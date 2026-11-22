@@ -34,7 +34,7 @@ If the asset plan you approve includes music from your assets, the agent can lay
 
 Formats that ask for portrait cuts get short vertical videos taken from the approved video, each with its own thumbnails, ready to review with the titles and descriptions.
 
-Formats with **Subtitles in the picture** turned on (Workspace settings › Outputs, a profile's Outputs, or a video's own outputs) also get a copy with the subtitles drawn into the picture when you download the delivery. It uses the latest edited subtitles, and the clean video and its SRT are still included.
+Formats with **Subtitles in the picture** turned on (Workspace settings › Outputs, a profile's Outputs, or a video's own outputs) also get a copy with the subtitles drawn into the picture when you download the delivery. It uses the latest edited subtitles, and the clean video and its SRT are still included. To get only that copy, open the video, pick the format and choose **Save with captions**.
 
 To see what the agent was asked and what it printed, open **Agent logs** next to the run's activity. A failed step shows its error output there.
 

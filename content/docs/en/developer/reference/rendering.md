@@ -78,7 +78,7 @@ MCP and A2A expose `get_completed_subtitles` with `workspaceId`, `runId`, `forma
 
 Use `export-delivery <workspace-id> <run-id> <destination-zip>` after delivery verification. It exports the primary MP4 and SRT files recorded as verified for the completed run. Choose a new ZIP path in an existing directory. An incomplete export leaves that path free.
 
-A format whose frozen delivery has `burned_captions` set also gets `<format-id>-captioned.mp4`: FFmpeg's `subtitles` filter (libass) draws the latest subtitle revision into a copy at export time, with text about 5.5% of the shorter side and portrait captions raised to 20% of the height. The video stream is re-encoded with libx264 and the audio copied. The setting sits in a format's supplemental delivery, a profile override and a video's `format_overrides`, and is off by default.
+A format whose frozen delivery has `burned_captions` set also gets `<format-id>-captioned.mp4`: FFmpeg's `subtitles` filter (libass) draws the latest subtitle revision into a copy at export time, with text about 5.5% of the shorter side and portrait captions raised to 20% of the height. The video stream is re-encoded with libx264 and the audio copied. The setting sits in a format's supplemental delivery, a profile override and a video's `format_overrides`, and is off by default. `export-captioned-output <workspace-id> <run-id> <format-id> <destination-mp4>` (MCP `export_captioned_output`) writes just that copy for one format to a new file.
 
 Call `export_generation_delivery` with the workspace ID, completed run ID, and an absolute local `destination` path in an existing directory. The shared exporter writes a ZIP of the verified video and subtitle files and refuses to replace an existing path.
 

@@ -34,7 +34,7 @@ Si el plan de recursos que apruebas incluye música de tus recursos, el agente p
 
 Los formatos que piden cortes verticales reciben vídeos verticales cortos sacados del vídeo aprobado, cada uno con sus miniaturas, listos para revisar con los títulos y las descripciones.
 
-Los formatos con **Subtítulos en la imagen** activado (Ajustes del espacio › Salidas, las Salidas de un perfil o las salidas de un vídeo) también reciben una copia con los subtítulos dibujados en la imagen al descargar la entrega. Usa los subtítulos editados más recientes, y el vídeo limpio y su SRT se siguen incluyendo.
+Los formatos con **Subtítulos en la imagen** activado (Ajustes del espacio › Salidas, las Salidas de un perfil o las salidas de un vídeo) también reciben una copia con los subtítulos dibujados en la imagen al descargar la entrega. Usa los subtítulos editados más recientes, y el vídeo limpio y su SRT se siguen incluyendo. Para obtener solo esa copia, abre el vídeo, elige el formato y pulsa **Guardar con subtítulos**.
 
 Para ver qué se pidió al agente y qué mostró, abre **Registros del agente** junto a la actividad del proceso. Si un paso falla, ahí verás su salida de error.
 

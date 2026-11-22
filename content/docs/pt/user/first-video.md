@@ -34,7 +34,7 @@ Se o plano de recursos que aprovas incluir música dos teus recursos, o agente p
 
 Os formatos que pedem cortes verticais recebem vídeos verticais curtos tirados do vídeo aprovado, cada um com as suas miniaturas, prontos a rever com os títulos e as descrições.
 
-Os formatos com **Legendas na imagem** ativado (Definições do espaço › Saídas, as Saídas de um perfil ou as saídas de um vídeo) também recebem uma cópia com as legendas desenhadas na imagem quando descarregas a entrega. Usa as legendas editadas mais recentes, e o vídeo limpo e o SRT continuam incluídos.
+Os formatos com **Legendas na imagem** ativado (Definições do espaço › Saídas, as Saídas de um perfil ou as saídas de um vídeo) também recebem uma cópia com as legendas desenhadas na imagem quando descarregas a entrega. Usa as legendas editadas mais recentes, e o vídeo limpo e o SRT continuam incluídos. Para obteres só essa cópia, abre o vídeo, escolhe o formato e carrega em **Guardar com legendas**.
 
 Para veres o que foi pedido ao agente e o que ele mostrou, abre **Registos do agente** junto à atividade da execução. Se um passo falhar, vês aí a saída de erro.
 
