@@ -82,6 +82,15 @@ references, each reference image is uploaded through `upload` (see the video
 adapter) and the public addresses are set as `field` of the JSON request posted
 to the references `endpoint`.
 
+Schema 3 adds named models. `models` maps each model ID to its `label`, a
+`bestFor` line (`en`, and optionally `es` and `pt`) and its own `endpoint`,
+`aspectRatios`, `request` and `references`; a model without `references` takes
+none. `model.default` must be one of them, and the `model.setting` choices must
+match the model IDs. Creators see each model's label and best-for line under
+**Model** in Generate, and agents read them from `list_image_models` and pass
+`model` to `generate_library_images`. A `urls` reference can set `single` to
+send the first address as a string, for providers that take one image.
+
 ## Describe a video generation adapter
 
 A plugin declaring `video-generation` can provide a `video-generation.json`
@@ -110,6 +119,15 @@ HTTPS address and a public one, then a PUT without the credential) and fills
 `{image}`, `{images}`, `{video}` or `{videos}` with the public addresses. The
 top-level `endpoint`, `aspectRatios`, `durations` and `request` stay as the
 schema 1 fallback.
+
+Schema 3 lets a model be an object with a `label`, a `bestFor` line and its
+`variants`, shown to creators under **Model** and to agents in
+`list_video_models`. `durations.allowed` lists the only lengths a model takes;
+the host moves a requested length to the nearest of them. A variant that takes
+a reference video may leave out `durations`, and the clip then follows that
+video's length; its request must not use `{duration}`. A variant taking up to
+two images can use `{image}` for the opening frame and `{lastImage}` for the
+closing one. Setting `choices` can list up to 64 models.
 
 ## Describe a usage adapter
 

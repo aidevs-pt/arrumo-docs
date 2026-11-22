@@ -1,39 +1,96 @@
 ---
 
 title: "Gera clipes de vídeo e imagens com a Higgsfield"
-description: "Cria clipes e imagens para a tua biblioteca com os modelos Kling, Seedance e Qwen da Higgsfield."
+description: "Cria clipes e imagens para a tua biblioteca com os 41 modelos de vídeo e 14 de imagem da Higgsfield."
 ---
 
 ## Adiciona a tua chave
 
-Cria uma chave de API na [consola da Higgsfield](https://console.higgsfield.ai/). No Arrumo, abre **Definições › Serviços e chaves**, procura a Higgsfield e cola a chave como `ID_DA_CHAVE:SEGREDO`. A chave de um espaço de trabalho tem prioridade sobre a da aplicação. O Arrumo guarda-a no cofre de credenciais do sistema, só a envia para a API da Higgsfield e nunca a mostra aos agentes.
+Cria uma chave de API na [consola Higgsfield](https://console.higgsfield.ai/). No Arrumo, abre **Definições › Serviços e chaves**, procura a Higgsfield e cola a chave como `ID_DA_CHAVE:SEGREDO`. Uma chave do espaço de trabalho tem prioridade sobre a predefinida da aplicação. O Arrumo guarda-a no cofre de credenciais do sistema, só a envia para a API da Higgsfield e nunca a mostra aos agentes.
 
-Cada clipe e imagem gasta os teus créditos da Higgsfield. Quando a conta fica sem créditos, o trabalho falha e o Arrumo explica porquê.
+Cada clipe e imagem gasta os teus créditos Higgsfield. Quando a conta fica sem créditos, o trabalho falha e o Arrumo diz-te porquê. Alguns modelos podem não estar disponíveis para todas as contas; quando um trabalho é recusado, é mostrado o motivo da Higgsfield.
 
 ## Cria um clipe de vídeo
 
-Abre **Recursos › Gerar › Clipe de vídeo**, descreve o clipe e escolhe a proporção (16:9, 9:16 ou 1:1) e a duração. **Modelo** escolhe um destes:
+Abre **Recursos › Gerar › Clipe de vídeo**, descreve o clipe e escolhe o tamanho. Escolhe a Higgsfield em **Feito com** e depois um **Modelo**: a linha por baixo diz para que é ideal, e **Duração** só oferece as durações que esse modelo aceita. Os modelos cujo nome termina em *References* seguem as imagens e vídeos que anexas; os modelos *Edit*, *Extend*, *Motion Control* e *Genjutsu* trabalham sobre um clipe que anexas, e o resultado segue a sua duração.
 
-| Modelo                           | Sem referências  | Com referências                           | Duração |
-| -------------------------------- | ---------------- | ----------------------------------------- | ------- |
-| Kling 3.0 Standard (predefinido) | Texto para vídeo | Anima uma imagem                          | 3–15 s  |
-| Kling 3.0 Pro                    | Texto para vídeo | Anima uma imagem                          | 3–15 s  |
-| Seedance 2.0                     | Não disponível   | 1–9 imagens e até 3 vídeos, ou 1–3 vídeos | 4–15 s  |
+| Modelo | Ideal para |
+| --- | --- |
+| Cinema Studio 4.0 | Planos de estilo cinema de 4–30 s a partir de texto, até nove imagens ou três vídeos; o modelo escolhe lente, luz e ritmo. |
+| Genjutsu Motion Transfer | Coloca as pessoas ou personagens de até oito imagens no movimento de um vídeo (mínimo 4 s; acima de 30 s é cortado). |
+| Genjutsu Object Swap | Substitui um objeto de um vídeo pelo das tuas imagens, mantendo o movimento do plano. |
+| Grok Imagine Video 1.5 | Clipes curtos em 720p de 1–15 s que começam numa imagem ou seguem até sete imagens de referência. |
+| Happy Horse 1.0 | O modelo de vídeo da Alibaba para clipes em 1080p de 2–15 s a partir de texto ou um primeiro fotograma. |
+| Happy Horse 1.0 References | Happy Horse seguindo até nove imagens de referência de um sujeito ou estilo. |
+| Happy Horse 1.1 | O Happy Horse mais recente, em 1080p por omissão, a partir de texto ou um primeiro fotograma. |
+| Happy Horse 1.1 References | Happy Horse 1.1 seguindo até nove imagens de referência. |
+| Kling 2.5 Turbo Pro | Clipes rápidos e económicos de 5 ou 10 s; a partir de texto só faz 16:9. |
+| Kling 2.5 Turbo Standard | A forma mais barata de animar uma imagem num clipe de 5 ou 10 s. |
+| Kling 2.6 Motion Control Pro | Transferência de movimento do Kling 2.6 com mais detalhe do que o Standard. |
+| Kling 2.6 Motion Control Standard | A transferência de movimento anterior: a personagem de uma imagem segue o movimento de um vídeo, a menor preço. |
+| Kling 2.6 Pro | A geração anterior do Kling para clipes de 5 ou 10 s a partir de texto ou uma imagem, se procuras o seu estilo. |
+| Kling 3.0 4K | Kling 3.0 em 4K, para ecrãs grandes ou recortes na edição; o nível Kling mais caro. |
+| Kling 3.0 Motion Control Pro | Move a personagem da tua imagem como se move a pessoa de um vídeo de referência de 3–30 s; o clipe dura o mesmo que o vídeo O Pro mantém mais detalhe. |
+| Kling 3.0 Motion Control Standard | Move a personagem da tua imagem como se move a pessoa de um vídeo de referência de 3–30 s; o clipe dura o mesmo que o vídeo. |
+| Kling 3.0 Pro | Planos principais que pedem mais detalhe e melhor movimento do que o Standard; mesmas entradas, mais custo. |
+| Kling 3.0 Standard (predefinido) | Clipes do dia a dia a bom preço: 3–15 s a partir de texto, um primeiro fotograma ou o primeiro e o último. |
+| Kling 3.0 Turbo | Rascunhos rápidos em 1080p a partir de texto ou uma imagem, com prompts mais longos (até 3000 caracteres). |
+| Kling O3 | Clipes que começam numa imagem e podem terminar noutra, de 3–15 s. |
+| Kling O3 Edit | Altera um clipe existente de 3–15 s com uma instrução, como trocar o cenário ou um objeto, guiado se quiseres por imagens. |
+| Kling O3 References | Mantém coerentes personagens, produtos ou lugares a partir de até quatro imagens, ou segue a câmara e o estilo de um vídeo de referência. |
+| Kling Omni | O modelo Omni anterior para clipes de 5 ou 10 s entre um primeiro fotograma e um último opcional. |
+| Kling Omni Edit | Edita um clipe existente de 3–10 s com uma instrução, guiado se quiseres por imagens. |
+| Kling Omni References | Omni com até quatro imagens ou um vídeo de referência, para sujeitos coerentes a menor preço do que o O3. |
+| LTX-2.5 Fast | Rascunhos rápidos de 6, 8 ou 10 s em 16:9 ou 9:16, a partir de texto, um primeiro fotograma ou o primeiro e o último. |
+| LTX-2.5 Pro | Clipes cuidados de 6, 8 ou 10 s em 16:9 ou 9:16 a partir de texto ou uma imagem. |
+| MiniMax H3 | Clipes nítidos em 2K de 5–15 s a partir de texto, um primeiro fotograma ou o primeiro e o último. |
+| MiniMax H3 References | MiniMax H3 seguindo até nove imagens ou três vídeos. |
+| Seedance 2.0 | Clipes cinematográficos em 1080p de 4–15 s a partir de texto, um primeiro fotograma ou o primeiro e o último. |
+| Seedance 2.0 References | Segue ao mesmo tempo até nove imagens e três vídeos de referência: personagens, produtos, estilo e movimentos de câmara. |
+| Seedance 2.5 | Planos cinematográficos mais longos, até 30 s, a partir de texto ou fotogramas, com bitrate alto. |
+| Seedance 2.5 Edit | Edita um clipe existente com uma instrução, com imagens opcionais do que queres acrescentar. |
+| Seedance 2.5 Extend | Continua um clipe existente mais 4–30 s, a partir de onde termina. |
+| Seedance 2.5 References | Seedance 2.5 seguindo até nove imagens e três vídeos, para planos longos e coerentes até 30 s. |
+| Wan 2.6 | Anima uma imagem num clipe em 1080p de 5, 10 ou 15 s. |
+| Wan 2.7 References | Clipes em 1080p de 2–10 s em 16:9 ou 9:16 que seguem até cinco imagens ou vídeos de referência. |
+| Wan 3.0 | Clipes longos em 1080p, de 2–30 s, a partir de texto, um primeiro fotograma ou o primeiro e o último. |
+| Wan 3.0 Prime | O nível premium do Wan 3.0 para clipes longos em 1080p quando a qualidade importa mais do que o custo. |
+| Wan 3.0 Prime References | Wan 3.0 Prime com até nove imagens e três vídeos de referência. |
+| Wan 3.0 References | Wan 3.0 seguindo até nove imagens e três vídeos para sujeitos coerentes em planos longos. |
 
-O Kling 3.0 Pro tem melhor aspeto e custa mais. Para mudar o predefinido de um espaço de trabalho, define **Modelo de vídeo** nas definições do plugin.
+Para mudar o predefinido de um espaço de trabalho, define **Modelo de vídeo** nas definições do plugin.
 
-Em **Referências**, escolhe imagens ou vídeos da biblioteca do espaço de trabalho. O Arrumo avisa quando o modelo escolhido não aceita essa combinação. Uma imagem animada mantém a sua forma, seja qual for a proporção escolhida. Os clipes não têm som; acrescenta narração ou música na montagem.
-
-O MP4 final junta-se aos **Recursos**, com uma nota que indica o modelo que o criou.
+Em **Referências**, escolhe imagens ou vídeos da biblioteca do espaço de trabalho. Com duas imagens, os modelos que aceitam fotogramas usam a primeira como fotograma inicial e a segunda como final. O Arrumo avisa-te quando o modelo escolhido não aceita essa combinação ou esse tamanho. Os clipes não têm som; acrescenta narração ou música na edição. O MP4 terminado junta-se a **Recursos**, com uma nota que indica o modelo que o fez.
 
 ## Cria uma imagem
 
-A Higgsfield também cria imagens com o Qwen Image 3 em 2K. Em **Recursos › Gerar › Imagem**, descreve a imagem e, para a editar ou mudar o estilo, anexa uma a três imagens de referência. Para as miniaturas, a Higgsfield ocupa o seu lugar na ordem de fornecedores de imagens do espaço de trabalho em **Serviços e chaves**.
+Em **Recursos › Gerar › Imagem**, escolhe a Higgsfield e um **Modelo**. Os modelos que aceitam imagens de referência usam as que anexas, até ao número da tabela. Para as miniaturas, a Higgsfield entra na sua vez segundo a ordem de fornecedores de imagens do espaço de trabalho em **Serviços e chaves** e usa a definição **Modelo de imagem**.
+
+| Modelo | Ideal para | Referências |
+| --- | --- | --- |
+| Grok Image 2.0 | Gera ou edita com muitas referências (até oito aqui), para combinar pessoas, produtos e lugares. | Até 8 |
+| Ideogram 4.0 | A tipografia primeiro: cartazes, títulos e miniaturas com letras exatas; remistura uma imagem de referência. | Até 1 |
+| Marketing Studio 2.0 | Imagens de campanhas e anúncios, construídas à volta das fotografias do teu produto (até oito referências). | Até 8 |
+| Marketing Studio 2.5 Flare | O modelo de campanhas mais recente para anúncios cuidados a partir de fotografias de produto. | Até 8 |
+| Marketing Studio 2.5 Sunburst | O outro estilo do Marketing Studio 2.5, para imagens de campanha luminosas e com energia. | Até 8 |
+| Qwen Image 3 (predefinido) | Imagens fiáveis em 2K com texto limpo dentro da imagem; edita até três imagens de referência. | Até 3 |
+| Recraft V4.1 | Imagens de design em 1K: ilustrações, ícones e gráficos de marca. | Nenhuma |
+| Recraft V4.1 Pro | O estilo de design da Recraft em 2K, para impressão ou paginações grandes. | Nenhuma |
+| Recraft V4.1 Utility | Imagens práticas em 1K, como fotografias de produto, fundos e diagramas. | Nenhuma |
+| Recraft V4.1 Utility Pro | Recraft Utility em 2K. | Nenhuma |
+| SOUL | O modelo fotográfico da Higgsfield para fotografias realistas de pessoas, com estilo de moda. | Nenhuma |
+| SOUL 2 | O SOUL mais recente para fotografias realistas de pessoas e estilo de vida. | Nenhuma |
+| SOUL Cinema | Aspeto de fotograma de filme: luz e cor cinematográficas para cenas com atmosfera e miniaturas. | Nenhuma |
+| Z-Image Turbo | Rascunhos rápidos e baratos em 2K a partir de descrições curtas (até 800 caracteres). | Nenhuma |
+
+## O que não é oferecido aqui
+
+Ainda não são oferecidos os fluxos que precisam de predefinições ou identificadores treinados da Higgsfield (Genjutsu Restyle, personagens Soul ID, elementos e prompts de várias tomadas do Kling) nem os modelos cujas páginas de API não estavam publicadas quando este plugin foi escrito (Hailuo 2.3, PixVerse V6, Ads Studio).
 
 ## Agentes
 
-Os agentes ligados por MCP usam `list_video_models` para ver cada modelo e as referências que aceita, e `generate_library_video` ou `generate_library_images` com IDs de recursos do espaço de trabalho como `references`.
+Os agentes ligados por MCP usam `list_video_models` e `list_image_models` para ver cada modelo, para que é ideal e o que aceita, e depois passam `provider` e `model` a `generate_library_video` ou `generate_library_images`, com identificadores de recursos do espaço de trabalho como `references`.
 
 ## Privacidade
 
-Os ficheiros de referência são enviados para o armazenamento da Higgsfield através de um endereço temporário, sem a tua chave. Só saem do teu computador a descrição, as definições e as referências que escolheste.
+Os ficheiros de referência são enviados para o armazenamento da Higgsfield através de um endereço de curta duração, sem a tua chave. Só saem do teu computador a descrição, as definições e as referências que escolheste.
