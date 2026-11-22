@@ -30,6 +30,8 @@ For a guided run, open **Review run** when a stage needs a decision. Check the a
 
 At **Assets and animations**, the agent also designs animations for the video, such as a title card, lower thirds or an end card, and Arrumo renders them for you to review. A video started from scratch has no footage, so its preview is a storyboard of animated scenes built from the approved script and animations. Its captions come from the text on screen. If a text-to-speech provider such as ElevenLabs is set up, the storyboard is narrated and its captions follow the narration. Decide on each animation with **Approve**, **Ask for changes** (with a note) or **Reject**, and tick **Save to the library when approved** on the ones to keep. When every animation is approved and there is no overall note, the step is approved; otherwise one revision with each decision goes back to the agent. You can also decide on the whole step instead.
 
+If the asset plan you approve includes music from your assets, the agent can lay it under the whole video. It plays quietly, drops further while anyone speaks and fades out at the end.
+
 Formats that ask for portrait cuts get short vertical videos taken from the approved video, each with its own thumbnails, ready to review with the titles and descriptions.
 
 Formats with **Subtitles in the picture** turned on (Workspace settings › Outputs, a profile's Outputs, or a video's own outputs) also get a copy with the subtitles drawn into the picture when you download the delivery. It uses the latest edited subtitles, and the clean video and its SRT are still included.

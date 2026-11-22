@@ -30,6 +30,8 @@ Numa execução guiada, abre **Rever execução** quando houver uma decisão pen
 
 Em **Recursos e animações**, o agente também desenha animações para o vídeo, como um cartão de título, oráculos ou um cartão final, e o Arrumo renderiza-as para as reveres. Um vídeo começado do zero não tem gravações, por isso a pré-visualização é um storyboard de cenas animadas feito a partir do guião e das animações aprovadas. As legendas vêm do texto no ecrã. Se houver um fornecedor de texto para voz configurado, como o ElevenLabs, o storyboard é narrado e as legendas seguem a narração. Decide cada animação com **Aprovar**, **Pedir alterações** (com uma nota) ou **Rejeitar**, e marca **Guardar na biblioteca ao aprovar** nas que queres manter. Se aprovares todas e não houver nota geral, o passo é aprovado; caso contrário, volta ao agente uma revisão com cada decisão. Também podes decidir sobre o passo inteiro.
 
+Se o plano de recursos que aprovas incluir música dos teus recursos, o agente pode pô-la por baixo de todo o vídeo. Toca baixo, baixa ainda mais enquanto alguém fala e desvanece no fim.
+
 Os formatos que pedem cortes verticais recebem vídeos verticais curtos tirados do vídeo aprovado, cada um com as suas miniaturas, prontos a rever com os títulos e as descrições.
 
 Os formatos com **Legendas na imagem** ativado (Definições do espaço › Saídas, as Saídas de um perfil ou as saídas de um vídeo) também recebem uma cópia com as legendas desenhadas na imagem quando descarregas a entrega. Usa as legendas editadas mais recentes, e o vídeo limpo e o SRT continuam incluídos.
