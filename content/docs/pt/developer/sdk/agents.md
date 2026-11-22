@@ -30,6 +30,8 @@ As capacidades do agente pertencem ao plugin. Declara-as como `settings` normais
 
 Os agentes que conseguem ver imagens declaram `imageArgs`, como `["-i", "{imagePath}"]`, e colocam `{images}` em `args`. O host repete esses argumentos uma vez por cada imagem que quer que o agente veja, como referências de miniaturas ou imagens encontradas ao pesquisar um criador, e deixa `{images}` vazio para os agentes que não o suportam.
 
+Os agentes que leem imagens a partir de uma mensagem estruturada declaram antes `structuredRun.imageInput` (esquema de manifesto 13). Quando uma execução leva imagens, o Arrumo acrescenta os seus `args` e escreve na entrada padrão uma linha JSON construída a partir de `stdin`: a cadeia `"{prompt}"` passa a ser o pedido e um elemento de lista `"{images}"` torna-se uma cópia de `image` por imagem, com `"{data}"` como os bytes em base64 e `"{mediaType}"` como `image/png` ou `image/jpeg`. As execuções sem imagens continuam a enviar o pedido tal como está. O Claude Code usa isto com `--input-format stream-json`.
+
 Os agentes com a sua própria ferramenta de imagens também declaram a capacidade `image-generation` e um `imageRun`. O Arrumo envia o pedido da imagem pela entrada padrão, lê o identificador de sessão dos eventos JSON impressos em `sessionPointer` e recolhe o ficheiro PNG, JPEG ou WebP mais recente de `outputDirectory`: `path` (com `{session}`) dentro da pasta da variável de ambiente `env`, ou dentro de `fallback` na pasta pessoal. O agente continua só de leitura e não escreve nada por si. O Arrumo verifica e recorta a imagem como a de qualquer outro fornecedor, e remove o que a execução deixou. `{images}` anexa referências de estilo através de `structuredRun.imageArgs`.
 
 ```json

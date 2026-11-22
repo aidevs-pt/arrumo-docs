@@ -56,6 +56,14 @@ and place `{images}` in `args`. The host repeats those arguments once per image
 it wants the agent to see, such as thumbnail references or images found while
 researching a creator, and leaves `{images}` empty for agents without it.
 
+Agents that read images from a structured message instead declare
+`structuredRun.imageInput` (manifest schema 13). When a run has images, Arrumo
+adds its `args` and writes one JSON line to stdin built from `stdin`: the string
+`"{prompt}"` becomes the prompt and an array element `"{images}"` becomes one
+copy of `image` per image, with `"{data}"` as the base64 bytes and
+`"{mediaType}"` as `image/png` or `image/jpeg`. Runs without images still send
+the plain prompt. Claude Code uses this with `--input-format stream-json`.
+
 Agents with their own image tool also declare the `image-generation` capability
 and an `imageRun`. Arrumo sends the image brief on stdin, reads the session ID
 from the printed JSON events at `sessionPointer`, and collects the newest PNG,
