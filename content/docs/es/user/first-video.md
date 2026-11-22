@@ -32,6 +32,8 @@ En **Recursos y animaciones**, el agente también diseña animaciones para el v�
 
 Los formatos que piden cortes verticales reciben vídeos verticales cortos sacados del vídeo aprobado, cada uno con sus miniaturas, listos para revisar con los títulos y las descripciones.
 
+Los formatos con **Subtítulos en la imagen** activado (Ajustes del espacio › Salidas, las Salidas de un perfil o las salidas de un vídeo) también reciben una copia con los subtítulos dibujados en la imagen al descargar la entrega. Usa los subtítulos editados más recientes, y el vídeo limpio y su SRT se siguen incluyendo.
+
 Para ver qué se pidió al agente y qué mostró, abre **Registros del agente** junto a la actividad del proceso. Si un paso falla, ahí verás su salida de error.
 
 En la etapa de renderizado final, usa **Generar vídeo final** cuando esté disponible. En **Verificar la entrega**, usa **Generar subtítulos** o **Importar SRT** para cada formato que aún no tenga subtítulos. El SRT importado debe estar codificado en UTF-8 y sus marcas de tiempo deben quedar dentro de la duración del vídeo de ese formato.

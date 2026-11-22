@@ -32,6 +32,8 @@ At **Assets and animations**, the agent also designs animations for the video, s
 
 Formats that ask for portrait cuts get short vertical videos taken from the approved video, each with its own thumbnails, ready to review with the titles and descriptions.
 
+Formats with **Subtitles in the picture** turned on (Workspace settings › Outputs, a profile's Outputs, or a video's own outputs) also get a copy with the subtitles drawn into the picture when you download the delivery. It uses the latest edited subtitles, and the clean video and its SRT are still included.
+
 To see what the agent was asked and what it printed, open **Agent logs** next to the run's activity. A failed step shows its error output there.
 
 At the final render stage, use **Render final video** when the action is available. In **Verify delivery**, use **Generate subtitles** or **Import SRT** for any format still missing captions. An imported SRT must be UTF-8 and its cues must fit within that format’s video duration.

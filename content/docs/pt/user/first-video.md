@@ -32,6 +32,8 @@ Em **Recursos e animações**, o agente também desenha animações para o víde
 
 Os formatos que pedem cortes verticais recebem vídeos verticais curtos tirados do vídeo aprovado, cada um com as suas miniaturas, prontos a rever com os títulos e as descrições.
 
+Os formatos com **Legendas na imagem** ativado (Definições do espaço › Saídas, as Saídas de um perfil ou as saídas de um vídeo) também recebem uma cópia com as legendas desenhadas na imagem quando descarregas a entrega. Usa as legendas editadas mais recentes, e o vídeo limpo e o SRT continuam incluídos.
+
 Para veres o que foi pedido ao agente e o que ele mostrou, abre **Registos do agente** junto à atividade da execução. Se um passo falhar, vês aí a saída de erro.
 
 Na etapa de renderização final, usa **Gerar vídeo final** quando estiver disponível. Em **Verificar a entrega**, usa **Gerar legendas** ou **Importar SRT** em cada formato que ainda não tenha legendas. O SRT importado tem de estar em UTF-8 e as marcas temporais devem ficar dentro da duração do vídeo desse formato.

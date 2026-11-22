@@ -54,6 +54,8 @@ MCP y A2A exponen `get_completed_subtitles` con `workspaceId`, `runId`, `formatI
 
 Usa `export-delivery <workspace-id> <run-id> <destination-zip>` después de la verificación de la entrega. Exporta los MP4 y SRT principales registrados como verificados para la ejecución completada. Elige una ruta de ZIP nueva en un directorio existente. Una exportación incompleta deja esa ruta libre.
 
+Un formato cuya entrega congelada tiene `burned_captions` también recibe `<format-id>-captioned.mp4`: el filtro `subtitles` de FFmpeg (libass) dibuja la revisión de subtítulos más reciente en una copia al exportar, con el texto a un 5,5 % del lado más corto y los subtítulos verticales elevados al 20 % de la altura. El vídeo se recodifica con libx264 y el audio se copia. El ajuste está en la entrega complementaria de un formato, en una sustitución de perfil y en `format_overrides` de un vídeo, y viene desactivado.
+
 Llama a `export_generation_delivery` con el identificador del espacio de trabajo, el de la ejecución completada y una ruta local absoluta en `destination` dentro de un directorio existente. El exportador compartido escribe un ZIP con el vídeo y los subtítulos verificados y se niega a reemplazar una ruta existente.
 
 El comando local de la CLI `verified-video-source <workspace-id> <run-id> <format-id>` imprime en JSON la ruta del MP4 verificado para flujos de trabajo que se ejecutan en la misma máquina.
