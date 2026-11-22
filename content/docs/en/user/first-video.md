@@ -12,6 +12,8 @@ Each workspace starts with its own icon and color. To change them, or to show an
 
 In **Workspace settings › Brand**, name each brand color and use its check mark to choose whether videos use it; colors without the check stay in the palette but are left out of generation.
 
+Under **Fonts** on the same page, add the heading and body fonts animations are set in, each as a Regular and a Bold file. Use static TrueType (.ttf) or OpenType (.otf) files, such as the ones a font's official release ships, with accented letters and the euro sign. Titles and big numbers use the heading font, and other text the body font. Without a heading font, animations use the body font; without either, a plain sans-serif. A video keeps the fonts it started with, even if you change them later.
+
 Open **Outputs** and check which formats are enabled. Each enabled format needs its own final MP4 and SRT for the delivery to pass verification.
 
 ## Save and queue a draft
