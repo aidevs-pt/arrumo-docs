@@ -161,4 +161,6 @@ Workspace Context uses the editorcn rich-text toolbar with Tiptap Markdown. Use 
 
 Use `list_workspace_feedback`, `add_workspace_feedback`, and `update_workspace_feedback` to manage workspace guidance cards. Use `get_brand_colors` and `set_brand_colors` to read or replace the workspace palette; `get_brand_colors` also returns `palette`, each color's name and whether videos use it, and `set_brand_color_details` changes those. Generation reads only the colors videos use. New generation runs capture both inputs.
 
+`get_brand_fonts`, `import_brand_font` (a static .ttf or .otf at an absolute path, as the `heading` or `body` font in `regular` or `bold`) and `remove_brand_font` manage the brand fonts. Imports are checked for accented letters and common symbols, and the average letter width is measured so animation text wraps to fit. Files are kept by SHA-256, and runs record the fonts in their snapshot, so re-renders keep the fonts a run started with. The CLI has `brand-fonts`, `import-brand-font` and `remove-brand-font`.
+
 Use `list_brand_assets`, `attach_brand_asset`, and `detach_brand_asset` through MCP or A2A to manage which workspace images serve as identity assets or style references. Removing a role keeps the image in the workspace library.

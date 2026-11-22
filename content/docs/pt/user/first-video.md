@@ -12,6 +12,8 @@ Cada espaço de trabalho começa com o seu próprio ícone e cor. Para os mudar,
 
 Em **Definições do espaço › Marca**, dá nome a cada cor da marca e usa o visto para escolher se os vídeos a usam; as cores sem visto ficam na paleta, mas não são usadas ao gerar.
 
+Em **Tipos de letra**, na mesma página, adiciona os tipos de letra dos títulos e do texto das animações, cada um com um ficheiro Regular e outro Bold. Usa ficheiros TrueType (.ttf) ou OpenType (.otf) estáticos, como os da versão oficial do tipo de letra, com letras acentuadas e o símbolo do euro. Os títulos e os números grandes usam o tipo de letra dos títulos, e o resto do texto o do texto. Sem tipo de letra de títulos, as animações usam o do texto; sem nenhum, uma sans-serif simples. Um vídeo mantém os tipos de letra com que começou, mesmo que os mudes depois.
+
 Abre **Saídas** e verifica os formatos ativos. Para a entrega ser verificada, cada formato ativo precisa do seu próprio MP4 final e ficheiro SRT.
 
 ## Guarda um rascunho e coloca-o na fila

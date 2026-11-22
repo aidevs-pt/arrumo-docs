@@ -12,6 +12,8 @@ Cada espacio de trabajo empieza con su propio icono y color. Para cambiarlos, o 
 
 En **Ajustes del espacio › Marca**, pon nombre a cada color de marca y usa su marca de verificación para elegir si los vídeos lo usan; los colores sin ella siguen en la paleta, pero no se usan al generar.
 
+En **Fuentes**, en la misma página, añade las fuentes de títulos y de texto de las animaciones, cada una con un archivo Regular y otro Bold. Usa archivos TrueType (.ttf) u OpenType (.otf) estáticos, como los que trae la versión oficial de la fuente, con letras con tilde y el símbolo del euro. Los títulos y las cifras grandes usan la fuente de títulos, y el resto del texto la de texto. Sin fuente de títulos, las animaciones usan la de texto; sin ninguna, una sans-serif sencilla. Un vídeo conserva las fuentes con las que empezó, aunque las cambies después.
+
 Abre **Salidas** y comprueba qué formatos están activados. Para que la entrega se verifique, cada formato activado necesita su propio vídeo MP4 final y su archivo SRT.
 
 ## Guarda un borrador y añádelo a la cola
