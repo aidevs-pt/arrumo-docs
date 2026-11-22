@@ -1,0 +1,32 @@
+name: CI
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check:locales
+      - run: pnpm lint
+      - run: pnpm types:check
+      - run: pnpm build
+      - name: Check that every llms.txt link resolves
+        run: |
+          for f in out/llms.txt out/*/llms.txt; do
+            grep -o '](/[^)]*)' "$f" | sed 's/](\(.*\))/\1/' | while read -r u; do
+              [ -f "out$u" ] || [ -f "out$u/index.html" ] || { echo "Missing in $f: $u"; exit 1; }
+            done
+          done
