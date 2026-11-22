@@ -1,0 +1,14 @@
+{
+  "title": "Official plugins",
+  "root": true,
+  "pages": [
+    "index",
+    "auto-dubbing",
+    "claude-code",
+    "codex",
+    "elevenlabs",
+    "gemini",
+    "higgsfield",
+    "openai"
+  ]
+}

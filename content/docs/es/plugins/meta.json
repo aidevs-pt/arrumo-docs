@@ -1,0 +1,14 @@
+{
+  "title": "Complementos oficiales",
+  "root": true,
+  "pages": [
+    "index",
+    "auto-dubbing",
+    "claude-code",
+    "codex",
+    "elevenlabs",
+    "gemini",
+    "higgsfield",
+    "openai"
+  ]
+}
