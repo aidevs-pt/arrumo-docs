@@ -1,0 +1,107 @@
+---
+
+title: "Plugins e fornecedores"
+description: "Instala, configura, ordena e executa plugins do lado do host."
+---
+
+## Catálogo e instalação
+
+A base de dados da aplicação também guarda um catálogo de manifestos de plugins. Com o caminho da base de dados como primeiro argumento da CLI, usa `plugin-catalog` para ver os manifestos do SDK incluídos e registados localmente, `install-plugin-manifest <manifest.json>` para registar um manifesto, `remove-plugin-manifest <plugin-id>` para remover uma entrada local e `set-plugin-active <plugin-id> on|off` para ativar ou desativar um plugin. O catálogo valida os metadados das versões 1 a 6 do SDK e reserva os identificadores dos plugins incluídos. As entradas locais são só metadados. O seletor de agentes e as verificações de sessão usam os adaptadores de agentes incluídos até o host suportar autorizações em tempo de execução.
+
+Usa `install-plugin-zip <package.zip>` para registar um ZIP local que contenha um `manifest.json` do SDK na raiz. O catálogo indica o tamanho e o digest SHA-256 do pacote e guarda o ZIP original na base de dados da aplicação. Remover a entrada local remove o ZIP guardado. A CLI mostra o aviso de plugins de terceiros ao registar. O conteúdo do ZIP fica inerte.
+
+Passa `--sha256 <digest>` depois do caminho do ZIP para comparar o pacote com uma soma de verificação da publicação obtida em separado antes do registo. Um digest malformado ou que não corresponda impede o registo. Uma soma de verificação mostra que o pacote tem os bytes esperados. A confiança em quem o publica continua a depender de como obtiveste a soma.
+
+Usa `install-plugin-release <catalog.json> <plugin-id> <version> <package.zip>` para verificar um ZIP local com uma publicação escolhida de um instantâneo local do registo. O Arrumo verifica a compatibilidade do manifesto, a soma de verificação do ZIP e o identificador do plugin no manifesto, e depois regista a versão declarada e os URL de origem no catálogo. Este comando aceita os dois ficheiros localmente. A sincronização com o registo e a descarga remota são trabalhos à parte.
+
+Usa `download-plugin-release <catalog-url> <plugin-id> <version>` para descarregar uma publicação exata de um registo HTTPS e registá-la localmente. O Arrumo verifica a publicação com as mesmas verificações do registo a partir de um instantâneo local e guarda o URL do registo. O comando espera um registo e um pacote que possam ser descarregados sem autenticação.
+
+Lista identificadores de plugins, repositórios de origem, plugins predefinidos e versões publicadas com `read-plugin-registry <catalog.json>` ou `fetch-plugin-registry <catalog-url>`. Este host suporta os esquemas de manifesto 1 a 10; o esquema 10 permite que uma definição indique um `helpUrl`, que a aplicação abre como Onde o encontrar através de `open_plugin_setting_help`, lendo o endereço do manifesto instalado. As entradas com a lista de publicações vazia não têm versão para descarregar nesse catálogo. Ambos os comandos validam o catálogo e podem correr sem abrir a base de dados da aplicação.
+
+Nas Definições da aplicação, abre **Explorar registo** em **Plugins** e carrega o URL HTTPS de um catálogo. Abre um plugin para rever o repositório de origem e as versões disponíveis. O Arrumo volta a verificar a publicação revista antes de a descarregar. Se a origem ou a soma de verificação mudaram, volta a carregar o catálogo e revê de novo a publicação.
+
+Usa `update-plugin-release <plugin-id> <version>` para substituir um pacote instalado remotamente por uma publicação SemVer mais recente do catálogo HTTPS e do repositório de origem registados. O Arrumo valida a substituição antes de a guardar e verifica que a publicação instalada não mudou durante a descarga. As atualizações dos plugins incluídos chegam com o Arrumo.
+
+Para pacotes instalados a partir de um instantâneo local do registo, usa `update-plugin-release-from-snapshot <catalog.json> <plugin-id> <version> <package.zip>`. Usa um instantâneo do catálogo obtido de forma independente do ZIP. O Arrumo exige o repositório de origem registado e uma publicação compatível mais recente, e verifica o ZIP antes de substituir o pacote instalado. Os pacotes instalados remotamente continuam a usar o catálogo HTTPS registado.
+
+Quando carregas o mesmo registo nas Definições da aplicação, os pacotes instalados mostram **Atualizar** para as publicações compatíveis mais recentes do repositório registado. Revê a publicação e confirma a atualização. Os pacotes de instantâneo local usam o comando de atualização sem ligação da CLI.
+
+Os plugins apresentam-se através da `introduction` opcional do manifesto (esquema 8). Os plugins que chegam depois do primeiro arranque são mostrados uma vez numa visita guiada partilhada; a primeira verificação regista como visto tudo o que já existia. O MCP e o A2A expõem `get_plugin_tour` e `finish_plugin_tour`.
+
+Usa `install_plugin_zip` com um caminho local absoluto de origem e o `packageSha256` esperado para instalar um pacote revisto. O digest tem de corresponder ao ficheiro antes do registo. A resposta inclui a entrada de catálogo instalada e o aviso de plugins de terceiros. O acesso ao contexto do espaço de trabalho exige uma autorização à parte.
+
+Usa `install_plugin_release_from_snapshot` ou `update_plugin_release_from_snapshot` com caminhos locais absolutos para `catalog` e para o ZIP em `source`, o identificador do plugin e uma versão exata. O host verifica o ficheiro com o catálogo e regista a origem da publicação. As atualizações sem ligação exigem uma publicação mais recente do mesmo repositório.
+
+Usa `fetch_plugin_registry` para ver um catálogo de registo HTTPS, ou `read_plugin_registry_snapshot` para validar um catálogo num caminho local absoluto. Ambos devolvem metadados de publicações para rever antes de instalar.
+
+Usa `install_reviewed_plugin_release` e `update_reviewed_plugin_release` com o URL do catálogo, o identificador do plugin, o repositório e o objeto de publicação exato devolvido pela descoberta do registo. O host volta a verificar os metadados antes de descarregar o pacote e verifica o digest do ficheiro antes do registo. As atualizações exigem uma publicação mais recente do registo e do repositório originais.
+
+Ativa ou desativa um plugin para toda a aplicação na respetiva página em **Definições › Plugins**, ou com `set_plugin_active` (`pluginId`, `active`) por MCP ou A2A. Um plugin desativado mantém as definições, mas o Arrumo não o executa: sai das ordens de fornecedores (incluindo as que uma execução capturou antes), das listas e tarefas de ações, dos hooks, das superfícies de interface, das leituras de utilização e da lista de agentes. Os plugins incluídos começam ativos; os importados começam desativados, exceto os importados antes de este interruptor existir. Um agente não pode ser desativado enquanto a aplicação, um espaço de trabalho ou um vídeo por terminar o usar.
+
+Usa `remove_reviewed_plugin_package` por MCP ou A2A com o identificador do plugin e o SHA-256 do pacote instalado. Um digest que não corresponda deixa a revisão instalada intacta. Desinstalar remove as definições e autorizações guardadas desse pacote.
+
+Usa `list_plugin_catalog` para descobrir identificadores de plugins e definições declaradas. Usa `get_plugin_credential_status` para uma credencial declarada e um identificador de espaço de trabalho opcional. A resposta indica as flags de configuração e a origem efetiva. Guarda as credenciais nas Definições da aplicação ou com o comando da CLI que lê a entrada padrão redirecionada.
+
+## Definições e credenciais
+
+Usa `plugin-settings <plugin-id> <app|workspace-id>` para ler os valores não secretos declarados e a origem efetiva. Usa `set-plugin-setting <plugin-id> <app|workspace-id> <setting-id> <value-json>` para guardar uma cadeia, um booleano ou um inteiro de 64 bits com sinal. Usa `clear-plugin-setting <plugin-id> <app|workspace-id> <setting-id>` para retirar um valor. Retirar uma substituição de espaço de trabalho repõe o valor predefinido da aplicação. As cadeias vazias, `false` e `0` são valores explícitos. Os campos secretos exigem um armazenamento de credenciais à parte e ficam fora destes comandos.
+
+As Definições da aplicação mostram **Definições dos plugins** quando um manifesto instalado declara campos não secretos editáveis. Escolhe o âmbito da aplicação para definir valores predefinidos ou o de um espaço de trabalho para substituir os campos dele. **Usar valor predefinido** retira uma substituição. O formulário mostra de onde vem cada valor efetivo.
+
+Usa `plugin-credential-status <plugin-id> <app|workspace-id> <setting-id>` para ler as flags de configuração e o âmbito efetivo do segredo declarado de um fornecedor incluído. Usa `set-plugin-credential <plugin-id> <app|workspace-id> <setting-id>` com a credencial na entrada padrão redirecionada, ou `clear-plugin-credential <plugin-id> <app|workspace-id> <setting-id>` para a remover. Uma credencial de espaço de trabalho substitui a da aplicação. Os bytes secretos são guardados no armazenamento de credenciais do sistema. No Linux, isto exige uma sessão do Secret Service disponível, e compilar a partir do código-fonte exige os cabeçalhos de desenvolvimento do D-Bus. A saída da CLI só indica o estado.
+
+Nas Definições da aplicação, abre um fornecedor incluído em **Definições dos plugins** para guardar ou remover a credencial no âmbito da aplicação ou de um espaço de trabalho. O Arrumo mostra se há uma credencial configurada e de onde vem. Remover uma credencial de espaço de trabalho repõe a da aplicação, quando existe.
+
+Usa `get_plugin_settings`, `set_plugin_setting` e `clear_plugin_setting` para gerir as definições não secretas declaradas no SDK. Omite `workspaceId` para o âmbito da aplicação. Retirar uma substituição de espaço de trabalho repõe a herança. As credenciais guardadas ficam fora destas ferramentas.
+
+Usa `clear_plugin_credential` com um identificador de plugin e de definição para remover uma credencial da aplicação. Inclui `workspaceId` para remover só a credencial desse espaço de trabalho e repor a herança.
+
+## Ordem de fornecedores
+
+Usa `provider-preferences <capability> <app|workspace-id>` para ver os candidatos do catálogo e a ordem efetiva de fornecedores. Usa `set-provider-preferences <capability> <app|workspace-id> <order-json>` com uma lista JSON ordenada de identificadores de plugins. Uma lista vazia não escolhe nenhum fornecedor de forma explícita. Usa `clear-provider-preferences <capability> <app|workspace-id>` para herdar. A ordem predefinida só contém plugins incluídos. Aqui, a elegibilidade reflete as capacidades declaradas. A disponibilidade e a execução em tempo real são à parte.
+
+As execuções de geração novas capturam a ordem efetiva de fornecedores e a respetiva origem para cada capacidade. Uma repetição com definições capturadas mantém essa ordem. Uma repetição com definições atuais resolve-a de novo. A seleção do agente continua a usar as definições do agente capturadas à parte. Os instantâneos criados antes da captura da ordem de fornecedores continuam legíveis.
+
+O JSON de opções de `enqueue-draft` pode incluir `provider_overrides`, um mapa de identificador de capacidade para uma lista ordenada de identificadores de plugins fornecedores. Uma capacidade omitida herda a ordem do espaço de trabalho ou da aplicação. Uma lista vazia desativa os fornecedores dessa capacidade para esta execução. Os dois modos de repetição mantêm as substituições por execução pedidas. Uma repetição com definições atuais volta a validar os fornecedores pedidos. A seleção do agente usa as definições do agente.
+
+No formulário de geração da aplicação, abre **Fornecedores para esta execução** para incluir ou excluir fornecedores concretos. **Usar ordem guardada** retira a substituição de uma capacidade. Fechar a secção mantém as tuas escolhas para esse rascunho. Enviar a execução deixa as preferências do espaço de trabalho inalteradas.
+
+Usa `list_provider_preferences` ou `get_provider_preferences` para ver a disponibilidade de fornecedores, a ordem efetiva e a origem. Usa `set_provider_preferences` para guardar uma ordem e `clear_provider_preferences` para repor a herança. Omite `workspaceId` para o âmbito da aplicação. Passar uma ordem vazia desativa explicitamente os fornecedores da capacidade nesse âmbito.
+
+## Transcrição e voz
+
+Usa `transcribe-wav <workspace-id> [plugin-id] <audio.wav>` para enviar um WAV para um adaptador de transcrição incluído. Omite o identificador do plugin para usar a ordem efetiva de fornecedores. Cada plugin declara os limites e os campos da transcrição. O host salta os adaptadores indisponíveis, as entradas demasiado grandes para um adaptador concreto e as credenciais em falta antes de enviar. Um HTTP 401, 403 ou 429 permite passar ao seguinte. As restantes falhas param o pedido. É um envio explícito para a nuvem.
+
+Usa `synthesize-speech <workspace-id> <plugin-id> <voice-id> <new-audio-file>` para enviar texto UTF-8 pela entrada padrão para um fornecedor de voz incluído de confiança. A extensão de saída tem de corresponder ao formato de resposta do adaptador. O editor resolve a credencial configurada do espaço de trabalho, com a da aplicação como alternativa, valida o áudio devolvido com FFprobe e guarda-o sem substituir um ficheiro existente. Este comando faz um pedido ao fornecedor por invocação.
+
+Usa `speech-provider-status <workspace-id> <plugin-id>` para ler o formato de resposta do fornecedor incluído, o tamanho máximo de entrada, o digest do adaptador e o âmbito da credencial configurada antes de sintetizar. O comando não faz nenhum pedido ao fornecedor.
+
+## Ambiente de execução, permissões e painéis
+
+O índice de plugins incluídos é gerado a partir das predefinições do registo oficial e dos checkouts locais dos plugins. As definições de transcrição próprias de cada fornecedor ficam no descritor do SDK do plugin. A versão 3 do esquema de manifesto aceita ZIP com pontos de entrada declarados de backend WebAssembly e interface HTML, valida que existem e mantém o código. Os componentes de backend instalados suportam invocação explícita pela CLI. Os painéis de interface instalados são renderizados a partir dos documentos declarados. Os painéis de espaço de trabalho podem pedir acesso ao contexto autorizado explicitamente.
+
+Usa `invoke-plugin <plugin-id>` com JSON na entrada padrão para invocar o backend WebAssembly declarado de um pacote instalado. O ambiente instancia o componente sem importações do host nem WASI e limita o tamanho, o combustível de execução, a memória linear e as cargas JSON. O resultado sai como JSON na saída padrão.
+
+Um plugin que declara acesso ao contexto do espaço de trabalho precisa de uma autorização à parte. Usa `grant-plugin-context <plugin-id> <workspace-id>`, `plugin-context-grant <plugin-id> <workspace-id>` e `revoke-plugin-context <plugin-id> <workspace-id>` para conceder, verificar ou retirar o acesso. Passa o identificador do espaço de trabalho a `invoke-plugin <plugin-id> <workspace-id>` para usar a autorização. Retirá-la e atualizar o pacote afetam as invocações seguintes. Cada invocação vê só o contexto escolhido no início.
+
+As Definições da aplicação, o Contexto do espaço de trabalho e os detalhes dos vídeos concluídos podem mostrar **Painéis de plugins** de ZIP instalados. Abrir um painel carrega o HTML declarado a partir de um protocolo local dedicado e verifica a revisão do pacote. Uma sandbox isola o painel do editor e dos comandos nativos.
+
+Nas Definições da aplicação, escolhe um espaço de trabalho e abre **Permissões de plugins** para conceder ou retirar o acesso ao contexto a um plugin que o pede. A confirmação indica o plugin e o espaço de trabalho, e o host verifica a revisão do pacote antes de aplicar a tua escolha.
+
+Os painéis de plugins do espaço de trabalho e dos vídeos concluídos podem pedir o contexto do espaço de trabalho escolhido no host se o manifesto declarar essa permissão e o operador a conceder. A ponte trata um pedido por abertura do painel e volta a verificar a revisão do pacote e a autorização antes de devolver o contexto.
+
+Usa `list_plugin_context_requests` com um identificador de espaço de trabalho para ver os pacotes que pedem acesso ao contexto do espaço de trabalho. Depois de rever um pacote, chama `apply_reviewed_plugin_context_grant` com o identificador do espaço de trabalho, o do plugin, o SHA-256 do pacote listado e o valor `allowed` pretendido. O host rejeita um digest que já não corresponda ao pacote instalado.
+
+## Ações, tarefas e hooks
+
+Usa `plugin-actions` para descobrir as ações de backend com nome. Invoca uma ação com `invoke-plugin-action <plugin-id> <action-id> <app|workspace-id>` e passa JSON na entrada padrão. O host valida o âmbito declarado da ação antes de executar o componente.
+
+Nas Definições da aplicação, abre uma ação em **Ações de plugins**. O âmbito das Definições decide que ações aparecem. Preenche o formulário que a ação declara (`inputs` do esquema 9), ou escreve JSON para as ações que não o têm, escolhe **Executar ação** e revê o resultado. As ações que declaram `placements` também aparecem num cartão **Ações de plugins** junto dos rascunhos, nas páginas de geração ou nos vídeos terminados, onde uma entrada de legendas oferece as faixas do vídeo em vista; as ações `completed-video` também aparecem no menu de contexto dos vídeos terminados e do leitor. O editor verifica que o pacote corresponde à versão mostrada quando o formulário foi aberto. As ações que declaram `hooks` também correm sozinhas: um hook `video-completed` põe em fila uma tarefa de ação por cada vídeo terminado, depois da verificação da entrega, enquanto a definição booleana que indica estiver ativa para o espaço de trabalho. A tarefa recebe o título do vídeo, as saídas e os textos aprovados, e o identificador deriva do vídeo e da ação, por isso um evento repetido nunca a executa duas vezes. As opções de geração listam os hooks ativos para o espaço de trabalho; desativar um acrescenta-o a `skip_hooks` da execução (`plugin-id/action-id`), e esse vídeo não o executa.
+
+Envia pela entrada padrão para `queue-plugin-action-job` um objeto JSON com `id` (um UUID gerado por quem chama), `pluginId`, `actionId`, `packageSha256`, `input` e `workspaceId` para as ações de espaço de trabalho. Repetir o mesmo pedido devolve a tarefa existente. Reutilizar o UUID com outra entrada ou outro âmbito falha.
+
+Lê uma tarefa com `plugin-action-job <app|workspace-id> <job-id>`. Executa uma tarefa em fila com `process-plugin-action-job <app|workspace-id> <job-id>`. O processamento volta a verificar o pacote revisto, guarda o resultado e pode reclamar de novo uma tarefa quando a concessão de dois minutos expira. O MCP e o A2A expõem-nas como `queue_plugin_action_job`, `get_plugin_action_job` e `process_plugin_action_job`. Estas tarefas executam ações Wasm declaradas na sandbox existente. Os pedidos de tarefas guardam a entrada, por isso inclui só os dados de que a ação precisa. Uma tarefa de um plugin desativado depois de entrar na fila não é executada.
+
+Executa `arrumo-workspaces <database-path> watch-plugin-action-queue` como worker em primeiro plano para as ações Wasm em fila quando a aplicação está fechada. Reclama as tarefas em fila e recupera as concessões expiradas. Lê cada resultado com os mesmos comandos de estado de tarefas. O worker não escreve na consola nenhuma entrada nem resultado de tarefas. Para-o com Ctrl+C.
+
+O painel **Ações de plugins** da aplicação regista cada execução como uma tarefa e inclui as tarefas recentes do âmbito escolhido. Enquanto a aplicação está aberta, processa as tarefas em fila e recupera as tarefas interrompidas quando as concessões expiram. O painel atualiza quando uma tarefa termina. Usa **Processar tarefa** para reclamar uma tarefa concreta quando está disponível. Para listar tarefas a partir da CLI, usa `list-plugin-action-jobs <app|workspace-id>`. O MCP e o A2A expõem `list_plugin_action_jobs`.

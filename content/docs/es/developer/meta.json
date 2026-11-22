@@ -1,5 +1,5 @@
 {
   "title": "Desarrollar con Arrumo",
   "root": true,
-  "pages": ["index", "connect", "agent-skill", "first-plugin"]
+  "pages": ["index", "connect", "agent-skill", "first-plugin", "reference"]
 }
