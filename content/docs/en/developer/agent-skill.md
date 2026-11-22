@@ -15,3 +15,11 @@ Arrumo ships an agent skill, [`skills/arrumo/SKILL.md`](https://github.com/aidev
 ## What Arrumo already does
 
 The skill tells the agent not to redo work Arrumo handles itself: Arrumo transcribes footage, shows its agent phrase timings, keeps cuts off spoken words, fades every cut and evens out the final loudness to -14 LUFS.
+
+## Editing guides
+
+Each production step's agent follows a short guide of editing craft notes: writing the script, planning visuals, designing animations, cutting footage, storyboarding, choosing portrait cuts, writing publishing text, and reviewing an edit. The guide sits in the step's prompt apart from the creator's brief, and the brief and learned feedback take precedence. Outside agents read the same guides with `list_editing_guides` and `get_editing_guide` (CLI `list-editing-guides` and `editing-guide <id>`), so their review notes and Arrumo's agent pull the same way.
+
+## Looking at a moment
+
+`render_timeline_view` draws evenly spaced frames from up to 120 seconds of video above its waveform into a new PNG and returns each frame's time. It takes a footage asset (`assetId`), a run's final video (`runId`, `formatId`) or one of its previews (add `previewAttempt`). Agents that can read images use it to check a cut, a join or an overlay at a decision point. The CLI form is `render-timeline-view <workspace-id> <video-asset-id> <start> <end> <destination-png>`.

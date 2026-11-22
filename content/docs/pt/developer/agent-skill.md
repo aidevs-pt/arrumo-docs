@@ -15,3 +15,11 @@ O Arrumo inclui uma skill para agentes, [`skills/arrumo/SKILL.md`](https://githu
 ## O que o Arrumo já faz
 
 A skill diz ao agente para não repetir o trabalho que o Arrumo faz: o Arrumo transcreve as gravações, mostra ao seu agente os tempos de cada frase, evita cortar palavras, suaviza o áudio de cada corte e iguala o volume final a -14 LUFS.
+
+## Guias de edição
+
+O agente de cada passo de produção segue um guia curto com notas de ofício: escrever o guião, planear os recursos visuais, desenhar animações, cortar as gravações, fazer o storyboard, escolher cortes verticais, escrever os textos de publicação e rever uma montagem. O guia vai nas instruções do passo, separado do brief do criador, e o brief e o feedback aprendido têm prioridade. Os agentes externos leem os mesmos guias com `list_editing_guides` e `get_editing_guide` (CLI `list-editing-guides` e `editing-guide <id>`), para que as suas notas de revisão e o agente do Arrumo puxem no mesmo sentido.
+
+## Olhar para um momento
+
+`render_timeline_view` desenha imagens espaçadas de até 120 segundos de vídeo por cima da forma de onda num PNG novo e devolve o tempo de cada imagem. Aceita um recurso de gravação (`assetId`), o vídeo final de uma execução (`runId`, `formatId`) ou uma das suas pré-visualizações (acrescenta `previewAttempt`). Os agentes que leem imagens usam-no para verificar um corte, uma junção ou uma sobreposição num momento de decisão. Na CLI é `render-timeline-view <workspace-id> <video-asset-id> <start> <end> <destination-png>`.
