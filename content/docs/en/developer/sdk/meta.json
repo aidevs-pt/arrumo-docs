@@ -1,0 +1,12 @@
+{
+  "title": "Plugin SDK reference",
+  "pages": [
+    "index",
+    "manifest",
+    "packages",
+    "actions",
+    "adapters",
+    "agents",
+    "motion"
+  ]
+}

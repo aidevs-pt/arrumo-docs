@@ -8,5 +8,4 @@ description: "Conéctate a Arrumo y amplíalo."
 - [Usa la skill para agentes](agent-skill.md) para que Claude Code o Codex manejen Arrumo.
 - [Crea tu primer complemento](first-plugin.md) con el SDK de complementos.
 - [Referencia](reference/index.md): cada comando, herramienta MCP y operación A2A, por dominio.
-
-El [README del SDK](https://github.com/aidevs-pt/arrumo-plugin-sdk/blob/main/README.md) documenta cada campo del manifiesto y cada esquema de adaptador.
+- [Referencia del SDK de complementos](sdk/index.md): cada campo del manifiesto, regla de paquete y contrato de adaptador.

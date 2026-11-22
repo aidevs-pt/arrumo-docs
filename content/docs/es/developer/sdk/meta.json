@@ -1,0 +1,12 @@
+{
+  "title": "Referencia del SDK de complementos",
+  "pages": [
+    "index",
+    "manifest",
+    "packages",
+    "actions",
+    "adapters",
+    "agents",
+    "motion"
+  ]
+}

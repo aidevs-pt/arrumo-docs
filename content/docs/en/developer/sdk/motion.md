@@ -1,0 +1,41 @@
+---
+
+title: "Motion renderers"
+description: "Hand off rendered motion and run renderers in the Linux sandbox."
+---
+
+## Hand off rendered motion media
+
+Use the [motion result schema](https://github.com/aidevs-pt/arrumo-plugin-sdk/blob/main/motion-result.schema.json) for the motion portion of an Assets stage result. The [example](https://github.com/aidevs-pt/arrumo-plugin-sdk/blob/main/examples/motion-result.json) references a managed video preview and thumbnail. Items can also reference audio and a profile. These are workspace-local asset and profile IDs allocated by Arrumo. The host checks ownership, media kinds, and the current generation lease before accepting the result.
+
+A renderer adapter runs in its own authorized environment. Import its finished preview and any supporting media through the host's asset import operation, then submit the returned IDs in `motion_items` for the run's Assets stage. Filesystem paths and executable source are outside this result contract. Generic WIT components cannot spawn external renderer processes or access the host filesystem. The schema supports producer-side validation of the JSON shape, while the host remains responsible for checking what each ID refers to.
+
+## Submit a local renderer batch
+
+Use the [motion artifact schema](https://github.com/aidevs-pt/arrumo-plugin-sdk/blob/main/motion-artifacts.schema.json) and [example batch](https://github.com/aidevs-pt/arrumo-plugin-sdk/blob/main/examples/motion-artifacts.json) when the renderer has produced local files and the worker holds the Assets-stage lease. Pass the batch JSON to the editor CLI as the final argument of `submit-motion-artifacts <workspace-id> <run-id> <attempt> <artifacts-json>`. With MCP or A2A, pass it as `artifacts` to `submit_motion_artifacts` together with `workspaceId`, `runId`, and `attempt`.
+
+File paths refer to the machine and filesystem where the host runs. If a renderer uses a mount such as `/output`, translate each path to its host-visible location before submission. The schema checks the input shape. Arrumo checks the lease and probes the actual media before committing the batch and emitting managed IDs.
+
+When an isolated renderer returns paths under `/output`, stop the renderer before resolving or importing its files. Run `python tools/resolve_motion_artifacts.py <host-output-directory>` with the artifact batch on stdin. It emits the batch with host-visible absolute paths on stdout and rejects missing files, traversal, and symlinks that resolve outside the output directory. Use a fresh output directory for each job and keep it private to the worker until the host finishes the import.
+
+### Local Linux renderer runner
+
+`python tools/run_motion_renderer.py --project <project-directory> --output <new-output-directory> -- /usr/bin/sh /input/render.sh` launches an operator-selected renderer in Bubblewrap. The project is mounted read-only at `/input`, the job gets writable `/output` and temporary storage, and the runner clears inherited environment variables and isolates the network. An optional `--toolchain <directory>` is mounted read-only at `/renderer`. The output path must be new and outside both input directories. Set a wall-clock limit with `--timeout`.
+
+The renderer writes `/output/artifacts.json` conforming to the motion artifact schema and then exits. The SDK prints host-visible paths after validating that the files stay within the job directory. Use those paths with `submit_motion_artifacts`. The worker owns the job directory until submission finishes. This runner requires Linux with Bubblewrap and a compatible system toolchain. Installed editor packages and other operating systems need runtime integration separately.
+
+The Linux runner also requires `prlimit` from util-linux. Use `--max-output-bytes` to set the hard per-file write limit and the aggregate size limit for unique files referenced by the artifact batch. The default is 512 MiB. The aggregate check runs after rendering. A worker that can create many files still needs a job-level filesystem quota.
+
+Use `--max-scratch-bytes` to size the renderer's private `/tmp` filesystem. It defaults to 256 MiB. The runner sets both `HOME` and `TMPDIR` to that mount. This limit applies to temporary storage during execution. The separate job output directory is governed by the per-file and post-render checks above.
+
+### Run a reviewed renderer ZIP
+
+A local worker can run a reviewed ZIP that declares a `motion-render` capability and includes `renderer.json` with a single `entrypoint` field naming a packaged shell script. Include both files with the packaging tool. The script runs inside the same Linux sandbox and writes the same `/output/artifacts.json` manifest.
+
+Run `python tools/run_motion_package.py <package.zip> --sha256 <reviewed-digest> --output <new-output-directory>`. Supply the digest from the reviewed package record. The worker checks the digest, expanded package limits, file paths, and manifest before invoking the script. It can mount an operator-provisioned toolchain with `--toolchain`. The editor uses this entry point for installed renderer dispatch on Linux.
+
+### Distribute the Linux SDK worker
+
+SDK conformance builds publish an `arrumo-motion-worker-linux` CI artifact containing the worker ZIP and `SHA256SUMS`. To build it locally, run `python tools/package_motion_worker.py arrumo-motion-worker-linux.zip` from the SDK checkout. The tool prints the archive's SHA-256. Select a trusted SDK revision or CI run, then verify the archive checksum before extracting it to a trusted location outside individual plugin directories.
+
+Install the extracted `motion-worker-requirements.txt` into the Python 3 environment that launches Arrumo. The host also needs Bubblewrap, util-linux with `prlimit`, and FFprobe. Set `ARRUMO_MOTION_SDK_WORKER` to the extracted absolute path of `tools/run_motion_package.py` when starting the editor, MCP, or A2A. Keep the extracted layout intact so the worker can load its SDK schemas.

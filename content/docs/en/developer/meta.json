@@ -1,5 +1,12 @@
 {
   "title": "Build on Arrumo",
   "root": true,
-  "pages": ["index", "connect", "agent-skill", "first-plugin", "reference"]
+  "pages": [
+    "index",
+    "connect",
+    "agent-skill",
+    "first-plugin",
+    "reference",
+    "sdk"
+  ]
 }

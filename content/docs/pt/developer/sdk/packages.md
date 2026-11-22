@@ -1,0 +1,88 @@
+---
+
+title: "Pacotes e código"
+description: "Empacota um plugin, inclui código de backend e interface e executa ficheiros revistos."
+---
+
+## Pacotes ZIP locais
+
+Coloca um único `manifest.json` do SDK na raiz do ZIP. São suportados manifestos armazenados e comprimidos com Deflate. O editor limita um pacote a 16 MiB e 512 entradas, e o manifesto a 64 KiB. Usa nomes de entrada relativos em UTF-8 com barras normais. Evita nomes duplicados, incluindo os que só diferem em maiúsculas. As entradas cifradas e as ligações simbólicas são rejeitadas.
+
+O Arrumo guarda o ZIP original e o digest SHA-256. O digest identifica os bytes importados para os comparar com a soma de verificação de uma publicação. Registar o pacote deixa o conteúdo inerte. Executar uma capacidade exige um adaptador de confiança à parte.
+
+### Compila um pacote
+
+Com Python 3.11 ou posterior e `jsonschema` instalado, executa:
+
+```console
+python /path/to/plugin-sdk/tools/package_plugin.py /path/to/plugin plugin.zip --include LICENSE --include README.md
+```
+
+A ferramenta valida e inclui automaticamente o manifesto da raiz. Passa cada ficheiro adicional explicitamente com `--include`. Os mesmos ficheiros produzem bytes de ZIP idênticos, seja qual for a ordem dos argumentos ou as marcas temporais do sistema de ficheiros. A saída é um ficheiro novo, e a ferramenta imprime o identificador do plugin, a versão do esquema do manifesto, o tamanho em bytes e o SHA-256. Usa esse digest ao preparar o registo da publicação.
+
+## Pacotes com código
+
+A versão 3 do esquema de manifesto acrescenta uma secção `code` opcional. Inclui um componente de backend WebAssembly em `backend.component`, documentos HTML de entrada próprios em `frontend`, ou ambos. Cada ponto de entrada tem de ser um ficheiro não vazio do ZIP. Inclui explicitamente ao empacotar qualquer JavaScript, estilo ou recurso incluído.
+
+```json
+{
+  "backend": { "component": "backend/plugin.wasm" },
+  "frontend": [
+    {
+      "id": "example-panel",
+      "title": "Example panel",
+      "document": "frontend/index.html",
+      "placement": "workspace"
+    }
+  ]
+}
+```
+
+Usa identificadores de superfície únicos. Os locais suportados são `settings`, `workspace` e `completed_video`. O host valida a declaração, verifica que o ZIP contém os pontos de entrada e guarda o pacote. Os componentes de backend instalados podem ser invocados explicitamente através do Arrumo. As superfícies de interface instaladas são renderizadas em molduras isoladas. As autorizações de capacidades do host são declaradas e aplicadas à parte.
+
+### Invoca um backend
+
+Implementa o [mundo WIT de backend](https://github.com/aidevs-pt/arrumo-plugin-sdk/blob/main/wit/plugin.wit). A exportação `invoke` recebe texto JSON em UTF-8 e devolve texto JSON em UTF-8. O host instancia um componente novo sem importações do host nem WASI. Assim, um componente só recebe a entrada fornecida por quem o chama. O host limita o tamanho do componente a 4 MiB, a entrada e a saída a 64 KiB cada, e aplica limites de memória e de combustível.
+
+O [exemplo echo](https://github.com/aidevs-pt/arrumo-plugin-sdk/tree/main/examples/component) inclui o manifesto e um componente escrito à mão em formato de texto WebAssembly. Compila-o com `wasm-tools parse examples/component/echo.wat -o examples/component/echo.wasm` e depois empacota a pasta do exemplo com `--include echo.wasm`. Depois de instalado, passa JSON pela entrada padrão ao comando `invoke-plugin component-echo` da CLI do editor.
+
+### Lê o contexto do espaço de trabalho partilhado explicitamente
+
+Com a versão 4 do esquema de manifesto, um backend pode declarar `"permissions": ["workspace-context-read"]` em `code.backend` e implementar o mundo WIT `workspace-plugin`. A instalação, por si só, não concede nenhuma permissão. Um operador pode conceder esta permissão a um pacote instalado concreto num espaço de trabalho concreto.
+
+Invoca o plugin com o identificador desse espaço de trabalho. O host liga `read-workspace-context` só quando a autorização corresponde ao pacote atual. A função devolve o contexto do espaço de trabalho como cadeia JSON ou `null`, e pode ser chamada uma vez por invocação. A autorização é avaliada no início da invocação. Atualizar ou remover o pacote retira a autorização para as chamadas seguintes.
+
+### Renderiza um painel de interface
+
+Cada ponto de entrada de interface tem de ser um documento HTML autónomo em UTF-8 com 512 KiB no máximo. Inclui o JavaScript e os estilos em linha e usa URL de dados para imagens ou fontes incorporadas. A aplicação carrega o documento a partir de um protocolo local dedicado numa moldura isolada com origem opaca. O painel não tem uma ponte direta para comandos nativos. Os dados do espaço de trabalho só estão disponíveis através de uma permissão declarada e de uma autorização explícita. A política de conteúdo limita o carregamento de recursos ao documento e aos recursos em linha.
+
+Empacota o [exemplo de contador de interface](https://github.com/aidevs-pt/arrumo-plugin-sdk/tree/main/examples/frontend) com `--include index.html`. Depois de instalar o ZIP, abre o painel em **Painéis de plugins**, nas Definições da aplicação.
+
+### Lê o contexto a partir de um painel de interface
+
+No esquema v5, um painel `workspace` ou `completed_video` pode declarar `"permissions": ["workspace-context-read"]`. O operador tem de conceder acesso ao pacote instalado no espaço de trabalho atual. O host escolhe o espaço de trabalho.
+
+Envia uma mensagem para `parent` com `type: "arrumo:workspace-context"` e `nonce: location.hash.slice(1)`. Transfere uma porta de `MessageChannel` com o pedido. O host responde uma vez por abertura do painel nessa porta com `{ok: true, context: string | null}` ou `{ok: false, error: "context_unavailable"}`. A revisão do pacote, a declaração do painel e a autorização do espaço de trabalho são verificadas no momento do pedido. Vê o [exemplo de painel de espaço de trabalho](https://github.com/aidevs-pt/arrumo-plugin-sdk/tree/main/examples/workspace-panel). Mostra o contexto devolvido como texto.
+
+## Prepara ficheiros de pacotes revistos
+
+Usa `tools/stage_plugin_package.py` para copiar ficheiros concretos de um ZIP instalado ou incluído exportado pelo editor. Passa o digest revisto no catálogo e uma pasta de destino nova.
+
+```sh
+python3 tools/stage_plugin_package.py package.zip /path/to/new-stage \
+  --sha256 <reviewed-digest> --include tools/worker.py
+```
+
+Repete `--include` para cada dependência de que o worker precise. A ferramenta verifica o ZIP exato, verifica os caminhos e os tipos das entradas, aplica os limites de tamanho comprimido e descomprimido, e publica a pasta depois de os ficheiros escolhidos estarem escritos. A execução cabe ao ambiente configurado de quem o usa.
+
+## Executa um worker multimédia revisto no Linux
+
+`tools/run_media_package.py` executa um ponto de entrada Python revisto com a mesma sandbox Bubblewrap do renderizador de movimento. O código do pacote é só de leitura em `/input`. Uma pasta de entrada dedicada é só de leitura em `/media`, e o worker escreve em `/output`. O processo usa um ambiente vazio e um espaço de nomes de rede separado. Passa só os ficheiros de que o trabalho precisa.
+
+```sh
+python3 tools/run_media_package.py package.zip --sha256 <reviewed-digest> \
+  --inputs /path/to/media --output /path/to/new-output \
+  --entrypoint tools/worker.py --include tools/helper.py
+```
+
+O worker escreve `/output/result.json` como `{"file":"artifact.mp4"}` ou indica um WAV na mesma pasta. O host tem de validar os ficheiros antes de os importar. Este executor precisa, no Linux, de Bubblewrap, Python e das ferramentas multimédia que o worker use. O comando suportado usa um tempo limite de relógio, espaço temporário limitado e um limite de saída por ficheiro.
