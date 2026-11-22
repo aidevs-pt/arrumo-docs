@@ -64,4 +64,4 @@ Definições › Serviços e chaves mostra o que resta a cada chave quando o plu
 
 ## Plugins novos
 
-Quando chegam plugins, de um ZIP, do registo ou de uma atualização do Arrumo, o Arrumo apresenta-os numa visita curta, uma página por plugin. Podes saltá-la quando quiseres; **Definições › Plugins › Ver a visita aos plugins** volta a mostrar a apresentação de cada um.
+Quando chegam plugins, de um ZIP, de um repositório do GitHub (**Definições › Plugins › De um repositório**), do registo ou de uma atualização do Arrumo, o Arrumo apresenta-os numa visita curta, uma página por plugin. Podes saltá-la quando quiseres; **Definições › Plugins › Ver a visita aos plugins** volta a mostrar a apresentação de cada um.

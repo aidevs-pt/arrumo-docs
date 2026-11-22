@@ -64,4 +64,4 @@ Ajustes › Servicios y claves muestra lo que le queda a cada clave cuando su co
 
 ## Complementos nuevos
 
-Cuando llegan complementos, desde un ZIP, el registro o una actualización de Arrumo, Arrumo los presenta en un recorrido breve, una página por complemento. Puedes saltarlo cuando quieras; **Ajustes › Complementos › Ver el recorrido de complementos** vuelve a mostrar la presentación de cada uno.
+Cuando llegan complementos, desde un ZIP, un repositorio de GitHub (**Ajustes › Complementos › Desde un repositorio**), el registro o una actualización de Arrumo, Arrumo los presenta en un recorrido breve, una página por complemento. Puedes saltarlo cuando quieras; **Ajustes › Complementos › Ver el recorrido de complementos** vuelve a mostrar la presentación de cada uno.

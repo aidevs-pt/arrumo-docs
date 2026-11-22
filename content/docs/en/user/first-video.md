@@ -64,4 +64,4 @@ Settings › Services and keys shows how much each provider key has left when it
 
 ## New plugins
 
-When plugins arrive, from a ZIP, the registry or an Arrumo update, Arrumo introduces them in a short tour, one page each. Skip it whenever you like; **Settings › Plugins › Take the plugin tour** shows every plugin's introduction again.
+When plugins arrive, from a ZIP, a GitHub repository (**Settings › Plugins › From repository**), the registry or an Arrumo update, Arrumo introduces them in a short tour, one page each. Skip it whenever you like; **Settings › Plugins › Take the plugin tour** shows every plugin's introduction again.
