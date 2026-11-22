@@ -57,6 +57,19 @@ Los agentes del esquema 11 pueden declarar un `usageRun` para que los creadores 
 }
 ```
 
+Los agentes que solo informan de su cuota mientras trabajan pueden declarar en su lugar un `usageEvent` (esquema 12). En cada ejecución normal, Arrumo busca la última línea JSON impresa cuyo `typePointer` sea igual a `typeValue`, lee cada ventana (`used` como `fraction` de 0 a 1 o como `percent`, un puntero `resetsAt` opcional y una duración fija en `minutes`) y las guarda. Servicios y claves muestra entonces la ventana más usada que aún no se ha reiniciado, así que ninguna petición extra gasta la cuota. Hasta que el agente se ejecute una vez, no se muestra el uso.
+
+```json
+"usageEvent": {
+  "typePointer": "/type",
+  "typeValue": "rate_limit_event",
+  "windows": [{"used": "/rate_limit_info/unifiedWindows/seven_day/utilization",
+               "scale": "fraction",
+               "resetsAt": "/rate_limit_info/unifiedWindows/seven_day/resetsAt",
+               "minutes": 10080}]
+}
+```
+
 ```json
 "settings": [
   {"id": "web-search", "label": "Web search", "description": "…", "kind": "boolean",

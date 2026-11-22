@@ -57,6 +57,19 @@ Os agentes do esquema 11 podem declarar um `usageRun` para os criadores verem qu
 }
 ```
 
+Os agentes que só informam a quota enquanto trabalham podem declarar antes um `usageEvent` (esquema 12). Em cada execução normal, o Arrumo procura a última linha JSON impressa cujo `typePointer` seja igual a `typeValue`, lê cada janela (`used` como `fraction` de 0 a 1 ou como `percent`, um ponteiro `resetsAt` opcional e uma duração fixa em `minutes`) e guarda-as. Serviços e chaves mostra então a janela mais usada que ainda não reiniciou, por isso nenhum pedido extra gasta a quota. Até o agente correr uma vez, não é mostrada utilização.
+
+```json
+"usageEvent": {
+  "typePointer": "/type",
+  "typeValue": "rate_limit_event",
+  "windows": [{"used": "/rate_limit_info/unifiedWindows/seven_day/utilization",
+               "scale": "fraction",
+               "resetsAt": "/rate_limit_info/unifiedWindows/seven_day/resetsAt",
+               "minutes": 10080}]
+}
+```
+
 ```json
 "settings": [
   {"id": "web-search", "label": "Web search", "description": "…", "kind": "boolean",

@@ -97,6 +97,25 @@ allowance, and it stops after 20 seconds.
 }
 ```
 
+Agents that report their allowance only while they work can declare a
+`usageEvent` instead (schema 12). Arrumo looks for the last printed JSON line
+whose `typePointer` equals `typeValue` during each ordinary run, reads every
+window (`used` as a `fraction` from 0 to 1 or a `percent`, an optional
+`resetsAt` pointer and a fixed `minutes` length) and keeps them. Services and
+keys then shows the most used window that has not reset yet, so no extra
+request spends the allowance. Until the agent has run once, no usage is shown.
+
+```json
+"usageEvent": {
+  "typePointer": "/type",
+  "typeValue": "rate_limit_event",
+  "windows": [{"used": "/rate_limit_info/unifiedWindows/seven_day/utilization",
+               "scale": "fraction",
+               "resetsAt": "/rate_limit_info/unifiedWindows/seven_day/resetsAt",
+               "minutes": 10080}]
+}
+```
+
 ```json
 "settings": [
   {"id": "web-search", "label": "Web search", "description": "…", "kind": "boolean",
