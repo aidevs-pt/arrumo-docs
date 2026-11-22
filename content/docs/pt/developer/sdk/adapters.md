@@ -20,11 +20,23 @@ O host tem de fazer corresponder o identificador de plugin do descritor ao manif
 
 Um `voiceSetting` opcional indica uma definição de cadeia não secreta declarada no manifesto onde os criadores escolhem uma voz, e `defaultVoice` é a voz usada quando essa definição está vazia. Os hosts usam-nos quando um fluxo precisa de voz sem pedir uma, como ao narrar um vídeo com storyboard.
 
+O esquema 2 acrescenta modelos com nome. `models` associa cada ID de modelo a um `label`, uma linha `bestFor` (`en` obrigatório, `es` e `pt` opcionais), campos `body` que substituem os do adaptador e o seu próprio `maxTextCharacters`. `model.default` escolhe um quando quem chama não indica nenhum, e `model.setting` pode indicar uma definição de texto cujas `choices` sejam exatamente os IDs de modelo. Os agentes listam-nos com `list_speech_models` e passam `model` a `generate_library_speech`.
+
 ## Descreve um adaptador de música e efeitos sonoros
 
 Um plugin pode fornecer um [descritor](https://github.com/aidevs-pt/arrumo-plugin-sdk/blob/main/audio-generation.schema.json) `audio-generation.json` com um tipo `music`, um tipo `sound-effect` ou ambos. Cada tipo precisa da sua própria capacidade, `music-generation` ou `sound-effect-generation`, e descreve um POST com JSON para uma API HTTPS revista: o endpoint, os campos da descrição e da duração, se a duração é enviada em `seconds` ou `milliseconds`, a duração permitida em segundos, o limite de caracteres da descrição e os valores fixos do corpo e da consulta. Os valores do corpo podem ser cadeias, números ou booleanos. A resposta é um único ficheiro `mp3` ou `wav`, e a credencial é um segredo do espaço de trabalho.
 
 O host aplica as mesmas regras de endpoint, redirecionamentos, credenciais e resposta que para a voz, rejeita uma chave fixa do corpo que repita o campo da descrição ou da duração, e recusa durações fora do intervalo do tipo antes de chamar o fornecedor. O resultado passa a ser um recurso de áudio do espaço de trabalho. A ElevenLabs usa-o para música instrumental (de 3 a 600 segundos) e efeitos sonoros (de 0,5 a 30 segundos).
+
+## Descreve um adaptador de mudança ou isolamento de voz
+
+Um [descritor](https://github.com/aidevs-pt/arrumo-plugin-sdk/blob/main/audio-transform.schema.json) `audio-transform.json` declara endpoints HTTPS POST multipart que recebem um som e devolvem áudio processado. `voice-change` precisa da capacidade `voice-changer`, acrescenta a voz como último segmento do caminho e exige um `voiceSetting`. `voice-isolation` precisa da capacidade `voice-isolation`. Cada um indica o campo do ficheiro, os campos de texto e valores de consulta fixos, e a entrada mais curta e mais longa que aceita.
+
+O anfitrião converte a faixa de som do recurso para MP3, verifica a duração e o tamanho, envia-a com o segredo do espaço de trabalho, reconhece MP3, WAV, FLAC ou Ogg pelos bytes devolvidos e guarda-o como um recurso novo cujas notas indicam a origem. Os agentes usam `list_audio_transforms` e `transform_audio_asset`.
+
+## Descreve um adaptador de dobragem
+
+Um plugin que declara `dubbing` pode fornecer um [descritor](https://github.com/aidevs-pt/arrumo-plugin-sdk/blob/main/dubbing.schema.json) `dubbing.json` para um trabalho assíncrono em três passos. `create` envia a faixa MP3 em multipart com a língua de destino e lê o ID do trabalho de `idField`. `status` é consultado a cada cinco segundos num endpoint com um segmento `{id}` até `statusField` ter um valor de `done` ou `failed`, ou `errorField` trazer uma mensagem. `result` descarrega a dobragem de um endpoint com os segmentos `{id}` e `{language}`. `languages` lista os códigos oferecidos e `maxWaitSeconds` limita a espera. Os agentes usam `list_dubbing_providers` e `dub_asset`.
 
 ## Descreve um adaptador de geração de imagens
 

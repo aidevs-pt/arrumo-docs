@@ -37,6 +37,12 @@ manifest where creators choose a voice, and `defaultVoice` is the voice used
 when that setting is empty. Hosts use them when a workflow needs speech
 without asking for a voice, such as narrating a storyboarded video.
 
+Schema 2 adds named models. `models` maps each model ID to a `label`, a `bestFor` line (`en`
+required, `es` and `pt` optional), `body` fields that replace the adapter's, and the model's own
+`maxTextCharacters`. `model.default` picks one when the caller names none, and `model.setting` can
+name a string setting whose `choices` are exactly the model IDs. Agents list them with
+`list_speech_models` and pass `model` to `generate_library_speech`.
+
 ## Describe a music and sound-effect adapter
 
 A plugin can provide an `audio-generation.json` [descriptor](https://github.com/aidevs-pt/arrumo-plugin-sdk/blob/main/audio-generation.schema.json) with a
@@ -53,6 +59,28 @@ for speech, rejects a static body key that repeats the prompt or duration
 field, and refuses lengths outside the kind's range before calling the
 provider. The result becomes a workspace audio asset. ElevenLabs uses it for
 instrumental music (3 to 600 seconds) and sound effects (0.5 to 30 seconds).
+
+## Describe a voice changer or isolation adapter
+
+An `audio-transform.json` [descriptor](https://github.com/aidevs-pt/arrumo-plugin-sdk/blob/main/audio-transform.schema.json) declares multipart HTTPS
+POST endpoints that take one sound and return processed audio. `voice-change` needs the
+`voice-changer` capability, appends the voice as the last path segment and requires a
+`voiceSetting`. `voice-isolation` needs the `voice-isolation` capability. Each names the file
+field, fixed text fields and query values, and the shortest and longest input it takes.
+
+The host converts the asset's soundtrack to MP3, checks its length and size, posts it with the
+workspace secret, recognises MP3, WAV, FLAC or Ogg from the returned bytes and stores it as a new
+asset whose notes name the source. Agents use `list_audio_transforms` and `transform_audio_asset`.
+
+## Describe a dubbing adapter
+
+A plugin declaring `dubbing` can provide a `dubbing.json` [descriptor](https://github.com/aidevs-pt/arrumo-plugin-sdk/blob/main/dubbing.schema.json)
+for an asynchronous job in three steps. `create` uploads the MP3 soundtrack as multipart with the
+target language and reads the job ID from `idField`. `status` is polled every five seconds at an
+endpoint with an `{id}` segment until `statusField` holds a `done` or `failed` value or
+`errorField` has a message. `result` downloads the dub from an endpoint with `{id}` and
+`{language}` segments. `languages` lists the codes offered, and `maxWaitSeconds` bounds the wait.
+Agents use `list_dubbing_providers` and `dub_asset`.
 
 ## Describe an image generation adapter
 
