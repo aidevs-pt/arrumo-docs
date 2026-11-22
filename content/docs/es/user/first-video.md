@@ -30,7 +30,7 @@ En una ejecución guiada, abre **Revisar proceso** cuando haya una decisión pen
 
 En **Recursos y animaciones**, el agente también diseña animaciones para el vídeo, como un rótulo de título, rótulos inferiores o una tarjeta final, y Arrumo las renderiza para que las revises. Un vídeo empezado desde cero no tiene grabaciones, así que su vista previa es un guion gráfico de escenas animadas creado a partir del guion y las animaciones aprobadas. Sus subtítulos salen del texto en pantalla. Si hay un proveedor de texto a voz configurado, como ElevenLabs, el guion gráfico se narra y sus subtítulos siguen la narración. Decide cada animación con **Aprobar**, **Pedir cambios** (con una nota) o **Rechazar**, y marca **Guardar en la biblioteca al aprobar** en las que quieras conservar. Si apruebas todas y no hay nota general, el paso se aprueba; si no, vuelve al agente una revisión con cada decisión. También puedes decidir sobre todo el paso.
 
-Si el plan de recursos que apruebas incluye música de tus recursos, el agente puede ponerla bajo todo el vídeo. Suena baja, baja aún más mientras alguien habla y se funde al final.
+Si el plan de recursos que apruebas incluye música de tus recursos, el agente puede ponerla bajo todo el vídeo. Suena baja, baja aún más mientras alguien habla y se funde al final. Para crear una pista, abre **Recursos › Generar › Música**, describe el ambiente y elige una duración; ElevenLabs la compone y se añade a tus recursos.
 
 Los formatos que piden cortes verticales reciben vídeos verticales cortos sacados del vídeo aprobado, cada uno con sus miniaturas, listos para revisar con los títulos y las descripciones.
 

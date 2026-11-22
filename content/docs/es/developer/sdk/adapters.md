@@ -1,7 +1,7 @@
 ---
 
 title: "Adaptadores de proveedores"
-description: "Describe proveedores de transcripción, voz, imagen, vídeo, uso y traducción."
+description: "Describe proveedores de transcripción, voz, música, efectos de sonido, imagen, vídeo, uso y traducción."
 ---
 
 ## Adaptador de transcripción incluido
@@ -19,6 +19,12 @@ Un complemento que declara `text-to-speech` puede aportar un [descriptor](https:
 El host debe hacer coincidir el identificador de complemento del descriptor con el manifiesto y comprobar la credencial con un secreto de espacio de trabajo declarado. Debe rechazar credenciales, consultas, fragmentos, segmentos con puntos y URL que no sean HTTPS en el endpoint, y rechazar una clave fija del cuerpo que choque con el campo de texto. Los hosts deben añadir el identificador de voz de quien llama como un único segmento de ruta codificado, codificar los valores de la consulta, aplicar el límite de caracteres Unicode del descriptor, rechazar las redirecciones, y acotar y validar la respuesta de audio antes de guardarla. El host es dueño de las credenciales y debe ocultar los errores del proveedor. El descriptor es para entradas de proveedores de confianza.
 
 Un `voiceSetting` opcional nombra un ajuste de cadena no secreto declarado en el manifiesto donde los creadores eligen una voz, y `defaultVoice` es la voz usada cuando ese ajuste está vacío. Los hosts los usan cuando un flujo necesita voz sin pedir una, como al narrar un vídeo con storyboard.
+
+## Describe un adaptador de música y efectos de sonido
+
+Un complemento puede aportar un [descriptor](https://github.com/aidevs-pt/arrumo-plugin-sdk/blob/main/audio-generation.schema.json) `audio-generation.json` con un tipo `music`, un tipo `sound-effect` o ambos. Cada tipo necesita su propia capacidad, `music-generation` o `sound-effect-generation`, y describe un POST con JSON a una API HTTPS revisada: el endpoint, los campos de la descripción y de la duración, si la duración se envía en `seconds` o `milliseconds`, la duración permitida en segundos, el límite de caracteres de la descripción y los valores fijos del cuerpo y de la consulta. Los valores del cuerpo pueden ser cadenas, números o booleanos. La respuesta es un único archivo `mp3` o `wav`, y la credencial es un secreto del espacio de trabajo.
+
+El host aplica las mismas reglas de endpoint, redirecciones, credenciales y respuesta que para la voz, rechaza una clave fija del cuerpo que repita el campo de la descripción o de la duración, y rechaza duraciones fuera del rango del tipo antes de llamar al proveedor. El resultado se convierte en un recurso de audio del espacio de trabajo. ElevenLabs lo usa para música instrumental (de 3 a 600 segundos) y efectos de sonido (de 0,5 a 30 segundos).
 
 ## Describe un adaptador de generación de imágenes
 

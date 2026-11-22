@@ -1,7 +1,7 @@
 ---
 
 title: "Provider adapters"
-description: "Describe transcription, speech, image, video, usage and translation providers."
+description: "Describe transcription, speech, music, sound-effect, image, video, usage and translation providers."
 ---
 
 ## Bundled transcription adapter
@@ -36,6 +36,23 @@ An optional `voiceSetting` names a non-secret string setting declared in the
 manifest where creators choose a voice, and `defaultVoice` is the voice used
 when that setting is empty. Hosts use them when a workflow needs speech
 without asking for a voice, such as narrating a storyboarded video.
+
+## Describe a music and sound-effect adapter
+
+A plugin can provide an `audio-generation.json` [descriptor](https://github.com/aidevs-pt/arrumo-plugin-sdk/blob/main/audio-generation.schema.json) with a
+`music` kind, a `sound-effect` kind, or both. Each kind needs its own
+capability, `music-generation` or `sound-effect-generation`, and describes one
+reviewed HTTPS JSON POST: its endpoint, the prompt and duration fields, whether
+the duration is sent in `seconds` or `milliseconds`, the allowed length in
+seconds, the prompt's character limit, and static body and query values. Body
+values can be strings, numbers or booleans. The response is one `mp3` or `wav`
+file, and the credential is a workspace secret.
+
+The host checks the same endpoint, redirect, credential and response rules as
+for speech, rejects a static body key that repeats the prompt or duration
+field, and refuses lengths outside the kind's range before calling the
+provider. The result becomes a workspace audio asset. ElevenLabs uses it for
+instrumental music (3 to 600 seconds) and sound effects (0.5 to 30 seconds).
 
 ## Describe an image generation adapter
 
