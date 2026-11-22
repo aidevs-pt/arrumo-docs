@@ -4,7 +4,7 @@ title: "Plugins oficiais"
 description: "Plugins criados e mantidos pela DEVS AI."
 ---
 
-Estes plugins vêm do [registo oficial](https://github.com/aidevs-pt/arrumo-plugin-registry). O Arrumo instala os predefinidos no primeiro arranque; gere-os em **Definições › Plugins**.
+Estes plugins vêm do [registo oficial](https://github.com/aidevs-pt/arrumo-plugin-registry). O Arrumo instala-os no primeiro arranque e ativa-os; os plugins que importares começam desativados. Ativa ou desativa cada um com o interruptor na respetiva página em **Definições › Plugins**. Um plugin desativado mantém as definições, mas o Arrumo não o usa.
 
 | Plugin                                       | O que faz                                                              |
 | -------------------------------------------- | ---------------------------------------------------------------------- |

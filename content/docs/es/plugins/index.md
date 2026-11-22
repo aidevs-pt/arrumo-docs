@@ -4,7 +4,7 @@ title: "Complementos oficiales"
 description: "Complementos creados y mantenidos por DEVS AI."
 ---
 
-Estos complementos vienen del [registro oficial](https://github.com/aidevs-pt/arrumo-plugin-registry). Arrumo instala los predeterminados en el primer inicio; gestiónalos en **Ajustes › Complementos**.
+Estos complementos vienen del [registro oficial](https://github.com/aidevs-pt/arrumo-plugin-registry). Arrumo los instala en el primer inicio y los activa; los complementos que importes empiezan desactivados. Activa o desactiva cada uno con el interruptor de su página en **Ajustes › Complementos**. Un complemento desactivado conserva sus ajustes, pero Arrumo no lo usa.
 
 | Complemento                                  | Qué hace                                                               |
 | -------------------------------------------- | ---------------------------------------------------------------------- |

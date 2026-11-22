@@ -4,7 +4,7 @@ title: "Official plugins"
 description: "Plugins made and maintained by DEVS AI."
 ---
 
-These plugins come from the [official registry](https://github.com/aidevs-pt/arrumo-plugin-registry). Arrumo installs the defaults on first launch; manage them in **Settings › Plugins**.
+These plugins come from the [official registry](https://github.com/aidevs-pt/arrumo-plugin-registry). Arrumo installs these on first launch and turns them on; plugins you import start off. Turn each one on or off with the switch on its page in **Settings › Plugins**. A plugin that is off keeps its settings, but Arrumo doesn't use it.
 
 | Plugin                                       | What it does                                                     |
 | -------------------------------------------- | ---------------------------------------------------------------- |
