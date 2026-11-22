@@ -22,4 +22,4 @@ El agente de cada paso de producción sigue una guía breve con notas de oficio:
 
 ## Mirar un momento
 
-`render_timeline_view` dibuja fotogramas espaciados de hasta 120 segundos de vídeo sobre su forma de onda en un PNG nuevo y devuelve el tiempo de cada fotograma. Acepta un recurso de material (`assetId`), el vídeo final de una ejecución (`runId`, `formatId`) o una de sus vistas previas (añade `previewAttempt`). Los agentes que leen imágenes lo usan para comprobar un corte, una unión o una superposición en un momento de decisión. En la CLI es `render-timeline-view <workspace-id> <video-asset-id> <start> <end> <destination-png>`.
+`render_frame_strip` dibuja fotogramas espaciados de hasta 120 segundos de vídeo sobre su forma de onda en un PNG nuevo y devuelve el tiempo de cada fotograma. Acepta un recurso de material (`assetId`), el vídeo final de una ejecución (`runId`, `formatId`) o una de sus vistas previas (añade `previewAttempt`). Los agentes que leen imágenes lo usan para comprobar un corte, una unión o una superposición en un momento de decisión. En la CLI es `render-frame-strip <workspace-id> <video-asset-id> <start> <end> <destination-png>`.

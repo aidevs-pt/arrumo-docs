@@ -22,4 +22,4 @@ Each production step's agent follows a short guide of editing craft notes: writi
 
 ## Looking at a moment
 
-`render_timeline_view` draws evenly spaced frames from up to 120 seconds of video above its waveform into a new PNG and returns each frame's time. It takes a footage asset (`assetId`), a run's final video (`runId`, `formatId`) or one of its previews (add `previewAttempt`). Agents that can read images use it to check a cut, a join or an overlay at a decision point. The CLI form is `render-timeline-view <workspace-id> <video-asset-id> <start> <end> <destination-png>`.
+`render_frame_strip` draws evenly spaced frames from up to 120 seconds of video above its waveform into a new PNG and returns each frame's time. It takes a footage asset (`assetId`), a run's final video (`runId`, `formatId`) or one of its previews (add `previewAttempt`). Agents that can read images use it to check a cut, a join or an overlay at a decision point. The CLI form is `render-frame-strip <workspace-id> <video-asset-id> <start> <end> <destination-png>`.

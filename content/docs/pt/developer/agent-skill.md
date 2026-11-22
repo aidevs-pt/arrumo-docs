@@ -22,4 +22,4 @@ O agente de cada passo de produção segue um guia curto com notas de ofício: e
 
 ## Olhar para um momento
 
-`render_timeline_view` desenha imagens espaçadas de até 120 segundos de vídeo por cima da forma de onda num PNG novo e devolve o tempo de cada imagem. Aceita um recurso de gravação (`assetId`), o vídeo final de uma execução (`runId`, `formatId`) ou uma das suas pré-visualizações (acrescenta `previewAttempt`). Os agentes que leem imagens usam-no para verificar um corte, uma junção ou uma sobreposição num momento de decisão. Na CLI é `render-timeline-view <workspace-id> <video-asset-id> <start> <end> <destination-png>`.
+`render_frame_strip` desenha imagens espaçadas de até 120 segundos de vídeo por cima da forma de onda num PNG novo e devolve o tempo de cada imagem. Aceita um recurso de gravação (`assetId`), o vídeo final de uma execução (`runId`, `formatId`) ou uma das suas pré-visualizações (acrescenta `previewAttempt`). Os agentes que leem imagens usam-no para verificar um corte, uma junção ou uma sobreposição num momento de decisão. Na CLI é `render-frame-strip <workspace-id> <video-asset-id> <start> <end> <destination-png>`.
