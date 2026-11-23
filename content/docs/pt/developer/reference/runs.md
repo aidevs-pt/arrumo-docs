@@ -121,7 +121,7 @@ O plano de produção da aplicação pode renderizar uma pré-visualização com
 
 Usa `rename_completed_video` para mudar o título visível de uma execução concluída. Usa `add_completed_video_feedback` para guardar comentários em Markdown sobre a execução inteira ou um resultado de produção concreto. Passa o identificador do resultado de `get_completed_video` para comentar uma etapa.
 
-Usa `delete-completed-video <workspace-id> <run-id> <confirmed-title>` na CLI para remover uma execução concluída e a respetiva pasta de entrega gerida. Usa o título visível atual exato. Uma execução referenciada por uma repetição continua disponível. Se a limpeza de ficheiros for interrompida, volta a executar o mesmo comando para a terminar. Os recursos de origem partilhados ficam na biblioteca do espaço de trabalho.
+Usa `delete-completed-video <workspace-id> <run-id> <confirmed-title>` na CLI para remover uma execução concluída e a respetiva pasta de entrega gerida. Usa o título visível atual exato. As repetições dela mantêm-se e deixam de apontar para ela. Se a limpeza de ficheiros for interrompida, volta a executar o mesmo comando para a terminar. Os recursos de origem partilhados ficam na biblioteca do espaço de trabalho.
 
 Por MCP ou A2A, usa `delete_completed_video` com `workspaceId`, `runId` e o `confirmedTitle` exato. Usa a mesma remoção e a mesma limpeza retomável que o comando da CLI.
 

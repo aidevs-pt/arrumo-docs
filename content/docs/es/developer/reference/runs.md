@@ -121,7 +121,7 @@ El plan de producción de escritorio puede renderizar una vista previa con clips
 
 Usa `rename_completed_video` para cambiar el título visible de una ejecución completada. Usa `add_completed_video_feedback` para guardar comentarios en Markdown sobre la ejecución entera o un resultado de producción concreto. Pasa el identificador del resultado de `get_completed_video` para comentar una etapa.
 
-Usa `delete-completed-video <workspace-id> <run-id> <confirmed-title>` en la CLI para quitar una ejecución completada y su directorio de entrega gestionado. Usa el título visible actual exacto. Una ejecución referenciada por una repetición sigue disponible. Si la limpieza de archivos se interrumpe, vuelve a ejecutar el mismo comando para terminarla. Los recursos de origen compartidos se quedan en la biblioteca del espacio de trabajo.
+Usa `delete-completed-video <workspace-id> <run-id> <confirmed-title>` en la CLI para quitar una ejecución completada y su directorio de entrega gestionado. Usa el título visible actual exacto. Sus repeticiones se conservan y dejan de apuntar a ella. Si la limpieza de archivos se interrumpe, vuelve a ejecutar el mismo comando para terminarla. Los recursos de origen compartidos se quedan en la biblioteca del espacio de trabajo.
 
 Por MCP o A2A, usa `delete_completed_video` con `workspaceId`, `runId` y el `confirmedTitle` exacto. Usa el mismo borrado y la misma limpieza reanudable que el comando de la CLI.
 

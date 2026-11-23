@@ -121,7 +121,7 @@ The desktop production plan can render a whole-clip preview for recorded-source 
 
 Use `rename_completed_video` to change a completed run's display title. Use `add_completed_video_feedback` to save Markdown feedback about the full run or a specific production result. Pass the result ID from `get_completed_video` for stage feedback.
 
-Use `delete-completed-video <workspace-id> <run-id> <confirmed-title>` in the CLI to remove a completed run and its managed delivery directory. Use the exact current display title. A run referenced by a replay stays available. If file cleanup is interrupted, rerun the same command to finish the pending cleanup. Shared source assets stay in the workspace library.
+Use `delete-completed-video <workspace-id> <run-id> <confirmed-title>` in the CLI to remove a completed run and its managed delivery directory. Use the exact current display title. Its replays stay, and no longer point to it. If file cleanup is interrupted, rerun the same command to finish the pending cleanup. Shared source assets stay in the workspace library.
 
 Through MCP or A2A, use `delete_completed_video` with `workspaceId`, `runId`, and the exact `confirmedTitle`. It uses the same deletion and resumable file cleanup as the CLI command.
 
