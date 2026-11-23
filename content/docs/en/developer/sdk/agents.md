@@ -61,7 +61,7 @@ Agents that read images from a structured message instead declare
 adds its `args` and writes one JSON line to stdin built from `stdin`: the string
 `"{prompt}"` becomes the prompt and an array element `"{images}"` becomes one
 copy of `image` per image, with `"{data}"` as the base64 bytes and
-`"{mediaType}"` as `image/png` or `image/jpeg`. Runs without images still send
+`"{mediaType}"` as `image/png`, `image/jpeg`, `image/gif` or `image/webp`; other images, such as SVG, and ones over 5 MB are left out. Runs without images still send
 the plain prompt. Claude Code uses this with `--input-format stream-json`.
 
 Agents with their own image tool also declare the `image-generation` capability
