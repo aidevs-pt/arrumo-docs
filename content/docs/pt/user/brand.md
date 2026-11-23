@@ -1,0 +1,53 @@
+---
+title: "Configura a tua marca"
+description: "Transforma um site num espaço de trabalho com contexto, cores, tipos de letra, logótipos e regras de entrega que todos os vídeos seguem."
+---
+
+Um espaço de trabalho guarda o que se mantém entre os teus vídeos: quem és, que aspeto tens e o que inclui cada entrega. Mais tarde, os perfis e cada vídeo podem alterar partes. Esta página configura-o a partir de um site que já tens.
+
+## Deixa o agente ler o teu site
+
+Abre **Definições do espaço › Contexto**. Em **Onde pode Claude Code conhecer-te?** (ou o nome do teu agente), adiciona o teu site e as ligações do teu canal ou redes sociais, e deixa o agente lê-los. Ele redige **Sobre ti**, sugere cores da marca e perfis, e mostra as imagens que encontrou, como a pré-visualização do site para redes sociais, para marcares as que queres.
+
+Com o Claude Code, ativa primeiro **Pesquisa na web** nas definições do plugin para este espaço, para que possa abrir as páginas. O agente só lê e não pode executar comandos. Quando o contexto estiver certo, volta a desativá-la se não quiseres que o trabalho seguinte use a web.
+
+Lê o rascunho antes de o guardar. Substitui o que o agente tiver suposto, como uma morada em falta ou uma lista de serviços vaga, e mantém os factos que importam nos vídeos: nomes, locais, serviços e o apelo à ação.
+
+## Cores
+
+Em **Marca › Cores da marca**, confirma cada cor no próprio site, por exemplo nas variáveis CSS ou nas classes dos botões e títulos. Um agente que lê uma página pode arredondar cores ou inventar outras parecidas. Dá a cada cor um nome que o agente possa usar numa frase, como Tinta ou Papel, e usa o visto para escolher se os vídeos a podem usar.
+
+## Tipos de letra
+
+Em **Tipos de letra**, adiciona um ficheiro Regular e outro Bold para **Títulos** e para **Texto**. Usa os ficheiros `.ttf` ou `.otf` estáticos da versão oficial do tipo de letra, não um tipo de letra variável nem um ficheiro de tipo de letra para a web. Se um site usa um corte largo nos títulos, como o Expanded, adiciona esse corte como tipo de letra dos títulos. Cada cartão mostra letras acentuadas e o símbolo do euro, por isso vês logo se faltam a um ficheiro.
+
+## Logótipos e referências de estilo
+
+Os **Recursos da marca** são logótipos, avatares e marcas que o agente coloca tal como são. As **Referências de estilo** são estilos a seguir, como uma miniatura ou o design de uma página, e nunca aparecem num vídeo.
+
+Para logótipos, prefere PNG. Se uma marca tem fundo opaco, di-lo na descrição, por exemplo «texto preto num retângulo branco opaco: usa-o em cenas claras ou como cartão branco». Cada elemento sem descrição mostra **Descreve-a**. O agente decide onde vai cada imagem a partir destas notas, por isso escreve o que mostra, o tamanho e onde funciona.
+
+## Perfis
+
+Cada perfil é um tipo de vídeo que fazes, como explicações de produto ou casos de clientes. Dá-lhe as suas próprias indicações de ritmo, estrutura e estilo no ecrã. As definições do perfil prevalecem sobre as do espaço nos seus vídeos, e o contexto de ambos soma-se.
+
+## Saídas
+
+**Saídas** lista os formatos em que cada vídeo é entregue. Cada formato ativo recebe sempre um ficheiro de vídeo e o respetivo ficheiro de legendas. Desativa os formatos que não publicas. Em cada formato podes pedir títulos, descrições, etiquetas e miniaturas, indicar **Imagens de referência para miniaturas** e acrescentar **Especificações adicionais**, como os limites de tamanho de uma plataforma ou uma frase com que termina cada descrição.
+
+As legendas são entregues num ficheiro SRT à parte. Ativa **Entregar também uma cópia com as legendas na imagem** só se também quiseres uma cópia com as legendas gravadas.
+
+## Antes do teu primeiro vídeo
+
+- **Sobre ti** soa a ti e não tem marcadores de posição.
+- Cada cor marcada aparece no teu site.
+- Os dois cartões de tipos de letra mostram as letras certas nos pesos certos.
+- Cada logótipo tem descrição.
+- Só estão ativos os formatos que publicas.
+- Os teus fornecedores de narração e música têm chave em **Definições › Serviços e chaves**, e a voz da narração está escolhida nas definições desse plugin.
+
+Depois, cria algumas [animações](animations.md) para reutilizar e faz [o teu primeiro vídeo](first-video.md).
+
+## Com um agente
+
+Tudo nesta página também está disponível para agentes através do servidor MCP do Arrumo, da linha de comandos e do A2A, por exemplo `draft_workspace_context`, `set_workspace_context`, `import_brand_font`, `attach_brand_asset`, `set_asset_notes` e `set_format_delivery`. Consulta [Liga-te ao Arrumo](../developer/connect.md).

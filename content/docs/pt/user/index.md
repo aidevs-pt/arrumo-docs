@@ -4,4 +4,4 @@ title: "Usar o Arrumo"
 description: "Cria vídeos com o Arrumo."
 ---
 
-Começa pelo [teu primeiro vídeo](first-video.md): percorre um espaço de trabalho, uma geração com revisões e a exportação.
+Começa por [configurar a tua marca](brand.md) a partir do teu site e [cria algumas animações](animations.md) para reutilizar. [O teu primeiro vídeo](first-video.md) percorre uma geração com revisões e a exportação.
