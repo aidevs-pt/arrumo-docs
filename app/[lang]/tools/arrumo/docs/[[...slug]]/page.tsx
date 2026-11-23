@@ -1,3 +1,4 @@
+import { posix } from "node:path";
 import {
   DocsBody,
   DocsDescription,
@@ -6,9 +7,10 @@ import {
   MarkdownCopyButton,
   ViewOptionsPopover,
 } from "fumadocs-ui/layouts/docs/page";
-import { createRelativeLink } from "fumadocs-ui/mdx";
+import defaultMdxComponents from "fumadocs-ui/mdx";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import type { ComponentProps } from "react";
 import { getMDXComponents } from "@/components/mdx";
 import { i18n } from "@/lib/i18n";
 import { gitConfig, siteUrl, staticRoute } from "@/lib/shared";
@@ -39,11 +41,38 @@ export default async function Page(
       </div>
       <DocsBody>
         <MDX
-          components={getMDXComponents({ a: createRelativeLink(source, page) })}
+          components={getMDXComponents({
+            a: ({ href, ...props }: ComponentProps<"a">) => (
+              <defaultMdxComponents.a
+                href={pageLink(href, page.path, lang)}
+                {...props}
+              />
+            ),
+          })}
         />
       </DocsBody>
     </DocsPage>
   );
+}
+
+/** Content links to other pages by relative file path (`../plugins/index.md`); this turns them
+ * into the page's URL in the same language. */
+function pageLink(href: string | undefined, from: string, lang: string) {
+  if (!href || /^([a-z]+:|#|\/)/i.test(href)) return href;
+  const [file, hash] = href.split("#", 2);
+  if (!/\.mdx?$/.test(file)) return href;
+  // Page paths include the language folder (`pt/user/brand.md`).
+  const within = from.startsWith(`${lang}/`)
+    ? from.slice(lang.length + 1)
+    : from;
+  const path = posix.normalize(posix.join(posix.dirname(within), file));
+  const slugs = path
+    .replace(/\.mdx?$/, "")
+    .split("/")
+    .filter((part) => part && part !== "index");
+  const target = source.getPage(slugs, lang);
+  if (!target) return href;
+  return hash ? `${target.url}#${hash}` : target.url;
 }
 
 export async function generateStaticParams() {
