@@ -2,12 +2,16 @@ import { createMDX } from "fumadocs-mdx/next";
 
 const withMDX = createMDX();
 
-/** @type {import('next').NextConfig} */
+/**
+ * Exported to the paths aidevs.pt serves: `<lang>/tools/arrumo/docs/…` for pages (aidevs.pt drops
+ * the `en` prefix) and `/tools/arrumo/static/…` for everything else.
+ * @type {import('next').NextConfig}
+ */
 const config = {
   output: "export",
   reactStrictMode: true,
-  trailingSlash: true,
-  basePath: process.env.NEXT_PUBLIC_BASE_PATH || undefined,
+  trailingSlash: false,
+  assetPrefix: "/tools/arrumo/static",
   images: { unoptimized: true },
 };
 

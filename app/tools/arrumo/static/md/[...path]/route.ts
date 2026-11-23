@@ -6,7 +6,7 @@ export const dynamicParams = false;
 
 export async function GET(
   _req: Request,
-  { params }: RouteContext<"/llms.mdx/[...path]">,
+  { params }: RouteContext<"/tools/arrumo/static/md/[...path]">,
 ) {
   const { path } = await params;
   return (

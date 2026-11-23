@@ -12,12 +12,13 @@ import {
   type SharedProps,
 } from "fumadocs-ui/components/dialog/search";
 import { useI18n } from "fumadocs-ui/contexts/i18n";
+import { staticRoute } from "@/lib/shared";
 
 export default function DefaultSearchDialog(props: SharedProps) {
   const { locale } = useI18n();
   const search = useStaticSearch({
     locale,
-    from: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/api/search`,
+    from: `${staticRoute}/search`,
   });
 
   return (

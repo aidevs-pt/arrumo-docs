@@ -4,7 +4,7 @@ export const i18n = defineI18n({
   defaultLanguage: "en",
   languages: ["en", "es", "pt"],
   parser: "dir",
-  hideLocale: "never",
+  hideLocale: "default-locale",
 });
 
 export type Lang = (typeof i18n.languages)[number];

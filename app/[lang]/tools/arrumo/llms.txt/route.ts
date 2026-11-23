@@ -10,7 +10,7 @@ export function generateStaticParams() {
 
 export async function GET(
   _req: Request,
-  { params }: RouteContext<"/[lang]/llms.txt">,
+  { params }: RouteContext<"/[lang]/tools/arrumo/llms.txt">,
 ) {
   const { lang } = await params;
   return (
