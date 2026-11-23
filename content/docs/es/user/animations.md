@@ -8,6 +8,8 @@ description: "Genera animaciones reutilizables con tu marca, como una cortinilla
 
 ## Genera una animación
 
+![La página Animaciones: rótulos, cortinillas de logotipo y tarjetas finales, cada una con su vista previa en bucle](/tools/arrumo/static/media/app/animations-library.webp)
+
 Abre **Animaciones** en la barra lateral y elige **Generar con el agente**. En **¿Qué debe mostrar?**, describe la pieza con palabras sencillas: qué aparece, qué colores y logotipos de la marca, el ritmo y dónde se usará. El agente la diseña con los colores, las fuentes y los recursos de tu marca, y Arrumo renderiza la vista previa. Puede tardar unos minutos.
 
 Tres piezas que necesitan la mayoría de los espacios, con peticiones que funcionaron bien:
@@ -20,6 +22,8 @@ Llama a los colores como los llama tu página de **Marca**, y a los logotipos co
 
 ## Revísala y cámbiala
 
+![Los detalles de una animación: su vista previa en bucle y cuándo usarla](/tools/arrumo/static/media/app/animations-detail.webp)
+
 Abre un elemento para reproducir su vista previa y leer su nota de uso. Si algo no encaja, elige **Cambiar con el agente** y di solo lo que debe cambiar, como «deja la tarjeta final un segundo más» o «haz más pequeña la tarjeta del logotipo». El agente guarda el resultado como un elemento nuevo y deja el original como estaba, así que puedes compararlos y borrar el que no quieras. **Duplicar elemento** copia un elemento, por ejemplo para cambiar su nota de uso para otro fin.
 
 ## Quién puede usarla
@@ -27,6 +31,8 @@ Abre un elemento para reproducir su vista previa y leer su nota de uso. Si algo 
 **Visibilidad** filtra la biblioteca por todo el espacio o por un perfil. Los elementos creados para el espacio están disponibles para todos los perfiles. Para dar a otros perfiles un elemento de un perfil, usa **Compartir con perfiles**.
 
 ## En los vídeos
+
+![Revisión de las animaciones de un vídeo: cada una con su vista previa, una decisión y «Guardar en la biblioteca al aprobar»](/tools/arrumo/static/media/app/review-animations.webp)
 
 En el paso de recursos de un vídeo, el agente coloca tal como son los elementos de la biblioteca que encajan con el guion, como la cortinilla al principio y la tarjeta final al cierre. Para todo lo que lleva palabras que cambian en cada vídeo, como los rótulos inferiores, diseña animaciones nuevas y sigue la composición, los colores, las fuentes y el ritmo de las piezas de tu biblioteca que hacen lo mismo.
 

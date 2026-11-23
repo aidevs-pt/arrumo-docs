@@ -8,6 +8,8 @@ description: "Gera animações reutilizáveis com a tua marca, como um separador
 
 ## Gera uma animação
 
+![A página Animações: oráculos, separadores do logótipo e cartões finais, cada um com a sua pré-visualização em ciclo](/tools/arrumo/static/media/app/animations-library.webp)
+
 Abre **Animações** na barra lateral e escolhe **Gerar com o agente**. Em **O que deve mostrar?**, descreve a peça em palavras simples: o que aparece, que cores e logótipos da marca, o ritmo e onde vai ser usada. O agente desenha-a com as cores, os tipos de letra e os recursos da tua marca, e o Arrumo renderiza a pré-visualização. Pode demorar alguns minutos.
 
 Três peças de que a maioria dos espaços precisa, com pedidos que funcionaram bem:
@@ -20,6 +22,8 @@ Chama às cores os nomes que estão na tua página **Marca**, e aos logótipos o
 
 ## Revê-a e altera-a
 
+![Os detalhes de uma animação: a pré-visualização em ciclo e quando a usar](/tools/arrumo/static/media/app/animations-detail.webp)
+
 Abre um elemento para reproduzir a pré-visualização e ler a nota de utilização. Se algo não estiver bem, escolhe **Alterar com o agente** e diz só o que deve mudar, como «mantém o cartão final mais um segundo» ou «torna o cartão do logótipo mais pequeno». O agente guarda o resultado como um elemento novo e deixa o original como estava, por isso podes compará-los e apagar o que não quiseres. **Duplicar elemento** copia um elemento, por exemplo para mudar a nota de utilização para outro fim.
 
 ## Quem a pode usar
@@ -27,6 +31,8 @@ Abre um elemento para reproduzir a pré-visualização e ler a nota de utilizaç
 **Visibilidade** filtra a biblioteca por todo o espaço ou por um perfil. Os elementos criados para o espaço estão disponíveis para todos os perfis. Para dar a outros perfis um elemento de um perfil, usa **Partilhar com perfis**.
 
 ## Nos vídeos
+
+![Revisão das animações de um vídeo: cada uma com pré-visualização, uma decisão e «Guardar na biblioteca ao aprovar»](/tools/arrumo/static/media/app/review-animations.webp)
 
 No passo de recursos de um vídeo, o agente coloca tal como são os elementos da biblioteca que encaixam no guião, como o separador na abertura e o cartão final no fecho. Para tudo o que tem palavras que mudam de vídeo para vídeo, como os oráculos, desenha animações novas e segue a composição, as cores, os tipos de letra e o ritmo das peças da tua biblioteca que fazem o mesmo.
 

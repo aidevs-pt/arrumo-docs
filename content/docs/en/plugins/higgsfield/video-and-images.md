@@ -4,6 +4,10 @@ title: "Generate video clips and images with Higgsfield"
 description: "Make clips and images for your library with Higgsfield's 45 video and 15 image models."
 ---
 
+[![Watch “Arrumo + Higgsfield: what it can do” on YouTube](/tools/arrumo/static/media/videos/06-arrumo-with-higgsfield.webp)](https://youtu.be/a8z9Aql6qPg)
+
+_Every clip and image in this video was generated with this plugin, and Arrumo made the whole video._
+
 ## Add your key
 
 Create an API key in the [Higgsfield console](https://console.higgsfield.ai/). In Arrumo, open **Settings › Services and keys**, find Higgsfield and paste the key as `KEY_ID:KEY_SECRET`. A workspace key takes precedence over the app default. Arrumo keeps it in the system credential store, sends it only to Higgsfield's API and never shows it to agents.

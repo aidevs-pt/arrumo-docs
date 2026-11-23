@@ -1,8 +1,10 @@
 ---
 
 title: "Crea y exporta tu primer vídeo"
-description: "Crea un espacio de trabajo y selecciona el agente de edición disponible en tu equipo."
+description: "Escribe un briefing, revisa cada etapa, añade subtítulos, programa y exporta el vídeo terminado."
 ---
+
+[![Ver «Del briefing al vídeo terminado» en YouTube](/tools/arrumo/static/media/videos/03-from-brief-to-finished-video.webp)](https://youtu.be/ldBiG89NOvA)
 
 ## Configura un espacio de trabajo
 
@@ -18,15 +20,21 @@ Abre **Salidas** y comprueba qué formatos están activados. Para que la entrega
 
 ## Guarda un borrador y añádelo a la cola
 
+![Un vídeo nuevo desde cero: el briefing, el perfil, lo que hará el agente y Generar este vídeo](/tools/arrumo/static/media/app/new-video-brief.webp)
+
 1. Abre **Vídeos** y entra en **Borradores**. Añade grabaciones a un borrador o elige **Empezar desde cero** y describe lo que quieres comunicar con el vídeo.
 2. Pon un título al borrador e incluye las indicaciones que afecten al montaje. Guárdalo para poder retomarlo antes de iniciar la producción.
 3. Elige **Generar** en el borrador. En las opciones, selecciona los proveedores y decide si quieres usar el **Piloto automático**. El piloto automático avanza por las etapas de revisión. La producción aún puede quedar a la espera de un renderizado o de archivos.
 4. Activa **Generar automáticamente los subtítulos que falten** si quieres que Arrumo envíe el audio de cada formato renderizado sin SRT a un proveedor seleccionado para la ejecución. Esta opción viene desactivada.
 5. Selecciona **Generar este vídeo**. Abre la pestaña **En producción** para seguir el proceso.
 
+![Un vídeo en producción: las etapas, lo que hace el agente y su razonamiento, y la actividad](/tools/arrumo/static/media/app/run-working.webp)
+
 Mientras Arrumo está en segundo plano, los vídeos terminados, fallidos o pendientes de revisión también aparecen en las notificaciones de tu equipo. Desactívalas en **Ajustes › General › Notificaciones**.
 
 ## Revisa y termina la entrega
+
+![Revisión de un guion: cada sección aprobada, devuelta con una nota o rechazada, con siete decisiones preparadas](/tools/arrumo/static/media/app/review-script.webp)
 
 En una ejecución guiada, abre **Revisar proceso** cuando haya una decisión pendiente. Comprueba el guion, los recursos o la vista previa disponibles. Prepara tus decisiones y envíalas cuando hayas terminado. Si necesitas una revisión, describe el cambio en las notas de la etapa antes de enviarla.
 
@@ -38,6 +46,10 @@ Los formatos que piden cortes verticales reciben vídeos verticales cortos sacad
 
 Los formatos con **Subtítulos en la imagen** activado (Ajustes del espacio › Salidas, las Salidas de un perfil o las salidas de un vídeo) también reciben una copia con los subtítulos dibujados en la imagen al descargar la entrega. Usa los subtítulos editados más recientes, y el vídeo limpio y su SRT se siguen incluyendo. Para obtener solo esa copia, abre el vídeo, elige el formato y pulsa **Guardar con subtítulos**.
 
+![Revisión de la vista previa de un formato antes del render final](/tools/arrumo/static/media/app/review-previews.webp)
+
+![Revisión de títulos, descripciones y etiquetas, cada uno aprobado, cambiado o rechazado](/tools/arrumo/static/media/app/review-titles.webp)
+
 Para ver qué se pidió al agente y qué mostró, abre **Registros del agente** junto a la actividad del proceso. Si un paso falla, ahí verás su salida de error.
 
 En la etapa de renderizado final, usa **Generar vídeo final** cuando esté disponible. En **Verificar la entrega**, usa **Generar subtítulos** o **Importar SRT** para cada formato que aún no tenga subtítulos. El SRT importado debe estar codificado en UTF-8 y sus marcas de tiempo deben quedar dentro de la duración del vídeo de ese formato.
@@ -48,7 +60,19 @@ La aplicación de escritorio verifica la entrega cuando todos los formatos activ
 
 ## Abre y exporta el resultado
 
+![Un vídeo terminado con los datos del formato, la fecha de publicación y otros archivos: títulos, descripciones, etiquetas y la miniatura](/tools/arrumo/static/media/app/finished-video.webp)
+
 Ve a **Vídeos** → **Terminados** y abre el vídeo terminado. Selecciona una salida para previsualizarla o abre **Texto de los subtítulos** para consultar sus marcas de tiempo. Usa **Exportar ZIP** para guardar los archivos verificados en un ZIP nuevo. Debajo del vídeo, **Cómo se hizo** muestra cada paso con los comentarios que dejaste, donde puedes comentar para que el agente lo lea cuando este vídeo se vuelva a generar, además de las animaciones usadas y el registro de actividad. **Ajustes usados** ofrece repetirlo con los ajustes capturados o los actuales y permite renombrar el vídeo.
+
+## Planifica las publicaciones en el calendario
+
+![El calendario: todas las salidas programadas del mes, con el color de su perfil y filtros por formato](/tools/arrumo/static/media/app/calendar.webp)
+
+Cada formato terminado puede tener una fecha de publicación. Ponla en **Fecha programada** del vídeo terminado. **Calendario** muestra todas las salidas programadas del espacio de trabajo con el color de su perfil, e Inicio lista las que salen esta semana. Filtra por perfil o formato arriba.
+
+## Recursos de vídeo
+
+En **Recursos**, los archivos de vídeo muestran un fotograma del clip, y al seleccionar uno se reproduce en el panel de detalles, igual que el audio. Los vídeos terminados muestran su miniatura en **Vídeos › Terminados**, o un fotograma del vídeo si no tiene.
 
 ## Copia de seguridad y restauración
 
@@ -58,7 +82,7 @@ Para restaurar, elige una copia en el mismo sitio. Arrumo comprueba primero cada
 
 ## Datos y privacidad
 
-Arrumo cuenta qué funciones se usan e informa de los errores, para saber qué mejorar. Ambas opciones están activadas por defecto y se pueden desactivar en **Ajustes › General › Datos y privacidad**. Van ligadas a un identificador aleatorio de esta instalación, nunca a ti, y nunca incluyen tus vídeos, archivos, textos ni claves. Las compilaciones que haces tú no envían nada.
+Arrumo cuenta qué funciones se usan e informa de los errores, para saber qué mejorar. Puedes desactivar ambas cosas en **Ajustes › General › Datos y privacidad**. [Ajustes, actualizaciones y privacidad](settings.md) detalla exactamente qué se envía.
 
 ## Créditos de los proveedores
 

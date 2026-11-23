@@ -4,6 +4,10 @@ title: "Genera clips de vídeo e imágenes con Higgsfield"
 description: "Crea clips e imágenes para tu biblioteca con los 45 modelos de vídeo y 15 de imagen de Higgsfield."
 ---
 
+[![Ver «Arrumo + Higgsfield: lo que puede hacer» en YouTube](/tools/arrumo/static/media/videos/06-arrumo-with-higgsfield.webp)](https://youtu.be/a8z9Aql6qPg)
+
+_Todos los clips e imágenes de este vídeo se generaron con este complemento, y Arrumo hizo el vídeo entero._
+
 ## Añade tu clave
 
 Crea una clave de API en la [consola de Higgsfield](https://console.higgsfield.ai/). En Arrumo, abre **Ajustes › Servicios y claves**, busca Higgsfield y pega la clave como `ID_DE_CLAVE:SECRETO`. Una clave del espacio de trabajo tiene prioridad sobre la predeterminada de la aplicación. Arrumo la guarda en el almacén de credenciales del sistema, solo la envía a la API de Higgsfield y nunca se la muestra a los agentes.

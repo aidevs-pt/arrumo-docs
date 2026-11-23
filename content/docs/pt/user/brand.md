@@ -6,23 +6,33 @@ description: "Transforma um site num espaço de trabalho com contexto, cores, ti
 
 Um espaço de trabalho guarda o que se mantém entre os teus vídeos: quem és, que aspeto tens e o que inclui cada entrega. Mais tarde, os perfis e cada vídeo podem alterar partes. Esta página configura-o a partir de um site que já tens.
 
+[![Ver «A tua marca no Arrumo» no YouTube](/tools/arrumo/static/media/videos/02-your-brand-in-arrumo.webp)](https://youtu.be/wBL2fZAUA2k)
+
 ## Deixa o agente ler o teu site
+
+![Definições do espaço, Contexto: o site que o agente leu e o «Sobre ti» que redigiu](/tools/arrumo/static/media/app/context.webp)
 
 Abre **Definições do espaço › Contexto**. Em **Onde pode Claude Code conhecer-te?** (ou o nome do teu agente), adiciona o teu site e as ligações do teu canal ou redes sociais, e deixa o agente lê-los. Ele redige **Sobre ti**, sugere cores da marca e perfis, e mostra as imagens que encontrou, como a pré-visualização do site para redes sociais, para marcares as que queres.
 
-Com o Claude Code, ativa primeiro **Pesquisa na web** nas definições do plugin para este espaço, para que possa abrir as páginas. O agente só lê e não pode executar comandos. Quando o contexto estiver certo, volta a desativá-la se não quiseres que o trabalho seguinte use a web.
+Com o Claude Code, ativa primeiro **Pesquisa na web** nas definições do plugin para este espaço, para que possa abrir as páginas. Quando o contexto estiver certo, volta a desativá-la se não quiseres que o trabalho seguinte use a web.
 
 Lê o rascunho antes de o guardar. Substitui o que o agente tiver suposto, como uma morada em falta ou uma lista de serviços vaga, e mantém os factos que importam nos vídeos: nomes, locais, serviços e o apelo à ação.
 
 ## Cores
 
+![Definições do espaço, Marca: oito cores com nome, cada uma com uma marca que indica se os vídeos a usam](/tools/arrumo/static/media/app/brand-colors.webp)
+
 Em **Marca › Cores da marca**, confirma cada cor no próprio site, por exemplo nas variáveis CSS ou nas classes dos botões e títulos. Um agente que lê uma página pode arredondar cores ou inventar outras parecidas. Dá a cada cor um nome que o agente possa usar numa frase, como Tinta ou Papel, e usa o visto para escolher se os vídeos a podem usar.
 
 ## Tipos de letra
 
+![Tipos de letra da marca com amostras de títulos e de texto, cada um com um ficheiro Regular e outro Bold](/tools/arrumo/static/media/app/brand-fonts.webp)
+
 Em **Tipos de letra**, adiciona um ficheiro Regular e outro Bold para **Títulos** e para **Texto**. Usa os ficheiros `.ttf` ou `.otf` estáticos da versão oficial do tipo de letra, não um tipo de letra variável nem um ficheiro de tipo de letra para a web. Se um site usa um corte largo nos títulos, como o Expanded, adiciona esse corte como tipo de letra dos títulos. Cada cartão mostra letras acentuadas e o símbolo do euro, por isso vês logo se faltam a um ficheiro.
 
 ## Logótipos e referências de estilo
+
+![Recursos da marca: logótipos e wordmarks, cada um com uma descrição que o agente lê](/tools/arrumo/static/media/app/brand-assets.webp)
 
 Os **Recursos da marca** são logótipos, avatares e marcas que o agente coloca tal como são. As **Referências de estilo** são estilos a seguir, como uma miniatura ou o design de uma página, e nunca aparecem num vídeo.
 
@@ -30,9 +40,13 @@ Para logótipos, prefere PNG. Se uma marca tem fundo opaco, di-lo na descrição
 
 ## Perfis
 
+![Perfis: um para vídeos explicativos e outro para casos de estudo, cada um com os seus rascunhos e formatos](/tools/arrumo/static/media/app/profiles.webp)
+
 Cada perfil é um tipo de vídeo que fazes, como explicações de produto ou casos de clientes. Dá-lhe as suas próprias indicações de ritmo, estrutura e estilo no ecrã. As definições do perfil prevalecem sobre as do espaço nos seus vídeos, e o contexto de ambos soma-se.
 
 ## Saídas
+
+![Definições do espaço, Saídas: o formato horizontal com miniaturas e as respetivas imagens de referência](/tools/arrumo/static/media/app/outputs.webp)
 
 **Saídas** lista os formatos em que cada vídeo é entregue. Cada formato ativo recebe sempre um ficheiro de vídeo e o respetivo ficheiro de legendas. Desativa os formatos que não publicas. Em cada formato podes pedir títulos, descrições, etiquetas e miniaturas, indicar **Imagens de referência para miniaturas** e acrescentar **Especificações adicionais**, como os limites de tamanho de uma plataforma ou uma frase com que termina cada descrição.
 

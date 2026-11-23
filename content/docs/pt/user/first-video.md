@@ -1,8 +1,10 @@
 ---
 
 title: "Cria e exporta o teu primeiro vídeo"
-description: "Cria um espaço de trabalho e escolhe o agente de edição disponível no teu computador."
+description: "Escreve um briefing, revê cada etapa, acrescenta legendas, agenda e exporta o vídeo concluído."
 ---
+
+[![Ver «Do briefing ao vídeo final» no YouTube](/tools/arrumo/static/media/videos/03-from-brief-to-finished-video.webp)](https://youtu.be/ldBiG89NOvA)
 
 ## Configura um espaço de trabalho
 
@@ -18,15 +20,21 @@ Abre **Saídas** e verifica os formatos ativos. Para a entrega ser verificada, c
 
 ## Guarda um rascunho e coloca-o na fila
 
+![Um vídeo novo do zero: o briefing, o perfil, o que o agente vai fazer e Gerar este vídeo](/tools/arrumo/static/media/app/new-video-brief.webp)
+
 1. Abre **Vídeos** e entra em **Rascunhos**. Adiciona gravações a um rascunho ou escolhe **Começar do zero** e descreve o que queres comunicar com o vídeo.
 2. Dá um título ao rascunho e inclui as indicações que influenciam a montagem. Guarda-o para poderes voltar a ele antes de iniciar a produção.
 3. Escolhe **Gerar** no rascunho. Nas opções, seleciona os fornecedores e decide se queres usar o **Piloto automático**. O piloto automático avança pelas etapas de revisão. A produção ainda pode ficar à espera de uma renderização ou de ficheiros.
 4. Ativa **Gerar automaticamente as legendas em falta** se quiseres que o Arrumo envie o áudio de cada formato renderizado sem SRT para um fornecedor selecionado para a execução. Esta opção está desativada por predefinição.
 5. Seleciona **Gerar este vídeo**. Abre **Em produção** para acompanhar a execução.
 
+![Um vídeo em produção: as etapas, o que o agente está a fazer e o seu raciocínio, e a atividade](/tools/arrumo/static/media/app/run-working.webp)
+
 Enquanto o Arrumo está em segundo plano, os vídeos concluídos, falhados ou à espera de revisão também aparecem nas notificações do teu computador. Desativa-as em **Definições › Geral › Notificações**.
 
 ## Revê e termina a entrega
+
+![Revisão de um guião: cada secção aprovada, devolvida com uma nota ou rejeitada, com sete decisões preparadas](/tools/arrumo/static/media/app/review-script.webp)
 
 Numa execução guiada, abre **Rever execução** quando houver uma decisão pendente. Verifica o guião, os recursos ou a pré-visualização disponíveis. Prepara as tuas decisões e envia-as quando terminares. Se precisares de alterações, descreve-as nas notas da etapa antes de enviar a decisão.
 
@@ -38,6 +46,10 @@ Os formatos que pedem cortes verticais recebem vídeos verticais curtos tirados 
 
 Os formatos com **Legendas na imagem** ativado (Definições do espaço › Saídas, as Saídas de um perfil ou as saídas de um vídeo) também recebem uma cópia com as legendas desenhadas na imagem quando descarregas a entrega. Usa as legendas editadas mais recentes, e o vídeo limpo e o SRT continuam incluídos. Para obteres só essa cópia, abre o vídeo, escolhe o formato e carrega em **Guardar com legendas**.
 
+![Revisão da pré-visualização de um formato antes da renderização final](/tools/arrumo/static/media/app/review-previews.webp)
+
+![Revisão de títulos, descrições e etiquetas, cada um aprovado, alterado ou rejeitado](/tools/arrumo/static/media/app/review-titles.webp)
+
 Para veres o que foi pedido ao agente e o que ele mostrou, abre **Registos do agente** junto à atividade da execução. Se um passo falhar, vês aí a saída de erro.
 
 Na etapa de renderização final, usa **Gerar vídeo final** quando estiver disponível. Em **Verificar a entrega**, usa **Gerar legendas** ou **Importar SRT** em cada formato que ainda não tenha legendas. O SRT importado tem de estar em UTF-8 e as marcas temporais devem ficar dentro da duração do vídeo desse formato.
@@ -48,7 +60,19 @@ A aplicação de computador verifica a entrega quando todos os formatos ativos t
 
 ## Abre e exporta o resultado
 
+![Um vídeo concluído com os dados do formato, a data agendada e outros ficheiros: títulos, descrições, etiquetas e a miniatura](/tools/arrumo/static/media/app/finished-video.webp)
+
 Vai a **Vídeos** → **Concluídos** e abre o vídeo finalizado. Seleciona uma saída para a pré-visualizar ou abre **Texto das legendas** para consultar as suas marcas temporais. Usa **Exportar ZIP** para guardar os ficheiros verificados num novo ZIP. Por baixo do vídeo, **Como foi feito** mostra cada passo com o feedback que deixaste, onde podes comentar para o agente ler quando este vídeo for gerado de novo, além das animações usadas e do registo de atividade. **Definições usadas** permite repetir com as definições capturadas ou atuais e mudar o nome do vídeo.
+
+## Planeia as publicações no calendário
+
+![O calendário: todas as saídas agendadas do mês, com a cor do perfil e filtros por formato](/tools/arrumo/static/media/app/calendar.webp)
+
+Cada formato concluído pode ter uma data de publicação. Define-a em **Data agendada** no vídeo concluído. **Calendário** mostra todas as saídas agendadas do espaço de trabalho com a cor do respetivo perfil, e o Início lista as que saem esta semana. Filtra por perfil ou formato no topo.
+
+## Recursos de vídeo
+
+Em **Recursos**, os ficheiros de vídeo mostram uma imagem do clipe, e ao selecionares um ele é reproduzido no painel de detalhes, tal como o áudio. Os vídeos concluídos mostram a sua miniatura em **Vídeos › Concluídos**, ou uma imagem do vídeo quando não têm.
 
 ## Cópia de segurança e restauro
 
@@ -58,7 +82,7 @@ Para restaurar, escolhe uma cópia no mesmo sítio. O Arrumo verifica primeiro c
 
 ## Dados e privacidade
 
-O Arrumo conta que funcionalidades são usadas e reporta erros, para saber o que melhorar. Ambas as opções estão ativas por omissão e podem ser desligadas em **Definições › Geral › Dados e privacidade**. Estão ligadas a um identificador aleatório desta instalação, nunca a ti, e nunca incluem os teus vídeos, ficheiros, textos ou chaves. As compilações que fazes tu não enviam nada.
+O Arrumo conta que funcionalidades são usadas e reporta erros, para saber o que melhorar. Podes desativar ambos em **Definições › Geral › Dados e privacidade**. [Definições, atualizações e privacidade](settings.md) detalha exatamente o que é enviado.
 
 ## Créditos dos fornecedores
 

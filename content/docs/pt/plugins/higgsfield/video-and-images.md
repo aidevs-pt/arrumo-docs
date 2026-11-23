@@ -4,6 +4,10 @@ title: "Gera clipes de vídeo e imagens com a Higgsfield"
 description: "Cria clipes e imagens para a tua biblioteca com os 45 modelos de vídeo e 15 de imagem da Higgsfield."
 ---
 
+[![Ver «Arrumo + Higgsfield: o que consegue fazer» no YouTube](/tools/arrumo/static/media/videos/06-arrumo-with-higgsfield.webp)](https://youtu.be/a8z9Aql6qPg)
+
+_Todos os clipes e imagens deste vídeo foram gerados com este plugin, e o Arrumo fez o vídeo inteiro._
+
 ## Adiciona a tua chave
 
 Cria uma chave de API na [consola Higgsfield](https://console.higgsfield.ai/). No Arrumo, abre **Definições › Serviços e chaves**, procura a Higgsfield e cola a chave como `ID_DA_CHAVE:SEGREDO`. Uma chave do espaço de trabalho tem prioridade sobre a predefinida da aplicação. O Arrumo guarda-a no cofre de credenciais do sistema, só a envia para a API da Higgsfield e nunca a mostra aos agentes.

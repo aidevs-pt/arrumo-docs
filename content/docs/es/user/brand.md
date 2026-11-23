@@ -6,23 +6,33 @@ description: "Convierte un sitio web en un espacio de trabajo con contexto, colo
 
 Un espacio de trabajo guarda lo que no cambia entre tus vídeos: quién eres, cómo te ves y qué incluye cada entrega. Más adelante, los perfiles y cada vídeo pueden cambiar partes. Esta página lo configura a partir de un sitio web que ya tienes.
 
+[![Ver «Tu marca en Arrumo» en YouTube](/tools/arrumo/static/media/videos/02-your-brand-in-arrumo.webp)](https://youtu.be/wBL2fZAUA2k)
+
 ## Deja que el agente lea tu sitio web
+
+![Ajustes del espacio de trabajo, Contexto: el sitio web que leyó el agente y el «Sobre ti» que redactó](/tools/arrumo/static/media/app/context.webp)
 
 Abre **Ajustes del espacio › Contexto**. En **¿Dónde puede Claude Code conocerte?** (o el nombre de tu agente), añade tu sitio web y los enlaces de tu canal o tus redes, y deja que el agente los lea. Redacta **Sobre ti**, sugiere colores de marca y perfiles, y te ofrece las imágenes que encontró, como la vista previa para redes del sitio, para que marques las que quieras.
 
-Con Claude Code, activa antes **Búsqueda web** en los ajustes de su complemento para este espacio, para que pueda abrir las páginas. El agente solo lee y no puede ejecutar comandos. Cuando el contexto esté bien, vuelve a desactivarla si no quieres que el trabajo posterior use la web.
+Con Claude Code, activa antes **Búsqueda web** en los ajustes de su complemento para este espacio, para que pueda abrir las páginas. Cuando el contexto esté bien, vuelve a desactivarla si no quieres que el trabajo posterior use la web.
 
 Lee el borrador antes de guardarlo. Sustituye lo que el agente haya supuesto, como una dirección que falta o una lista de servicios vaga, y conserva los datos que importan en los vídeos: nombres, lugares, servicios y la llamada a la acción.
 
 ## Colores
 
+![Ajustes del espacio de trabajo, Marca: ocho colores con nombre, cada uno con una marca que indica si los vídeos lo usan](/tools/arrumo/static/media/app/brand-colors.webp)
+
 En **Marca › Colores de marca**, comprueba cada color con el propio sitio, por ejemplo con sus variables CSS o las clases de sus botones y títulos. Un agente que lee una página puede redondear colores o inventar otros parecidos. Dale a cada color un nombre que el agente pueda usar en una frase, como Tinta o Papel, y usa su marca de verificación para elegir si los vídeos pueden usarlo.
 
 ## Fuentes
 
+![Fuentes de la marca con muestras de títulos y de texto, cada una con un archivo Regular y otro Bold](/tools/arrumo/static/media/app/brand-fonts.webp)
+
 En **Fuentes**, añade un archivo Regular y otro Bold para **Títulos** y para **Texto**. Usa los archivos `.ttf` u `.otf` estáticos de la versión oficial de la fuente, no una fuente variable ni un archivo de fuente web. Si un sitio usa un corte ancho para los titulares, como el Expanded, añade ese corte como fuente de títulos. Cada tarjeta muestra letras con tilde y el símbolo del euro, así que ves enseguida si a un archivo le faltan.
 
 ## Logotipos y referencias de estilo
+
+![Recursos de marca: logotipos y wordmarks, cada uno con una descripción que lee el agente](/tools/arrumo/static/media/app/brand-assets.webp)
 
 Los **Recursos de marca** son logotipos, avatares y marcas que el agente coloca tal como son. Las **Referencias de estilo** son estilos que seguir, como una miniatura o el diseño de una página, y nunca aparecen en un vídeo.
 
@@ -30,9 +40,13 @@ Para los logotipos, mejor PNG. Si una marca tiene un fondo opaco, dilo en su des
 
 ## Perfiles
 
+![Perfiles: uno para vídeos explicativos y otro para casos de éxito, cada uno con sus borradores y formatos](/tools/arrumo/static/media/app/profiles.webp)
+
 Cada perfil es un tipo de vídeo que haces, como explicaciones de producto o casos de clientes. Dale sus propias indicaciones de ritmo, estructura y estilo en pantalla. Los ajustes del perfil mandan sobre los del espacio en sus vídeos, y el contexto de ambos se suma.
 
 ## Salidas
+
+![Ajustes del espacio de trabajo, Salidas: el formato horizontal con miniaturas y sus imágenes de referencia](/tools/arrumo/static/media/app/outputs.webp)
 
 **Salidas** lista los formatos en que se entrega cada vídeo. Cada formato activado recibe siempre un archivo de vídeo y su archivo de subtítulos. Desactiva los formatos que no publicas. En cada formato puedes pedir títulos, descripciones, etiquetas y miniaturas, dar **Imágenes de referencia para miniaturas** y añadir **Especificaciones adicionales**, como los límites de longitud de una plataforma o una frase con la que acaba cada descripción.
 

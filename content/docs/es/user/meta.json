@@ -1,5 +1,12 @@
 {
   "title": "Usar Arrumo",
   "root": true,
-  "pages": ["index", "brand", "animations", "first-video"]
+  "pages": [
+    "index",
+    "tutorial",
+    "brand",
+    "animations",
+    "first-video",
+    "settings"
+  ]
 }

@@ -6,23 +6,33 @@ description: "Turn a website into a workspace with context, colors, fonts, logos
 
 A workspace holds what stays the same across your videos: who you are, how you look and what each delivery contains. Profiles and single videos can override parts of it later. This page sets one up from an existing website.
 
+[![Watch “Your brand in Arrumo” on YouTube](/tools/arrumo/static/media/videos/02-your-brand-in-arrumo.webp)](https://youtu.be/wBL2fZAUA2k)
+
 ## Let the agent read your website
+
+![Workspace settings, Context: the website the agent read and the “About you” it drafted](/tools/arrumo/static/media/app/context.webp)
 
 Open **Workspace settings › Context**. Under **Where can Claude Code learn about you?** (or the name of your agent), add your website and any channel or social profile links, then let the agent read them. It drafts **About you**, suggests brand colors and profiles, and offers images it found, such as the site's social preview, for you to tick.
 
-With Claude Code, turn on **Web search** in its plugin settings for this workspace first, so it can open the pages. The agent stays read-only and can't run commands. Turn the setting off again once the context is right if you don't want later work to use the web.
+With Claude Code, turn on **Web search** in its plugin settings for this workspace first, so it can open the pages. Turn the setting off again once the context is right if you don't want later work to use the web.
 
 Read the draft before you save it. Replace anything the agent guessed, such as a missing address or a vague service list, and keep the facts that matter in videos: names, places, services and the call to action.
 
 ## Colors
 
+![Workspace settings, Brand: eight named brand colors, each with a check mark for whether videos use it](/tools/arrumo/static/media/app/brand-colors.webp)
+
 In **Brand › Brand colors**, check every color against the site itself, for example its CSS variables or the classes of its buttons and headings. An agent reading a page can round colors or invent near-misses. Give each color a name the agent can use in a sentence, such as Ink or Paper, and use its check mark to choose whether videos may use it.
 
 ## Fonts
 
+![Brand fonts with heading and body specimens, each with a Regular and a Bold file](/tools/arrumo/static/media/app/brand-fonts.webp)
+
 Under **Fonts**, add a Regular and a Bold file for **Headings** and for **Body text**. Use the static `.ttf` or `.otf` files from the font's official release, not a variable font or a web font file. If a site uses a wide cut for headlines, such as an Expanded width, add that cut as the heading font. Each card previews accented letters and the euro sign, so you can see at once when a file lacks them.
 
 ## Logos and style references
+
+![Brand assets: logos and wordmarks, each with a description the agent reads](/tools/arrumo/static/media/app/brand-assets.webp)
 
 **Brand assets** are logos, avatars and marks the agent places as they are. **Style references** are looks to follow, such as a thumbnail or a page design, and are never placed in a video.
 
@@ -30,9 +40,13 @@ Prefer PNG for logos. When a mark sits on an opaque background, say so in its de
 
 ## Profiles
 
+![Profiles: one for explainer videos, one for showcases, each with its drafts and formats](/tools/arrumo/static/media/app/profiles.webp)
+
 Each profile is a kind of video you make, such as product explainers or client showcases. Give it its own guidance on pacing, structure and on-screen style. Profile settings win over the workspace's for its videos, while context from both adds up.
 
 ## Outputs
+
+![Workspace settings, Outputs: the Landscape format with thumbnails and their reference images](/tools/arrumo/static/media/app/outputs.webp)
 
 **Outputs** lists the formats each video is delivered in. Every enabled format always gets a video file and its subtitle file. Turn off the formats you don't publish. Under each format you can ask for titles, descriptions, tags and thumbnails, give **Thumbnail reference images**, and add **Additional specifications**, such as a platform's length limits or a closing line every description ends with.
 

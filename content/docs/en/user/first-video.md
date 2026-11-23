@@ -1,8 +1,10 @@
 ---
 
 title: "Create and export your first video"
-description: "Create a workspace and choose the editing agent available on your machine."
+description: "Write a brief, review each stage, add subtitles, schedule and export the finished video."
 ---
+
+[![Watch “From brief to finished video” on YouTube](/tools/arrumo/static/media/videos/03-from-brief-to-finished-video.webp)](https://youtu.be/ldBiG89NOvA)
 
 ## Set up a workspace
 
@@ -18,15 +20,21 @@ Open **Outputs** and check which formats are enabled. Each enabled format needs 
 
 ## Save and queue a draft
 
+![A new video from scratch: the brief, the profile, what the agent will make, and Generate this video](/tools/arrumo/static/media/app/new-video-brief.webp)
+
 1. Open **Videos** and go to **Drafts**. Add recordings to a draft or choose **Start from scratch** and describe what you want the video to say.
 2. Give the draft a title and add any instructions that affect the edit. Save it so you can return to it before starting production.
 3. Choose **Generate** on the draft. Use the run options to choose providers and decide whether to use **Autopilot**. Autopilot advances through review gates. A run can still wait for rendering or files.
 4. Turn on **Generate missing subtitles automatically** if you want Arrumo to send audio from each rendered format missing an SRT to a provider selected for the run. This option is off by default.
 5. Select **Generate this video**. Open **Generating** to follow the run.
 
+![A video being generated: the stage track, what the agent is doing and its reasoning, and the activity](/tools/arrumo/static/media/app/run-working.webp)
+
 While Arrumo is in the background, finished, failed and waiting-for-review videos also appear in your computer's notifications. Turn them off in **Settings › General › Notifications**.
 
 ## Review and finish the delivery
+
+![Reviewing a script: each section approved, sent back with a note or rejected, with seven decisions staged](/tools/arrumo/static/media/app/review-script.webp)
 
 For a guided run, open **Review run** when a stage needs a decision. Check the available script, media, or preview. Stage your decisions and send them when you are ready. If you want a revision, describe the change in the stage’s notes before sending.
 
@@ -38,6 +46,10 @@ Formats that ask for portrait cuts get short vertical videos taken from the appr
 
 Formats with **Subtitles in the picture** turned on (Workspace settings › Outputs, a profile's Outputs, or a video's own outputs) also get a copy with the subtitles drawn into the picture when you download the delivery. It uses the latest edited subtitles, and the clean video and its SRT are still included. To get only that copy, open the video, pick the format and choose **Save with captions**.
 
+![Reviewing the video preview of a format before the final render](/tools/arrumo/static/media/app/review-previews.webp)
+
+![Reviewing titles, descriptions and tags, each approved, changed or rejected](/tools/arrumo/static/media/app/review-titles.webp)
+
 To see what the agent was asked and what it printed, open **Agent logs** next to the run's activity. A failed step shows its error output there.
 
 At the final render stage, use **Render final video** when the action is available. In **Verify delivery**, use **Generate subtitles** or **Import SRT** for any format still missing captions. An imported SRT must be UTF-8 and its cues must fit within that format’s video duration.
@@ -48,7 +60,19 @@ The desktop verifies the delivery when all enabled formats have managed MP4 and 
 
 ## Open and export the result
 
+![A finished video with its format details, schedule date and other files: titles, descriptions, tags and the thumbnail](/tools/arrumo/static/media/app/finished-video.webp)
+
 Go to **Videos** → **Completed** and open the finished video. Choose an output to preview it or open **Subtitle text** to inspect its cues. Use **Export ZIP** to save the verified delivery files to a new ZIP. Below the video, **How it was made** lists each step with any feedback you left, where you can comment so the agent reads it when this video is generated again, plus the animations used and the activity log. **Settings used** offers a replay with the captured or current settings and lets you rename the video.
+
+## Plan releases on the calendar
+
+![The calendar: every scheduled output for the month, colored by profile, with format filters](/tools/arrumo/static/media/app/calendar.webp)
+
+Each finished format can have a publishing date. Set it under **Schedule date** on the finished video. **Calendar** shows every scheduled output across the workspace, colored by profile, and Home lists the ones going out this week. Filter by profile or format at the top.
+
+## Video assets
+
+In **Assets**, video files show a still from the clip, and selecting one plays it in the details panel, as audio files do. Finished videos show their thumbnail in **Videos › Finished**, or a frame of the video when it has none.
 
 ## Back up and restore
 
@@ -58,7 +82,7 @@ To restore, choose a backup in the same place. Arrumo checks every file against 
 
 ## Data and privacy
 
-Arrumo counts which features are used and reports crashes, to learn what to improve. Both are on by default and can be turned off in **Settings › General › Data and privacy**. They are tied to a random ID for this install, never to you, and never include your videos, files, text or keys. Builds you compile yourself send nothing.
+Arrumo counts which features are used and reports crashes, to learn what to improve. Both can be turned off in **Settings › General › Data and privacy**. [Settings, updates and privacy](settings.md) lists exactly what is sent.
 
 ## Provider credits
 

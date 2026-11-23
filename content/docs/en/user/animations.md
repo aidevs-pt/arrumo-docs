@@ -8,6 +8,8 @@ description: "Generate reusable on-brand animations, such as a logo sting, an en
 
 ## Generate an animation
 
+![The Animations page: lower thirds, logo stings and end cards, each with a looping preview](/tools/arrumo/static/media/app/animations-library.webp)
+
 Open **Animations** in the sidebar and choose **Generate with agent**. Under **What should it show?**, describe the piece in plain words: what appears, which brand colors and logos, the timing and where it will be used. The agent designs it with your brand colors, fonts and brand assets, and Arrumo renders the preview. It can take a few minutes.
 
 Three pieces most workspaces need, with requests that worked well:
@@ -20,6 +22,8 @@ Name colors as your **Brand** page names them, and name logos as the brand asset
 
 ## Check and change it
 
+![An animation’s details: its looping preview and when to use it](/tools/arrumo/static/media/app/animations-detail.webp)
+
 Open an item to play its preview and read its usage note. When something is off, choose **Change with agent** and say only what should change, such as "hold the end card one second longer" or "make the wordmark card smaller". The agent saves the result as a new item and leaves the original as it was, so you can compare them and delete the one you don't want. **Duplicate item** copies an item, for example to edit its usage note for another purpose.
 
 ## Who can use it
@@ -27,6 +31,8 @@ Open an item to play its preview and read its usage note. When something is off,
 **Visibility** filters the library by the whole workspace or one profile. Items made for the workspace are available to every profile. To give a profile's item to others, use **Share with profiles**.
 
 ## In videos
+
+![Reviewing a video’s animations: each one with a preview, a decision and “Save to the library when approved”](/tools/arrumo/static/media/app/review-animations.webp)
 
 During a video's Assets step, the agent places library items that fit the script as they are, such as the sting to open and the end card to close. For anything with words that change from video to video, such as lower thirds, it designs new animations and follows the layout, colors, fonts and timing of your library pieces that do the same job.
 
