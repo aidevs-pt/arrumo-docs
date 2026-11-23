@@ -1,8 +1,24 @@
-# Arrumo Docs
+<p align="center">
+  <img src="public/tools/arrumo/static/icon.svg" width="88" height="88" alt="">
+</p>
 
-User, developer and official plugin documentation for [Arrumo](https://github.com/aidevs-pt/arrumo-video-editor), the desktop video editor where an AI agent drafts, cuts and renders videos while you review each step. Built with [Fumadocs](https://fumadocs.dev) on Next.js as a static site, in English, Spanish and Portuguese.
+<h1 align="center">Arrumo AI Video Editor documentation</h1>
 
-Arrumo is made by DEVS AI Unipessoal LDA. Need a custom AI solution? Visit [aidevs.pt](https://aidevs.pt).
+<p align="center">Guides, a tutorial and the full developer reference for <b>Arrumo AI Video Editor</b>, in English, Spanish and Portuguese.</p>
+
+<p align="center">
+  <a href="LICENSE"><img alt="License: AGPL-3.0" src="https://img.shields.io/badge/license-AGPL--3.0-2337B4"></a>
+  <img alt="English, Spanish and Portuguese" src="https://img.shields.io/badge/languages-EN%20%C2%B7%20ES%20%C2%B7%20PT-111">
+  <img alt="Built with Fumadocs" src="https://img.shields.io/badge/built%20with-Fumadocs-111">
+</p>
+
+<p align="center">
+  <a href="https://www.aidevs.pt/tools/arrumo/docs"><b>Read the docs</b></a> · <a href="https://www.aidevs.pt/tools/arrumo/docs/user/tutorial">Tutorial</a> · <a href="https://www.aidevs.pt/tools/arrumo/docs/developer">Developers</a> · <a href="https://github.com/aidevs-pt/arrumo-video-editor">The editor</a>
+</p>
+
+[![From brief to finished video, made entirely in Arrumo](https://img.youtube.com/vi/ldBiG89NOvA/maxresdefault.jpg)](https://youtu.be/ldBiG89NOvA)
+
+The documentation covers [Arrumo AI Video Editor](https://github.com/aidevs-pt/arrumo-video-editor), the free, open-source desktop app where an AI agent writes, designs, voices and cuts videos and you review each step. It is published at [aidevs.pt/tools/arrumo/docs](https://www.aidevs.pt/tools/arrumo/docs), with every page in English, Spanish and Portuguese, real app screenshots, and the showcase videos made with Arrumo.
 
 ## Content
 
@@ -15,6 +31,8 @@ Pages live in `content/docs/<language>/`, one folder per language with the same 
 `meta.json` files order the sidebar; the section folders are sidebar roots. Link to other pages with relative file paths (`../plugins/index.md`) so links stay in the reader's language. Spanish says "complementos" for plugins; Portuguese says "plugins".
 
 `pnpm check:locales` fails when a page or folder is missing from a language.
+
+Screenshots and video thumbnails live in `public/tools/arrumo/static/media/` and are stored with Git LFS (run `git lfs install` before cloning). Use the same file for all three languages unless the screenshot is about wording. Reference them from Markdown as `/tools/arrumo/static/media/...`. Link a video by its thumbnail: `[![Title](/tools/arrumo/static/media/videos/<name>.webp)](https://youtu.be/<id>)`; a play badge marks it.
 
 ## For AI agents
 
@@ -34,4 +52,4 @@ The pages ask for and honour the same cookie choice as aidevs.pt, and load its a
 
 ## License
 
-[AGPL-3.0](LICENSE). Plugin icons in the docs belong to their owners.
+Copyright © 2026 DEVS AI Unipessoal LDA. Licensed under the [GNU Affero General Public License v3.0](LICENSE). Plugin icons and the brands they show belong to their owners. Built by [DEVS AI](https://aidevs.pt), who make custom AI solutions for companies.
