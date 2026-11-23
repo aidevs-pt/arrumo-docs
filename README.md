@@ -50,6 +50,10 @@ The site is a static export with static search. It is served by [aidevs.pt](http
 
 The pages ask for and honour the same cookie choice as aidevs.pt, and load its analytics only when `NEXT_PUBLIC_AHREFS_KEY` and `NEXT_PUBLIC_OPENAI_PIXEL_ID` are set at build time.
 
+## Contributing
+
+Contributions are welcome: read [CONTRIBUTING.md](CONTRIBUTING.md) and our [Code of Conduct](CODE_OF_CONDUCT.md). Report security problems privately as described in [SECURITY.md](SECURITY.md).
+
 ## License
 
 Copyright © 2026 DEVS AI Unipessoal LDA. Licensed under the [GNU Affero General Public License v3.0](LICENSE). Plugin icons and the brands they show belong to their owners. Built by [DEVS AI](https://aidevs.pt), who make custom AI solutions for companies.
