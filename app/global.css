@@ -25,3 +25,37 @@ html > body[data-scroll-locked] {
     transform: translateY(1rem);
   }
 }
+
+/* Video thumbnails link to YouTube; a play badge shows they are videos. */
+a[href^="https://youtu.be/"]:has(> img) {
+  position: relative;
+  display: block;
+  border: 0;
+}
+
+a[href^="https://youtu.be/"]:has(> img)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4.5rem;
+  height: 4.5rem;
+  margin: -2.25rem 0 0 -2.25rem;
+  border-radius: 9999px;
+  background:
+    #2337b4
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M8 5.5v13l10.5-6.5z' fill='white'/%3E%3C/svg%3E")
+    center / 2rem no-repeat;
+  box-shadow: 0 0.75rem 2rem rgb(0 0 0 / 0.3);
+  transition: transform 0.2s ease-out;
+}
+
+a[href^="https://youtu.be/"]:has(> img):hover::after {
+  transform: scale(1.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a[href^="https://youtu.be/"]:has(> img)::after {
+    transition: none;
+  }
+}
