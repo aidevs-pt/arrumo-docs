@@ -13,6 +13,7 @@ jobs:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
+          lfs: true
       - uses: pnpm/action-setup@v6
       - uses: actions/setup-node@v7
         with:
@@ -25,8 +26,14 @@ jobs:
       - run: pnpm build
       - name: Check that every llms.txt link resolves
         run: |
-          for f in out/llms.txt out/*/llms.txt; do
-            grep -o '](/[^)]*)' "$f" | sed 's/](\(.*\))/\1/' | while read -r u; do
-              [ -f "out$u" ] || [ -f "out$u/index.html" ] || { echo "Missing in $f: $u"; exit 1; }
+          status=0
+          for f in out/*/tools/arrumo/llms.txt; do
+            for u in $(grep -o '](https://www.aidevs.pt/[^)]*)' "$f" | sed 's|](https://www.aidevs.pt/\(.*\))|\1|'); do
+              case "$u" in
+                tools/arrumo/static/* | es/* | pt/*) p="out/$u" ;;
+                *) p="out/en/$u" ;;
+              esac
+              [ -f "$p" ] || [ -f "$p.html" ] || { echo "Missing in $f: $u"; status=1; }
             done
           done
+          exit $status
