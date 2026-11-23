@@ -1,4 +1,5 @@
 ---
+
 title: "Crea una biblioteca de animaciones"
 description: "Genera animaciones reutilizables con tu marca, como una cortinilla del logotipo, una tarjeta final y un rótulo inferior, que el agente añade a cualquier vídeo."
 ---

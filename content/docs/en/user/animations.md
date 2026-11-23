@@ -1,4 +1,5 @@
 ---
+
 title: "Build an animation library"
 description: "Generate reusable on-brand animations, such as a logo sting, an end card and a lower third, that the agent drops into any video."
 ---

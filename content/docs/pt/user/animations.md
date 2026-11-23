@@ -1,4 +1,5 @@
 ---
+
 title: "Cria uma biblioteca de animações"
 description: "Gera animações reutilizáveis com a tua marca, como um separador do logótipo, um cartão final e um oráculo, que o agente coloca em qualquer vídeo."
 ---

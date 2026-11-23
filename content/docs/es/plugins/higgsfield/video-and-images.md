@@ -12,55 +12,55 @@ Cada clip e imagen gasta tus créditos de Higgsfield. Cuando la cuenta se queda 
 
 ## Crea un clip de vídeo
 
-Abre **Recursos › Generar › Clip de vídeo**, describe el clip y elige su tamaño. Elige Higgsfield en **Hecho con** y después un **Modelo**: la línea de debajo dice para qué es ideal, y **Duración** solo ofrece las duraciones que admite ese modelo. Los modelos cuyo nombre termina en *References* siguen las imágenes y vídeos que adjuntas; los modelos *Edit*, *Extend*, *Motion Control* y *Genjutsu* trabajan sobre un clip que adjuntas, y el resultado sigue su duración.
+Abre **Recursos › Generar › Clip de vídeo**, describe el clip y elige su tamaño. Elige Higgsfield en **Hecho con** y después un **Modelo**: la línea de debajo dice para qué es ideal, y **Duración** solo ofrece las duraciones que admite ese modelo. Los modelos cuyo nombre termina en _References_ siguen las imágenes y vídeos que adjuntas; los modelos _Edit_, _Extend_, _Motion Control_ y _Genjutsu_ trabajan sobre un clip que adjuntas, y el resultado sigue su duración.
 
-| Modelo | Ideal para |
-| --- | --- |
-| Cinema Studio 4.0 | Planos de estilo cine de 4–30 s a partir de texto, hasta nueve imágenes o tres vídeos; el modelo elige lente, luz y ritmo. |
-| Genjutsu Motion Transfer | Coloca a las personas o personajes de hasta ocho imágenes en el movimiento de un vídeo (mínimo 4 s; más de 30 s se recorta). |
-| Genjutsu Object Swap | Sustituye un objeto de un vídeo por el de tus imágenes, manteniendo el movimiento del plano. |
-| Grok Imagine Video 1.5 | Clips cortos en 720p de 1–15 s que empiezan en una imagen o siguen hasta siete imágenes de referencia. |
-| Hailuo 2.3 Standard | Anima una imagen en un clip de 6 o 10 s a 768p. |
-| Happy Horse 1.0 | El modelo de vídeo de Alibaba para clips en 1080p de 2–15 s a partir de texto o un primer fotograma. |
-| Happy Horse 1.0 References | Happy Horse siguiendo hasta nueve imágenes de referencia de un sujeto o estilo. |
-| Happy Horse 1.1 | El Happy Horse más reciente, en 1080p por defecto, a partir de texto o un primer fotograma. |
-| Happy Horse 1.1 References | Happy Horse 1.1 siguiendo hasta nueve imágenes de referencia. |
-| Kling 2.5 Turbo Pro | Clips de 5 o 10 s a partir de texto o una imagen. Su API de texto no admite tamaño, así que Arrumo solo le pide 16:9. |
-| Kling 2.5 Turbo Standard | Anima una imagen en un clip de 5 o 10 s, en el nivel Turbo Standard. |
-| Kling 2.6 Motion Control Pro | Transferencia de movimiento de Kling 2.6 en el nivel Pro. |
-| Kling 2.6 Motion Control Standard | Transferencia de movimiento de Kling 2.6: el personaje de una imagen sigue el movimiento de un vídeo de 3–30 s. |
-| Kling 2.6 Pro | La generación anterior de Kling: clips de 5 o 10 s a partir de texto o una imagen. |
-| Kling 3.0 4K | Kling 3.0 en 4K, para pantallas grandes o recortes en la edición. |
-| Kling 3.0 Motion Control Pro | Transferencia de movimiento de Kling 3.0 en el nivel Pro: el personaje de una imagen sigue un vídeo de 3–30 s. |
-| Kling 3.0 Motion Control Standard | Mueve al personaje de tu imagen como se mueve la persona de un vídeo de referencia de 3–30 s; el clip dura lo mismo que el vídeo. |
-| Kling 3.0 Pro | El nivel Pro de Kling 3.0, por encima de Standard, con las mismas entradas. |
-| Kling 3.0 Standard (predeterminado) | El nivel Standard de Kling 3.0: 3–15 s a partir de texto, un primer fotograma o el primero y el último. |
-| Kling 3.0 Turbo | El nivel Turbo de Kling 3.0: clips en 1080p a partir de texto o una imagen, con prompts de hasta 3000 caracteres. |
-| Kling O3 | Clips que empiezan en una imagen y pueden terminar en otra, de 3–15 s. |
-| Kling O3 Edit | Cambia un clip existente de 3–15 s con una instrucción, como sustituir el escenario o un objeto, guiado si quieres por imágenes. |
-| Kling O3 References | Mantiene coherentes personajes, productos o lugares a partir de hasta cuatro imágenes, o sigue la cámara y el estilo de un vídeo de referencia. |
-| Kling Omni | El modelo Omni anterior para clips de 5 o 10 s entre un primer fotograma y un último opcional. |
-| Kling Omni Edit | Edita un clip existente de 3–10 s con una instrucción, guiado si quieres por imágenes. |
-| Kling Omni References | Omni con hasta cuatro imágenes o un vídeo de referencia, para sujetos coherentes. |
-| LTX-2.5 Fast | El nivel Fast de LTX-2.5: 6, 8 o 10 s en 16:9 o 9:16, a partir de texto, un primer fotograma o el primero y el último. |
-| LTX-2.5 Pro | El nivel Pro de LTX-2.5: 6, 8 o 10 s en 16:9 o 9:16 a partir de texto o una imagen. |
-| MiniMax H3 | Clips en 2K de 5–15 s a partir de texto, un primer fotograma o el primero y el último. |
-| MiniMax H3 References | MiniMax H3 siguiendo hasta nueve imágenes o tres vídeos. |
-| PixVerse V6 | Clips en 1080p de 1–15 s a partir de texto. |
-| Seedance 2.0 | Clips en 1080p de 4–15 s a partir de texto, un primer fotograma o el primero y el último. |
-| Seedance 2.0 References | Sigue a la vez hasta nueve imágenes y tres vídeos de referencia: personajes, productos, estilo y movimientos de cámara. |
-| Seedance 2.5 | Planos más largos, hasta 30 s, a partir de texto o fotogramas, con bitrate alto. |
-| Seedance 2.5 Edit | Edita un clip existente con una instrucción, con imágenes opcionales de lo que quieres añadir. |
-| Seedance 2.5 Extend | Continúa un clip existente 4–30 s más, desde donde termina. |
-| Seedance 2.5 References | Seedance 2.5 siguiendo hasta nueve imágenes y tres vídeos, para planos largos y coherentes de hasta 30 s. |
-| Wan 2.6 | Anima una imagen en un clip en 1080p de 5, 10 o 15 s. |
-| Wan 2.6 References | Clips en 1080p de 5 o 10 s que siguen de uno a tres vídeos de referencia. |
-| Wan 2.7 | Clips en 1080p de 2–15 s a partir de texto, un primer fotograma o el primero y el último. |
-| Wan 2.7 References | Clips en 1080p de 2–10 s en 16:9 o 9:16 que siguen hasta cinco imágenes o vídeos de referencia. |
-| Wan 3.0 | Clips largos en 1080p, de 2–30 s, a partir de texto, un primer fotograma o el primero y el último. |
-| Wan 3.0 Prime | El nivel Prime de Wan 3.0, con las mismas entradas que Wan 3.0. |
-| Wan 3.0 Prime References | Wan 3.0 Prime con hasta nueve imágenes y tres vídeos de referencia. |
-| Wan 3.0 References | Wan 3.0 siguiendo hasta nueve imágenes y tres vídeos para sujetos coherentes en planos largos. |
+| Modelo                              | Ideal para                                                                                                                                      |
+| ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| Cinema Studio 4.0                   | Planos de estilo cine de 4–30 s a partir de texto, hasta nueve imágenes o tres vídeos; el modelo elige lente, luz y ritmo.                      |
+| Genjutsu Motion Transfer            | Coloca a las personas o personajes de hasta ocho imágenes en el movimiento de un vídeo (mínimo 4 s; más de 30 s se recorta).                    |
+| Genjutsu Object Swap                | Sustituye un objeto de un vídeo por el de tus imágenes, manteniendo el movimiento del plano.                                                    |
+| Grok Imagine Video 1.5              | Clips cortos en 720p de 1–15 s que empiezan en una imagen o siguen hasta siete imágenes de referencia.                                          |
+| Hailuo 2.3 Standard                 | Anima una imagen en un clip de 6 o 10 s a 768p.                                                                                                 |
+| Happy Horse 1.0                     | El modelo de vídeo de Alibaba para clips en 1080p de 2–15 s a partir de texto o un primer fotograma.                                            |
+| Happy Horse 1.0 References          | Happy Horse siguiendo hasta nueve imágenes de referencia de un sujeto o estilo.                                                                 |
+| Happy Horse 1.1                     | El Happy Horse más reciente, en 1080p por defecto, a partir de texto o un primer fotograma.                                                     |
+| Happy Horse 1.1 References          | Happy Horse 1.1 siguiendo hasta nueve imágenes de referencia.                                                                                   |
+| Kling 2.5 Turbo Pro                 | Clips de 5 o 10 s a partir de texto o una imagen. Su API de texto no admite tamaño, así que Arrumo solo le pide 16:9.                           |
+| Kling 2.5 Turbo Standard            | Anima una imagen en un clip de 5 o 10 s, en el nivel Turbo Standard.                                                                            |
+| Kling 2.6 Motion Control Pro        | Transferencia de movimiento de Kling 2.6 en el nivel Pro.                                                                                       |
+| Kling 2.6 Motion Control Standard   | Transferencia de movimiento de Kling 2.6: el personaje de una imagen sigue el movimiento de un vídeo de 3–30 s.                                 |
+| Kling 2.6 Pro                       | La generación anterior de Kling: clips de 5 o 10 s a partir de texto o una imagen.                                                              |
+| Kling 3.0 4K                        | Kling 3.0 en 4K, para pantallas grandes o recortes en la edición.                                                                               |
+| Kling 3.0 Motion Control Pro        | Transferencia de movimiento de Kling 3.0 en el nivel Pro: el personaje de una imagen sigue un vídeo de 3–30 s.                                  |
+| Kling 3.0 Motion Control Standard   | Mueve al personaje de tu imagen como se mueve la persona de un vídeo de referencia de 3–30 s; el clip dura lo mismo que el vídeo.               |
+| Kling 3.0 Pro                       | El nivel Pro de Kling 3.0, por encima de Standard, con las mismas entradas.                                                                     |
+| Kling 3.0 Standard (predeterminado) | El nivel Standard de Kling 3.0: 3–15 s a partir de texto, un primer fotograma o el primero y el último.                                         |
+| Kling 3.0 Turbo                     | El nivel Turbo de Kling 3.0: clips en 1080p a partir de texto o una imagen, con prompts de hasta 3000 caracteres.                               |
+| Kling O3                            | Clips que empiezan en una imagen y pueden terminar en otra, de 3–15 s.                                                                          |
+| Kling O3 Edit                       | Cambia un clip existente de 3–15 s con una instrucción, como sustituir el escenario o un objeto, guiado si quieres por imágenes.                |
+| Kling O3 References                 | Mantiene coherentes personajes, productos o lugares a partir de hasta cuatro imágenes, o sigue la cámara y el estilo de un vídeo de referencia. |
+| Kling Omni                          | El modelo Omni anterior para clips de 5 o 10 s entre un primer fotograma y un último opcional.                                                  |
+| Kling Omni Edit                     | Edita un clip existente de 3–10 s con una instrucción, guiado si quieres por imágenes.                                                          |
+| Kling Omni References               | Omni con hasta cuatro imágenes o un vídeo de referencia, para sujetos coherentes.                                                               |
+| LTX-2.5 Fast                        | El nivel Fast de LTX-2.5: 6, 8 o 10 s en 16:9 o 9:16, a partir de texto, un primer fotograma o el primero y el último.                          |
+| LTX-2.5 Pro                         | El nivel Pro de LTX-2.5: 6, 8 o 10 s en 16:9 o 9:16 a partir de texto o una imagen.                                                             |
+| MiniMax H3                          | Clips en 2K de 5–15 s a partir de texto, un primer fotograma o el primero y el último.                                                          |
+| MiniMax H3 References               | MiniMax H3 siguiendo hasta nueve imágenes o tres vídeos.                                                                                        |
+| PixVerse V6                         | Clips en 1080p de 1–15 s a partir de texto.                                                                                                     |
+| Seedance 2.0                        | Clips en 1080p de 4–15 s a partir de texto, un primer fotograma o el primero y el último.                                                       |
+| Seedance 2.0 References             | Sigue a la vez hasta nueve imágenes y tres vídeos de referencia: personajes, productos, estilo y movimientos de cámara.                         |
+| Seedance 2.5                        | Planos más largos, hasta 30 s, a partir de texto o fotogramas, con bitrate alto.                                                                |
+| Seedance 2.5 Edit                   | Edita un clip existente con una instrucción, con imágenes opcionales de lo que quieres añadir.                                                  |
+| Seedance 2.5 Extend                 | Continúa un clip existente 4–30 s más, desde donde termina.                                                                                     |
+| Seedance 2.5 References             | Seedance 2.5 siguiendo hasta nueve imágenes y tres vídeos, para planos largos y coherentes de hasta 30 s.                                       |
+| Wan 2.6                             | Anima una imagen en un clip en 1080p de 5, 10 o 15 s.                                                                                           |
+| Wan 2.6 References                  | Clips en 1080p de 5 o 10 s que siguen de uno a tres vídeos de referencia.                                                                       |
+| Wan 2.7                             | Clips en 1080p de 2–15 s a partir de texto, un primer fotograma o el primero y el último.                                                       |
+| Wan 2.7 References                  | Clips en 1080p de 2–10 s en 16:9 o 9:16 que siguen hasta cinco imágenes o vídeos de referencia.                                                 |
+| Wan 3.0                             | Clips largos en 1080p, de 2–30 s, a partir de texto, un primer fotograma o el primero y el último.                                              |
+| Wan 3.0 Prime                       | El nivel Prime de Wan 3.0, con las mismas entradas que Wan 3.0.                                                                                 |
+| Wan 3.0 Prime References            | Wan 3.0 Prime con hasta nueve imágenes y tres vídeos de referencia.                                                                             |
+| Wan 3.0 References                  | Wan 3.0 siguiendo hasta nueve imágenes y tres vídeos para sujetos coherentes en planos largos.                                                  |
 
 Para cambiar el predeterminado de un espacio de trabajo, ajusta **Modelo de vídeo** en los ajustes del complemento.
 
@@ -70,23 +70,23 @@ En **Referencias**, elige imágenes o vídeos de la biblioteca del espacio de tr
 
 En **Recursos › Generar › Imagen**, elige Higgsfield y un **Modelo**. Los modelos que admiten imágenes de referencia usan las que adjuntas, hasta el número de la tabla. Para las miniaturas, Higgsfield entra en su turno según el orden de proveedores de imágenes del espacio de trabajo en **Servicios y claves** y usa el ajuste **Modelo de imagen**.
 
-| Modelo | Ideal para | Referencias |
-| --- | --- | --- |
-| Ads Studio | Convierte un briefing de marketing y hasta ocho referencias de producto en una imagen de concepto de anuncio. | Hasta 8 |
-| Grok Image 2.0 | Genera o edita con muchas referencias (hasta ocho aquí), para combinar personas, productos y lugares. | Hasta 8 |
-| Ideogram 4.0 | Imágenes con texto, como carteles, títulos y miniaturas; remezcla una imagen de referencia. | Hasta 1 |
-| Marketing Studio 2.0 | Imágenes de campaña, generadas o editadas a partir de hasta ocho referencias, como fotos de producto. | Hasta 8 |
-| Marketing Studio 2.5 Flare | Marketing Studio 2.5 Flare, el modelo de imágenes de campaña más reciente, con hasta ocho referencias. | Hasta 8 |
-| Marketing Studio 2.5 Sunburst | La variante Sunburst de Marketing Studio 2.5, con hasta ocho referencias. | Hasta 8 |
-| Qwen Image 3 (predeterminado) | Imágenes en 2K a partir de una descripción, o ediciones de hasta tres imágenes de referencia. | Hasta 3 |
-| Recraft V4.1 | Recraft V4.1 en 1K. | Ninguna |
-| Recraft V4.1 Pro | Recraft V4.1 en 2K. | Ninguna |
-| Recraft V4.1 Utility | La variante Utility de Recraft V4.1 en 1K. | Ninguna |
-| Recraft V4.1 Utility Pro | La variante Utility de Recraft V4.1 en 2K. | Ninguna |
-| SOUL | El modelo SOUL de texto a imagen de Higgsfield, en 1080p. | Ninguna |
-| SOUL 2 | La segunda versión de SOUL, en 1080p. | Ninguna |
-| SOUL Cinema | SOUL con su estilo de cine fijo, en 1080p. | Ninguna |
-| Z-Image Turbo | Imágenes Turbo en 2K a partir de descripciones cortas (hasta 800 caracteres). | Ninguna |
+| Modelo                        | Ideal para                                                                                                    | Referencias |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------- | ----------- |
+| Ads Studio                    | Convierte un briefing de marketing y hasta ocho referencias de producto en una imagen de concepto de anuncio. | Hasta 8     |
+| Grok Image 2.0                | Genera o edita con muchas referencias (hasta ocho aquí), para combinar personas, productos y lugares.         | Hasta 8     |
+| Ideogram 4.0                  | Imágenes con texto, como carteles, títulos y miniaturas; remezcla una imagen de referencia.                   | Hasta 1     |
+| Marketing Studio 2.0          | Imágenes de campaña, generadas o editadas a partir de hasta ocho referencias, como fotos de producto.         | Hasta 8     |
+| Marketing Studio 2.5 Flare    | Marketing Studio 2.5 Flare, el modelo de imágenes de campaña más reciente, con hasta ocho referencias.        | Hasta 8     |
+| Marketing Studio 2.5 Sunburst | La variante Sunburst de Marketing Studio 2.5, con hasta ocho referencias.                                     | Hasta 8     |
+| Qwen Image 3 (predeterminado) | Imágenes en 2K a partir de una descripción, o ediciones de hasta tres imágenes de referencia.                 | Hasta 3     |
+| Recraft V4.1                  | Recraft V4.1 en 1K.                                                                                           | Ninguna     |
+| Recraft V4.1 Pro              | Recraft V4.1 en 2K.                                                                                           | Ninguna     |
+| Recraft V4.1 Utility          | La variante Utility de Recraft V4.1 en 1K.                                                                    | Ninguna     |
+| Recraft V4.1 Utility Pro      | La variante Utility de Recraft V4.1 en 2K.                                                                    | Ninguna     |
+| SOUL                          | El modelo SOUL de texto a imagen de Higgsfield, en 1080p.                                                     | Ninguna     |
+| SOUL 2                        | La segunda versión de SOUL, en 1080p.                                                                         | Ninguna     |
+| SOUL Cinema                   | SOUL con su estilo de cine fijo, en 1080p.                                                                    | Ninguna     |
+| Z-Image Turbo                 | Imágenes Turbo en 2K a partir de descripciones cortas (hasta 800 caracteres).                                 | Ninguna     |
 
 ## Lo que no se ofrece aquí
 

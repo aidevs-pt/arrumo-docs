@@ -1,4 +1,5 @@
 ---
+
 title: "Configura tu marca"
 description: "Convierte un sitio web en un espacio de trabajo con contexto, colores, fuentes, logotipos y reglas de entrega que sigue cada vídeo."
 ---
