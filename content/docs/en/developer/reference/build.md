@@ -59,12 +59,17 @@ Desktop deep links use `arrumo://open/<section>?workspace=<id>`. Profile and run
 
 ## Usage counts and crash reports
 
-Anonymous usage counts and crash reports are provider-neutral ([`telemetry.rs`](https://github.com/aidevs-pt/arrumo-video-editor/blob/main/crates/workspaces/src/telemetry.rs))
-and on by default, with switches in **Settings › General › Data and privacy**
-(`get_privacy_settings`/`set_privacy_settings` over MCP and A2A). Builds only
-send anything when compiled with `ARRUMO_USAGE_KEY` (and optionally
-`ARRUMO_USAGE_ENDPOINT`, Aptabase's event API by default) or `ARRUMO_CRASH_DSN`
-(a Sentry-style `https://<key>@<host>/<project>` DSN); contributor builds have
-neither and send nothing. Events carry the event name, a random install ID, a
-per-launch session ID, the app version and the operating system; crash messages
-keep only their first line with paths and addresses removed.
+Anonymous usage counts and crash reports are on by default, with switches in **Settings › General › Data and privacy** (`get_privacy_settings`/`set_privacy_settings` over MCP and A2A). Builds send anything only when compiled with `ARRUMO_USAGE_KEY` (an [Aptabase](https://aptabase.com) app key; `ARRUMO_USAGE_ENDPOINT` overrides its event API) or `ARRUMO_CRASH_DSN` (a [Sentry](https://sentry.io) DSN). Contributor builds have neither and send nothing.
+
+- **Usage.** The desktop app sends through [`tauri-plugin-aptabase`](https://github.com/aptabase/tauri-plugin-aptabase), with its own error tracking off; headless CLI, MCP and A2A processes post to the same API. [`telemetry.rs`](https://github.com/aidevs-pt/arrumo-video-editor/blob/main/crates/workspaces/src/telemetry.rs) decides what is sent: the events `app_started`, `workspace_created`, `video_queued`, `video_generated`, `media_generated`, `plugin_installed` and `backup_exported`, with only flags, counts, numbers and IDs of at most 64 characters as properties, plus the random install ID as `install`. [Settings, updates and privacy](../../user/settings.md) lists each event's properties.
+- **Crashes.** [`tauri-plugin-sentry`](https://github.com/getsentry/sentry-tauri) reports Rust panics and errors and injects Sentry's browser SDK into the webview, so interface errors are reported through the same client. `before_send` drops every report while the switch is off, removes user and machine names, breadcrumbs and request data, cuts paths to file names and redacts path-like words. Native minidumps are not collected. The switch is mirrored in a small file next to the data, so reports from before the database opens follow it too. Session tracking is off.
+
+Add an event with `WorkspaceStore::track_usage` only for meaningful, infrequent moments.
+
+## Updates and releases
+
+Release builds update themselves with [`tauri-plugin-updater`](https://v2.tauri.app/plugin/updater/) from the latest GitHub release's `latest.json`, checked against the public key compiled in from `ARRUMO_UPDATER_PUBKEY`. Builds without it, or with `ARRUMO_STORE_BUILD`, never check. The desktop commands are `update_status`, `check_for_update` and `install_update` (now, or on quit).
+
+Each launch writes a marker that the interface clears once it has stayed up for 30 seconds. If a launch finds the marker left behind, it checks for a newer release before opening any data and installs it straight away, so a release that crashes on start can be replaced by the next one.
+
+Releases are built by the owner-run **Release** workflow; its secrets and steps are in [`docs/releasing.md`](https://github.com/aidevs-pt/arrumo-video-editor/blob/main/docs/releasing.md).

@@ -44,6 +44,24 @@ and a string setting with `choices` only accepts one of them. A setting's
 `default` applies when neither the app nor the workspace sets a value. The host
 freezes the resolved values into each generation run so it can be reproduced.
 
+Manifest schema 14 adds conditions, warnings and a work folder:
+
+- A `settingArgs` entry with `when` (the ID of a boolean setting) applies only while that setting is on, and one with `unless` only while it is off. One switch can so choose between two sets of flags for another setting.
+- A setting's `warning` is shown under its switch while it is on, for consequences the creator should weigh. `hiddenWhen` (a boolean setting's ID) hides the setting while that one is on, for options it makes moot. Both can be translated.
+- `structuredRun.workFolderSetting` names a boolean setting. While it is on, Arrumo runs the agent for a video in a folder of its own, `<database>.work/<workspace>/<run>`, instead of an empty temporary directory, tells the agent the folder is its own, and keeps it across that video's stages and follow-ups. Arrumo deletes it when the video completes, fails or is cancelled, and at startup for videos that are no longer running.
+
+The official Claude Code and Codex plugins use all three for **Write files and run commands** (`local-tools`):
+
+```json
+"settingArgs": [
+  {"setting": "local-tools", "args": ["-c", "sandbox_mode=\"workspace-write\""],
+   "otherwise": ["-c", "sandbox_mode=\"read-only\"", "--disable", "shell_tool"]},
+  {"setting": "installed-plugins", "args": [],
+   "otherwise": ["--ignore-user-config", "--disable", "plugins"], "unless": "local-tools"}
+],
+"workFolderSetting": "local-tools"
+```
+
 `progress` lets the host show what the agent is doing while it works. Each
 entry is a regular expression matched against every line the agent prints;
 its first capture group (or `label`) becomes a step of kind `thinking`,

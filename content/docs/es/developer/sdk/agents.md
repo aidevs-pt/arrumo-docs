@@ -26,6 +26,24 @@ Los marcadores son argumentos completos: `{schema}` es el esquema como JSON, `{s
 
 Las capacidades del agente pertenecen a su complemento. Decláralas como `settings` normales y asigna cada una a opciones con `settingArgs`; el host inserta los argumentos elegidos en un marcador `{settings}`. Un ajuste booleano usa `args` cuando vale true y `otherwise` cuando vale false o no está definido. Los demás ajustes usan `args` con `{value}` reemplazado, y solo aceptan palabras simples (letras, dígitos, `.`, `_`, `:` y `-`); un ajuste de cadena con `choices` solo acepta una de ellas. El `default` de un ajuste se aplica cuando ni la aplicación ni el espacio de trabajo fijan un valor. El host congela los valores resueltos en cada ejecución de generación para poder reproducirla.
 
+El esquema de manifiesto 14 añade condiciones, avisos y una carpeta de trabajo:
+
+- Una entrada de `settingArgs` con `when` (el identificador de un ajuste booleano) solo se aplica mientras ese ajuste está activado, y una con `unless` solo mientras está desactivado. Así, un interruptor puede elegir entre dos conjuntos de opciones para otro ajuste.
+- El `warning` de un ajuste se muestra bajo su interruptor mientras está activado, para consecuencias que conviene sopesar. `hiddenWhen` (el identificador de un ajuste booleano) oculta el ajuste mientras ese otro está activado, para opciones que dejan de tener sentido. Ambos se pueden traducir.
+- `structuredRun.workFolderSetting` nombra un ajuste booleano. Mientras está activado, Arrumo ejecuta el agente de un vídeo en una carpeta propia, `<database>.work/<workspace>/<run>`, en lugar de un directorio temporal vacío, le dice al agente que esa carpeta es suya y la conserva entre las etapas y preguntas de seguimiento de ese vídeo. Arrumo la borra cuando el vídeo termina, falla o se cancela, y al arrancar para los vídeos que ya no están en marcha.
+
+Los complementos oficiales de Claude Code y Codex usan los tres para **Escribir archivos y ejecutar comandos** (`local-tools`):
+
+```json
+"settingArgs": [
+  {"setting": "local-tools", "args": ["-c", "sandbox_mode=\"workspace-write\""],
+   "otherwise": ["-c", "sandbox_mode=\"read-only\"", "--disable", "shell_tool"]},
+  {"setting": "installed-plugins", "args": [],
+   "otherwise": ["--ignore-user-config", "--disable", "plugins"], "unless": "local-tools"}
+],
+"workFolderSetting": "local-tools"
+```
+
 `progress` permite al host mostrar qué está haciendo el agente mientras trabaja. Cada entrada es una expresión regular que se compara con cada línea que imprime el agente; su primer grupo de captura (o `label`) se convierte en un paso de tipo `thinking`, `search` o `step`, para que los creadores sigan en directo el razonamiento y las búsquedas. Los agentes que imprimen un evento JSON por línea añaden un `pointer` a cada patrón para comparar el texto en ese lugar del evento, y leen su respuesta con el origen de resultado `stdoutLastLine`.
 
 Los agentes que pueden mirar imágenes declaran `imageArgs`, como `["-i", "{imagePath}"]`, y colocan `{images}` en `args`. El host repite esos argumentos una vez por cada imagen que quiere que vea el agente, como referencias de miniaturas o imágenes encontradas al investigar a un creador, y deja `{images}` vacío para los agentes que no lo admiten.

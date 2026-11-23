@@ -18,6 +18,12 @@ arrumo-workspaces ./workspaces.sqlite agent-login-status claude-code
 
 O estado confirmed indica que a CLI aceitou a verificação. Se o Arrumo devolver unavailable, verifica se o executável está no PATH que o Arrumo consegue ver. Se devolver unconfirmed, inicia sessão seguindo o guia oficial e volta a verificar. Um tempo de espera excedido ou um erro indica que a verificação não foi concluída.
 
+## Escrever ficheiros e executar comandos
+
+**Escrever ficheiros e executar comandos**, em Definições › Agente, está ativo por predefinição. Enquanto trabalha num vídeo, o Claude Code aceita as edições (`--permission-mode acceptEdits`) e pode usar Read, Write, Edit, Glob, Grep e Bash, além de WebSearch e WebFetch quando **Pesquisa na web** está ativa. Aplica-se a tua própria configuração do Claude Code: os hooks, os servidores MCP e os plugins. Trabalha numa pasta que o Arrumo cria para esse vídeo e apaga quando o vídeo termina, falha ou é cancelado.
+
+Se o desativares, o Claude Code corre em modo restrito (`--restricted`), com os hooks desativados e sem ferramentas de ficheiros nem de terminal, e só lê o que o Arrumo lhe envia. **Usar os meus plugins instalados** decide então se os teus plugins e servidores MCP são carregados.
+
 ## Traduz as legendas
 
 Consulta [a tradução de legendas](https://github.com/aidevs-pt/arrumo-plugin-claude-code/blob/main/README.md#translate-subtitles) para usares este plugin como tradutor do Auto-Dubbing. O tradutor envia para Claude Code o texto das legendas selecionadas e o idioma de destino. O processo preserva as marcas temporais originais.

@@ -18,6 +18,12 @@ arrumo-workspaces ./workspaces.sqlite agent-login-status claude-code
 
 A confirmed status means the CLI accepted the sign-in probe. If Arrumo reports unavailable, check that the executable is on the PATH visible to Arrumo. If the login is unconfirmed, sign in using the official guide and check again. A timeout or failure means the probe could not finish successfully.
 
+## Write files and run commands
+
+**Write files and run commands**, in Settings › Agent, is on by default. While working on a video, Claude Code then runs with edits accepted (`--permission-mode acceptEdits`) and may use Read, Write, Edit, Glob, Grep and Bash, plus WebSearch and WebFetch when **Web search** is on. Your own Claude Code setup applies: its hooks, MCP servers and plugins. It works in a folder Arrumo makes for that video and deletes once the video is finished, fails or is cancelled.
+
+Turn it off and Claude Code runs restricted (`--restricted`), with hooks turned off and file and shell tools refused, and only reads what Arrumo sends. **Use my installed plugins** then decides whether your own plugins and MCP servers load.
+
 ## Translate subtitle cues
 
 See [Translate subtitles](https://github.com/aidevs-pt/arrumo-plugin-claude-code/blob/main/README.md#translate-subtitles) to use this plugin as an Auto-Dubbing translator. The translator sends the selected cue text and target language to Claude Code. The workflow keeps the original cue timings.

@@ -18,6 +18,12 @@ arrumo-workspaces ./workspaces.sqlite agent-login-status codex
 
 El estado confirmed indica que la CLI aceptó la comprobación. Si Arrumo devuelve unavailable, comprueba que el ejecutable esté en el PATH que ve Arrumo. Si devuelve unconfirmed, inicia sesión según la guía oficial y vuelve a comprobarlo. Un tiempo de espera agotado o un error indica que la comprobación no pudo completarse.
 
+## Escribir archivos y ejecutar comandos
+
+**Escribir archivos y ejecutar comandos**, en Ajustes › Agente, está activado por defecto. Mientras trabaja en un vídeo, Codex se ejecuta en su sandbox `workspace-write` con su terminal y carga tu propia configuración de Codex, incluidos los servidores MCP y los complementos. Trabaja en una carpeta que Arrumo crea para ese vídeo y borra cuando el vídeo termina, falla o se cancela.
+
+Si lo desactivas, Codex se ejecuta en el sandbox `read-only` sin su herramienta de terminal, y solo lee lo que Arrumo le envía. **Usar mis complementos instalados** decide entonces si se cargan tu configuración y tus complementos de Codex. La generación de imágenes siempre es de solo lectura.
+
 ## Traduce los subtítulos
 
 Consulta [la traducción de subtítulos](https://github.com/aidevs-pt/arrumo-plugin-codex/blob/main/README.md#translate-subtitles) para usar este complemento como traductor de Auto-Dubbing. El traductor envía a Codex el texto de los subtítulos seleccionados y el idioma de destino. El proceso conserva las marcas de tiempo originales.

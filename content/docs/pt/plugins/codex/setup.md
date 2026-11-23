@@ -18,6 +18,12 @@ arrumo-workspaces ./workspaces.sqlite agent-login-status codex
 
 O estado confirmed indica que a CLI aceitou a verificação. Se o Arrumo devolver unavailable, verifica se o executável está no PATH que o Arrumo consegue ver. Se devolver unconfirmed, inicia sessão seguindo o guia oficial e volta a verificar. Um tempo de espera excedido ou um erro indica que a verificação não foi concluída.
 
+## Escrever ficheiros e executar comandos
+
+**Escrever ficheiros e executar comandos**, em Definições › Agente, está ativo por predefinição. Enquanto trabalha num vídeo, o Codex corre na sua sandbox `workspace-write` com o terminal e carrega a tua própria configuração do Codex, incluindo os servidores MCP e os plugins. Trabalha numa pasta que o Arrumo cria para esse vídeo e apaga quando o vídeo termina, falha ou é cancelado.
+
+Se o desativares, o Codex corre na sandbox `read-only` sem a ferramenta de terminal, e só lê o que o Arrumo lhe envia. **Usar os meus plugins instalados** decide então se a tua configuração e os teus plugins do Codex são carregados. A geração de imagens é sempre só de leitura.
+
 ## Traduz as legendas
 
 Consulta [a tradução de legendas](https://github.com/aidevs-pt/arrumo-plugin-codex/blob/main/README.md#translate-subtitles) para usares este plugin como tradutor do Auto-Dubbing. O tradutor envia para Codex o texto das legendas selecionadas e o idioma de destino. O processo preserva as marcas temporais originais.
