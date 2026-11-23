@@ -18,19 +18,19 @@ Pages live in `content/docs/<language>/`, one folder per language with the same 
 
 ## For AI agents
 
-The build writes `llms.txt` and `llms-full.txt` for all languages at the root, the same per language at `/<lang>/llms.txt`, and every page as Markdown under `/llms.mdx/<lang>/docs/<page>.md`. Each page links its Markdown version and has **Copy Markdown** and **Open** actions.
+Each language has `llms.txt` and `llms-full.txt` (`/tools/arrumo/llms.txt`, `/pt/tools/arrumo/llms.txt`, …), and every page is available as Markdown under `/tools/arrumo/static/md/<page path>.md`. Each page links its Markdown version and has **Copy Markdown** and **Open** actions.
 
-## Build
+## Build and hosting
 
 ```sh
 pnpm install
-pnpm dev            # http://localhost:3000/en
+pnpm dev            # http://localhost:3000/en/tools/arrumo/docs
 pnpm build          # static site in out/
 ```
 
-The site is a static export with static search, so any file host can serve `out/`. To serve it below a path, build with `NEXT_PUBLIC_BASE_PATH=/docs-path pnpm build`. The opening page sends readers to their browser's language.
+The site is a static export with static search. It is served by [aidevs.pt](https://www.aidevs.pt/tools/arrumo/docs) under the website's own language paths: English at `/tools/arrumo/docs/…`, Spanish at `/es/tools/arrumo/docs/…` and Portuguese at `/pt/tools/arrumo/docs/…`. The export mirrors them (English under `out/en/`), scripts, search, Markdown and images live under `/tools/arrumo/static/`, and `out/sitemap.xml` lists every page with its translations. Deploy `out/` to any static host with clean URLs (see `vercel.json`) and point the website's `ARRUMO_DOCS_ORIGIN` at it.
 
-The final address under aidevs.pt is not decided yet; until then, repositories link to this repository.
+The pages ask for and honour the same cookie choice as aidevs.pt, and load its analytics only when `NEXT_PUBLIC_AHREFS_KEY` and `NEXT_PUBLIC_OPENAI_PIXEL_ID` are set at build time.
 
 ## License
 
