@@ -38,7 +38,7 @@ Screenshots and video thumbnails live in `public/tools/arrumo/static/media/` and
 
 ## For AI agents
 
-Each language has `llms.txt` and `llms-full.txt` (`/tools/arrumo/llms.txt`, `/pt/tools/arrumo/llms.txt`, …), each section has its own `llms-full.txt`, and every page is available as Markdown at its own address plus `.md` (`/tools/arrumo/docs/user/install.md`; the docs home is `/tools/arrumo/docs/index.md`). `scripts/markdown-pages.mjs` puts those files beside the pages after `next build`. Each page links its Markdown version and has **Copy Markdown** and **Open** actions.
+Each language has `llms.txt` and `llms-full.txt` (`/tools/arrumo/llms.txt`, `/pt/tools/arrumo/llms.txt`, …), each section has its own `llms-full.txt`, and every page is available as Markdown at its own address plus `.md` (`/tools/arrumo/docs/user/install.md`; the docs home is `/tools/arrumo/docs/index.md`). On Vercel, `vercel.json` rewrites those addresses to the Markdown the export renders under `/tools/arrumo/static/md/`; for other static hosts, `scripts/markdown-pages.mjs` copies it beside the pages after `next build`. Each page links its Markdown version and has **Copy Markdown** and **Open** actions.
 
 ## Build and hosting
 

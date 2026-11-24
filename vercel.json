@@ -18,8 +18,29 @@
     {
       "source": "/(.*)\\.md",
       "headers": [
-        { "key": "Content-Type", "value": "text/markdown; charset=utf-8" }
+        {
+          "key": "Content-Type",
+          "value": "text/markdown; charset=utf-8"
+        }
       ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/en/tools/arrumo/docs/index.md",
+      "destination": "/tools/arrumo/static/md/tools/arrumo/docs.md"
+    },
+    {
+      "source": "/:lang(es|pt)/tools/arrumo/docs/index.md",
+      "destination": "/tools/arrumo/static/md/:lang/tools/arrumo/docs.md"
+    },
+    {
+      "source": "/en/tools/arrumo/docs/(.+)\\.(md|txt)",
+      "destination": "/tools/arrumo/static/md/tools/arrumo/docs/$1.$2"
+    },
+    {
+      "source": "/(es|pt)/tools/arrumo/docs/(.+)\\.(md|txt)",
+      "destination": "/tools/arrumo/static/md/$1/tools/arrumo/docs/$2.$3"
     }
   ]
 }

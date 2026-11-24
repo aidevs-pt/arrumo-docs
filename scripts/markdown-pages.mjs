@@ -3,6 +3,8 @@
 // `llms-full.txt` goes beside its pages too. The export renders the
 // Markdown under the static path (`/tools/arrumo/static/md/…`) because a page and a route can't
 // share a folder; aidevs.pt proxies `/tools/arrumo/docs/*` to `/en/tools/arrumo/docs/*` here.
+// Vercel deploys from `.next` and skips files added to `out`, so there `vercel.json` rewrites
+// the same addresses instead; this script serves any other static host.
 import { cpSync, existsSync, readdirSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 

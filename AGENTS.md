@@ -9,4 +9,4 @@ This site is built with [Fumadocs](https://fumadocs.dev) on Next.js as a static 
 - Keep the site static: no proxy, rewrites or server routes. aidevs.pt serves it, so the export mirrors its paths: pages under `app/[lang]/tools/arrumo/docs` (aidevs.pt drops the `en` prefix) and everything else under `/tools/arrumo/static`. Use `staticRoute` and `localized()` from `lib/shared.ts` for URLs; never root-absolute paths of your own.
 - Store screenshots and other media under `public/tools/arrumo/static/media/` through Git LFS.
 - Keep the consent banner on the aidevs.pt contract in `lib/consent.ts`.
-- Verify with `pnpm lint`, `pnpm types:check` and `pnpm build`. The build also writes each page's Markdown beside it (`scripts/markdown-pages.mjs`).
+- Verify with `pnpm lint`, `pnpm types:check` and `pnpm build`. Page Markdown addresses (`<page>.md`) come from the `vercel.json` rewrites on Vercel and from `scripts/markdown-pages.mjs` elsewhere; keep both in step.
