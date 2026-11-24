@@ -45,15 +45,15 @@ Closing the window, or quitting from the menu or dock, while a video is generati
 
 **Anonymous usage data** counts a few moments that tell DEVS AI which features are used:
 
-| Event               | What it carries                                                       |
-| ------------------- | --------------------------------------------------------------------- |
-| `app_started`       | nothing else                                                          |
-| `workspace_created` | nothing else                                                          |
-| `video_queued`      | whether Autopilot is on                                               |
-| `video_generated`   | the agent plugin, whether Autopilot was on, and the number of formats |
-| `media_generated`   | image, audio or video, the provider plugin, and for images how many   |
-| `plugin_installed`  | the plugin ID                                                         |
-| `backup_exported`   | nothing else                                                          |
+| Event                 | What it carries                                                       |
+| --------------------- | --------------------------------------------------------------------- |
+| `app_installed`       | nothing else; sent once, the first time a new install opens           |
+| `workspace_created`   | nothing else                                                          |
+| `video_generated`     | the agent plugin, whether Autopilot was on, and the number of formats |
+| `media_generated`     | image, audio or video, the provider plugin, and for images how many   |
+| `animation_generated` | the agent plugin, and whether it changed an existing animation        |
+| `plugin_installed`    | the plugin ID                                                         |
+| `backup_exported`     | nothing else                                                          |
 
 Each event also carries a random ID for this install, made when Arrumo first opened, plus a per-launch session ID, the app version and the operating system. It is never tied to you, and never includes your videos, files, prompts, text, file names or keys. Usage data goes to [Aptabase](https://aptabase.com), which does not use cookies or fingerprinting.
 
