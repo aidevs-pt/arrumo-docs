@@ -1,0 +1,48 @@
+---
+title: "Música, efeitos sonoros e ferramentas de voz com a ElevenLabs"
+description: "Compõe música, cria efeitos sonoros, muda ou isola vozes e dobra clipes para 29 línguas, a partir de Recursos."
+icon: AudioLines
+---
+
+Além de narrar e transcrever, o plugin da ElevenLabs cria música e efeitos sonoros para os teus vídeos e trabalha o som dos clipes que já tens. Tudo usa a chave de [Narra vídeos com a ElevenLabs](narration.mdx) e os teus créditos da ElevenLabs. A música, a dobragem e alguns modelos precisam de um plano pago da ElevenLabs; se o teu não o incluir, o Arrumo mostra a resposta da ElevenLabs como uma mensagem clara.
+
+## Música e efeitos sonoros
+
+Abre **Recursos › Gerar** e escolhe **Música** ou **Efeito sonoro**. Descreve-o e escolhe a duração; o resultado junta-se aos recursos do espaço de trabalho. O agente também os pode pedir, para o fundo de um vídeo ou uma transição.
+
+| Tipo              | Duração                        | Exemplo                                                                              |
+| ----------------- | ------------------------------ | ------------------------------------------------------------------------------------ |
+| Música            | De 3 segundos a 10 minutos     | Batida lo-fi calma com piano suave, sem voz, ritmo constante para um tutorial.       |
+| Efeito sonoro     | De meio segundo a 30 segundos  | Um whoosh nítido quando um cartão entra.                                             |
+
+A música pode demorar um ou dois minutos.
+
+## Muda, isola ou dobra uma voz
+
+Seleciona um recurso de áudio ou vídeo em **Recursos**. Cada uma destas ações cria um recurso novo e deixa o original como está.
+
+<Tabs items={["Mudar voz", "Isolar voz", "Dobrar"]}>
+<Tab value="Mudar voz">
+
+Diz as mesmas palavras com outra voz, mantendo o ritmo e a entoação, com o modelo de voz para voz da ElevenLabs. Escreve um **ID da voz**, ou deixa-o vazio para usar a voz das definições do plugin. Até 5 minutos e 50 MB.
+
+</Tab>
+<Tab value="Isolar voz">
+
+Mantém a voz e remove o ruído de fundo e a música. De 4,6 segundos até 1 hora e 500 MB.
+
+</Tab>
+<Tab value="Dobrar">
+
+Traduz a fala para outra língua, com vozes parecidas com as originais. Escolhe a **Língua** e espera alguns minutos. Até 1 hora e 500 MB.
+
+Línguas: alemão, árabe, búlgaro, checo, chinês, coreano, croata, dinamarquês, eslovaco, espanhol, filipino, finlandês, francês, grego, hindi, indonésio, inglês, italiano, japonês, malaio, neerlandês, polaco, português, romeno, russo, sueco, tâmil, turco e ucraniano.
+
+</Tab>
+</Tabs>
+
+Para dobrar um vídeo concluído com todos os formatos e legendas, vê o [Auto-Dubbing](../auto-dubbing/dub-a-video.mdx).
+
+## O que não inclui
+
+O design de vozes, a clonagem de voz, o texto para diálogo e o alinhamento forçado ainda não fazem parte do plugin. Cria a voz na ElevenLabs e usa o seu ID no Arrumo.

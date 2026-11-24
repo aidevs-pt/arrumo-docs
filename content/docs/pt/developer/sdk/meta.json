@@ -1,5 +1,6 @@
 {
   "title": "Referência do SDK de plugins",
+  "icon": "Package",
   "pages": [
     "index",
     "manifest",

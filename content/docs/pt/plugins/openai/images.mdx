@@ -1,0 +1,38 @@
+---
+title: "Cria miniaturas e imagens com a OpenAI"
+description: "Gera miniaturas e imagens com o teu estilo com o modelo de imagem da OpenAI, seguindo até quatro imagens de referência."
+icon: Images
+---
+
+A OpenAI cria as miniaturas de cada formato e qualquer imagem que peças em **Recursos › Gerar**. Quando um formato pede miniaturas, o agente escreve uma descrição de imagem por miniatura, usando as **Imagens de referência para miniaturas** do formato e a tua marca, e o Arrumo pede a imagem aos fornecedores pela ordem do vídeo. As miniaturas geradas ficam guardadas como recursos do espaço de trabalho e esperam pela tua revisão com os títulos e as descrições.
+
+## Configura-a
+
+Cria uma chave na [página de chaves de API da OpenAI](https://platform.openai.com/api-keys) e cola-a na OpenAI, em **Definições › Serviços e chaves**. A chave de um espaço de trabalho tem prioridade sobre a da app; os agentes usam-na através do Arrumo, mas nunca a veem. Em **Que plugin faz o quê, por ordem**, sobe a OpenAI em **Geração de imagens** para a preferir. Os fornecedores sem chave são ignorados.
+
+## Definições
+
+<TypeTable
+  type={{
+    "Chave de API da OpenAI": {
+      description: "Usada para a transcrição e as imagens. Guardada no cofre do sistema.",
+      type: "secreta",
+      required: true,
+    },
+    "Modelo de imagem": {
+      description: "O modelo da OpenAI usado para miniaturas e imagens. Deixa-o vazio para seguir a predefinição atual do plugin.",
+      type: "texto",
+      default: "gpt-image-2.6-sunburst",
+    },
+  }}
+/>
+
+## Tamanhos e referências
+
+| Proporção | Tamanho     |
+| --------- | ----------- |
+| 16:9      | 1536 × 1024 |
+| 9:16      | 1024 × 1536 |
+| 1:1       | 1024 × 1024 |
+
+Com imagens de referência, como miniaturas anteriores ou uma personagem, a OpenAI edita a partir de até quatro delas. Cada imagem pode ter até 20 MB.

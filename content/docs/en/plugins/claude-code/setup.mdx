@@ -1,0 +1,90 @@
+---
+title: "Set up Claude Code in Arrumo"
+description: "Install Claude Code, sign in with your Claude plan, and choose what the agent may do while it edits your videos."
+icon: Bot
+---
+
+Claude Code drafts scripts, plans assets, designs animations and translates subtitles, using your Claude plan. Image generation needs an [OpenAI](../openai/images.mdx) or [Gemini](../gemini/images.mdx) key.
+
+## Set it up
+
+<Steps>
+<Step>
+
+### Install and sign in
+
+Follow the [Claude Code setup guide](https://code.claude.com/docs/en/setup) to install the `claude` command and sign in with your Claude account. Run `claude` once in a terminal to check that it works.
+
+</Step>
+<Step>
+
+### Choose it in Arrumo
+
+Pick Claude Code when you create a workspace, or later as the agent in **Settings › Agent**. Arrumo finds it on your `PATH` and in the folders your login shell adds, even when Arrumo is opened from the Dock, Finder or a desktop launcher. If you installed it somewhere else, use **Choose the program…** and pick its program file.
+
+</Step>
+<Step>
+
+### Check the sign-in
+
+Choose **Check sign-in**. **The CLI reports a local sign-in** means you're ready. The check doesn't start an edit or use your plan.
+
+</Step>
+</Steps>
+
+## Settings
+
+These appear in **Settings › Agent** for every workspace, or for one workspace under **Applies to**. Each video keeps the settings it started with, so a replay can reproduce it.
+
+<TypeTable
+  type={{
+    "Write files and run commands": {
+      description: "Lets the agent write its own scripts and files, run commands, and use your installed plugins, tool servers and hooks while it works on a video. Its files stay in a work folder for that video until the video is finished.",
+      type: "on or off",
+      default: "on",
+    },
+    "Web search": {
+      description: "Lets the agent search the web while it works, for facts, prices and trends.",
+      type: "on or off",
+      default: "off",
+    },
+    Model: {
+      description: "The Claude model for this workspace, such as `sonnet` or `opus`. Leave it empty to use Claude Code's default.",
+      type: "text",
+    },
+    "Reasoning effort": {
+      description: "How long the agent thinks before answering. Higher effort gives better scripts and edits but takes longer.",
+      type: "low, medium, high, xhigh or max",
+      default: "medium",
+    },
+    "Use my installed plugins": {
+      description: "Lets the agent use the plugins and tool servers (MCP) you installed for Claude Code yourself, while Write files and run commands is off. They can see the workspace material the agent is given, so turn it on only for ones you trust.",
+      type: "on or off",
+      default: "off",
+    },
+  }}
+/>
+
+## Check the connection
+
+From the editor CLI, pass a local database path and this plugin ID.
+
+```sh
+arrumo-workspaces ./workspaces.sqlite agent-login-status claude-code
+```
+
+A confirmed status means the CLI accepted the sign-in probe. If Arrumo reports unavailable, check that the CLI is installed, or choose its program file in Settings. If the login is unconfirmed, sign in using the official guide and check again. A timeout or failure means the probe could not finish successfully.
+
+## Write files and run commands
+
+**Write files and run commands**, in Settings › Agent, is on by default. While working on a video, Claude Code then runs with edits accepted (`--permission-mode acceptEdits`) and may use Read, Write, Edit, Glob, Grep and Bash, plus WebSearch and WebFetch when **Web search** is on. Your own Claude Code setup applies: its hooks, MCP servers and plugins. It works in a folder Arrumo makes for that video and deletes once the video is finished, fails or is cancelled.
+
+Turn it off and Claude Code runs restricted (`--restricted`), with hooks turned off and file and shell tools refused, and only reads what Arrumo sends. **Use my installed plugins** then decides whether your own plugins and MCP servers load.
+
+## Translate subtitle cues
+
+See [Translate subtitles](https://github.com/aidevs-pt/arrumo-plugin-claude-code/blob/main/README.md#translate-subtitles) to use this plugin as an Auto-Dubbing translator. The translator sends the selected cue text and target language to Claude Code. The workflow keeps the original cue timings.
+
+## Follow-up questions
+
+When Claude Code asks Arrumo for workspace material, such as an earlier video's script, Arrumo answers in the same Claude Code session with only that material, so the brief is not sent and paid for twice. These sessions are kept in Claude Code's own history (`claude --resume`); one-off runs keep none.

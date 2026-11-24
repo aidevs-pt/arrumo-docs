@@ -1,5 +1,6 @@
 {
   "title": "Referencia del SDK de complementos",
+  "icon": "Package",
   "pages": [
     "index",
     "manifest",

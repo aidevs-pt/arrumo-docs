@@ -1,0 +1,43 @@
+---
+title: "Transcreve as tuas gravações com a OpenAI"
+description: "Usa a conversão de voz para texto da OpenAI, com identificação de oradores, como fornecedor de transcrição ou como alternativa."
+icon: Captions
+---
+
+A OpenAI transcreve a fala das tuas gravações para que o agente possa cortar pelo que é dito e o Arrumo possa escrever as legendas. É uma boa alternativa depois da [ElevenLabs](../elevenlabs/transcription.mdx): quando o primeiro fornecedor falha ou fica sem saldo, o Arrumo passa ao seguinte.
+
+As transcrições com marcas de tempo usam `gpt-4o-transcribe-diarize`, que também indica quem está a falar; o texto simples usa `gpt-transcribe`. Cada ficheiro pode ter até 25 MB.
+
+## Configura-a
+
+<Steps>
+<Step>
+
+### Adiciona a tua chave
+
+Cria uma chave na [página de chaves de API da OpenAI](https://platform.openai.com/api-keys). No Arrumo, abre **Definições › Serviços e chaves**, procura a OpenAI e cola-a, para todos os espaços de trabalho ou para um. A mesma chave serve para as [imagens](images.mdx).
+
+</Step>
+<Step>
+
+### Coloca-a na ordem
+
+Em **Que plugin faz o quê, por ordem**, coloca a OpenAI em **Transcrição**: em primeiro para a preferir, ou depois da ElevenLabs como alternativa. Um vídeo mantém a ordem com que começou.
+
+</Step>
+</Steps>
+
+## Legendas
+
+- Ao colocar um vídeo na fila, **Gerar automaticamente as legendas em falta** envia ao primeiro fornecedor de transcrição o áudio de cada formato renderizado sem SRT.
+- Na verificação da entrega, **Gerar legendas** fá-lo para um formato.
+- **Importar SRT** usa as tuas.
+
+## Verifica a partir da CLI
+
+```sh
+arrumo-workspaces ./workspaces.sqlite plugin-credential-status openai 1 api-key
+arrumo-workspaces ./workspaces.sqlite transcribe-wav 1 openai ./sample.wav
+```
+
+O primeiro comando indica onde a chave está configurada sem a revelar; o segundo carrega o WAV e imprime a transcrição normalizada. Se as legendas falharem, verifica que a saída tem áudio, que a ordem do vídeo inclui um fornecedor com marcas de tempo e que a chave continua válida.

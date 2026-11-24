@@ -1,0 +1,49 @@
+---
+title: "Dobra um vídeo concluído"
+description: "Traduz as legendas de um vídeo concluído e dá-lhes voz noutra língua, mantendo cada legenda no tempo certo, e adiciona a dobragem junto às saídas originais."
+icon: Languages
+---
+
+O Auto-Dubbing leva um vídeo concluído para outras línguas. Traduz as legendas uma a uma, dá voz a cada uma com o teu fornecedor de voz, coloca cada clipe no momento da sua legenda e adiciona o MP4 dobrado junto à saída original.
+
+<Callout type="warn" title="Por agora, uma parte corre na linha de comandos">
+  Na app, as ações do Auto-Dubbing preparam e montam as traduções das legendas. A voz e o render da dobragem são feitos com as suas ferramentas de linha de comandos, mostradas abaixo. Para dobrar um só clipe a partir de **Recursos** em dois cliques, usa a [dobragem da ElevenLabs](../elevenlabs/audio-tools.mdx).
+</Callout>
+
+## O que precisas
+
+- Um vídeo concluído cuja entrega tenha passado a verificação, com as suas legendas.
+- Um fornecedor de voz com chave e uma voz, como a [ElevenLabs](../elevenlabs/narration.mdx), em primeiro em **Texto para voz**.
+- Uma tradução das legendas na língua de destino, ou um tradutor: o [Claude Code](../claude-code/setup.mdx) e o [Codex](../codex/setup.mdx) conseguem traduzir legendas.
+
+## Na app
+
+Abre um vídeo concluído e procura **Ações de plugins**. O Auto-Dubbing oferece três, cada uma sobre uma faixa SRT:
+
+| Ação                              | O que faz                                                                                      |
+| --------------------------------- | ---------------------------------------------------------------------------------------------- |
+| **Ler legendas**                  | Lista o texto de cada legenda, pronto a traduzir.                                              |
+| **Montar legendas traduzidas**    | Volta a colocar o texto traduzido nos tempos originais e devolve o SRT traduzido.              |
+| **Planear segmentos de voz**      | Lista o texto de cada legenda com o intervalo em que a sua voz tem de caber, para a sintetizar. |
+
+Escolhe as legendas do vídeo ou abre um ficheiro SRT de até 64 KiB, corre a ação e copia o resultado. Para guardares um SRT traduzido, abre as legendas da saída, escolhe **Adicionar idioma**, escreve a etiqueta de idioma e cola-o.
+
+## Dobra a partir da linha de comandos
+
+Corre estes comandos a partir do [repositório do Auto-Dubbing](https://github.com/aidevs-pt/arrumo-plugin-auto-dubbing) ou do pacote do plugin extraído. Usam o FFmpeg que vem com o Arrumo: no Linux está no `PATH`; no macOS e no Windows, aponta `ARRUMO_FFMPEG` e `ARRUMO_FFPROBE` para `arrumo-ffmpeg` e `arrumo-ffprobe`, junto ao executável da app.
+
+### Pré-visualiza o pedido
+
+O exemplo seleciona o espaço de trabalho 1, a execução 42 e o formato 3. Substitui os identificadores, caminhos, idioma e voz pelos teus. A pré-visualização indica as faixas disponíveis e os pedidos previstos para as legendas conhecidas. Não contacta nenhum fornecedor.
+
+```sh
+python3 tools/dub-completed-output.py /path/to/arrumo-workspaces /path/to/workspaces.sqlite 1 42 3 es elevenlabs YOUR_VOICE_ID --dry-run
+```
+
+### Renderiza e exporta
+
+Quando o plano estiver pronto, volta a executar o comando sem a opção de pré-visualização. Usa all no lugar do identificador do formato para dobrar todas as saídas verificadas, ou adiciona formatos específicos com `--additional-format`. Se faltar uma faixa traduzida, podes importá-la no vídeo concluído ou usar um tradutor compatível.
+
+A ferramenta anexa cada dobragem bem-sucedida à saída como MP4 alternativo. Abre o vídeo concluído para o encontrar ou exporta o ZIP da entrega. Se o lote parar devido a um erro, o relatório indica os formatos concluídos, falhados e ignorados.
+
+Consulta [a referência do comando](https://github.com/aidevs-pt/arrumo-plugin-auto-dubbing/blob/main/README.md#dub-completed-outputs) para saber mais sobre tradução, revisões, cache e renderização isolada.

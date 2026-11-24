@@ -1,0 +1,34 @@
+---
+title: "MCP y A2A"
+description: "Conecta agentes y herramientas a la API compartida de la aplicación."
+icon: Network
+---
+
+## MCP local
+
+Configura un cliente MCP local para que lance `arrumo-workspaces <database-path> mcp` por stdio. Este servidor admite MCP `2025-11-25` y expone como herramienta cada operación de la API de Arrumo: espacios de trabajo, perfiles, salidas, recursos, marca, borradores, generaciones y revisiones, vídeos terminados, subtítulos, complementos, ajustes y copias de seguridad. `tools/list` devuelve el nombre, la descripción y el esquema de entrada de cada herramienta, y las páginas de [referencia](index.mdx) las describen por áreas. Para las acciones de complementos, pasa a `invoke_plugin_action` el digest del paquete que devuelve `list_plugin_actions`, con un identificador de espacio de trabajo para las acciones de espacio de trabajo. El proceso cliente tiene el mismo acceso a los espacios de trabajo que un operador que use la CLI local. La ejecución de acciones aplica el aislamiento y las concesiones de complementos existentes. Pasa una ruta absoluta a la base de datos al configurar el cliente.
+
+## A2A local
+
+Ejecuta `arrumo-workspaces <database-path> a2a <port>` con un token bearer alfanumérico aleatorio de 32 a 256 caracteres en la entrada estándar redirigida. Usa el puerto `0` para que el sistema operativo elija uno. El comando solo escucha en `127.0.0.1` e imprime su endpoint cuando está listo. Quien tenga el token tiene el mismo acceso a esa base de datos y a las operaciones locales que el operador de la CLI.
+
+Lee `/.well-known/agent-card.json` en el origen impreso para obtener la [interfaz JSON-RPC de A2A 1.0](https://a2a-protocol.org/latest/specification/#9-json-rpc-protocol-binding). Envía las solicitudes al endpoint impreso con `Authorization: Bearer <token>`, `Content-Type: application/json` y `A2A-Version: 1.0`. Por ejemplo, envía este cuerpo JSON para descubrir los nombres y argumentos de las operaciones.
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "SendMessage",
+  "params": {
+    "message": {
+      "messageId": "discover-operations-1",
+      "role": "ROLE_USER",
+      "parts": [{ "data": { "operation": "list_operations", "arguments": {} } }]
+    }
+  }
+}
+```
+
+A2A ofrece las mismas operaciones que MCP, con los mismos nombres. Usa el mismo formato de mensaje con un nombre de operación de la lista y sus argumentos. La respuesta contiene una parte de datos con `result` o un `error` de la operación. La mayoría de las operaciones devuelven mensajes directos. Encolar y repetir devuelven una tarea. Usa su identificador con `GetTask` o `CancelTask`. El estado de la tarea refleja la cola de generación, y las tareas completadas incluyen los metadatos de las salidas verificadas. Usa `ListTasks` para recorrer las tareas, filtrando opcionalmente por `contextId` (como `workspace-1`), `status` o `statusTimestampAfter`. Devuelve `nextPageToken` con los mismos filtros para obtener la página siguiente. Los cambios de estado simultáneos pueden reordenar la lista entre páginas. Activa `includeArtifacts` para incluir las salidas verificadas de las tareas completadas. Usa `SendStreamingMessage` con el mismo cuerpo de mensaje para recibir Server-Sent Events, o `SubscribeToTask` con el identificador de una tarea activa. Los flujos envían el resultado inicial y después instantáneas de la tarea a medida que cambia el estado observado. Los flujos se cierran en un estado final o tras 60 segundos. Vuelve a conectarte a una tarea activa para obtener una instantánea nueva. El servidor acepta hasta ocho flujos simultáneos.
+
+Para enviar una decisión sobre una tarea que espera revisión, envía un mensaje de seguimiento con su `taskId` y la operación `review_production_result`. Pasa el `pendingReviewId` actual como `resultId`, además de la decisión y notas opcionales. El identificador de la tarea aporta el espacio de trabajo y la ejecución. Si incluyes `contextId`, debe coincidir con la tarea. Una decisión correcta devuelve la tarea actualizada.

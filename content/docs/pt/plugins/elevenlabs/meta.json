@@ -1,3 +1,5 @@
 {
-  "title": "ElevenLabs"
+  "title": "ElevenLabs",
+  "icon": "AudioLines",
+  "pages": ["narration", "transcription", "audio-tools"]
 }

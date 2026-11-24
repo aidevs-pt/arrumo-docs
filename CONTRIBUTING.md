@@ -36,7 +36,7 @@ pnpm build
 - **Every page exists in English, Spanish and Portuguese** with the same file name
   (`content/docs/<language>/`). If you can only write one language, say so in the pull request
   and we will translate it.
-- **Link pages with relative file paths** (`../plugins/index.md`) so links stay in the reader's
+- **Link pages with relative file paths** (`../plugins/index.mdx`) so links stay in the reader's
   language.
 - **Screenshots are WebP** under `public/tools/arrumo/static/media/`, taken from the real app.
 - **Small, focused commits** with [Conventional Commits](https://www.conventionalcommits.org/)

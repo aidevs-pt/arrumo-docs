@@ -1,0 +1,81 @@
+---
+title: "Generate media and edit sound"
+description: "Make images, video clips, voices, music and sound effects with your providers, and change, clean up or dub the sound of any clip."
+icon: ImagePlay
+---
+
+The agent asks your providers for media while it makes a video: narration for each scene, a thumbnail for each format, a clip when a scene needs b-roll. You can also make media yourself in **Assets**, to use in any video or as a reference. Everything you make lands in the workspace's assets with its prompt, so you can find it and reuse it.
+
+## Generate an asset
+
+Open **Assets** and choose **Generate**. Pick what to make, describe it under **Describe it**, and choose the provider under **Made with**, or keep the workspace's order. Where a provider offers several models, **Model** lists them with what each is best for. Add **Context for the agent**, such as where the asset will be used: it's saved with the asset so the agent knows what it's for.
+
+<Tabs items={["Image", "Video clip", "Voice", "Music", "Sound effect"]}>
+<Tab value="Image">
+
+Describe the picture, choose its **Size** and how many **Variations** to make and, optionally, pick **References**: images from your assets for the provider to follow, such as a character or a product. Each model takes a different number of references, and Arrumo says how many it will use. Models that can't take references work from the description alone.
+
+Made by [OpenAI](../plugins/openai/images.mdx), [Gemini](../plugins/gemini/images.mdx), [Higgsfield](../plugins/higgsfield/video-and-images.mdx) or [Codex](../plugins/codex/setup.mdx#make-images).
+
+</Tab>
+<Tab value="Video clip">
+
+Describe the shot, choose the **Model**, **Size** and **Length**, and optionally pick images to animate or images and clips for the model to follow. Arrumo tells you when a model needs a reference, or can't make the size you chose. Clips take a few minutes: keep the dialog open until the clip is ready.
+
+Made by [Higgsfield](../plugins/higgsfield/video-and-images.mdx), with 45 models for text-to-video, animating frames, following references, motion transfer and editing clips.
+
+</Tab>
+<Tab value="Voice">
+
+Write the **Text to voice** and choose the speech model. It speaks in the voice chosen in the provider's settings, such as the ElevenLabs **Voice ID**.
+
+Made by [ElevenLabs](../plugins/elevenlabs/narration.mdx).
+
+</Tab>
+<Tab value="Music">
+
+Describe the music, such as "calm lo-fi beat with soft piano, no vocals, steady tempo for a tutorial", and choose its **Length**, from 3 seconds to 10 minutes. Music can take a minute or two.
+
+Made by [ElevenLabs](../plugins/elevenlabs/audio-tools.mdx).
+
+</Tab>
+<Tab value="Sound effect">
+
+Describe the sound, such as "a crisp whoosh as a card slides in", and choose its **Length**, from half a second to 30 seconds.
+
+Made by [ElevenLabs](../plugins/elevenlabs/audio-tools.mdx).
+
+</Tab>
+</Tabs>
+
+<Callout type="warn" title="It uses your credits">
+  Generated media is paid for by your provider accounts. Arrumo shows how much is left where the provider reports it, and warns you when it runs low: see [Keep an eye on credits](#keep-an-eye-on-credits).
+</Callout>
+
+## Change, clean up or dub the sound of a clip
+
+Select an audio or video asset in **Assets** to see what you can do with its sound. Each action makes a new asset and leaves the original as it is.
+
+| Action             | What it does                                                                                     | Limits                       |
+| ------------------ | ------------------------------------------------------------------------------------------------ | ---------------------------- |
+| **Change voice**   | Says the same words again in another voice, keeping the timing and delivery.                     | Up to 5 minutes and 50 MB.   |
+| **Isolate voice**  | Keeps the voice and removes background noise and music.                                          | Up to 1 hour and 500 MB.     |
+| **Dub**            | Translates the speech into another language, in voices like the original. Takes a few minutes.  | Up to 1 hour and 500 MB.     |
+
+**Change voice** asks for a **Voice ID**; leave it empty to use the voice from the provider's settings. **Dub** offers the 29 languages ElevenLabs dubs into. These actions are made by [ElevenLabs](../plugins/elevenlabs/audio-tools.mdx). To dub a finished video with all of its outputs and subtitles, use [Auto-Dubbing](../plugins/auto-dubbing/dub-a-video.mdx) instead.
+
+## Which provider does what
+
+When more than one plugin can do the same thing, such as transcription or images, Arrumo uses them in order. Open **Settings › Services and keys** and find **Which plugin does what, in order**: Arrumo tries the first one and moves to the next if it fails or runs out. Each row shows whether the provider has its key, needs one, or uses your agent's sign-in.
+
+The order there applies to every workspace. In a workspace's settings you can change it for that workspace only, or keep following the app's order. A video keeps the order it started with, so a replay uses the same providers.
+
+## Keep an eye on credits
+
+For providers that report usage, such as ElevenLabs, and for your agent's plan limits, **Settings › Services and keys** shows how much is left and when it resets. When a provider has 20% left, a banner appears; at 10% it turns red, and Arrumo warns you before each generation that the video might stop partway. Top up the account or move that provider down the order.
+
+For ElevenLabs, give the API key the **User read** permission so Arrumo can read your remaining credits.
+
+## With an agent
+
+Agents can generate and transform media through Arrumo over [MCP, the CLI and A2A](../developer/connect.mdx), with the same providers, order and keys, and without ever seeing the keys. Generated files land in the workspace's assets like the ones you make.

@@ -1,0 +1,65 @@
+---
+title: "Complementos oficiales"
+description: "Los agentes y proveedores de medios que crea y mantiene DEVS AI, qué hace cada uno y cómo configurarlos."
+icon: Puzzle
+---
+
+El agente de Arrumo y cada servicio que usa para crear medios vienen de complementos. Los oficiales salen del [registro oficial](https://github.com/aidevs-pt/arrumo-plugin-registry): Arrumo los instala en el primer inicio, los activa y los actualiza desde la propia app con versiones verificadas. Los complementos que importas empiezan desactivados.
+
+Activa o desactiva cada complemento con el interruptor de su página en **Ajustes › Complementos**. Un complemento desactivado conserva sus ajustes, pero Arrumo no lo usa. Las claves van en **Ajustes › Servicios y claves**, para todos los espacios de trabajo o para uno: la clave de un espacio tiene prioridad sobre la de la app. Se guardan cifradas en el almacén de tu sistema, y los agentes las usan a través de Arrumo sin poder leerlas nunca.
+
+## Agentes
+
+El agente escribe guiones, planifica recursos, diseña animaciones y toma las decisiones de edición. Se ejecuta en tu ordenador, con la sesión de tu propio plan.
+
+<Cards>
+  <Card icon={<Icon name="Bot" />} title="Claude Code" href="claude-code/setup.mdx">
+    Usa tu plan de Claude. Redacta guiones, planifica recursos y traduce subtítulos.
+  </Card>
+  <Card icon={<Icon name="SquareTerminal" />} title="Codex" href="codex/setup.mdx">
+    Usa tu plan de ChatGPT y también crea miniaturas e imágenes, así necesitas una clave menos.
+  </Card>
+</Cards>
+
+## Proveedores de medios
+
+<Cards>
+  <Card icon={<Icon name="AudioLines" />} title="ElevenLabs" href="elevenlabs/narration.mdx">
+    Narración con cinco modelos de voz, transcripción, música, efectos de sonido, cambio y aislamiento de voz, y doblaje a 29 idiomas.
+  </Card>
+  <Card icon={<Icon name="Sparkle" />} title="OpenAI" href="openai/transcription.mdx">
+    Transcripción con etiquetas de hablante e imágenes para miniaturas y referencias de estilo.
+  </Card>
+  <Card icon={<Icon name="Images" />} title="Gemini" href="gemini/images.mdx">
+    Un segundo modelo de imagen para miniaturas y referencias de estilo.
+  </Card>
+  <Card icon={<Icon name="Video" />} title="Higgsfield" href="higgsfield/video-and-images.mdx">
+    Clips de vídeo con IA de 45 modelos e imágenes de 15, siguiendo tus referencias.
+  </Card>
+  <Card icon={<Icon name="Languages" />} title="Auto-Dubbing" href="auto-dubbing/dub-a-video.mdx">
+    Traduce los subtítulos de los vídeos terminados y les pone voz en otros idiomas.
+  </Card>
+</Cards>
+
+## Quién hace qué
+
+Cuando varios complementos pueden hacer el mismo trabajo, Arrumo los prueba en el orden de **Ajustes › Servicios y claves › Qué complemento hace cada cosa, en orden**, y pasa al siguiente si uno falla o se queda sin saldo. Un espacio de trabajo puede seguir el orden de la app o fijar el suyo, y cada vídeo mantiene el orden con el que empezó.
+
+| Capacidad                                | Complementos                          | Necesita                                      |
+| ---------------------------------------- | ------------------------------------- | --------------------------------------------- |
+| Agente de edición                        | Claude Code, Codex                    | El agente instalado y con la sesión iniciada  |
+| Transcripción                            | ElevenLabs, OpenAI                    | Una clave de API                              |
+| Texto a voz                              | ElevenLabs                            | Una clave de API                              |
+| Música, efectos de sonido                | ElevenLabs                            | Una clave de API                              |
+| Cambio de voz, aislamiento de voz, doblaje | ElevenLabs                          | Una clave de API                              |
+| Generación de imágenes                   | Codex, OpenAI, Gemini, Higgsfield     | Codex: tu plan de ChatGPT; el resto: una clave |
+| Generación de vídeo                      | Higgsfield                            | Una clave de API                              |
+| Traducción de subtítulos                 | Claude Code, Codex                    | El agente con la sesión iniciada              |
+
+## Privacidad
+
+Un complemento proveedor envía solo lo que necesita su trabajo, como el audio de un clip para transcribirlo o una descripción e imágenes de referencia para una imagen, y solo a la API de ese proveedor. Arrumo hace la petición; el agente nunca ve la clave. Tu material se queda en tu ordenador, salvo que un complemento que activaste suba una parte para un trabajo que pediste tú o el agente.
+
+## Crea el tuyo
+
+Los complementos son paquetes descritos por un manifiesto. Los proveedores de agentes, los proveedores de medios, las acciones y las plantillas de animación se escriben con el [SDK de complementos](../developer/sdk/index.mdx); empieza por [Compila y ejecuta tu primer complemento](../developer/first-plugin.mdx).

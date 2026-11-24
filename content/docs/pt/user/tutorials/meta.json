@@ -1,0 +1,6 @@
+{
+  "title": "Tutoriais",
+  "icon": "GraduationCap",
+  "defaultOpen": true,
+  "pages": ["website-to-video", "social-channel"]
+}

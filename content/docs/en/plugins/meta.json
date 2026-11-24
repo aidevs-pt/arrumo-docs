@@ -1,5 +1,7 @@
 {
   "title": "Official plugins",
+  "description": "Agents and media providers",
+  "icon": "Puzzle",
   "root": true,
   "pages": [
     "index",

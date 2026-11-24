@@ -1,20 +1,27 @@
-import { posix } from "node:path";
+import { Card } from "fumadocs-ui/components/card";
 import {
   DocsBody,
   DocsDescription,
   DocsPage,
   DocsTitle,
+  EditOnGitHub,
   MarkdownCopyButton,
   ViewOptionsPopover,
-} from "fumadocs-ui/layouts/docs/page";
+} from "fumadocs-ui/layouts/spacious/page";
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import type { ComponentProps } from "react";
+import {
+  Children,
+  type ComponentProps,
+  isValidElement,
+  type ReactNode,
+} from "react";
+import { CookieSettingsButton } from "@/components/consent";
 import { getMDXComponents } from "@/components/mdx";
 import { i18n } from "@/lib/i18n";
-import { gitConfig, siteUrl, staticRoute } from "@/lib/shared";
-import { source } from "@/lib/source";
+import { gitConfig, markdownPath, siteUrl } from "@/lib/shared";
+import { linkedPage, source } from "@/lib/source";
 
 export default async function Page(
   props: PageProps<"/[lang]/tools/arrumo/docs/[[...slug]]">,
@@ -24,56 +31,82 @@ export default async function Page(
   if (!page) notFound();
 
   const MDX = page.data.body;
-  const markdownUrl = `${staticRoute}/md${page.url}.md`;
+  const markdownUrl = markdownPath(page.url);
+  const githubUrl = `https://github.com/${gitConfig.user}/${gitConfig.repo}/blob/${gitConfig.branch}/content/docs/${encodeURI(page.path)}`;
 
   return (
-    <DocsPage toc={page.data.toc} full={page.data.full}>
+    <DocsPage
+      toc={page.data.toc}
+      full={page.data.full}
+      tableOfContent={{ style: "clerk" }}
+      breadcrumb={{ includeRoot: true }}
+    >
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription className="mb-0">
         {page.data.description}
       </DocsDescription>
-      <div className="flex flex-row gap-2 items-center border-b pb-6">
+      <div className="flex flex-row flex-wrap gap-2 items-center border-b pb-6">
         <MarkdownCopyButton markdownUrl={markdownUrl} />
-        <ViewOptionsPopover
-          markdownUrl={markdownUrl}
-          githubUrl={`https://github.com/${gitConfig.user}/${gitConfig.repo}/blob/${gitConfig.branch}/content/docs/${encodeURI(page.path)}`}
-        />
+        <ViewOptionsPopover markdownUrl={markdownUrl} githubUrl={githubUrl} />
       </div>
       <DocsBody>
         <MDX
           components={getMDXComponents({
-            a: ({ href, ...props }: ComponentProps<"a">) => (
+            a: ({ href, children, ...props }: ComponentProps<"a">) => (
               <defaultMdxComponents.a
-                href={pageLink(href, page.path, lang)}
+                href={pageHref(href, page.path, lang)}
                 {...props}
-              />
+              >
+                {plainImages(children)}
+              </defaultMdxComponents.a>
+            ),
+            // biome-ignore lint/correctness/noComponentHookFactories: rendered once on the server; links resolve against this page
+            Card: ({ href, ...props }: ComponentProps<typeof Card>) => (
+              <Card href={pageHref(href, page.path, lang)} {...props} />
             ),
           })}
         />
       </DocsBody>
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-2 border-t pt-4 text-sm">
+        <EditOnGitHub href={githubUrl} />
+        <CookieSettingsButton />
+      </div>
     </DocsPage>
   );
 }
 
-/** Content links to other pages by relative file path (`../plugins/index.md`); this turns them
- * into the page's URL in the same language. */
-function pageLink(href: string | undefined, from: string, lang: string) {
-  if (!href || /^([a-z]+:|#|\/)/i.test(href)) return href;
-  const [file, hash] = href.split("#", 2);
-  if (!/\.mdx?$/.test(file)) return href;
-  // Page paths include the language folder (`pt/user/brand.md`).
-  const within = from.startsWith(`${lang}/`)
-    ? from.slice(lang.length + 1)
-    : from;
-  const path = posix.normalize(posix.join(posix.dirname(within), file));
-  const slugs = path
-    .replace(/\.mdx?$/, "")
-    .split("/")
-    .filter((part) => part && part !== "index");
-  const target = source.getPage(slugs, lang);
+/** Content links to other pages by relative file path; this gives the page's address. */
+function pageHref(href: string | undefined, from: string, lang: string) {
+  const target = href ? linkedPage(href, from, lang) : undefined;
   if (!target) return href;
-  return hash ? `${target.url}#${hash}` : target.url;
+  return href?.includes("#")
+    ? `${target.url}#${href.split("#")[1]}`
+    : target.url;
 }
+
+/** An image inside a link (a video thumbnail that opens YouTube) stays a plain image, so a click
+ * follows the link instead of zooming. */
+function plainImages(children: ReactNode) {
+  return Children.map(children, (child) => {
+    if (!isValidElement<ImageProps>(child) || !child.props.src) return child;
+    const { src, alt, width, height } = child.props;
+    // Fumadocs MDX imports local images, so `src` can be the import rather than a path.
+    const url = typeof src === "string" ? src : src.src;
+    return (
+      // biome-ignore lint/performance/noImgElement: static export has no image optimizer
+      <img
+        src={url}
+        alt={alt ?? ""}
+        width={width ?? (typeof src === "string" ? undefined : src.width)}
+        height={height ?? (typeof src === "string" ? undefined : src.height)}
+      />
+    );
+  });
+}
+
+type ImageProps = Omit<ComponentProps<"img">, "src"> & {
+  src?: string | { src: string; width: number; height: number };
+};
 
 export async function generateStaticParams() {
   return source.generateParams();
@@ -100,7 +133,7 @@ export async function generateMetadata(
           `${siteUrl}${source.getPage(slug, "en")?.url ?? page.url}`,
         ],
       ]),
-      types: { "text/markdown": `${siteUrl}${staticRoute}/md${page.url}.md` },
+      types: { "text/markdown": `${siteUrl}${markdownPath(page.url)}` },
     },
   };
 }

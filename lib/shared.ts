@@ -17,3 +17,9 @@ export const gitConfig = {
   repo: "arrumo-docs",
   branch: "main",
 };
+
+/** Where a page's Markdown is served: beside the page (`…/docs/user/brand.md`), and as
+ * `…/docs/index.md` for a language's docs home, which has no parent folder of its own. */
+export function markdownPath(pageUrl: string) {
+  return /\/docs$/.test(pageUrl) ? `${pageUrl}/index.md` : `${pageUrl}.md`;
+}

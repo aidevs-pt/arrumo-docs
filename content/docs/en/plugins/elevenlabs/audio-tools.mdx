@@ -1,0 +1,48 @@
+---
+title: "Music, sound effects and voice tools with ElevenLabs"
+description: "Compose music, make sound effects, change or isolate voices and dub clips into 29 languages, from Assets."
+icon: AudioLines
+---
+
+Beyond narration and transcription, the ElevenLabs plugin makes music and sound effects for your videos, and works on the sound of clips you already have. Everything uses the key from [Narrate videos with ElevenLabs](narration.mdx) and your ElevenLabs credits. Music, dubbing and some models need a paid ElevenLabs plan; when yours lacks one, Arrumo shows ElevenLabs' answer as a plain message.
+
+## Music and sound effects
+
+Open **Assets › Generate** and choose **Music** or **Sound effect**. Describe it and choose its length; the result joins the workspace's assets. The agent can ask for them too, for a video's background or a transition.
+
+| Kind          | Length                     | Example                                                                   |
+| ------------- | -------------------------- | ------------------------------------------------------------------------- |
+| Music         | 3 seconds to 10 minutes    | Calm lo-fi beat with soft piano, no vocals, steady tempo for a tutorial.  |
+| Sound effect  | Half a second to 30 seconds | A crisp whoosh as a card slides in.                                      |
+
+Music can take a minute or two.
+
+## Change, isolate or dub a voice
+
+Select an audio or video asset in **Assets**. Each of these makes a new asset and leaves the original as it is.
+
+<Tabs items={["Change voice", "Isolate voice", "Dub"]}>
+<Tab value="Change voice">
+
+Says the same words again in another voice, keeping the timing and delivery, with ElevenLabs' speech-to-speech model. Enter a **Voice ID**, or leave it empty to use the voice from the plugin's settings. Up to 5 minutes and 50 MB.
+
+</Tab>
+<Tab value="Isolate voice">
+
+Keeps the voice and removes background noise and music. From 4.6 seconds up to 1 hour and 500 MB.
+
+</Tab>
+<Tab value="Dub">
+
+Translates the speech into another language, in voices like the original. Choose the **Language** and wait a few minutes. Up to 1 hour and 500 MB.
+
+Languages: Arabic, Bulgarian, Chinese, Croatian, Czech, Danish, Dutch, English, Filipino, Finnish, French, German, Greek, Hindi, Indonesian, Italian, Japanese, Korean, Malay, Polish, Portuguese, Romanian, Russian, Slovak, Spanish, Swedish, Tamil, Turkish and Ukrainian.
+
+</Tab>
+</Tabs>
+
+To dub a finished video with every format and its subtitles, see [Auto-Dubbing](../auto-dubbing/dub-a-video.mdx).
+
+## Not covered
+
+Voice design, voice cloning, text to dialogue and forced alignment aren't part of the plugin yet. Make a voice in ElevenLabs and use its ID in Arrumo.

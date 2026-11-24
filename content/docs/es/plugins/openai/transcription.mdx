@@ -1,0 +1,43 @@
+---
+title: "Transcribe tu material con OpenAI"
+description: "Usa la conversión de voz a texto de OpenAI, con etiquetas de hablante, como proveedor de transcripción o como alternativa."
+icon: Captions
+---
+
+OpenAI transcribe el habla de tu material para que el agente pueda cortar según lo que se dice y Arrumo pueda escribir los subtítulos. Es una buena alternativa detrás de [ElevenLabs](../elevenlabs/transcription.mdx): cuando el primer proveedor falla o se queda sin saldo, Arrumo pasa al siguiente.
+
+Las transcripciones con marcas de tiempo usan `gpt-4o-transcribe-diarize`, que además indica quién habla; el texto simple usa `gpt-transcribe`. Cada archivo puede ocupar hasta 25 MB.
+
+## Configúralo
+
+<Steps>
+<Step>
+
+### Añade tu clave
+
+Crea una clave en la [página de claves de API de OpenAI](https://platform.openai.com/api-keys). En Arrumo, abre **Ajustes › Servicios y claves**, busca OpenAI y pégala, para todos los espacios de trabajo o para uno. La misma clave sirve para las [imágenes](images.mdx).
+
+</Step>
+<Step>
+
+### Ponlo en el orden
+
+En **Qué complemento hace cada cosa, en orden**, coloca OpenAI en **Transcripción**: primero para preferirlo, o detrás de ElevenLabs como alternativa. Un vídeo mantiene el orden con el que empezó.
+
+</Step>
+</Steps>
+
+## Subtítulos
+
+- Al poner un vídeo en cola, **Generar automáticamente los subtítulos que falten** envía al primer proveedor de transcripción el audio de cada formato renderizado sin SRT.
+- En la verificación de la entrega, **Generar subtítulos** lo hace para un formato.
+- **Importar SRT** usa los tuyos.
+
+## Compruébalo desde la CLI
+
+```sh
+arrumo-workspaces ./workspaces.sqlite plugin-credential-status openai 1 api-key
+arrumo-workspaces ./workspaces.sqlite transcribe-wav 1 openai ./sample.wav
+```
+
+El primer comando indica dónde está configurada la clave sin revelarla; el segundo sube el WAV e imprime la transcripción normalizada. Si los subtítulos fallan, comprueba que la salida tiene audio, que el orden del vídeo incluye un proveedor con marcas de tiempo y que la clave sigue siendo válida.

@@ -1,0 +1,113 @@
+---
+title: "Instala Arrumo"
+description: "Descarga Arrumo para Windows, macOS o Linux, conecta el agente que edita tus vídeos y añade los servicios que les ponen voz e imágenes."
+icon: Download
+---
+
+Arrumo es gratuito y de código abierto. Descárgalo desde la [página de Arrumo](https://www.aidevs.pt/es/tools/arrumo) o desde las [versiones en GitHub](https://github.com/aidevs-pt/arrumo-video-editor/releases). Incluye FFmpeg, que Arrumo usa para las vistas previas, el render y la exportación.
+
+<Steps>
+<Step>
+
+### Instala la app
+
+<Tabs groupId="os" persist items={["Windows", "macOS", "Linux"]}>
+<Tab value="Windows">
+
+Para Windows 10 y 11 de 64 bits. Descarga el instalador `x64-setup.exe` y ábrelo. El paquete `.msi` sirve para instalar con herramientas de administración.
+
+Si una versión aún no está firmada con un certificado de firma de código, SmartScreen dice «Windows protegió tu PC»: elige **Más información** y después **Ejecutar de todas formas**. Windows 11 con el Control inteligente de aplicaciones activado bloquea las apps sin firmar sin forma de permitirlas; en esos equipos, espera a una versión firmada.
+
+</Tab>
+<Tab value="macOS">
+
+Para macOS 11 o posterior, tanto en Apple silicon como en Intel. Descarga el `.dmg`, ábrelo y arrastra Arrumo a **Aplicaciones**.
+
+Si una versión aún no está firmada y notarizada, macOS dice que no puede verificar la app la primera vez que la abres. Elige **OK**, abre **Ajustes del Sistema › Privacidad y seguridad**, baja hasta **Seguridad**, elige **Abrir igualmente** junto a Arrumo y confirma. macOS recuerda tu elección.
+
+</Tab>
+<Tab value="Linux">
+
+Para equipos x86 de 64 bits. Elige el paquete de tu distribución:
+
+```sh title="Debian, Ubuntu y derivadas"
+sudo apt install ./Arrumo*_amd64.deb
+```
+
+```sh title="Fedora, openSUSE y otras distribuciones RPM"
+sudo dnf install ./Arrumo*.x86_64.rpm
+```
+
+```sh title="Cualquier distribución (AppImage)"
+chmod +x Arrumo*_amd64.AppImage
+./Arrumo*_amd64.AppImage
+```
+
+Los paquetes `.deb` y `.rpm` instalan los complementos de GStreamer que reproducen vídeo dentro de la app; la AppImage lleva los suyos. Los instaladores para ARM de 64 bits están en la [hoja de ruta](https://github.com/orgs/aidevs-pt/projects/1).
+
+</Tab>
+</Tabs>
+
+</Step>
+<Step>
+
+### Instala tu agente e inicia sesión
+
+Arrumo no incluye un modelo de IA: la edición la hace un agente que ya usas, con tu propio plan. Instala uno e inicia sesión antes de abrir Arrumo:
+
+<Cards>
+  <Card icon={<Icon name="Bot" />} title="Claude Code" href="../plugins/claude-code/setup.mdx">
+    Usa tu plan de Claude.
+  </Card>
+  <Card icon={<Icon name="SquareTerminal" />} title="Codex" href="../plugins/codex/setup.mdx">
+    Usa tu plan de ChatGPT y también crea imágenes.
+  </Card>
+</Cards>
+
+Arrumo encuentra el agente en tu `PATH` y en las carpetas que añade tu shell de inicio de sesión, incluso cuando abres Arrumo desde el Dock, el Finder o un lanzador del escritorio. Si lo instalaste en otro sitio, elige su archivo de programa durante la configuración o más tarde en **Ajustes › Agente**.
+
+</Step>
+<Step>
+
+### Completa el primer inicio
+
+Arrumo empieza con una configuración breve: pon nombre a tu primer espacio de trabajo, elige el agente y añade enlaces donde el agente pueda conocerte, como tu web o tu canal. Después lee esas páginas y redacta el contexto del espacio. Puedes saltarte los enlaces y rellenarlo más tarde. [Trae tu canal de redes sociales a Arrumo](tutorials/social-channel.mdx) explica lo que lee.
+
+</Step>
+<Step>
+
+### Añade claves para voces, transcripción e imágenes
+
+El agente escribe y planifica; otros servicios crean los medios. Abre **Ajustes › Servicios y claves** y añade una clave para los que quieras. Las claves se guardan cifradas en el almacén de tu sistema: los agentes las usan a través de Arrumo, pero nunca pueden leerlas.
+
+| Para conseguir…                              | Añade una clave de                                                                                            |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Narración, música y efectos de sonido        | [ElevenLabs](../plugins/elevenlabs/narration.mdx)                                                             |
+| Subtítulos y cortes según lo que se dice     | [ElevenLabs](../plugins/elevenlabs/transcription.mdx) u [OpenAI](../plugins/openai/transcription.mdx)          |
+| Miniaturas e imágenes                        | [OpenAI](../plugins/openai/images.mdx) o [Gemini](../plugins/gemini/images.mdx), o ninguna si usas Codex       |
+| Clips de vídeo con IA                        | [Higgsfield](../plugins/higgsfield/video-and-images.mdx)                                                      |
+
+Sin ninguna clave, Arrumo sigue haciendo vídeos: con texto en pantalla en lugar de narración y sin imágenes generadas.
+
+</Step>
+</Steps>
+
+## Actualizaciones
+
+Arrumo busca una versión nueva al abrirse y pregunta antes de instalarla. Las actualizaciones están firmadas y Arrumo solo instala versiones firmadas por DEVS AI. Consulta [Mantén Arrumo al día](settings.mdx#mantén-arrumo-al-día).
+
+## Dónde se guardan tus datos
+
+Todo lo que crea Arrumo se queda en tu ordenador, en su carpeta de datos:
+
+<Tabs groupId="os" persist items={["Windows", "macOS", "Linux"]}>
+  <Tab value="Windows">`%LOCALAPPDATA%\pt.aidevs.arrumo`</Tab>
+  <Tab value="macOS">`~/Library/Application Support/pt.aidevs.arrumo`</Tab>
+  <Tab value="Linux">`~/.local/share/pt.aidevs.arrumo`</Tab>
+</Tabs>
+
+Para pasar a otro ordenador, usa **Ajustes › Importar y exportar**: **Exportar .zip** guarda tus ajustes, espacios de trabajo, perfiles, recursos, animaciones, vídeos terminados y complementos instalados en un solo archivo, y al importarlo en el otro ordenador se restauran. Las claves de API no se incluyen, así que vuelve a añadirlas allí.
+
+## Compílalo tú
+
+Arrumo tiene licencia AGPL-3.0. Para compilarlo desde el código, consulta el [repositorio del editor](https://github.com/aidevs-pt/arrumo-video-editor) y la [referencia de compilación](../developer/reference/build.mdx). Las versiones que compilas tú no se actualizan solas y no envían datos de uso ni informes de errores.

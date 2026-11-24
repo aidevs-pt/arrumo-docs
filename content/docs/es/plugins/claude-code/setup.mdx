@@ -1,0 +1,90 @@
+---
+title: "Configura Claude Code en Arrumo"
+description: "Instala Claude Code, inicia sesión con tu plan de Claude y elige qué puede hacer el agente mientras edita tus vídeos."
+icon: Bot
+---
+
+Claude Code redacta guiones, planifica recursos, diseña animaciones y traduce subtítulos con tu plan de Claude. Para generar imágenes necesitas una clave de [OpenAI](../openai/images.mdx) o [Gemini](../gemini/images.mdx).
+
+## Configúralo
+
+<Steps>
+<Step>
+
+### Instálalo e inicia sesión
+
+Sigue la [guía de instalación de Claude Code](https://code.claude.com/docs/en/setup) para instalar el comando `claude` e iniciar sesión con tu cuenta de Claude. Ejecuta `claude` una vez en una terminal para comprobar que funciona.
+
+</Step>
+<Step>
+
+### Elígelo en Arrumo
+
+Elige Claude Code al crear un espacio de trabajo, o más tarde como agente en **Ajustes › Agente**. Arrumo lo encuentra en tu `PATH` y en las carpetas que añade tu shell de inicio de sesión, incluso cuando abres Arrumo desde el Dock, el Finder o un lanzador del escritorio. Si lo instalaste en otro sitio, usa **Elegir el programa…** y selecciona su archivo de programa.
+
+</Step>
+<Step>
+
+### Comprueba la sesión
+
+Elige **Comprobar inicio de sesión**. **La CLI indica que hay una sesión local** significa que todo está listo. La comprobación no inicia ninguna edición ni gasta tu plan.
+
+</Step>
+</Steps>
+
+## Ajustes
+
+Aparecen en **Ajustes › Agente** para todos los espacios de trabajo, o para uno en **Se aplica a**. Cada vídeo mantiene los ajustes con los que empezó, así que al repetirlo se puede reproducir.
+
+<TypeTable
+  type={{
+    "Escribir archivos y ejecutar comandos": {
+      description: "Permite al agente escribir sus propios scripts y archivos, ejecutar comandos y usar tus complementos, servidores de herramientas y hooks instalados mientras trabaja en un vídeo. Sus archivos se quedan en una carpeta de trabajo de ese vídeo hasta que se termina.",
+      type: "activado o desactivado",
+      default: "activado",
+    },
+    "Búsqueda web": {
+      description: "Permite al agente buscar en la web mientras trabaja, para datos, precios y tendencias.",
+      type: "activado o desactivado",
+      default: "desactivado",
+    },
+    "Modelo": {
+      description: "El modelo de Claude para el agente de este espacio de trabajo, como sonnet u opus. Déjalo vacío para usar el predeterminado de Claude Code.",
+      type: "texto",
+    },
+    "Esfuerzo de razonamiento": {
+      description: "Cuánto piensa el agente antes de responder. Más esfuerzo da mejores guiones y ediciones, pero tarda más.",
+      type: "low, medium, high, xhigh, max",
+      default: "medium",
+    },
+    "Usar mis complementos instalados": {
+      description: "Permite al agente usar los complementos y servidores de herramientas (MCP) que instalaste para Claude Code, mientras Escribir archivos y ejecutar comandos está desactivado. Pueden ver el material del espacio que recibe el agente, así que actívalo solo con los que sean de confianza.",
+      type: "activado o desactivado",
+      default: "desactivado",
+    },
+  }}
+/>
+
+## Comprueba la conexión
+
+Desde la CLI del editor, indica la ruta de una base de datos local y el identificador de este complemento.
+
+```sh
+arrumo-workspaces ./workspaces.sqlite agent-login-status claude-code
+```
+
+El estado confirmed indica que la CLI aceptó la comprobación. Si Arrumo devuelve unavailable, comprueba que la CLI esté instalada o elige su archivo de programa en Ajustes. Si devuelve unconfirmed, inicia sesión según la guía oficial y vuelve a comprobarlo. Un tiempo de espera agotado o un error indica que la comprobación no pudo completarse.
+
+## Escribir archivos y ejecutar comandos
+
+**Escribir archivos y ejecutar comandos**, en Ajustes › Agente, está activado por defecto. Mientras trabaja en un vídeo, Claude Code acepta las ediciones (`--permission-mode acceptEdits`) y puede usar Read, Write, Edit, Glob, Grep y Bash, además de WebSearch y WebFetch cuando **Búsqueda web** está activada. Se aplica tu propia configuración de Claude Code: sus hooks, servidores MCP y complementos. Trabaja en una carpeta que Arrumo crea para ese vídeo y borra cuando el vídeo termina, falla o se cancela.
+
+Si lo desactivas, Claude Code se ejecuta en modo restringido (`--restricted`), con los hooks desactivados y sin herramientas de archivos ni de terminal, y solo lee lo que Arrumo le envía. **Usar mis complementos instalados** decide entonces si se cargan tus complementos y servidores MCP.
+
+## Traduce los subtítulos
+
+Consulta [la traducción de subtítulos](https://github.com/aidevs-pt/arrumo-plugin-claude-code/blob/main/README.md#translate-subtitles) para usar este complemento como traductor de Auto-Dubbing. El traductor envía a Claude Code el texto de los subtítulos seleccionados y el idioma de destino. El proceso conserva las marcas de tiempo originales.
+
+## Preguntas de seguimiento
+
+Cuando Claude Code pide a Arrumo material del espacio de trabajo, como el guion de un vídeo anterior, Arrumo responde en la misma sesión de Claude Code solo con ese material, así el encargo no se envía ni se paga dos veces. Estas sesiones quedan en el historial de Claude Code (`claude --resume`); las ejecuciones puntuales no guardan ninguna.

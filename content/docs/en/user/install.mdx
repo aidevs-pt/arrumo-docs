@@ -1,0 +1,113 @@
+---
+title: "Install Arrumo"
+description: "Download Arrumo for Windows, macOS or Linux, connect the agent that edits your videos, and add the services that voice and illustrate them."
+icon: Download
+---
+
+Arrumo is free and open source. Download it from the [Arrumo page](https://www.aidevs.pt/tools/arrumo) or from the [releases on GitHub](https://github.com/aidevs-pt/arrumo-video-editor/releases). FFmpeg, which Arrumo uses to preview, render and export, is included.
+
+<Steps>
+<Step>
+
+### Install the app
+
+<Tabs groupId="os" persist items={["Windows", "macOS", "Linux"]}>
+<Tab value="Windows">
+
+For 64-bit Windows 10 and 11. Download the `x64-setup.exe` installer and open it. The `.msi` package is for installing with management tools.
+
+When a build isn't signed with a code-signing certificate yet, SmartScreen says "Windows protected your PC": choose **More info**, then **Run anyway**. Windows 11 with Smart App Control turned on blocks unsigned apps with no way to allow them; wait for a signed build on those computers.
+
+</Tab>
+<Tab value="macOS">
+
+For macOS 11 or later, on Apple silicon and Intel alike. Download the `.dmg`, open it and drag Arrumo into **Applications**.
+
+When a build isn't signed and notarized yet, macOS says it can't verify the app the first time you open it. Choose **Done**, open **System Settings › Privacy & Security**, scroll to **Security**, choose **Open Anyway** next to Arrumo and confirm. macOS remembers your choice.
+
+</Tab>
+<Tab value="Linux">
+
+For 64-bit x86 computers. Pick the package for your distribution:
+
+```sh title="Debian, Ubuntu and derivatives"
+sudo apt install ./Arrumo*_amd64.deb
+```
+
+```sh title="Fedora, openSUSE and other RPM distributions"
+sudo dnf install ./Arrumo*.x86_64.rpm
+```
+
+```sh title="Any distribution (AppImage)"
+chmod +x Arrumo*_amd64.AppImage
+./Arrumo*_amd64.AppImage
+```
+
+The `.deb` and `.rpm` packages pull in the GStreamer plugins that play video inside the app; the AppImage carries its own. Installers for 64-bit ARM are on the [roadmap](https://github.com/orgs/aidevs-pt/projects/1).
+
+</Tab>
+</Tabs>
+
+</Step>
+<Step>
+
+### Install and sign in to your agent
+
+Arrumo doesn't include an AI model: the editing is done by an agent you already use, on your own plan. Install one and sign in to it before you open Arrumo:
+
+<Cards>
+  <Card icon={<Icon name="Bot" />} title="Claude Code" href="../plugins/claude-code/setup.mdx">
+    Uses your Claude plan.
+  </Card>
+  <Card icon={<Icon name="SquareTerminal" />} title="Codex" href="../plugins/codex/setup.mdx">
+    Uses your ChatGPT plan, and can also make images.
+  </Card>
+</Cards>
+
+Arrumo finds the agent on your `PATH` and in the folders your login shell adds, even when you open Arrumo from the Dock, Finder or a desktop launcher. If you installed it somewhere else, choose its program file during setup or later in **Settings › Agent**.
+
+</Step>
+<Step>
+
+### Go through the first launch
+
+Arrumo opens with a short setup: name your first workspace, choose the agent, and add links where the agent can learn about you, such as your website or channel. It then reads those pages and drafts your workspace's context. You can skip the links and fill it in later. [Bring your social media channel into Arrumo](tutorials/social-channel.mdx) explains what it reads.
+
+</Step>
+<Step>
+
+### Add keys for voices, transcription and images
+
+The agent writes and plans; other services make the media. Open **Settings › Services and keys** and add a key for the ones you want. Keys are kept in your system's encrypted vault: agents use them through Arrumo but can never read them.
+
+| To get…                                   | Add a key for                                                                                                 |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Narration, music and sound effects        | [ElevenLabs](../plugins/elevenlabs/narration.mdx)                                                             |
+| Subtitles and cuts based on what was said | [ElevenLabs](../plugins/elevenlabs/transcription.mdx) or [OpenAI](../plugins/openai/transcription.mdx)        |
+| Thumbnails and images                     | [OpenAI](../plugins/openai/images.mdx) or [Gemini](../plugins/gemini/images.mdx), or none if you use Codex     |
+| AI video clips                            | [Higgsfield](../plugins/higgsfield/video-and-images.mdx)                                                      |
+
+Without any keys, Arrumo still makes videos: on-screen text instead of narration, and no generated images.
+
+</Step>
+</Steps>
+
+## Updates
+
+Arrumo checks for a new version when it opens and asks before installing it. Updates are signed, and Arrumo installs only versions signed by DEVS AI. See [Keep Arrumo up to date](settings.mdx#keep-arrumo-up-to-date).
+
+## Where your data lives
+
+Everything Arrumo makes stays on your computer, in its data folder:
+
+<Tabs groupId="os" persist items={["Windows", "macOS", "Linux"]}>
+  <Tab value="Windows">`%LOCALAPPDATA%\pt.aidevs.arrumo`</Tab>
+  <Tab value="macOS">`~/Library/Application Support/pt.aidevs.arrumo`</Tab>
+  <Tab value="Linux">`~/.local/share/pt.aidevs.arrumo`</Tab>
+</Tabs>
+
+To move to another computer, use **Settings › Import and export**: **Export .zip** saves your settings, workspaces, profiles, assets, animations, finished videos and installed plugins in one file, and importing it on the other computer restores them. API keys aren't included, so add them again there.
+
+## Build it yourself
+
+Arrumo is licensed under the AGPL-3.0. To build it from source, see the [editor repository](https://github.com/aidevs-pt/arrumo-video-editor) and the [build reference](../developer/reference/build.mdx). Builds you compile yourself don't update themselves and send no usage data or crash reports.

@@ -1,5 +1,7 @@
 {
   "title": "Build on Arrumo",
+  "description": "CLI, MCP, A2A and plugins",
+  "icon": "Code",
   "root": true,
   "pages": [
     "index",

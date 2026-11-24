@@ -1,5 +1,7 @@
 {
   "title": "Plugins oficiais",
+  "description": "Agentes e fornecedores de media",
+  "icon": "Puzzle",
   "root": true,
   "pages": [
     "index",

@@ -1,0 +1,80 @@
+---
+title: "Narra vídeos com a ElevenLabs"
+description: "Configura a ElevenLabs, escolhe a voz e o modelo de voz, e deixa o Arrumo dar voz a cada cena dos teus vídeos."
+icon: Mic
+---
+
+A ElevenLabs dá voz ao Arrumo. Quando um vídeo começa do zero, o Arrumo constrói-o com cenas animadas e o agente escreve uma frase de narração para cada uma. Com a ElevenLabs configurada, o Arrumo narra cada frase ao fazer a pré-visualização, prolonga as cenas que precisam de mais tempo e reutiliza o mesmo áudio no vídeo final. As legendas seguem a narração. Sem um fornecedor de voz, o vídeo usa texto no ecrã.
+
+A mesma chave serve para a [transcrição](transcription.mdx) e para [a música, os efeitos sonoros, as ferramentas de voz e a dobragem](audio-tools.mdx).
+
+## Configura-a
+
+<Steps>
+<Step>
+
+### Cria uma chave de API
+
+Na ElevenLabs, abre [API keys](https://elevenlabs.io/app/settings/api-keys) e cria uma. Se a restringires, permite texto para voz, voz para texto e as outras funcionalidades que vais usar, e dá-lhe a permissão **User: Read** para que o Arrumo possa mostrar os créditos que te restam.
+
+</Step>
+<Step>
+
+### Adiciona-a ao Arrumo
+
+Abre **Definições › Serviços e chaves**, procura a ElevenLabs e cola a chave. Guarda-a para todos os espaços de trabalho, ou para um quando deva usar outra conta. O Arrumo guarda-a cifrada no cofre do teu sistema.
+
+</Step>
+<Step>
+
+### Escolhe a voz
+
+Copia um ID de voz da tua biblioteca de vozes da ElevenLabs e cola-o em **ID de voz** nas definições do plugin. Deixa-o vazio para usar o George.
+
+</Step>
+<Step>
+
+### Verifica a ordem
+
+Em **Que plugin faz o quê, por ordem**, a ElevenLabs deve estar em primeiro em **Texto para voz**. O Auto-Dubbing usa a mesma ordem para as suas locuções.
+
+</Step>
+</Steps>
+
+## Definições
+
+<TypeTable
+  type={{
+    "Chave de API da ElevenLabs": {
+      description: "Usada para a transcrição, a voz e as ferramentas de áudio. Guardada no cofre do sistema; os agentes podem usá-la através do Arrumo, mas nunca lê-la.",
+      type: "secreta",
+      required: true,
+    },
+    "ID de voz": {
+      description: "A voz da ElevenLabs que narra os vídeos, copiada da tua biblioteca de vozes.",
+      type: "texto",
+      default: "George",
+    },
+    "Modelo de voz": {
+      description: "O modelo usado para narrar quando não é escolhido outro.",
+      type: "texto",
+      default: "eleven_multilingual_v2",
+    },
+  }}
+/>
+
+## Modelos de voz
+
+**Gerar** em **Recursos** mostra para que é melhor cada modelo, e podes escolher um para uma só frase, ou deixar que o agente escolha.
+
+| Modelo            | ID                       | Ideal para                                                                                  | Caracteres por pedido |
+| ----------------- | ------------------------ | ------------------------------------------------------------------------------------------- | --------------------- |
+| Multilingual v2   | `eleven_multilingual_v2` | Narração longa em 29 línguas; a ElevenLabs considera-o o mais estável em textos longos. O predefinido. | 10 000 |
+| Eleven v4         | `eleven_v4`              | O modelo mais expressivo da ElevenLabs, para vozes de personagens, interpretação emotiva e audiolivros em mais de 90 línguas. | 10 000 |
+| Eleven v3         | `eleven_v3`              | O modelo expressivo anterior, para uma interpretação dramática em mais de 70 línguas.       | 5000                  |
+| Flash v2.5        | `eleven_flash_v2_5`      | Voz rápida e mais barata em 32 línguas, a metade do preço por carácter.                     | 10 000                |
+| Flash v2          | `eleven_flash_v2`        | Voz rápida só em inglês.                                                                    | 10 000                |
+
+## Créditos
+
+Cada tentativa de pré-visualização volta a sintetizar a narração, o que gasta créditos da ElevenLabs. Se a síntese falhar, a pré-visualização é feita sem narração e o resumo explica porquê. **Definições › Serviços e chaves** mostra a parte de caracteres que te resta e quando renova; o Arrumo avisa com 20% e com 10%. Alguns modelos precisam de um plano pago: se o teu não o incluir, o Arrumo mostra a resposta da ElevenLabs como uma mensagem clara.

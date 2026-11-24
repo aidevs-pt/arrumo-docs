@@ -1,0 +1,94 @@
+---
+title: "Configura Codex no Arrumo"
+description: "Instala o Codex, inicia sessão com o teu plano do ChatGPT e escolhe o que o agente pode fazer enquanto edita os teus vídeos."
+icon: SquareTerminal
+---
+
+O Codex redige guiões, planeia recursos, desenha animações e traduz legendas com o teu plano do ChatGPT. Também [cria miniaturas e imagens](#cria-imagens) com a sua ferramenta de imagens integrada, por isso precisas de menos uma chave.
+
+## Configura-o
+
+<Steps>
+<Step>
+
+### Instala-o e inicia sessão
+
+Segue o [guia de instalação do Codex](https://learn.chatgpt.com/docs/codex/cli) para instalar o comando `codex` e iniciar sessão com a tua conta do ChatGPT. Corre `codex` uma vez num terminal para verificar que funciona.
+
+</Step>
+<Step>
+
+### Escolhe-o no Arrumo
+
+Escolhe o Codex ao criar um espaço de trabalho, ou mais tarde como agente em **Definições › Agente**. O Arrumo encontra-o no teu `PATH` e nas pastas que a tua shell de sessão acrescenta, mesmo quando abres o Arrumo a partir da Dock, do Finder ou de um lançador do ambiente de trabalho. Se o instalaste noutro sítio, usa **Escolher o programa…** e seleciona o ficheiro do programa.
+
+</Step>
+<Step>
+
+### Verifica a sessão
+
+Escolhe **Verificar sessão**. **A CLI indica uma sessão local** significa que está tudo pronto. A verificação não inicia nenhuma edição nem gasta o teu plano.
+
+</Step>
+</Steps>
+
+## Definições
+
+Aparecem em **Definições › Agente** para todos os espaços de trabalho, ou para um em **Aplica-se a**. Cada vídeo mantém as definições com que começou, por isso ao repeti-lo pode ser reproduzido.
+
+<TypeTable
+  type={{
+    "Escrever ficheiros e executar comandos": {
+      description: "Deixa o agente escrever os seus próprios scripts e ficheiros, executar comandos e usar os teus plugins, servidores de ferramentas e hooks instalados enquanto trabalha num vídeo. Os ficheiros ficam numa pasta de trabalho desse vídeo até estar concluído.",
+      type: "ativado ou desativado",
+      default: "ativado",
+    },
+    "Pesquisa na web": {
+      description: "Deixa o agente pesquisar na web enquanto trabalha, para factos, preços e tendências.",
+      type: "ativado ou desativado",
+      default: "desativado",
+    },
+    "Modelo": {
+      description: "O modelo do Codex para o agente deste espaço de trabalho. Deixa-o vazio para usar a predefinição do Codex.",
+      type: "texto",
+    },
+    "Esforço de raciocínio": {
+      description: "Quanto o agente pensa antes de responder. Mais esforço dá melhores guiões e edições, mas demora mais.",
+      type: "minimal, low, medium, high, xhigh",
+      default: "medium",
+    },
+    "Usar os meus plugins instalados": {
+      description: "Deixa o agente usar a tua própria configuração, plugins e servidores de ferramentas (MCP) do Codex, enquanto Escrever ficheiros e executar comandos está desativado. Podem ver o material do espaço que o agente recebe, por isso ativa-o só para os que forem de confiança.",
+      type: "ativado ou desativado",
+      default: "desativado",
+    },
+  }}
+/>
+
+## Verifica a ligação
+
+Na CLI do editor, indica o caminho para uma base de dados local e o identificador deste plugin.
+
+```sh
+arrumo-workspaces ./workspaces.sqlite agent-login-status codex
+```
+
+O estado confirmed indica que a CLI aceitou a verificação. Se o Arrumo devolver unavailable, verifica se a CLI está instalada ou escolhe o ficheiro do programa nas Definições. Se devolver unconfirmed, inicia sessão seguindo o guia oficial e volta a verificar. Um tempo de espera excedido ou um erro indica que a verificação não foi concluída.
+
+## Escrever ficheiros e executar comandos
+
+**Escrever ficheiros e executar comandos**, em Definições › Agente, está ativo por predefinição. Enquanto trabalha num vídeo, o Codex corre na sua sandbox `workspace-write` com o terminal e carrega a tua própria configuração do Codex, incluindo os servidores MCP e os plugins. Trabalha numa pasta que o Arrumo cria para esse vídeo e apaga quando o vídeo termina, falha ou é cancelado.
+
+Se o desativares, o Codex corre na sandbox `read-only` sem a ferramenta de terminal, e só lê o que o Arrumo lhe envia. **Usar os meus plugins instalados** decide então se a tua configuração e os teus plugins do Codex são carregados. A geração de imagens é sempre só de leitura.
+
+## Traduz as legendas
+
+Consulta [a tradução de legendas](https://github.com/aidevs-pt/arrumo-plugin-codex/blob/main/README.md#translate-subtitles) para usares este plugin como tradutor do Auto-Dubbing. O tradutor envia para Codex o texto das legendas selecionadas e o idioma de destino. O processo preserva as marcas temporais originais.
+
+## Cria imagens
+
+O Codex pode criar miniaturas e outras imagens com a sua ferramenta de imagens integrada, com o teu plano do ChatGPT, por isso não precisas de uma chave da OpenAI ou da Gemini para elas. Aparece em **Geração de imagens**, em Definições, Serviços e chaves, em primeiro lugar por omissão; desce-o para preferir um fornecedor com chave. O Arrumo envia a descrição da imagem e até oito referências de estilo. O Codex trabalha só em leitura, e o Arrumo recolhe, verifica e recorta a imagem, e depois apaga a cópia do Codex.
+
+## Perguntas de seguimento
+
+Quando o Codex pede ao Arrumo material do espaço de trabalho, como o guião de um vídeo anterior, o Arrumo responde na mesma sessão do Codex só com esse material, para que o pedido não seja enviado nem pago duas vezes. Estas sessões ficam no histórico do Codex (`codex resume`); as execuções pontuais não guardam nenhuma.

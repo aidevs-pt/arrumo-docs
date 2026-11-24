@@ -1,0 +1,34 @@
+---
+title: "Crea miniaturas e imágenes con Gemini"
+description: "Añade Gemini como segundo modelo de imagen para miniaturas y referencias de estilo, siguiendo hasta tres imágenes de referencia."
+icon: Images
+---
+
+Gemini crea miniaturas e imágenes a partir de tus referencias de estilo. Úsalo junto a [OpenAI](../openai/images.mdx) o [Codex](../codex/setup.mdx#crea-imágenes), y ponlo primero cuando prefieras su estilo.
+
+Cuando un formato pide miniaturas, el agente escribe una descripción de imagen por miniatura y Arrumo pide la imagen a los proveedores en el orden del vídeo. Las miniaturas generadas se guardan como recursos del espacio de trabajo y esperan tu revisión junto con los títulos y las descripciones. También puedes elegir Gemini en **Hecha con**, en **Recursos › Generar**.
+
+## Configúralo
+
+Crea una clave en [Google AI Studio](https://aistudio.google.com/apikey) y pégala en Gemini, en **Ajustes › Servicios y claves**, para todos los espacios de trabajo o para uno. En **Qué complemento hace cada cosa, en orden**, sube Gemini en **Generación de imágenes** para preferirlo. Se omite cuando no tiene clave.
+
+## Ajustes
+
+<TypeTable
+  type={{
+    "Clave de API de Gemini": {
+      description: "Se usa para generar imágenes. Se guarda en el almacén del sistema; los agentes pueden usarla a través de Arrumo, pero nunca leerla.",
+      type: "secreto",
+      required: true,
+    },
+    "Modelo de imagen": {
+      description: "El modelo de Gemini que se usa para miniaturas e imágenes. Déjalo vacío para seguir el predeterminado actual del complemento.",
+      type: "texto",
+      default: "gemini-2.5-flash-image",
+    },
+  }}
+/>
+
+## Tamaños y referencias
+
+Gemini crea imágenes en 16:9, 9:16, 1:1, 4:3 y 3:4, y sigue hasta tres imágenes de referencia de hasta 20 MB cada una.

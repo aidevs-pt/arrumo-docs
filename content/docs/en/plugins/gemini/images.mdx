@@ -1,0 +1,34 @@
+---
+title: "Make thumbnails and images with Gemini"
+description: "Add Gemini as a second image model for thumbnails and style references, following up to three reference images."
+icon: Images
+---
+
+Gemini makes thumbnails and images from your style references. Use it alongside [OpenAI](../openai/images.mdx) or [Codex](../codex/setup.mdx#make-images), and put it first when you prefer its look.
+
+When a format asks for thumbnails, the agent writes one image prompt per thumbnail and Arrumo asks the image providers in the video's order. Generated thumbnails are saved as workspace assets and wait for your review with the titles and descriptions. You can also pick Gemini under **Made with** in **Assets › Generate**.
+
+## Set it up
+
+Create a key in [Google AI Studio](https://aistudio.google.com/apikey) and paste it under Gemini in **Settings › Services and keys**, for every workspace or for one. Under **Which plugin does what, in order**, move Gemini up for **Image generation** to prefer it. It's skipped when it has no key.
+
+## Settings
+
+<TypeTable
+  type={{
+    "Gemini API key": {
+      description: "Used for image generation. Stored in the system vault; agents can use it through Arrumo but never read it.",
+      type: "secret",
+      required: true,
+    },
+    "Image model": {
+      description: "The Gemini model used for thumbnails and images. Leave it empty to follow the plugin's current default.",
+      type: "text",
+      default: "gemini-2.5-flash-image",
+    },
+  }}
+/>
+
+## Sizes and references
+
+Gemini makes images in 16:9, 9:16, 1:1, 4:3 and 3:4, and follows up to three reference images of up to 20 MB each.

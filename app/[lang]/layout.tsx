@@ -1,5 +1,5 @@
 import { i18nProvider } from "fumadocs-ui/i18n";
-import { Inter } from "next/font/google";
+import { Anybody, Atkinson_Hyperlegible_Next } from "next/font/google";
 import Script from "next/script";
 import { ConsentBanner } from "@/components/consent";
 import { Provider } from "@/components/provider";
@@ -9,7 +9,15 @@ import { translations } from "@/lib/layout.shared";
 import { siteUrl } from "@/lib/shared";
 import "../global.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const anybody = Anybody({
+  subsets: ["latin"],
+  axes: ["wdth"],
+  variable: "--font-anybody",
+});
+const atkinson = Atkinson_Hyperlegible_Next({
+  subsets: ["latin"],
+  variable: "--font-atkinson",
+});
 const ahrefsKey = process.env.NEXT_PUBLIC_AHREFS_KEY;
 const openaiPixelId = process.env.NEXT_PUBLIC_OPENAI_PIXEL_ID;
 
@@ -25,7 +33,11 @@ export default async function Layout({
 }: LayoutProps<"/[lang]">) {
   const { lang } = await params;
   return (
-    <html lang={lang} className={inter.className} suppressHydrationWarning>
+    <html
+      lang={lang}
+      className={`${anybody.variable} ${atkinson.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         {/* biome-ignore lint/security/noDangerouslySetInnerHtml: fixed consent defaults */}
         <script dangerouslySetInnerHTML={{ __html: consentDefaultsScript }} />

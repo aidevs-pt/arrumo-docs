@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <a href="https://www.aidevs.pt/tools/arrumo/docs"><b>Read the docs</b></a> · <a href="https://www.aidevs.pt/tools/arrumo/docs/user/tutorial">Tutorial</a> · <a href="https://www.aidevs.pt/tools/arrumo/docs/developer">Developers</a> · <a href="https://github.com/aidevs-pt/arrumo-video-editor">The editor</a>
+  <a href="https://www.aidevs.pt/tools/arrumo/docs"><b>Read the docs</b></a> · <a href="https://www.aidevs.pt/tools/arrumo/docs/user/tutorials/website-to-video">Tutorial</a> · <a href="https://www.aidevs.pt/tools/arrumo/docs/developer">Developers</a> · <a href="https://github.com/aidevs-pt/arrumo-video-editor">The editor</a>
 </p>
 
 [![From brief to finished video, made entirely in Arrumo](.github/media/from-brief-to-finished-video.gif)](https://youtu.be/ldBiG89NOvA)
@@ -24,19 +24,21 @@ The documentation covers [Arrumo AI Video Editor](https://github.com/aidevs-pt/a
 
 Pages live in `content/docs/<language>/`, one folder per language with the same files in each:
 
-- `user/`: guides for creators.
+- `user/`: guides for creators, with step-by-step walkthroughs in `user/tutorials/`.
 - `developer/`: connecting through the CLI, MCP and A2A, the agent skill and the Plugin SDK.
 - `plugins/<plugin-id>/`: one folder per official plugin.
 
-`meta.json` files order the sidebar; the section folders are sidebar roots. Link to other pages with relative file paths (`../plugins/index.md`) so links stay in the reader's language. Spanish says "complementos" for plugins; Portuguese says "plugins".
+`meta.json` files order the sidebar; the section folders are sidebar roots. Link to other pages with relative file paths (`../plugins/index.mdx`) so links stay in the reader's language. Spanish says "complementos" for plugins; Portuguese says "plugins".
 
 `pnpm check:locales` fails when a page or folder is missing from a language.
+
+Pages are MDX. Besides Markdown, every page can use these components without importing them: `Cards`/`Card`, `Callout`, `Steps`/`Step`, `Tabs`/`Tab`, `Accordions`/`Accordion`, `TypeTable`, `Files`/`Folder`/`File` and `Icon` (a [Lucide](https://lucide.dev/icons) icon by name, such as `<Icon name="Mic" />`). Pages and folders name their sidebar icon the same way, with `icon:` in the front matter or `meta.json`. Images zoom when clicked, except video thumbnails, which open the video. Use components where they help a reader, and keep reference data that agents need, such as settings and limits, readable as text.
 
 Screenshots and video thumbnails live in `public/tools/arrumo/static/media/` and are stored with Git LFS (run `git lfs install` before cloning). Use the same file for all three languages unless the screenshot is about wording. Reference them from Markdown as `/tools/arrumo/static/media/...`. Link a video by its thumbnail: `[![Title](/tools/arrumo/static/media/videos/<name>.webp)](https://youtu.be/<id>)`; a play badge marks it.
 
 ## For AI agents
 
-Each language has `llms.txt` and `llms-full.txt` (`/tools/arrumo/llms.txt`, `/pt/tools/arrumo/llms.txt`, …), and every page is available as Markdown under `/tools/arrumo/static/md/<page path>.md`. Each page links its Markdown version and has **Copy Markdown** and **Open** actions.
+Each language has `llms.txt` and `llms-full.txt` (`/tools/arrumo/llms.txt`, `/pt/tools/arrumo/llms.txt`, …), each section has its own `llms-full.txt`, and every page is available as Markdown at its own address plus `.md` (`/tools/arrumo/docs/user/install.md`; the docs home is `/tools/arrumo/docs/index.md`). `scripts/markdown-pages.mjs` puts those files beside the pages after `next build`. Each page links its Markdown version and has **Copy Markdown** and **Open** actions.
 
 ## Build and hosting
 

@@ -1,5 +1,6 @@
 {
   "title": "Plugin SDK reference",
+  "icon": "Package",
   "pages": [
     "index",
     "manifest",
