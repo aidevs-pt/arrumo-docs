@@ -1,0 +1,90 @@
+---
+title: "Troubleshooting"
+description: "What to do when the agent isn't found, a video stops, subtitles fail, a provider runs out or Arrumo won't open."
+icon: LifeBuoy
+---
+
+Find the message you see, or the closest symptom. If nothing here helps, search the [issues](https://github.com/aidevs-pt/arrumo-video-editor/issues) or open a new one with your Arrumo version (**Settings › About**) and what you did.
+
+## The agent
+
+<Accordions>
+  <Accordion title="Agent CLI not found" id="agent-not-found">
+    Arrumo looks for the agent in your usual program folders and the ones your login shell adds. Check that [Claude Code](../plugins/claude-code/setup.mdx) or [Codex](../plugins/codex/setup.mdx) runs in a terminal, then choose **Check again** in **Settings › Agent**. If it's installed somewhere unusual, choose **Choose the program…** and pick the agent's program file, the one named after it (`claude` or `codex`). **Find it automatically** goes back to searching.
+  </Accordion>
+  <Accordion title="The CLI did not confirm a sign-in" id="agent-sign-in">
+    Arrumo found the agent, but it isn't signed in. Sign in from a terminal following the agent's setup guide, then choose **Check sign-in**. A check that timed out or couldn't run usually means the agent is updating or waiting for input: run it once in a terminal and try again.
+  </Accordion>
+  <Accordion title="The agent stopped partway through a video" id="run-stopped">
+    Open the video in **Generating**. The activity shows the step that stopped and why. Choose **Retry** to run that step again, or **Ask for changes** if the problem is in what the agent made. Plan limits are a common cause: the usage in **Settings › Services and keys** shows when they reset.
+  </Accordion>
+  <Accordion title="The agent changed files I didn't expect" id="agent-files">
+    With **Write files and run commands** on, the agent works in a folder of its own for each video, but it runs with your account's access. Turn the switch off in **Settings › Agent** to keep it read-only. See [What the agent may do](settings.mdx#what-the-agent-may-do).
+  </Accordion>
+</Accordions>
+
+## Videos and rendering
+
+<Accordions>
+  <Accordion title="Arrumo can't find FFmpeg" id="ffmpeg">
+    Arrumo comes with its own FFmpeg to preview, render and export. This message means that copy is missing or can't start: reinstall Arrumo to restore it. If you run Arrumo from source, install FFmpeg and make sure `ffmpeg` and `ffprobe` are on your `PATH`.
+  </Accordion>
+  <Accordion title="Previews are black or have no sound on Linux" id="linux-playback">
+    Arrumo plays video through GStreamer. The `.deb` and `.rpm` packages install the plugins it needs; if you installed another way, add `gstreamer1.0-plugins-good` and `gstreamer1.0-libav` (Debian and Ubuntu) or `gstreamer1-plugins-good` and `gstreamer1-plugin-libav` (Fedora). The AppImage carries its own.
+  </Accordion>
+  <Accordion title="Rendering is slow" id="slow-previews">
+    Previews render at the size in **Settings › Quality › Preview size**. Choose the size recommended for your computer, or a smaller one: the final render is always full quality. Videos already queued keep their size.
+  </Accordion>
+  <Accordion title="I closed Arrumo while a video was generating" id="closed-while-generating">
+    Nothing is lost. **Close and pause** stops at the current step, and each video continues from there the next time you open Arrumo. Updates do the same.
+  </Accordion>
+</Accordions>
+
+## Subtitles, voices and media
+
+<Accordions>
+  <Accordion title="Written without hearing your clips" id="no-transcript">
+    The agent wrote the script without a transcript of your footage, because no transcription provider had a key. Add an [ElevenLabs](../plugins/elevenlabs/transcription.mdx) or [OpenAI](../plugins/openai/transcription.mdx) key in **Settings › Services and keys**, then **Ask for changes** so the agent redrafts from what you said.
+  </Accordion>
+  <Accordion title="Subtitles weren't generated" id="subtitles">
+    Check that the output has audio, that a transcription provider with a key is in the order, and that the key is still valid. You can also turn on **Generate missing subtitles automatically** when you queue the video, or use **Import SRT** to supply your own.
+  </Accordion>
+  <Accordion title="No narration in the video" id="no-narration">
+    Without a speech provider, videos made from scratch use on-screen text. Add an [ElevenLabs](../plugins/elevenlabs/narration.mdx) key and choose a voice in its settings. If synthesis fails, the preview is made without narration and its summary says why.
+  </Accordion>
+  <Accordion title="A provider ran out of credits" id="credits">
+    A banner warns at 20% left and turns red at 10%. Generations that need that provider stop at that step when it runs out. Top up the account, or move the provider down in **Which plugin does what, in order** so the next one is used. See [Keep an eye on credits](media.mdx#keep-an-eye-on-credits).
+  </Accordion>
+  <Accordion title="No image, music or video provider is on" id="no-provider">
+    **Generate** needs a provider with a key that is turned on. Open **Settings › Services and keys**, add the key, and check that the plugin is on in **Settings › Plugins**.
+  </Accordion>
+</Accordions>
+
+## Workspaces and data
+
+<Accordions>
+  <Accordion title="None of the links could be read" id="links">
+    Arrumo reads only public pages. See [When a link can't be read](tutorials/social-channel.mdx#when-a-link-cant-be-read).
+  </Accordion>
+  <Accordion title="A backup won't import" id="backup">
+    **This file is not an Arrumo backup** means the `.zip` wasn't made by **Export .zip**. **This backup was changed or damaged** means its checksums don't match, so it wasn't restored: export it again. **This backup needs a newer version of Arrumo** means you should update first.
+  </Accordion>
+  <Accordion title="I want to start over" id="start-over">
+    Export a backup first in **Settings › Import and export**. Then quit Arrumo and move its data folder somewhere else: `%APPDATA%\pt.aidevs.arrumo` on Windows, `~/Library/Application Support/pt.aidevs.arrumo` on macOS, `~/.local/share/pt.aidevs.arrumo` on Linux. Arrumo starts fresh the next time you open it. Your keys stay in the system vault.
+  </Accordion>
+</Accordions>
+
+## Installing and updating
+
+<Accordions>
+  <Accordion title="Windows protected your PC, or macOS can't verify the app" id="unsigned">
+    Builds that aren't signed yet ask you to confirm before opening the first time. See [Install Arrumo](install.mdx) for the steps on each system.
+  </Accordion>
+  <Accordion title="A new version doesn't start" id="broken-update">
+    The next launch looks for a fix before anything else and installs it without asking, so a broken version can always be replaced. If it still won't start, download the latest version from the [releases](https://github.com/aidevs-pt/arrumo-video-editor/releases) and install it over the old one; your data stays.
+  </Accordion>
+</Accordions>
+
+<Callout title="Report a problem">
+  Crash reports, when on, send the error and the app version so we can fix it without your content. For anything else, [open an issue](https://github.com/aidevs-pt/arrumo-video-editor/issues/new/choose). Report security problems privately, as the [security policy](https://github.com/aidevs-pt/arrumo-video-editor/security/policy) describes.
+</Callout>

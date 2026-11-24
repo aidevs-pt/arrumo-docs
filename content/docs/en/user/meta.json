@@ -1,12 +1,18 @@
 {
   "title": "Use Arrumo",
+  "description": "Make videos with Arrumo",
+  "icon": "Clapperboard",
   "root": true,
   "pages": [
     "index",
-    "tutorial",
+    "install",
+    "tutorials",
+    "---[BookOpen]Guides---",
     "brand",
     "animations",
     "first-video",
-    "settings"
+    "media",
+    "settings",
+    "troubleshooting"
   ]
 }

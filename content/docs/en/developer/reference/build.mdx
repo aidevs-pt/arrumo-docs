@@ -1,0 +1,75 @@
+---
+title: "Build and run the editor"
+description: "Build the desktop app, choose which plugins it bundles, and open it from links."
+icon: Wrench
+---
+
+## Desktop development
+
+Install the [Tauri prerequisites](https://v2.tauri.app/start/prerequisites/), Node, and the pnpm version in `package.json`.
+
+```sh
+pnpm install --frozen-lockfile
+pnpm tauri dev
+```
+
+While the app starts, a cobalt screen animates the face logo; it fades out once the language and workspaces have loaded, and stays still when reduced motion is on. Set `ARRUMO_NO_SPLASH=1` (for example `ARRUMO_NO_SPLASH=1 pnpm tauri dev`) to skip it when debugging.
+
+The first desktop screen creates and lists workspaces. It uses the system language when it is English, Spanish, or Portuguese, with English as the fallback. The app stores `workspaces.sqlite` in its platform-specific local application data directory. The same workspace store powers the CLI.
+
+`pnpm tauri build --debug --no-bundle` builds a native executable from the static frontend. Installers and signing are tracked separately.
+
+## Bundled plugins
+
+In the Arrumo workspace layout, the build reads the sibling `plugin-registry/catalog.json` and loads entries marked `default` from the sibling `plugins/<id>` checkouts. The checkouts may be symlinks. Set `ARRUMO_PLUGIN_REGISTRY` and `ARRUMO_PLUGIN_SOURCE_ROOT` to use a different registry file or checkout location. The build embeds the selected artifacts from those inputs without tracking copies in the editor repository.
+
+For local debug builds, place an SDK-built `plugin.zip` in a selected sibling plugin checkout. The host validates the ZIP and requires its manifest to match the checkout before exposing its actions or frontend surfaces. Workspace context still requires a grant for that package digest.
+
+For registry release builds, set `ARRUMO_PLUGIN_RELEASE_ROOT` to a directory containing the staged `<id>.zip` files. Each staged ZIP must match exactly one release SHA-256 in the selected registry and its manifest must match the corresponding checkout. The bundled catalog retains the release version, source repository and package URL. Release builds only embed executable ZIPs and provider adapter descriptors from this verified staging path. Debug builds without release staging may use sibling checkout descriptors. A default without a staged ZIP has no bundled provider adapter in release builds.
+
+Use `export-plugin-package <plugin-id> <sha256> <new-zip>` to copy a bundled
+or installed package from the local catalog. The editor recomputes the digest
+and refuses to overwrite an existing file. Obtain the expected digest from
+the package entry you reviewed in `plugin-catalog`.
+
+Use `ARRUMO_CORE_ONLY=1` for isolated host verification without private checkout access. That build starts with an empty default catalog.
+
+## Command line
+
+From this repository, use Cargo to create and list workspaces in a local SQLite database.
+
+```sh
+cargo run --locked -- ./workspaces.sqlite create "My studio"
+cargo run --locked -- ./workspaces.sqlite list
+```
+
+The commands print JSON. The database persists across runs. Run the backend tests with `cargo test --locked`.
+
+## Interface translations
+
+Copy `locales/en.json` to a new file such as `locales/fr.json` and translate the values. Keep the same keys and preserve substitutions such as `{name}`. The desktop build discovers new catalogs automatically, requires English, Spanish, and Portuguese, and reports key or placeholder differences. The app follows the system’s language preferences, tries the base language when a regional translation is unavailable, and falls back to English.
+
+## Pages and deep links
+
+The desktop frontend exports separate App Router pages for Profiles, Context, Brand, Assets, Outputs, Drafts, Generations, and Completed videos. Workspace IDs are created in the local database after the app is built, so an exported page takes the ID as a query parameter, for example `/brand?workspace=2`. Profile-to-draft navigation also carries the profile ID in the URL. The studio layout resolves those IDs through Tauri.
+
+Completed runs open at `/completed-video?workspace=<workspace-id>&run=<run-id>`. The app resolves the video from the selected local workspace, so the link works with the matching Arrumo database.
+
+Desktop deep links use `arrumo://open/<section>?workspace=<id>`. Profile and run pages also take `profile=<id>` or `run=<id>`, respectively. For example, `arrumo://open/generation-run?workspace=2&run=8` opens the matching run in the local database. `arrumo://open/settings?workspace=2&section=plugins` opens Settings at `general`, `agent`, `services`, `plugins`, `quality` or `backup`; add `scope=workspace` for the workspace scope, or `plugin=<id>` with `section=plugins` to open one plugin's page. `arrumo://open/appearance?workspace=2` opens Workspace settings › Appearance, which only changes how the workspace looks in Arrumo. `arrumo://open/drafts?workspace=2&compose=1` starts a new video from raw footage, and `compose=scratch` starts one from scratch. Linux registers the scheme on launch, and Windows debug builds register it for testing. Installed package registration follows Tauri's desktop scheme configuration.
+
+## Usage counts and crash reports
+
+Anonymous usage counts and crash reports are on by default, with switches in **Settings › General › Data and privacy** (`get_privacy_settings`/`set_privacy_settings` over MCP and A2A). Builds send anything only when compiled with `ARRUMO_USAGE_KEY` (an [Aptabase](https://aptabase.com) app key; `ARRUMO_USAGE_ENDPOINT` overrides its event API) or `ARRUMO_CRASH_DSN` (a [Sentry](https://sentry.io) DSN). Contributor builds have neither and send nothing.
+
+- **Usage.** The desktop app sends through [`tauri-plugin-aptabase`](https://github.com/aptabase/tauri-plugin-aptabase), with its own error tracking off; headless CLI, MCP and A2A processes post to the same API. [`telemetry.rs`](https://github.com/aidevs-pt/arrumo-video-editor/blob/main/crates/workspaces/src/telemetry.rs) decides what is sent: the events `app_started`, `workspace_created`, `video_queued`, `video_generated`, `media_generated`, `plugin_installed` and `backup_exported`, with only flags, counts, numbers and IDs of at most 64 characters as properties, plus the random install ID as `install`. [Settings, updates and privacy](../../user/settings.mdx) lists each event's properties.
+- **Crashes.** [`tauri-plugin-sentry`](https://github.com/getsentry/sentry-tauri) reports Rust panics and errors and injects Sentry's browser SDK into the webview, so interface errors are reported through the same client. `before_send` drops every report while the switch is off, removes user and machine names, breadcrumbs and request data, cuts paths to file names and redacts path-like words. Native minidumps are not collected. The switch is mirrored in a small file next to the data, so reports from before the database opens follow it too. Session tracking is off.
+
+Add an event with `WorkspaceStore::track_usage` only for meaningful, infrequent moments.
+
+## Updates and releases
+
+Release builds update themselves with [`tauri-plugin-updater`](https://v2.tauri.app/plugin/updater/) from the latest GitHub release's `latest.json`, checked against the public key compiled in from `ARRUMO_UPDATER_PUBKEY`. Builds without it, or with `ARRUMO_STORE_BUILD`, never check. The desktop commands are `update_status`, `check_for_update` and `install_update` (now, or on quit).
+
+Each launch writes a marker that the interface clears once it has stayed up for 30 seconds. If a launch finds the marker left behind, it checks for a newer release before opening any data and installs it straight away, so a release that crashes on start can be replaced by the next one.
+
+Releases are built by the owner-run **Release** workflow; its secrets and steps are in [`docs/releasing.md`](https://github.com/aidevs-pt/arrumo-video-editor/blob/main/docs/releasing.md).

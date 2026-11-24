@@ -1,0 +1,49 @@
+---
+title: "Dub a finished video"
+description: "Translate a finished video's subtitles and voice them in another language, keeping every cue on time, then add the dub beside the original outputs."
+icon: Languages
+---
+
+Auto-Dubbing takes a finished video into other languages. It translates the subtitles cue by cue, voices each cue with your speech provider, places every clip at its cue's time, and adds the dubbed MP4 beside the original output.
+
+<Callout type="warn" title="Part of it runs from the command line for now">
+  In the app, Auto-Dubbing's actions prepare and assemble subtitle translations. Voicing and rendering the dub runs from its command-line tools, shown below. To dub a single clip from **Assets** in a couple of clicks, use [ElevenLabs dubbing](../elevenlabs/audio-tools.mdx) instead.
+</Callout>
+
+## What you need
+
+- A finished video whose delivery passed verification, with its subtitles.
+- A speech provider with a key and a voice, such as [ElevenLabs](../elevenlabs/narration.mdx), first for **Text to speech**.
+- A translation of the subtitles in the target language, or a translator: [Claude Code](../claude-code/setup.mdx) and [Codex](../codex/setup.mdx) can translate subtitle cues.
+
+## In the app
+
+Open a finished video and find **Plugin actions**. Auto-Dubbing offers three, each working on an SRT track:
+
+| Action                            | What it does                                                                                  |
+| --------------------------------- | --------------------------------------------------------------------------------------------- |
+| **Read subtitle cues**            | Lists the text of each cue, ready to translate.                                               |
+| **Assemble translated subtitles** | Puts translated text back on the original cue timings and returns the translated SRT.         |
+| **Plan speech segments**          | Lists each cue's text with the time window its voice must fit, for speech synthesis.          |
+
+Pick the video's subtitles or open an SRT file of up to 64 KiB, run the action and copy the result. Save a translated SRT as a language track on the output with **Import SRT**.
+
+## Dub from the command line
+
+Run these from the [Auto-Dubbing checkout](https://github.com/aidevs-pt/arrumo-plugin-auto-dubbing) or the extracted plugin package. They use the FFmpeg that comes with Arrumo: on Linux it's on the `PATH`; on macOS and Windows, point `ARRUMO_FFMPEG` and `ARRUMO_FFPROBE` at `arrumo-ffmpeg` and `arrumo-ffprobe` next to the app's executable.
+
+### Preview the request
+
+This example selects workspace 1, run 42 and format 3. Replace those IDs, the paths, the language and the voice ID with your own. The preview reports available tracks and expected requests for known cues. It makes no provider calls.
+
+```sh
+python3 tools/dub-completed-output.py /path/to/arrumo-workspaces /path/to/workspaces.sqlite 1 42 3 es elevenlabs YOUR_VOICE_ID --dry-run
+```
+
+### Render and export
+
+When the plan is ready, run the command again without the preview flag. Use all in place of the format ID to dub every verified output, or add specific IDs with `--additional-format`. If a translated track is missing, you can import it in the completed video or use a supported translator.
+
+The tool attaches each successful dub to its output as an alternate MP4. Open the completed video to find the alternate or export the delivery ZIP. When a batch stops on an error, its report identifies the completed, failed and skipped formats.
+
+See [the command reference](https://github.com/aidevs-pt/arrumo-plugin-auto-dubbing/blob/main/README.md#dub-completed-outputs) for translator, revision, cache and isolated renderer options.

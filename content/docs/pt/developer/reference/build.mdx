@@ -1,0 +1,72 @@
+---
+title: "Compila e executa o editor"
+description: "Compila a aplicação para computador, escolhe que plugins inclui e abre-a a partir de ligações."
+icon: Wrench
+---
+
+## Desenvolvimento para computador
+
+Instala os [pré-requisitos do Tauri](https://v2.tauri.app/start/prerequisites/), o Node e a versão do pnpm indicada em `package.json`.
+
+```sh
+pnpm install --frozen-lockfile
+pnpm tauri dev
+```
+
+Enquanto a aplicação arranca, um ecrã cobalto anima o logótipo da cara; desvanece quando o idioma e os espaços de trabalho carregam, e fica parado quando o movimento reduzido está ativo. Define `ARRUMO_NO_SPLASH=1` (por exemplo, `ARRUMO_NO_SPLASH=1 pnpm tauri dev`) para o saltar ao depurar.
+
+O primeiro ecrã cria e lista espaços de trabalho. Usa o idioma do sistema quando é inglês, espanhol ou português, com o inglês como alternativa. A aplicação guarda `workspaces.sqlite` na pasta local de dados de aplicação de cada plataforma. O mesmo armazenamento de espaços de trabalho serve a CLI.
+
+`pnpm tauri build --debug --no-bundle` compila um executável nativo a partir da interface estática. Os instaladores e a assinatura são tratados à parte.
+
+## Plugins incluídos
+
+Na estrutura do espaço de trabalho do Arrumo, a compilação lê o ficheiro vizinho `plugin-registry/catalog.json` e carrega as entradas marcadas como `default` a partir dos checkouts vizinhos `plugins/<id>`. Os checkouts podem ser ligações simbólicas. Define `ARRUMO_PLUGIN_REGISTRY` e `ARRUMO_PLUGIN_SOURCE_ROOT` para usar outro ficheiro de registo ou outra localização de checkouts. A compilação incorpora os artefactos selecionados dessas fontes sem guardar cópias no repositório do editor.
+
+Em compilações locais de depuração, coloca um `plugin.zip` gerado com o SDK no checkout vizinho do plugin selecionado. O host valida o ZIP e exige que o manifesto corresponda ao checkout antes de expor as ações ou superfícies de interface. O contexto do espaço de trabalho continua a exigir uma autorização para esse digest de pacote.
+
+Em compilações de publicação a partir do registo, define `ARRUMO_PLUGIN_RELEASE_ROOT` com uma pasta que contenha os ficheiros `<id>.zip` preparados. Cada ZIP preparado tem de corresponder exatamente a um SHA-256 de publicação do registo selecionado, e o manifesto tem de corresponder ao checkout respetivo. O catálogo incluído guarda a versão publicada, o repositório de origem e o URL do pacote. As compilações de publicação só incorporam ZIP executáveis e descritores de adaptadores de fornecedores a partir deste caminho de preparação verificado. As compilações de depuração sem preparação podem usar os descritores dos checkouts vizinhos. Um plugin predefinido sem ZIP preparado não tem adaptador de fornecedor incluído nas compilações de publicação.
+
+Usa `export-plugin-package <plugin-id> <sha256> <new-zip>` para copiar um pacote incluído ou instalado a partir do catálogo local. O editor volta a calcular o digest e recusa-se a substituir um ficheiro existente. Obtém o digest esperado na entrada do pacote que reviste em `plugin-catalog`.
+
+Usa `ARRUMO_CORE_ONLY=1` para verificar o host de forma isolada, sem acesso aos checkouts privados. Essa compilação começa com um catálogo predefinido vazio.
+
+## Linha de comandos
+
+A partir deste repositório, usa o Cargo para criar e listar espaços de trabalho numa base de dados SQLite local.
+
+```sh
+cargo run --locked -- ./workspaces.sqlite create "My studio"
+cargo run --locked -- ./workspaces.sqlite list
+```
+
+Os comandos imprimem JSON. A base de dados mantém-se entre execuções. Executa os testes do backend com `cargo test --locked`.
+
+## Traduções da interface
+
+Copia `locales/en.json` para um ficheiro novo, como `locales/fr.json`, e traduz os valores. Mantém as mesmas chaves e preserva as substituições como `{name}`. A compilação para computador descobre os catálogos novos automaticamente, exige inglês, espanhol e português, e indica diferenças de chaves ou marcadores. A aplicação segue as preferências de idioma do sistema, tenta o idioma base quando não há tradução regional e recorre ao inglês.
+
+## Páginas e ligações diretas
+
+A interface para computador exporta páginas separadas do App Router para Perfis, Contexto, Marca, Recursos, Saídas, Rascunhos, Gerações e Vídeos concluídos. Os identificadores dos espaços de trabalho são criados na base de dados local depois de a aplicação ser compilada, por isso uma página exportada recebe o identificador como parâmetro de consulta, por exemplo `/brand?workspace=2`. A navegação de um perfil para um rascunho também leva o identificador do perfil no URL. O layout do estúdio resolve esses identificadores através do Tauri.
+
+As execuções concluídas abrem em `/completed-video?workspace=<workspace-id>&run=<run-id>`. A aplicação resolve o vídeo a partir do espaço de trabalho local selecionado, por isso a ligação funciona com a base de dados do Arrumo correspondente.
+
+As ligações diretas usam `arrumo://open/<section>?workspace=<id>`. As páginas de perfis e de execuções também aceitam `profile=<id>` ou `run=<id>`, respetivamente. Por exemplo, `arrumo://open/generation-run?workspace=2&run=8` abre a execução correspondente na base de dados local. `arrumo://open/settings?workspace=2&section=plugins` abre as Definições em `general`, `agent`, `services`, `plugins`, `quality` ou `backup`; acrescenta `scope=workspace` para o âmbito do espaço de trabalho, ou `plugin=<id>` com `section=plugins` para abrir a página de um plugin. `arrumo://open/appearance?workspace=2` abre Definições do espaço de trabalho › Aparência, que só muda o aspeto do espaço de trabalho no Arrumo. `arrumo://open/drafts?workspace=2&compose=1` começa um vídeo novo a partir de gravações, e `compose=scratch` começa um do zero. O Linux regista o esquema no arranque, e as compilações de depuração do Windows registam-no para testes. O registo em pacotes instalados segue a configuração de esquemas do Tauri para computador.
+
+## Contagens de utilização e relatórios de falhas
+
+As contagens de utilização anónimas e os relatórios de falhas estão ativos por predefinição, com interruptores em **Definições › Geral › Dados e privacidade** (`get_privacy_settings`/`set_privacy_settings` por MCP e A2A). As versões só enviam algo se forem compiladas com `ARRUMO_USAGE_KEY` (uma chave de app do [Aptabase](https://aptabase.com); `ARRUMO_USAGE_ENDPOINT` muda a API de eventos) ou `ARRUMO_CRASH_DSN` (um DSN do [Sentry](https://sentry.io)). As versões de contribuidores não têm nenhuma e não enviam nada.
+
+- **Utilização.** A app de computador envia com [`tauri-plugin-aptabase`](https://github.com/aptabase/tauri-plugin-aptabase), com o seu próprio registo de erros desativado; os processos sem interface da CLI, MCP e A2A publicam na mesma API. [`telemetry.rs`](https://github.com/aidevs-pt/arrumo-video-editor/blob/main/crates/workspaces/src/telemetry.rs) decide o que é enviado: os eventos `app_started`, `workspace_created`, `video_queued`, `video_generated`, `media_generated`, `plugin_installed` e `backup_exported`, com propriedades que só podem ser indicadores, contagens, números ou identificadores até 64 caracteres, mais o identificador aleatório da instalação como `install`. [Definições, atualizações e privacidade](../../user/settings.mdx) detalha as propriedades de cada evento.
+- **Falhas.** [`tauri-plugin-sentry`](https://github.com/getsentry/sentry-tauri) reporta os pânicos e erros de Rust e injeta o SDK de browser do Sentry na webview, pelo que os erros da interface seguem pelo mesmo cliente. `before_send` descarta cada relatório enquanto o interruptor está desativado, remove os nomes de utilizador e de computador, os breadcrumbs e os dados do pedido, encurta os caminhos para nomes de ficheiro e oculta o que parece um caminho. Não são recolhidos minidumps nativos. O interruptor é copiado para um pequeno ficheiro junto aos dados, para que os relatórios anteriores à abertura da base de dados também o respeitem. O registo de sessões está desativado.
+
+Acrescenta um evento com `WorkspaceStore::track_usage` apenas para momentos significativos e pouco frequentes.
+
+## Atualizações e versões
+
+As versões publicadas atualizam-se sozinhas com [`tauri-plugin-updater`](https://v2.tauri.app/plugin/updater/) a partir do `latest.json` da última versão no GitHub, verificado com a chave pública compilada a partir de `ARRUMO_UPDATER_PUBKEY`. As versões sem ela, ou com `ARRUMO_STORE_BUILD`, nunca procuram atualizações. Os comandos de computador são `update_status`, `check_for_update` e `install_update` (agora ou ao sair).
+
+Cada arranque escreve uma marca que a interface apaga depois de estar aberta 30 segundos. Se um arranque encontrar a marca, procura uma versão mais recente antes de abrir quaisquer dados e instala-a de imediato, pelo que uma versão que falha ao arrancar pode ser substituída pela seguinte.
+
+As versões são compiladas pelo fluxo **Release** executado pelo proprietário; os segredos e passos estão em [`docs/releasing.md`](https://github.com/aidevs-pt/arrumo-video-editor/blob/main/docs/releasing.md).

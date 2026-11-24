@@ -1,0 +1,101 @@
+---
+title: "Packages and code"
+description: "Package a plugin, ship backend and frontend code, and run reviewed files."
+icon: Boxes
+---
+
+## Local ZIP packages
+
+Place a single SDK `manifest.json` at the ZIP root. Stored and Deflate-compressed manifests are supported. The editor limits a package to 16 MiB and 512 entries and its manifest to 64 KiB. Use relative UTF-8 entry names with forward slashes. Avoid duplicate names, including names that differ only by case. Encrypted entries and symbolic links are rejected.
+
+Arrumo records the original ZIP and its SHA-256 digest. The digest identifies the imported bytes for comparison with a release checksum. Package registration leaves the contents inert. Capability execution requires a separate trusted adapter.
+
+### Build a package
+
+With Python 3.11 or later and `jsonschema` installed, run:
+
+```console
+python /path/to/plugin-sdk/tools/package_plugin.py /path/to/plugin plugin.zip --include LICENSE --include README.md
+```
+
+The tool validates and includes the root manifest automatically. Pass each additional file explicitly with `--include`. The same files produce identical ZIP bytes regardless of argument order or filesystem timestamps. The output is a new file and the tool prints its plugin ID, manifest schema version, byte length, and SHA-256. Use that digest when preparing the registry release record.
+
+## Code packages
+
+Manifest schema v3 adds an optional `code` section. Include a WebAssembly backend component under `backend.component`, custom HTML entry documents under `frontend`, or both. Every entrypoint must be a non-empty file in the ZIP. Include any bundled JavaScript, styles, and assets explicitly when packaging.
+
+```json
+{
+  "backend": { "component": "backend/plugin.wasm" },
+  "frontend": [
+    {
+      "id": "example-panel",
+      "title": "Example panel",
+      "document": "frontend/index.html",
+      "placement": "workspace"
+    }
+  ]
+}
+```
+
+Use unique surface IDs. Supported placements are `settings`, `workspace`, and `completed_video`. The host validates the declaration, checks that the ZIP contains the entrypoints, and retains the package. Installed backend components can be invoked explicitly through Arrumo. Installed frontend surfaces render in sandboxed frames. Host capability grants are declared and enforced separately.
+
+### Invoke a backend
+
+Implement the [WIT backend world](https://github.com/aidevs-pt/arrumo-plugin-sdk/blob/main/wit/plugin.wit). The `invoke` export receives UTF-8 JSON text and returns UTF-8 JSON text. The host instantiates a fresh component with no host imports or WASI. A component therefore receives only the input the caller supplies. The host limits component size to 4 MiB, input and output to 64 KiB each, and applies memory and fuel limits.
+
+The [echo example](https://github.com/aidevs-pt/arrumo-plugin-sdk/tree/main/examples/component) includes the manifest and a handwritten component in WebAssembly text format. Compile it with `wasm-tools parse examples/component/echo.wat -o examples/component/echo.wasm`, then package the example directory with `--include echo.wasm`. After installation, pass JSON on stdin to the editor CLI's `invoke-plugin component-echo` command.
+
+### Read explicitly shared workspace context
+
+With manifest schema v4, a backend can declare `"permissions": ["workspace-context-read"]` in `code.backend` and implement the `workspace-plugin` WIT world. Installation alone grants no permission. An operator can grant this permission to a specific installed package in a specific workspace.
+
+Invoke the plugin with that workspace ID. The host links `read-workspace-context` only when the grant matches the current package. The function returns the workspace's context as a JSON string or `null`, and can be called once per invocation. The grant is evaluated at invocation start. Updating or removing the package revokes the grant for subsequent calls.
+
+### Render a frontend panel
+
+Each frontend entrypoint must be a self-contained UTF-8 HTML document of at most 512 KiB. Inline its JavaScript and styles and use data URLs for embedded images or fonts. The desktop app loads the document from a dedicated local protocol in an opaque sandboxed frame. The panel has no direct native command bridge. Workspace data is available only through a declared permission and an explicit grant. The content policy restricts resource loads to the document and its inline assets.
+
+Package the [frontend counter example](https://github.com/aidevs-pt/arrumo-plugin-sdk/tree/main/examples/frontend) with `--include index.html`. After installing the ZIP, open the panel under **Plugin panels** in desktop Settings.
+
+### Read context from a frontend panel
+
+In schema v5, a `workspace` or `completed_video` panel can declare `"permissions": ["workspace-context-read"]`. The operator must grant access to the installed package in the current workspace. The workspace is selected by the host.
+
+Send a message to `parent` with `type: "arrumo:workspace-context"` and `nonce: location.hash.slice(1)`. Transfer one `MessageChannel` port with the request. The host responds once per panel opening on that port with `{ok: true, context: string | null}` or `{ok: false, error: "context_unavailable"}`. The package revision, panel declaration, and workspace grant are checked at the time of the request. See the [workspace panel example](https://github.com/aidevs-pt/arrumo-plugin-sdk/tree/main/examples/workspace-panel). Use text rendering for the returned context.
+
+## Stage reviewed package files
+
+Use `tools/stage_plugin_package.py` to copy explicit files from an installed
+or bundled ZIP exported by the editor. Pass the digest reviewed in the catalog
+and a new destination directory.
+
+```sh
+python3 tools/stage_plugin_package.py package.zip /path/to/new-stage \
+  --sha256 <reviewed-digest> --include tools/worker.py
+```
+
+Repeat `--include` for each dependency the worker needs. The tool verifies the
+exact ZIP, checks member paths and entry types, applies the compressed and
+expanded size limits, and publishes the directory after the selected files
+have been written. Execution belongs to the consumer's configured runtime.
+
+## Run a reviewed media worker on Linux
+
+`tools/run_media_package.py` runs a reviewed Python entrypoint using the same
+Bubblewrap sandbox as the motion renderer. The package code is read-only at
+`/input`. A dedicated input directory is read-only at `/media`, and the
+worker writes to `/output`. The process uses a cleared environment and a
+separate network namespace. Pass only the media the job needs.
+
+```sh
+python3 tools/run_media_package.py package.zip --sha256 <reviewed-digest> \
+  --inputs /path/to/media --output /path/to/new-output \
+  --entrypoint tools/worker.py --include tools/helper.py
+```
+
+The worker writes `/output/result.json` as `{"file":"artifact.mp4"}` or names a
+WAV file in the same directory. The host must validate the media before
+importing it. This runner needs Bubblewrap, Python and any media tools used
+by the worker on Linux. The supported command uses a wall-clock timeout,
+bounded scratch and a per-file output limit.

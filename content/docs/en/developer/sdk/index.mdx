@@ -1,0 +1,32 @@
+---
+title: "Plugin SDK reference"
+description: "The manifest, package and adapter contracts a plugin declares to Arrumo."
+icon: Package
+---
+
+The [Plugin SDK](https://github.com/aidevs-pt/arrumo-plugin-sdk) holds the versioned JSON schemas, the WIT worlds, the packaging tools and the conformance suite. These pages explain each contract; the schemas are the source of truth. Start with [Write your first plugin](../first-plugin.mdx).
+
+<Cards>
+  <Card icon={<Icon name="FileBraces" />} title="Manifest" href="manifest.mdx">
+    Identity, settings, introduction, icon and translations.
+  </Card>
+  <Card icon={<Icon name="Boxes" />} title="Packages and code" href="packages.mdx">
+    ZIP packages, WebAssembly backends, frontend panels and reviewed files.
+  </Card>
+  <Card icon={<Icon name="MousePointerClick" />} title="Actions and hooks" href="actions.mdx">
+    Actions, their forms and places, and hooks that run on events.
+  </Card>
+  <Card icon={<Icon name="Plug" />} title="Provider adapters" href="adapters.mdx">
+    Transcription, speech, image, video, usage and subtitle translation.
+  </Card>
+  <Card icon={<Icon name="Bot" />} title="Agent providers" href="agents.mdx">
+    Status checks, structured runs, images, usage and follow-up messages.
+  </Card>
+  <Card icon={<Icon name="Shapes" />} title="Motion renderers" href="motion.mdx">
+    Rendered motion hand-off and the Linux renderer sandbox.
+  </Card>
+</Cards>
+
+## Document your plugin
+
+Write one guide per task a creator does with the plugin, such as setup or making images, in English, Spanish and Portuguese, with the same pages in each language. Name the app's controls as Arrumo shows them in each language, and say what leaves the creator's computer. Official plugins publish their guides in [Arrumo Docs](https://github.com/aidevs-pt/arrumo-docs) under `content/docs/<lang>/plugins/<plugin-id>/`; other plugins can keep them in their repository as `docs/<lang>/<page>.md` and link them from the README.

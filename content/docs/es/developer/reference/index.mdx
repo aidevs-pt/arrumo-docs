@@ -1,0 +1,31 @@
+---
+title: "Referencia"
+description: "Cada comando, herramienta MCP y operación A2A del editor, por dominio."
+icon: BookOpen
+---
+
+La CLI, MCP y A2A llaman a la misma API de la aplicación, así que cada página muestra los tres juntos. Ejecuta los comandos de la CLI como `arrumo-workspaces <ruta-de-la-base-de-datos> <comando>`, o `cargo run --locked -- <ruta-de-la-base-de-datos> <comando>` desde el repositorio del editor.
+
+<Cards>
+  <Card icon={<Icon name="Wrench" />} title="Compila y ejecuta el editor" href="build.mdx">
+    Desarrollo de escritorio, complementos incluidos, traducciones y enlaces profundos.
+  </Card>
+  <Card icon={<Icon name="Layers" />} title="Espacios de trabajo, perfiles y recursos" href="workspaces.mdx">
+    Copias de seguridad, perfiles, formatos de salida, recursos, contexto y marca.
+  </Card>
+  <Card icon={<Icon name="Workflow" />} title="Borradores, ejecuciones y revisión" href="runs.mdx">
+    Cola, workers, el agente de edición, resultados de cada etapa y vídeos completados.
+  </Card>
+  <Card icon={<Icon name="Clapperboard" />} title="Renderizado, subtítulos y entrega" href="rendering.mdx">
+    Vistas previas, renderizado final, comprobación de la entrega, subtítulos y exportación.
+  </Card>
+  <Card icon={<Icon name="Shapes" />} title="Biblioteca de animaciones y transiciones" href="motion.mdx">
+    Elementos de la biblioteca, animaciones diseñadas por el agente y renderizadores de movimiento.
+  </Card>
+  <Card icon={<Icon name="Puzzle" />} title="Complementos y proveedores" href="plugins.mdx">
+    Instalación, ajustes, credenciales, orden de proveedores, entorno de ejecución y acciones.
+  </Card>
+  <Card icon={<Icon name="Network" />} title="MCP y A2A" href="transports.mdx">
+    Cómo conectar un cliente a cada transporte.
+  </Card>
+</Cards>

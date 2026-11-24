@@ -1,0 +1,41 @@
+---
+title: "Renderizadores de movimento"
+description: "Entrega movimento renderizado e executa renderizadores na sandbox do Linux."
+icon: Shapes
+---
+
+## Entrega ficheiros de movimento renderizados
+
+Usa o [esquema de resultado de movimento](https://github.com/aidevs-pt/arrumo-plugin-sdk/blob/main/motion-result.schema.json) para a parte de movimento de um resultado da etapa Recursos. O [exemplo](https://github.com/aidevs-pt/arrumo-plugin-sdk/blob/main/examples/motion-result.json) referencia uma pré-visualização em vídeo e uma miniatura geridas. Os itens também podem referenciar áudio e um perfil. São identificadores de recursos e perfis locais do espaço de trabalho atribuídos pelo Arrumo. O host verifica a propriedade, os tipos de ficheiros e a concessão de geração atual antes de aceitar o resultado.
+
+Um adaptador renderizador corre no seu próprio ambiente autorizado. Importa a pré-visualização terminada e os ficheiros de apoio através da operação de importação de recursos do host, e depois envia os identificadores devolvidos em `motion_items` para a etapa Recursos da execução. Os caminhos do sistema de ficheiros e o código executável ficam fora deste contrato de resultado. Os componentes WIT genéricos não podem lançar processos renderizadores externos nem aceder ao sistema de ficheiros do host. O esquema permite validar a forma do JSON do lado de quem o produz, e o host continua responsável por verificar a que se refere cada identificador.
+
+## Envia um lote de renderização local
+
+Usa o [esquema de artefactos de movimento](https://github.com/aidevs-pt/arrumo-plugin-sdk/blob/main/motion-artifacts.schema.json) e o [lote de exemplo](https://github.com/aidevs-pt/arrumo-plugin-sdk/blob/main/examples/motion-artifacts.json) quando o renderizador produziu ficheiros locais e o worker tem a concessão da etapa Recursos. Passa o JSON do lote à CLI do editor como último argumento de `submit-motion-artifacts <workspace-id> <run-id> <attempt> <artifacts-json>`. Com MCP ou A2A, passa-o como `artifacts` a `submit_motion_artifacts` juntamente com `workspaceId`, `runId` e `attempt`.
+
+Os caminhos de ficheiros referem-se à máquina e ao sistema de ficheiros onde o host corre. Se um renderizador usar um ponto de montagem como `/output`, traduz cada caminho para a localização visível pelo host antes de enviar. O esquema verifica a forma da entrada. O Arrumo verifica a concessão e analisa os ficheiros reais antes de confirmar o lote e emitir identificadores geridos.
+
+Quando um renderizador isolado devolve caminhos em `/output`, para o renderizador antes de resolver ou importar os ficheiros. Executa `python tools/resolve_motion_artifacts.py <host-output-directory>` com o lote de artefactos na entrada padrão. Emite o lote com caminhos absolutos visíveis pelo host na saída padrão e rejeita ficheiros em falta, travessias de pastas e ligações simbólicas que apontem para fora da pasta de saída. Usa uma pasta de saída nova para cada trabalho e mantém-na privada para o worker até o host terminar a importação.
+
+### Executor local de renderização no Linux
+
+`python tools/run_motion_renderer.py --project <project-directory> --output <new-output-directory> -- /usr/bin/sh /input/render.sh` lança no Bubblewrap um renderizador escolhido pelo operador. O projeto é montado só de leitura em `/input`, o trabalho recebe `/output` com escrita e armazenamento temporário, e o executor limpa as variáveis de ambiente herdadas e isola a rede. Um `--toolchain <directory>` opcional é montado só de leitura em `/renderer`. O caminho de saída tem de ser novo e ficar fora das duas pastas de entrada. Define um limite de tempo de relógio com `--timeout`.
+
+O renderizador escreve `/output/artifacts.json` de acordo com o esquema de artefactos de movimento e termina. O SDK imprime os caminhos visíveis pelo host depois de validar que os ficheiros ficam dentro da pasta do trabalho. Usa esses caminhos com `submit_motion_artifacts`. O worker é dono da pasta do trabalho até o envio terminar. Este executor exige Linux com Bubblewrap e um conjunto de ferramentas do sistema compatível. Os pacotes do editor instalados e os restantes sistemas operativos precisam de integração própria.
+
+O executor do Linux também exige `prlimit` do util-linux. Usa `--max-output-bytes` para definir o limite rígido de escrita por ficheiro e o limite total dos ficheiros únicos referenciados pelo lote de artefactos. O valor predefinido é 512 MiB. A verificação total é feita depois da renderização. Um worker que consiga criar muitos ficheiros continua a precisar de uma quota de sistema de ficheiros por trabalho.
+
+Usa `--max-scratch-bytes` para dimensionar o sistema de ficheiros `/tmp` privado do renderizador. Por predefinição, é 256 MiB. O executor aponta `HOME` e `TMPDIR` para essa montagem. Este limite aplica-se ao armazenamento temporário durante a execução. A pasta de saída do trabalho é regida pelas verificações por ficheiro e posteriores à renderização descritas acima.
+
+### Executa um ZIP renderizador revisto
+
+Um worker local pode executar um ZIP revisto que declare a capacidade `motion-render` e inclua `renderer.json` com um único campo `entrypoint` que indique um script de shell do pacote. Inclui ambos os ficheiros com a ferramenta de empacotamento. O script corre dentro da mesma sandbox do Linux e escreve o mesmo manifesto `/output/artifacts.json`.
+
+Executa `python tools/run_motion_package.py <package.zip> --sha256 <reviewed-digest> --output <new-output-directory>`. Fornece o digest do registo do pacote revisto. O worker verifica o digest, os limites do pacote descomprimido, os caminhos dos ficheiros e o manifesto antes de invocar o script. Pode montar um conjunto de ferramentas preparado pelo operador com `--toolchain`. O editor usa este ponto de entrada para despachar os renderizadores instalados no Linux.
+
+### Distribui o worker do SDK para Linux
+
+As compilações de conformidade do SDK publicam um artefacto de CI `arrumo-motion-worker-linux` com o ZIP do worker e `SHA256SUMS`. Para o compilar localmente, executa `python tools/package_motion_worker.py arrumo-motion-worker-linux.zip` a partir do checkout do SDK. A ferramenta imprime o SHA-256 do ficheiro. Escolhe uma revisão do SDK ou uma execução de CI de confiança e verifica a soma de verificação do ficheiro antes de o extrair para um local de confiança fora das pastas dos plugins.
+
+Instala o `motion-worker-requirements.txt` extraído no ambiente Python 3 que lança o Arrumo. O host também precisa de Bubblewrap, util-linux com `prlimit` e FFprobe. Define `ARRUMO_MOTION_SDK_WORKER` com o caminho absoluto extraído de `tools/run_motion_package.py` ao iniciar o editor, o MCP ou o A2A. Mantém intacta a estrutura extraída para o worker conseguir carregar os esquemas do SDK.

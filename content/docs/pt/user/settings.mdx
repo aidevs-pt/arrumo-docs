@@ -1,0 +1,62 @@
+---
+title: "Definições, atualizações e privacidade"
+description: "O que o agente pode fazer no teu computador, como manter o Arrumo atualizado, fechá-lo enquanto se geram vídeos e o que o Arrumo envia."
+icon: Settings
+---
+
+![Definições, Geral: idioma, tema, movimento, notificações e o agente](/tools/arrumo/static/media/app/settings-general.webp)
+
+## O que o agente pode fazer
+
+As opções do agente vêm do seu plugin e aparecem em **Definições › Agente** para todos os espaços de trabalho, ou para um só se o escolheres em **Aplica-se a**.
+
+![Definições, Agente: o agente de produção e o que pode fazer](/tools/arrumo/static/media/app/settings-agent.webp)
+
+- **Escrever ficheiros e executar comandos** está ativo por predefinição. Enquanto trabalha num vídeo, o agente pode escrever os seus próprios scripts e ficheiros, executar comandos e usar os plugins, servidores de ferramentas (MCP) e hooks que configuraste. Trabalha numa pasta própria para esse vídeo, junto aos dados do Arrumo, que o Arrumo apaga quando o vídeo termina, falha ou é cancelado. Um aviso por baixo do interruptor lembra-te de que, assim, o agente pode alterar ficheiros do teu computador e executar programas com as permissões da tua conta: mantém-no ativo só com um agente e plugins em que confias. Se o desativares, o agente só lê o que o Arrumo lhe dá e responde, sem ferramentas, hooks nem a tua configuração.
+- **Pesquisa na web** deixa o agente procurar na web factos, preços e tendências.
+- **Usar os meus plugins instalados** só aparece quando **Escrever ficheiros e executar comandos** está desativado. Deixa o agente usar os plugins e servidores de ferramentas que instalaste para ele, que podem ver o material do espaço de trabalho que o agente recebe.
+- **Modelo** e **Esforço de raciocínio** escolhem como o agente pensa. Mais esforço dá melhores guiões e montagens, mas demora mais.
+
+Cada vídeo guarda as opções com que começou, para poder ser repetido igual.
+
+## Mantém o Arrumo atualizado
+
+O Arrumo procura uma versão nova uns segundos depois de abrir. Quando há uma, mostra o que mudou e pergunta:
+
+![O aviso de atualização: instalar e reiniciar, instalar ao sair ou mais tarde](/tools/arrumo/static/media/app/update-available.webp)
+
+- **Instalar e reiniciar** descarrega-a, instala-a e volta a abrir o Arrumo. Os vídeos em geração ficam em pausa e continuam após o reinício.
+- **Instalar ao sair** descarrega-a agora e instala-a da próxima vez que fechares o Arrumo.
+- **Mais tarde** volta a perguntar da próxima vez.
+
+**Definições › Geral › Atualizações** mostra a tua versão e tem **Procurar atualizações**. As atualizações são assinadas: o Arrumo só instala versões assinadas pela DEVS AI. As versões de uma loja de aplicações são atualizadas pela loja, e as que compilas tu não se atualizam sozinhas.
+
+Se alguma versão nova não conseguir arrancar, o arranque seguinte procura uma correção antes de tudo e instala-a sem perguntar, pelo que uma versão com problemas pode sempre ser substituída.
+
+## Fechar o Arrumo enquanto se geram vídeos
+
+![O aviso ao fechar o Arrumo enquanto se gera um vídeo](/tools/arrumo/static/media/app/close-warning.webp)
+
+Se fechares a janela, ou saíres pelo menu ou pela dock, enquanto se gera um vídeo, o Arrumo pergunta primeiro. **Manter o Arrumo aberto** volta ao trabalho; **Fechar e pausar** sai, e cada vídeo continua no mesmo passo da próxima vez que abrires o Arrumo. Os vídeos à espera da tua revisão não contam, porque não há nada a correr.
+
+## Dados e privacidade
+
+**Definições › Geral › Dados e privacidade** tem dois interruptores, ambos ativos por predefinição.
+
+**Dados de utilização anónimos** conta alguns momentos que dizem à DEVS AI que funcionalidades são usadas:
+
+| Evento              | O que inclui                                                                   |
+| ------------------- | ------------------------------------------------------------------------------ |
+| `app_started`       | nada mais                                                                      |
+| `workspace_created` | nada mais                                                                      |
+| `video_queued`      | se o piloto automático está ativo                                              |
+| `video_generated`   | o plugin do agente, se o piloto automático estava ativo e o número de formatos |
+| `media_generated`   | imagem, áudio ou vídeo, o plugin fornecedor e, nas imagens, quantas            |
+| `plugin_installed`  | o identificador do plugin                                                      |
+| `backup_exported`   | nada mais                                                                      |
+
+Cada evento inclui também um identificador aleatório desta instalação, criado quando o Arrumo abriu pela primeira vez, mais um identificador de sessão, a versão da app e o sistema operativo. Nunca está ligado a ti e nunca inclui os teus vídeos, ficheiros, pedidos, textos, nomes de ficheiros nem chaves. Os dados de utilização vão para o [Aptabase](https://aptabase.com), que não usa cookies nem impressões digitais do browser.
+
+**Relatórios de erros** envia o erro e a versão da app para o [Sentry](https://sentry.io) quando algo falha, na app ou na sua interface. Os relatórios omitem o teu nome de utilizador e o do computador, encurtam os caminhos para nomes de ficheiro, retiram das mensagens o que parece um caminho e nunca incluem cópias da memória, os passos anteriores ao erro nem o teu conteúdo.
+
+Desativar um interruptor para o envio de imediato, mesmo para erros que acontecem antes de o Arrumo acabar de abrir. As versões que compilas tu não enviam nada.

@@ -1,0 +1,32 @@
+---
+title: "Referência do SDK de plugins"
+description: "Os contratos de manifesto, pacote e adaptador que um plugin declara ao Arrumo."
+icon: Package
+---
+
+O [SDK de plugins](https://github.com/aidevs-pt/arrumo-plugin-sdk) contém os esquemas JSON versionados, os mundos WIT, as ferramentas de empacotamento e o conjunto de testes de conformidade. Estas páginas explicam cada contrato; os esquemas são a fonte de verdade. Começa por [Cria o teu primeiro plugin](../first-plugin.mdx).
+
+<Cards>
+  <Card icon={<Icon name="FileBraces" />} title="Manifesto" href="manifest.mdx">
+    Identidade, definições, apresentação, ícone e traduções.
+  </Card>
+  <Card icon={<Icon name="Boxes" />} title="Pacotes e código" href="packages.mdx">
+    Pacotes ZIP, backends WebAssembly, painéis de interface e ficheiros revistos.
+  </Card>
+  <Card icon={<Icon name="MousePointerClick" />} title="Ações e hooks" href="actions.mdx">
+    Ações, os seus formulários e locais, e hooks que correm com eventos.
+  </Card>
+  <Card icon={<Icon name="Plug" />} title="Adaptadores de fornecedores" href="adapters.mdx">
+    Transcrição, voz, imagem, vídeo, utilização e tradução de legendas.
+  </Card>
+  <Card icon={<Icon name="Bot" />} title="Fornecedores de agentes" href="agents.mdx">
+    Verificações de estado, execuções estruturadas, imagens, utilização e mensagens de seguimento.
+  </Card>
+  <Card icon={<Icon name="Shapes" />} title="Renderizadores de movimento" href="motion.mdx">
+    Entrega de movimento renderizado e a sandbox de renderização no Linux.
+  </Card>
+</Cards>
+
+## Documenta o teu plugin
+
+Escreve um guia por cada tarefa que um criador faz com o plugin, como a configuração ou criar imagens, em inglês, espanhol e português, com as mesmas páginas em cada idioma. Indica os controlos da aplicação tal como o Arrumo os mostra em cada idioma, e diz o que sai do computador do criador. Os plugins oficiais publicam os guias no [Arrumo Docs](https://github.com/aidevs-pt/arrumo-docs) em `content/docs/<lang>/plugins/<plugin-id>/`; os restantes plugins podem guardá-los no repositório como `docs/<lang>/<page>.md` e ligá-los a partir do README.

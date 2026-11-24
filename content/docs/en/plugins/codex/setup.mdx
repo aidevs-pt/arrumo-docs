@@ -1,0 +1,94 @@
+---
+title: "Set up Codex in Arrumo"
+description: "Install Codex, sign in with your ChatGPT plan, and choose what the agent may do while it edits your videos."
+icon: SquareTerminal
+---
+
+Codex drafts scripts, plans assets, designs animations and translates subtitles, using your ChatGPT plan. It also [makes thumbnails and images](#make-images) with its built-in image tool, so you need one key fewer.
+
+## Set it up
+
+<Steps>
+<Step>
+
+### Install and sign in
+
+Follow the [Codex setup guide](https://learn.chatgpt.com/docs/codex/cli) to install the `codex` command and sign in with your ChatGPT account. Run `codex` once in a terminal to check that it works.
+
+</Step>
+<Step>
+
+### Choose it in Arrumo
+
+Pick Codex when you create a workspace, or later as the agent in **Settings › Agent**. Arrumo finds it on your `PATH` and in the folders your login shell adds, even when Arrumo is opened from the Dock, Finder or a desktop launcher. If you installed it somewhere else, use **Choose the program…** and pick its program file.
+
+</Step>
+<Step>
+
+### Check the sign-in
+
+Choose **Check sign-in**. **The CLI reports a local sign-in** means you're ready. The check doesn't start an edit or use your plan.
+
+</Step>
+</Steps>
+
+## Settings
+
+These appear in **Settings › Agent** for every workspace, or for one workspace under **Applies to**. Each video keeps the settings it started with, so a replay can reproduce it.
+
+<TypeTable
+  type={{
+    "Write files and run commands": {
+      description: "Lets the agent write its own scripts and files, run commands, and use your installed plugins, tool servers and hooks while it works on a video. Its files stay in a work folder for that video until the video is finished.",
+      type: "on or off",
+      default: "on",
+    },
+    "Web search": {
+      description: "Lets the agent search the web while it works, for facts, prices and trends.",
+      type: "on or off",
+      default: "off",
+    },
+    Model: {
+      description: "The Codex model for this workspace. Leave it empty to use Codex's default.",
+      type: "text",
+    },
+    "Reasoning effort": {
+      description: "How long the agent thinks before answering. Higher effort gives better scripts and edits but takes longer.",
+      type: "minimal, low, medium, high or xhigh",
+      default: "medium",
+    },
+    "Use my installed plugins": {
+      description: "Lets the agent use your own Codex configuration, plugins and tool servers (MCP), while Write files and run commands is off. They can see the workspace material the agent is given, so turn it on only for ones you trust.",
+      type: "on or off",
+      default: "off",
+    },
+  }}
+/>
+
+## Check the connection
+
+From the editor CLI, pass a local database path and this plugin ID.
+
+```sh
+arrumo-workspaces ./workspaces.sqlite agent-login-status codex
+```
+
+A confirmed status means the CLI accepted the sign-in probe. If Arrumo reports unavailable, check that the CLI is installed, or choose its program file in Settings. If the login is unconfirmed, sign in using the official guide and check again. A timeout or failure means the probe could not finish successfully.
+
+## Write files and run commands
+
+**Write files and run commands**, in Settings › Agent, is on by default. While working on a video, Codex then runs in its `workspace-write` sandbox with its shell, and loads your own Codex configuration, including MCP servers and plugins. It works in a folder Arrumo makes for that video and deletes once the video is finished, fails or is cancelled.
+
+Turn it off and Codex runs in the `read-only` sandbox without its shell tool, and only reads what Arrumo sends. **Use my installed plugins** then decides whether your own Codex configuration and plugins load. Image generation always runs read-only.
+
+## Translate subtitle cues
+
+See [Translate subtitles](https://github.com/aidevs-pt/arrumo-plugin-codex/blob/main/README.md#translate-subtitles) to use this plugin as an Auto-Dubbing translator. The translator sends the selected cue text and target language to Codex. The workflow keeps the original cue timings.
+
+## Make images
+
+Codex can make thumbnails and other images with its built-in image tool, on your ChatGPT plan, so you do not need an OpenAI or Gemini key for them. It appears under **Image generation** in Settings, Services and keys, first by default; move it down to prefer a keyed provider. Arrumo sends the image brief and up to eight style references. Codex stays read-only, and Arrumo collects, checks and crops the image, then removes Codex's copy.
+
+## Follow-up questions
+
+When Codex asks Arrumo for workspace material, such as an earlier video's script, Arrumo answers in the same Codex session with only that material, so the brief is not sent and paid for twice. These sessions are kept in Codex's own history (`codex resume`); one-off runs keep none.

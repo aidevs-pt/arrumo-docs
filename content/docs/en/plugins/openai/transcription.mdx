@@ -1,0 +1,43 @@
+---
+title: "Transcribe footage with OpenAI"
+description: "Use OpenAI speech to text, with speaker labels, as your transcription provider or as a fallback."
+icon: Captions
+---
+
+OpenAI transcribes the speech in your footage so the agent can cut on what was said and Arrumo can write subtitles. It's a good fallback after [ElevenLabs](../elevenlabs/transcription.mdx): when the first provider fails or runs out, Arrumo moves on to the next.
+
+Timed transcripts use `gpt-4o-transcribe-diarize`, which also labels who is speaking; plain text uses `gpt-transcribe`. Each file can be up to 25 MB.
+
+## Set it up
+
+<Steps>
+<Step>
+
+### Add your key
+
+Create a key on the [OpenAI API keys page](https://platform.openai.com/api-keys). In Arrumo, open **Settings › Services and keys**, find OpenAI and paste it, for every workspace or for one. The same key covers [images](images.mdx).
+
+</Step>
+<Step>
+
+### Put it in the order
+
+Under **Which plugin does what, in order**, place OpenAI for **Transcription**: first to prefer it, or after ElevenLabs as a fallback. A video keeps the order it started with.
+
+</Step>
+</Steps>
+
+## Subtitles
+
+- When you queue a video, **Generate missing subtitles automatically** sends the audio of each rendered format without an SRT to the first transcription provider.
+- In delivery verification, **Generate subtitles** does it for one format.
+- **Import SRT** uses your own instead.
+
+## Check it from the CLI
+
+```sh
+arrumo-workspaces ./workspaces.sqlite plugin-credential-status openai 1 api-key
+arrumo-workspaces ./workspaces.sqlite transcribe-wav 1 openai ./sample.wav
+```
+
+The first command reports where the key is set without revealing it; the second uploads the WAV and prints the normalized transcript. If subtitles fail, check that the output has audio, that the video's order includes a provider with timestamps, and that the key is still valid.

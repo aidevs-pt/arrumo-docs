@@ -1,5 +1,6 @@
 {
   "title": "Referencia",
+  "icon": "BookOpen",
   "pages": [
     "index",
     "build",

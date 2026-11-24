@@ -1,0 +1,31 @@
+---
+title: "Reference"
+description: "Every command, MCP tool and A2A operation the editor offers, by domain."
+icon: BookOpen
+---
+
+The CLI, MCP and A2A call the same application API, so each page lists the three side by side. Run CLI commands as `arrumo-workspaces <database-path> <command>`, or `cargo run --locked -- <database-path> <command>` from the editor repository.
+
+<Cards>
+  <Card icon={<Icon name="Wrench" />} title="Build and run the editor" href="build.mdx">
+    Desktop development, bundled plugins, translations and deep links.
+  </Card>
+  <Card icon={<Icon name="Layers" />} title="Workspaces, profiles and assets" href="workspaces.mdx">
+    Backups, profiles, output formats, assets, context and brand.
+  </Card>
+  <Card icon={<Icon name="Workflow" />} title="Drafts, runs and review" href="runs.mdx">
+    Queuing, workers, the editing agent, stage results and completed videos.
+  </Card>
+  <Card icon={<Icon name="Clapperboard" />} title="Rendering, subtitles and delivery" href="rendering.mdx">
+    Previews, final render, delivery checks, subtitles and export.
+  </Card>
+  <Card icon={<Icon name="Shapes" />} title="Animation and transition library" href="motion.mdx">
+    Library items, agent-designed animations and motion renderers.
+  </Card>
+  <Card icon={<Icon name="Puzzle" />} title="Plugins and providers" href="plugins.mdx">
+    Installation, settings, credentials, provider order, runtime and actions.
+  </Card>
+  <Card icon={<Icon name="Network" />} title="MCP and A2A" href="transports.mdx">
+    Connecting a client to each transport.
+  </Card>
+</Cards>

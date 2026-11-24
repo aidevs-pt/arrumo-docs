@@ -1,0 +1,42 @@
+---
+title: "Arrumo documentation"
+description: "Guides for creators, developers and plugin authors, and Markdown for the agents that work with them."
+icon: House
+---
+
+Arrumo AI Video Editor is a free, open-source desktop video editor where an AI agent drafts the script, cuts your footage, makes animations and renders every format, and you review each step.
+
+[![Watch “Meet Arrumo” on YouTube, a video made entirely in Arrumo](https://www.aidevs.pt/tools/arrumo/static/media/videos/01-meet-arrumo.webp)](https://youtu.be/v2KcwE8xuso)
+
+_Every video in these docs was made entirely in Arrumo: the agent wrote, designed, voiced and cut it, and a person approved each step._
+
+<Cards>
+  <Card icon={<Icon name="Clapperboard" />} title="Use Arrumo" href="user/index.mdx">
+    Install it, set up your brand, make your first video and keep it running.
+  </Card>
+  <Card icon={<Icon name="GraduationCap" />} title="Tutorials" href="user/tutorials/index.mdx">
+    From your website or your social media channel to a finished video, step by step.
+  </Card>
+  <Card icon={<Icon name="Puzzle" />} title="Official plugins" href="plugins/index.mdx">
+    Claude Code, Codex, ElevenLabs, OpenAI, Gemini, Higgsfield and Auto-Dubbing.
+  </Card>
+  <Card icon={<Icon name="Code" />} title="Build on Arrumo" href="developer/index.mdx">
+    Drive Arrumo through the CLI, MCP or A2A, and write plugins with the SDK.
+  </Card>
+</Cards>
+
+## For AI agents
+
+Every page is also available as Markdown, so an agent can read these docs without scraping them:
+
+| What                      | Where                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------- |
+| One page                  | The page's address plus `.md`, such as [`/tools/arrumo/docs/user/install.md`](https://www.aidevs.pt/tools/arrumo/docs/user/install.md) |
+| The docs home             | [`/tools/arrumo/docs/index.md`](https://www.aidevs.pt/tools/arrumo/docs/index.md)                                      |
+| An index of every page    | [`/tools/arrumo/llms.txt`](https://www.aidevs.pt/tools/arrumo/llms.txt)                                                |
+| Every page in one file    | [`/tools/arrumo/llms-full.txt`](https://www.aidevs.pt/tools/arrumo/llms-full.txt)                                      |
+| One section in one file   | The section's address plus `/llms-full.txt`, such as `/tools/arrumo/docs/plugins/llms-full.txt`   |
+
+Spanish and Portuguese live under `/es` and `/pt`, such as `/es/tools/arrumo/llms.txt`. Each page's **Copy Markdown** and **Open** buttons do the same for people pasting a page into a chat.
+
+To let an agent operate Arrumo itself, rather than read about it, see [Connect to Arrumo](developer/connect.mdx) and the [agent skill](developer/agent-skill.mdx).

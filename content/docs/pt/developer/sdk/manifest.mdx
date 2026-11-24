@@ -1,0 +1,63 @@
+---
+title: "Manifesto"
+description: "Identidade, definições, apresentação, ícone e traduções."
+icon: FileBraces
+---
+
+## Rascunho de manifesto
+
+[manifest.schema.json](https://github.com/aidevs-pt/arrumo-plugin-sdk/blob/main/manifest.schema.json) define a identidade do plugin e os metadados das capacidades. Vê o [exemplo de transcrição](https://github.com/aidevs-pt/arrumo-plugin-sdk/blob/main/examples/transcription.json).
+
+As declarações de capacidades descrevem o que um plugin oferece. O editor valida o pacote e aplica o âmbito e as autorizações quando um ambiente de execução ou adaptador compatível executa uma capacidade.
+
+## Declarações de definições
+
+A versão 2 do esquema de manifesto pode incluir até 64 entradas em `settings`. Dá a cada entrada um `id` único dentro do plugin, um `label` e uma `description`, um `kind` de `string`, `boolean`, `integer` ou `secret`, um `scope` de `app` ou `workspace`, e uma flag booleana `required`. Uma lista de definições omitida é válida. Os hosts atuais continuam a ler o SDK v1, que não tem declarações de definições.
+
+No esquema 10, uma definição pode acrescentar `helpUrl`: uma página `https`, com até 512 caracteres, sem credenciais nem fragmento, que explica onde obter o valor, como a página de chaves de API do fornecedor. O Arrumo mostra-a como Onde o encontrar junto do campo e abre-a a partir do manifesto instalado, por isso não é possível trocar a página a partir da interface.
+
+Um campo com âmbito de aplicação só é configurado no âmbito da aplicação. Um campo com âmbito de espaço de trabalho pode ter um valor predefinido da aplicação e uma substituição por espaço de trabalho. Retirar uma substituição repõe o valor predefinido da aplicação. Um campo obrigatório precisa de um valor configurado antes de um host poder usar o plugin para trabalho que dependa desse campo. O manifesto só declara metadados. Os valores, os valores predefinidos e as credenciais nunca fazem parte de uma declaração. Por agora, o host valida e mostra as declarações através da API de catálogo. O host valida e resolve os valores normais à parte. O armazenamento seguro de credenciais exige suporte à parte do host.
+
+## Apresentação e visita guiada de plugins
+
+A versão 8 do esquema acrescenta uma `introduction` opcional. Quando chegam plugins depois do primeiro arranque do criador (instalados a partir de um ZIP ou do registo, ou incluídos numa atualização), o Arrumo apresenta-os numa visita guiada partilhada, com uma página por plugin com o nome, o `headline` e o `body`. Os plugins presentes no primeiro arranque não entram na visita. Os criadores podem repetir a visita em Definições › Plugins. O texto é indicado por idioma: `en` é obrigatório, e `es` e `pt` são usados quando a aplicação está nesses idiomas. Os títulos têm no máximo 80 caracteres e os corpos 320.
+
+```json
+"introduction": {
+  "headline": {"en": "Your videos, in more languages", "es": "Tus vídeos, en más idiomas"},
+  "body": {"en": "Pick a finished video and the languages you want…"}
+}
+```
+
+## Ícone e traduções
+
+O esquema 8 também acrescenta um `icon` opcional: o caminho de um ficheiro SVG do pacote, como `"icon": "icon.svg"`. Mantém o SVG autónomo e com 8 KiB no máximo. O Arrumo mostra-o como imagem onde quer que o plugin apareça, por exemplo junto do agente que está a trabalhar, por isso não pode executar scripts; o host recusa ícones com scripts, tratamento de eventos, `href`, `url(…)`, imagens ou documentos incorporados. Desenha o ícone com a sua própria forma de fundo e cores. `package_plugin.py` acrescenta ao ZIP o ícone declarado, e os plugins sem ícone recebem um predefinido.
+
+### Marcas: verifica antes de incluir uma
+
+O logótipo de uma empresa só pode ser o ícone de um plugin quando as orientações de marca publicadas por essa empresa permitem usá-lo dentro da interface de outra aplicação. Faz esta verificação antes de pôr o logótipo no pacote, não depois:
+
+1. Lê a página de marca, imprensa ou marcas registadas da própria empresa. Um aviso no manifesto não concede autorização.
+2. Usa o logótipo só se a página permitir este uso sem pedido (por exemplo, uma marca oferecida para ecossistemas de aplicações ou integrações). Usa o ficheiro da própria empresa, sem alterações, e segue as condições de espaço livre, cor e tamanho.
+3. Se a página pedir que solicites autorização, estiver atrás de um acesso de parceiros ou não for encontrada, desenha em vez disso um símbolo genérico do que o plugin faz, como um prompt de terminal para um agente de linha de comandos ou uma moldura para imagens.
+4. Regista o resultado no README do plugin, em "Icon and trademarks": que página leste, o que permite e porque é que o ícone é uma marca ou um símbolo genérico.
+
+Quando o ícone é uma marca, acrescenta `iconNotice` com o nome do titular (por exemplo, "ElevenLabs and its logo are trademarks of ElevenLabs."). O Arrumo mostra-o junto do plugin, e `translations` pode traduzi-lo como o restante texto. Os símbolos genéricos não levam aviso.
+
+Os plugins oficiais foram verificados em 2026-11-22. A página de marca da ElevenLabs recomenda o símbolo "11" para ecossistemas de aplicações. A OpenAI pede autorização primeiro, a Google mantém as orientações do Gemini atrás de um acesso de parceiros, e a Anthropic e a Higgsfield não publicam nenhuma regra para este uso. O editor dos plugins oficiais decidiu mostrar mesmo assim o logótipo de cada fornecedor com um `iconNotice`, para os criadores reconhecerem o serviço, e substituirá um logótipo por um símbolo genérico se o titular o pedir. Os plugins de terceiros devem continuar a seguir os passos acima.
+
+### Forma do ícone
+
+Desenha o ícone como um mosaico quadrado completo (por exemplo, um `viewBox` de 32×32 cuja primeira forma seja um `<rect width="32" height="32">` na cor de fundo) com cantos retos e sem contorno. O Arrumo arredonda os cantos e desenha um contorno ténue igual para todos os plugins, em qualquer tamanho.
+
+## Traduções
+
+Os plugins traduzem o seu próprio texto. O inglês fica nos campos do manifesto, e `translations.es` e `translations.pt` substituem o `name` e a `description` do plugin, o `provider.label` do agente e cada capacidade, definição (`label`, `description` e as etiquetas de `choices` por valor) e ação declaradas. `translations.en` pode acrescentar etiquetas que faltam nos campos base, como as das opções. Cada chave tem de indicar algo que o manifesto declara.
+
+```json
+"translations": {
+  "en": {"settings": {"reasoning-effort": {"choices": {"xhigh": "Extra high"}}}},
+  "es": {"description": "Usa tu plan de ChatGPT…",
+         "settings": {"web-search": {"label": "Búsqueda web"}}}
+}
+```

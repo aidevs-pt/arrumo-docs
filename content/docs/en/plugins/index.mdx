@@ -1,0 +1,65 @@
+---
+title: "Official plugins"
+description: "The agents and media providers made and maintained by DEVS AI, what each one does, and how to set them up."
+icon: Puzzle
+---
+
+Arrumo's agent and every service it uses to make media come from plugins. The official ones come from the [official registry](https://github.com/aidevs-pt/arrumo-plugin-registry): Arrumo installs them on first launch, turns them on, and updates them from inside the app with checked releases. Plugins you import start off.
+
+Turn each plugin on or off with the switch on its page in **Settings › Plugins**. A plugin that is off keeps its settings, but Arrumo doesn't use it. Keys go in **Settings › Services and keys**, for every workspace or for one: a workspace key takes precedence over the app's. They're kept in your system's encrypted vault, and agents use them through Arrumo without ever reading them.
+
+## Agents
+
+The agent writes scripts, plans assets, designs animations and makes the editing decisions. It runs on your computer, signed in to your own plan.
+
+<Cards>
+  <Card icon={<Icon name="Bot" />} title="Claude Code" href="claude-code/setup.mdx">
+    Uses your Claude plan. Drafts scripts, plans assets and translates subtitles.
+  </Card>
+  <Card icon={<Icon name="SquareTerminal" />} title="Codex" href="codex/setup.mdx">
+    Uses your ChatGPT plan, and also makes thumbnails and images, so you need one key fewer.
+  </Card>
+</Cards>
+
+## Media providers
+
+<Cards>
+  <Card icon={<Icon name="AudioLines" />} title="ElevenLabs" href="elevenlabs/narration.mdx">
+    Narration in five speech models, transcription, music, sound effects, voice changing and isolation, and dubbing into 29 languages.
+  </Card>
+  <Card icon={<Icon name="Sparkle" />} title="OpenAI" href="openai/transcription.mdx">
+    Transcription with speaker labels, and images for thumbnails and style references.
+  </Card>
+  <Card icon={<Icon name="Images" />} title="Gemini" href="gemini/images.mdx">
+    A second image model for thumbnails and style references.
+  </Card>
+  <Card icon={<Icon name="Video" />} title="Higgsfield" href="higgsfield/video-and-images.mdx">
+    AI video clips from 45 models and images from 15, following your references.
+  </Card>
+  <Card icon={<Icon name="Languages" />} title="Auto-Dubbing" href="auto-dubbing/dub-a-video.mdx">
+    Translates the subtitles of finished videos and voices them in other languages.
+  </Card>
+</Cards>
+
+## Who does what
+
+When several plugins can do the same job, Arrumo tries them in the order set in **Settings › Services and keys › Which plugin does what, in order**, and moves to the next if one fails or runs out. A workspace can keep the app's order or set its own, and each video keeps the order it started with.
+
+| Capability            | Plugins                               | Needs                                   |
+| --------------------- | ------------------------------------- | --------------------------------------- |
+| Editing agent         | Claude Code, Codex                    | The agent installed and signed in       |
+| Transcription         | ElevenLabs, OpenAI                    | An API key                              |
+| Text to speech        | ElevenLabs                            | An API key                              |
+| Music, sound effects  | ElevenLabs                            | An API key                              |
+| Voice changer, voice isolation, dubbing | ElevenLabs          | An API key                              |
+| Image generation      | Codex, OpenAI, Gemini, Higgsfield     | Codex: your ChatGPT plan; others: a key |
+| Video generation      | Higgsfield                            | An API key                              |
+| Subtitle translation  | Claude Code, Codex                    | The agent signed in                     |
+
+## Privacy
+
+A provider plugin sends only what its job needs, such as a clip's audio for transcription or a prompt and reference images for an image, and only to that provider's API. Arrumo makes the request; the agent never sees the key. Your footage stays on your computer unless a plugin you turned on uploads part of it for a job you or the agent asked for.
+
+## Build your own
+
+Plugins are packages described by a manifest. Agent providers, media providers, actions and motion templates are all written against the [Plugin SDK](../developer/sdk/index.mdx); start with [Your first plugin](../developer/first-plugin.mdx).

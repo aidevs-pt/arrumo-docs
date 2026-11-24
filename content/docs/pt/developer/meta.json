@@ -1,5 +1,7 @@
 {
   "title": "Desenvolver com o Arrumo",
+  "description": "CLI, MCP, A2A e plugins",
+  "icon": "Code",
   "root": true,
   "pages": [
     "index",

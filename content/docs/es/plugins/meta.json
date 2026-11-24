@@ -1,5 +1,7 @@
 {
   "title": "Complementos oficiales",
+  "description": "Agentes y proveedores de medios",
+  "icon": "Puzzle",
   "root": true,
   "pages": [
     "index",

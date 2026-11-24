@@ -1,0 +1,49 @@
+---
+title: "Transcribe footage with ElevenLabs"
+description: "Let the agent cut on what was said and get subtitles timed to every word, with ElevenLabs speech to text."
+icon: Captions
+---
+
+Transcription turns the speech in your footage into text with a time for every word. The agent reads it to plan cuts around what was said, and Arrumo uses it for subtitles. ElevenLabs transcribes with its `scribe_v2` model, word by word.
+
+## Set it up
+
+<Steps>
+<Step>
+
+### Add your key
+
+Open **Settings › Services and keys**, find ElevenLabs and paste an API key from [ElevenLabs](https://elevenlabs.io/app/settings/api-keys). A workspace key takes precedence over the app's. The same key covers [narration](narration.mdx).
+
+</Step>
+<Step>
+
+### Put it in the order
+
+Under **Which plugin does what, in order**, put ElevenLabs where you want it for **Transcription**. Put [OpenAI](../openai/transcription.mdx) after it as a fallback if you have a key. A video keeps the order it started with.
+
+</Step>
+</Steps>
+
+## Subtitles
+
+- When you queue a video, turn on **Generate missing subtitles automatically** to have Arrumo send the audio of each rendered format that has no SRT to the first transcription provider.
+- In delivery verification, choose **Generate subtitles** on a format to make them for that format only.
+- Use **Import SRT** to supply your own instead.
+
+Both send the audio of that output to the provider. Each file can be up to 32 MB.
+
+<Callout title="Written without hearing your clips?">
+  When no transcription provider has a key, the agent writes the script without a transcript and says so. Add a key, then **Ask for changes** so it redrafts from what you said.
+</Callout>
+
+## Check it from the CLI
+
+From a build that bundles the provider, check the key's scope without revealing it, and transcribe a WAV to see the normalized result:
+
+```sh
+arrumo-workspaces ./workspaces.sqlite plugin-credential-status elevenlabs 1 api-key
+arrumo-workspaces ./workspaces.sqlite transcribe-wav 1 elevenlabs ./sample.wav
+```
+
+If subtitles fail, check that the output has audio, that the video's provider order includes a transcription provider with timestamps, and that the key is still valid.

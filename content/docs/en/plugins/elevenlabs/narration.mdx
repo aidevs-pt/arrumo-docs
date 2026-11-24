@@ -1,0 +1,80 @@
+---
+title: "Narrate videos with ElevenLabs"
+description: "Set up ElevenLabs, choose the voice and speech model, and let Arrumo voice every scene of your videos."
+icon: Mic
+---
+
+ElevenLabs gives Arrumo its voice. When a video starts from scratch, Arrumo builds it from animated scenes and the agent writes a line of narration for each one. With ElevenLabs set up, Arrumo voices each line while making the video preview, lengthens scenes that need more time, and reuses the same audio in the final video. The subtitles follow the narration. Without a speech provider, the video uses on-screen text instead.
+
+The same key also covers [transcription](transcription.mdx), and [music, sound effects, voice tools and dubbing](audio-tools.mdx).
+
+## Set it up
+
+<Steps>
+<Step>
+
+### Create an API key
+
+In ElevenLabs, open [API keys](https://elevenlabs.io/app/settings/api-keys) and create one. If you restrict it, allow text to speech, speech to text and the other features you'll use, and give it the **User: Read** permission so Arrumo can show your remaining credits.
+
+</Step>
+<Step>
+
+### Add it to Arrumo
+
+Open **Settings › Services and keys**, find ElevenLabs and paste the key. Save it for every workspace, or for one workspace when it should use a different account. Arrumo keeps it in your system's encrypted vault.
+
+</Step>
+<Step>
+
+### Choose the voice
+
+Copy a voice ID from your ElevenLabs voice library and paste it in **Voice ID** in the plugin's settings. Leave it empty to use George.
+
+</Step>
+<Step>
+
+### Check the order
+
+Under **Which plugin does what, in order**, ElevenLabs should be first for **Text to speech**. Auto-Dubbing uses the same order for its voice-overs.
+
+</Step>
+</Steps>
+
+## Settings
+
+<TypeTable
+  type={{
+    "ElevenLabs API key": {
+      description: "Used for transcription, speech and the audio tools. Stored in the system vault; agents can use it through Arrumo but never read it.",
+      type: "secret",
+      required: true,
+    },
+    "Voice ID": {
+      description: "The ElevenLabs voice that narrates videos, copied from your voice library.",
+      type: "text",
+      default: "George",
+    },
+    "Speech model": {
+      description: "The model used for narration when you or the agent don't pick one.",
+      type: "text",
+      default: "eleven_multilingual_v2",
+    },
+  }}
+/>
+
+## Speech models
+
+**Generate** in **Assets** shows what each model is best for, and you or the agent can pick one for a single line.
+
+| Model             | ID                       | Best for                                                                                   | Characters per request |
+| ----------------- | ------------------------ | ------------------------------------------------------------------------------------------ | ---------------------- |
+| Multilingual v2   | `eleven_multilingual_v2` | Long narration in 29 languages; ElevenLabs calls it the most stable on long-form generations. The default. | 10,000 |
+| Eleven v4         | `eleven_v4`              | ElevenLabs' most emotive model, for character voiceovers, emotional delivery and audiobooks in 90+ languages. | 10,000 |
+| Eleven v3         | `eleven_v3`              | The previous expressive model, for dramatic delivery in 70+ languages.                     | 5,000                  |
+| Flash v2.5        | `eleven_flash_v2_5`      | Fast, lower-cost voice in 32 languages, at half the per-character rate.                    | 10,000                 |
+| Flash v2          | `eleven_flash_v2`        | Fast English-only voice.                                                                   | 10,000                 |
+
+## Credits
+
+Each preview attempt synthesizes the narration again, which uses your ElevenLabs credits. If synthesis fails, the preview is made without narration and its summary says why. **Settings › Services and keys** shows the share of characters left and when it resets; Arrumo warns at 20% and 10%. Some models need a paid plan: when yours lacks one, Arrumo shows ElevenLabs' answer as a plain message.
