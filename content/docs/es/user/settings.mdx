@@ -45,15 +45,15 @@ Si cierras la ventana, o sales desde el menú o el dock, mientras se genera un v
 
 **Datos de uso anónimos** cuenta unos pocos momentos que dicen a DEVS AI qué funciones se usan:
 
-| Evento              | Qué incluye                                                                                |
-| ------------------- | ------------------------------------------------------------------------------------------ |
-| `app_started`       | nada más                                                                                   |
-| `workspace_created` | nada más                                                                                   |
-| `video_queued`      | si el piloto automático está activado                                                      |
-| `video_generated`   | el complemento del agente, si el piloto automático estaba activado y el número de formatos |
-| `media_generated`   | imagen, audio o vídeo, el complemento proveedor y, en imágenes, cuántas                    |
-| `plugin_installed`  | el identificador del complemento                                                           |
-| `backup_exported`   | nada más                                                                                   |
+| Evento                | Qué incluye                                                                                |
+| --------------------- | ------------------------------------------------------------------------------------------ |
+| `app_installed`       | nada más; se envía una vez, la primera vez que se abre una instalación nueva               |
+| `workspace_created`   | nada más                                                                                   |
+| `video_generated`     | el complemento del agente, si el piloto automático estaba activado y el número de formatos |
+| `media_generated`     | imagen, audio o vídeo, el complemento proveedor y, en imágenes, cuántas                    |
+| `animation_generated` | el complemento del agente y si cambió una animación existente                              |
+| `plugin_installed`    | el identificador del complemento                                                           |
+| `backup_exported`     | nada más                                                                                   |
 
 Cada evento incluye también un identificador aleatorio de esta instalación, creado la primera vez que se abrió Arrumo, más un identificador de sesión, la versión de la app y el sistema operativo. Nunca está ligado a ti y nunca incluye tus vídeos, archivos, indicaciones, textos, nombres de archivo ni claves. Los datos de uso van a [Aptabase](https://aptabase.com), que no usa cookies ni huellas digitales.
 
