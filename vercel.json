@@ -1,5 +1,25 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/en/tools/arrumo/docs/user/tutorial",
+      "destination": "https://www.aidevs.pt/tools/arrumo/docs/user/tutorials/website-to-video",
+      "permanent": true
+    },
+    {
+      "source": "/:lang(es|pt)/tools/arrumo/docs/user/tutorial",
+      "destination": "https://www.aidevs.pt/:lang/tools/arrumo/docs/user/tutorials/website-to-video",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)\\.md",
+      "headers": [
+        { "key": "Content-Type", "value": "text/markdown; charset=utf-8" }
+      ]
+    }
+  ]
 }
