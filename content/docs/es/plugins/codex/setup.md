@@ -4,7 +4,7 @@ title: "Configura Codex en Arrumo"
 description: "Instala la CLI local e inicia sesión siguiendo la guía del proveedor."
 ---
 
-Instala la CLI local e inicia sesión siguiendo la [guía del proveedor](https://learn.chatgpt.com/docs/codex/cli). Inicia Arrumo desde un entorno cuyo PATH incluya el directorio del ejecutable.
+Instala la CLI local e inicia sesión siguiendo la [guía del proveedor](https://learn.chatgpt.com/docs/codex/cli). Arrumo encuentra la CLI en su PATH y en las carpetas que añade tu shell de inicio de sesión, aunque lo abras desde el Dock, el Finder o un lanzador del escritorio. Si la instalaste en otro sitio, elige su archivo de programa con **Elegir el programa…** en la configuración del agente o en Ajustes.
 
 Elige Codex al configurar el espacio de trabajo o selecciónalo como agente de producción en Ajustes. La comprobación confirma la sesión local y no inicia ningún montaje.
 
@@ -16,7 +16,7 @@ Desde la CLI del editor, indica la ruta de una base de datos local y el identifi
 arrumo-workspaces ./workspaces.sqlite agent-login-status codex
 ```
 
-El estado confirmed indica que la CLI aceptó la comprobación. Si Arrumo devuelve unavailable, comprueba que el ejecutable esté en el PATH que ve Arrumo. Si devuelve unconfirmed, inicia sesión según la guía oficial y vuelve a comprobarlo. Un tiempo de espera agotado o un error indica que la comprobación no pudo completarse.
+El estado confirmed indica que la CLI aceptó la comprobación. Si Arrumo devuelve unavailable, comprueba que la CLI esté instalada o elige su archivo de programa en Ajustes. Si devuelve unconfirmed, inicia sesión según la guía oficial y vuelve a comprobarlo. Un tiempo de espera agotado o un error indica que la comprobación no pudo completarse.
 
 ## Escribir archivos y ejecutar comandos
 

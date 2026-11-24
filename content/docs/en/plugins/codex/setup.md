@@ -4,7 +4,7 @@ title: "Set up Codex in Arrumo"
 description: "Install and sign in to the local CLI using the provider setup guide."
 ---
 
-Install and sign in to the local CLI using the [provider setup guide](https://learn.chatgpt.com/docs/codex/cli). Start Arrumo from an environment whose PATH includes the directory containing the CLI executable.
+Install and sign in to the local CLI using the [provider setup guide](https://learn.chatgpt.com/docs/codex/cli). Arrumo finds the CLI on its PATH and in the folders your login shell adds, even when it's opened from the Dock, Finder or a desktop launcher. If you installed it somewhere else, choose its program file with **Choose the program…** in agent setup or Settings.
 
 Choose Codex during workspace setup or select it as the production agent in Settings. A sign-in check confirms local authentication. It does not start an edit.
 
@@ -16,7 +16,7 @@ From the editor CLI, pass a local database path and this plugin ID.
 arrumo-workspaces ./workspaces.sqlite agent-login-status codex
 ```
 
-A confirmed status means the CLI accepted the sign-in probe. If Arrumo reports unavailable, check that the executable is on the PATH visible to Arrumo. If the login is unconfirmed, sign in using the official guide and check again. A timeout or failure means the probe could not finish successfully.
+A confirmed status means the CLI accepted the sign-in probe. If Arrumo reports unavailable, check that the CLI is installed, or choose its program file in Settings. If the login is unconfirmed, sign in using the official guide and check again. A timeout or failure means the probe could not finish successfully.
 
 ## Write files and run commands
 

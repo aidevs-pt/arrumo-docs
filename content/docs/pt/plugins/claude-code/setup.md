@@ -4,7 +4,7 @@ title: "Configura Claude Code no Arrumo"
 description: "Instala a CLI local e inicia sessão seguindo o guia do fornecedor."
 ---
 
-Instala a CLI local e inicia sessão seguindo o [guia do fornecedor](https://code.claude.com/docs/en/setup). Inicia o Arrumo num ambiente cujo PATH inclua a pasta do executável.
+Instala a CLI local e inicia sessão seguindo o [guia do fornecedor](https://code.claude.com/docs/en/setup). O Arrumo encontra a CLI no seu PATH e nas pastas que a tua shell de início de sessão acrescenta, mesmo quando o abres a partir da Dock, do Finder ou de um lançador do ambiente de trabalho. Se a instalaste noutro sítio, escolhe o ficheiro do programa com **Escolher o programa…** na configuração do agente ou nas Definições.
 
 Escolhe Claude Code durante a configuração do espaço de trabalho ou seleciona-o como agente de produção nas Definições. A verificação confirma a sessão local e não inicia uma edição.
 
@@ -16,7 +16,7 @@ Na CLI do editor, indica o caminho para uma base de dados local e o identificado
 arrumo-workspaces ./workspaces.sqlite agent-login-status claude-code
 ```
 
-O estado confirmed indica que a CLI aceitou a verificação. Se o Arrumo devolver unavailable, verifica se o executável está no PATH que o Arrumo consegue ver. Se devolver unconfirmed, inicia sessão seguindo o guia oficial e volta a verificar. Um tempo de espera excedido ou um erro indica que a verificação não foi concluída.
+O estado confirmed indica que a CLI aceitou a verificação. Se o Arrumo devolver unavailable, verifica se a CLI está instalada ou escolhe o ficheiro do programa nas Definições. Se devolver unconfirmed, inicia sessão seguindo o guia oficial e volta a verificar. Um tempo de espera excedido ou um erro indica que a verificação não foi concluída.
 
 ## Escrever ficheiros e executar comandos
 

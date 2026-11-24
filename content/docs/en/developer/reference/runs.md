@@ -53,9 +53,9 @@ Use `agent-settings <app|workspace-id>` to inspect the configured agent and wher
 
 Open **Settings** in the desktop sidebar to choose the app's production agent. Use the settings scope picker to configure a workspace override or restore inheritance. The effective provider and its source appear under the selector.
 
-On a fresh install, creating the first workspace opens agent setup if no app provider is selected. Settings can check whether the selected CLI is on Arrumo's PATH and open the provider's installation guide in the system browser. This check reports local CLI availability. Authentication is handled through the provider's own setup.
+On a fresh install, creating the first workspace opens agent setup if no app provider is selected. Settings show where the selected CLI was found and can open the provider's installation guide in the system browser. Arrumo looks on its PATH, including the folders the login shell adds on macOS and Linux, and on Windows accepts any PATHEXT extension, such as npm's `.cmd` launchers. **Choose the program…** keeps a program file for that agent plugin on this computer; it's used while the file exists, isn't included in backups, and can only be set in the desktop app, not over MCP or A2A, because agents use those and must not choose the program the next run executes. This check reports local CLI availability. Authentication is handled through the provider's own setup.
 
-Use **Check sign-in** in Settings or `agent-login-status <plugin-id>` in the CLI to ask the installed provider about its local authentication state. The check makes no generation request and returns only a status category. It times out after five seconds. Windows detection and sign-in checks use a native executable on PATH.
+Use **Check sign-in** in Settings or `agent-login-status <plugin-id>` in the CLI to ask the installed provider about its local authentication state. The check makes no generation request and returns only a status category. It times out after five seconds. Sign-in checks use the same program as runs.
 
 Use `agent-plugins` to list the bundled agent providers. Their IDs, labels, setup guides, and authentication probes come from the provider repositories' SDK manifests. Builds import the registry defaults from their separate plugin checkouts. Runtime installation and trust grants are separate host features.
 
