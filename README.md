@@ -16,7 +16,7 @@
   <a href="https://www.aidevs.pt/tools/arrumo/docs"><b>Read the docs</b></a> · <a href="https://www.aidevs.pt/tools/arrumo/docs/user/tutorial">Tutorial</a> · <a href="https://www.aidevs.pt/tools/arrumo/docs/developer">Developers</a> · <a href="https://github.com/aidevs-pt/arrumo-video-editor">The editor</a>
 </p>
 
-[![From brief to finished video, made entirely in Arrumo](https://img.youtube.com/vi/ldBiG89NOvA/maxresdefault.jpg)](https://youtu.be/ldBiG89NOvA)
+[![From brief to finished video, made entirely in Arrumo](.github/media/from-brief-to-finished-video.gif)](https://youtu.be/ldBiG89NOvA)
 
 The documentation covers [Arrumo AI Video Editor](https://github.com/aidevs-pt/arrumo-video-editor), the free, open-source desktop app where an AI agent writes, designs, voices and cuts videos and you review each step. It is published at [aidevs.pt/tools/arrumo/docs](https://www.aidevs.pt/tools/arrumo/docs), with every page in English, Spanish and Portuguese, real app screenshots, and the showcase videos made with Arrumo.
 
