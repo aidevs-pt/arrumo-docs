@@ -1,22 +1,43 @@
 ---
-title: "Usa la transcripción de OpenAI en Arrumo"
-description: "En los ajustes de Arrumo, abre el complemento de OpenAI y guarda una clave de API en su campo secreto."
+title: "Transcribe tu material con OpenAI"
+description: "Usa la conversión de voz a texto de OpenAI, con etiquetas de hablante, como proveedor de transcripción o como alternativa."
 icon: Captions
 ---
 
-En los ajustes de Arrumo, abre el complemento de OpenAI y guarda una clave de API en su campo secreto. La clave del espacio de trabajo tiene prioridad sobre la clave predeterminada de la aplicación. Arrumo guarda ambas en el almacén de credenciales del sistema.
+OpenAI transcribe el habla de tu material para que el agente pueda cortar según lo que se dice y Arrumo pueda escribir los subtítulos. Es una buena alternativa detrás de [ElevenLabs](../elevenlabs/transcription.mdx): cuando el primer proveedor falla o se queda sin saldo, Arrumo pasa al siguiente.
 
-Elige OpenAI en el orden de proveedores de transcripción del espacio de trabajo o al añadir un proceso a la cola. El proceso conserva ese orden. Puedes colocar otro proveedor configurado después.
+Las transcripciones con marcas de tiempo usan `gpt-4o-transcribe-diarize`, que además indica quién habla; el texto simple usa `gpt-transcribe`. Cada archivo puede ocupar hasta 25 MB.
 
-Al verificar la entrega, elige **Generar subtítulos** para el formato que quieras. También puedes activar **Generar automáticamente los subtítulos que falten** al poner el borrador en cola. Ambas acciones envían al proveedor el audio de la salida seleccionada. Usa **Importar SRT** para añadir tus propios subtítulos.
+## Configúralo
 
-## Comprueba la configuración desde la CLI
+<Steps>
+<Step>
 
-Usa estos comandos en una compilación que incluya el proveedor. El comando de estado indica el ámbito configurado sin devolver la clave. El de transcripción sube el WAV y muestra la respuesta normalizada.
+### Añade tu clave
+
+Crea una clave en la [página de claves de API de OpenAI](https://platform.openai.com/api-keys). En Arrumo, abre **Ajustes › Servicios y claves**, busca OpenAI y pégala, para todos los espacios de trabajo o para uno. La misma clave sirve para las [imágenes](images.mdx).
+
+</Step>
+<Step>
+
+### Ponlo en el orden
+
+En **Qué complemento hace cada cosa, en orden**, coloca OpenAI en **Transcripción**: primero para preferirlo, o detrás de ElevenLabs como alternativa. Un vídeo mantiene el orden con el que empezó.
+
+</Step>
+</Steps>
+
+## Subtítulos
+
+- Al poner un vídeo en cola, **Generar automáticamente los subtítulos que falten** envía al primer proveedor de transcripción el audio de cada formato renderizado sin SRT.
+- En la verificación de la entrega, **Generar subtítulos** lo hace para un formato.
+- **Importar SRT** usa los tuyos.
+
+## Compruébalo desde la CLI
 
 ```sh
 arrumo-workspaces ./workspaces.sqlite plugin-credential-status openai 1 api-key
 arrumo-workspaces ./workspaces.sqlite transcribe-wav 1 openai ./sample.wav
 ```
 
-Si falla la generación, comprueba que la salida tenga audio, que el orden de proveedores guardado incluya un adaptador con marcas de tiempo y que la credencial siga configurada.
+El primer comando indica dónde está configurada la clave sin revelarla; el segundo sube el WAV e imprime la transcripción normalizada. Si los subtítulos fallan, comprueba que la salida tiene audio, que el orden del vídeo incluye un proveedor con marcas de tiempo y que la clave sigue siendo válida.

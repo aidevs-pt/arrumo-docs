@@ -1,17 +1,57 @@
 ---
 title: "Usar Arrumo"
-description: "Crea vídeos con Arrumo."
+description: "Todo lo que necesitas para hacer vídeos con Arrumo: instalarlo, configurar tu marca, hacer un vídeo y mantenerlo en marcha."
+icon: Clapperboard
 ---
 
 ![La página de inicio de Arrumo con los vídeos en curso, el calendario de la semana y los perfiles del espacio de trabajo](/tools/arrumo/static/media/app/home.webp)
 
-¿Nuevo en Arrumo? El [tutorial](tutorials/website-to-video.mdx) te lleva de tu sitio web a un vídeo terminado, pantalla a pantalla.
+Arrumo es un editor de vídeo de escritorio en el que un agente de IA hace la edición y tú apruebas cada paso. Describes un vídeo, o traes tu material, y el agente escribe el guion, diseña animaciones con tu marca, pone la voz, lo monta y genera cada formato que publicas. Nada avanza hasta que lo apruebas o pides cambios.
 
-Después, profundiza:
+## Empieza aquí
 
-- [Configura tu marca](brand.mdx) a partir de tu sitio web: contexto, colores, fuentes, logotipos, perfiles y salidas.
-- [Crea una biblioteca de animaciones](animations.mdx) con cortinillas, rótulos y tarjetas finales para reutilizar.
-- [Crea y exporta tu primer vídeo](first-video.mdx): borradores, revisiones, subtítulos, el calendario y la exportación.
-- [Ajustes, actualizaciones y privacidad](settings.mdx): qué puede hacer el agente en tu equipo, cómo mantener Arrumo al día y qué envía.
+<Cards>
+  <Card icon={<Icon name="Download" />} title="Instala Arrumo" href="install.mdx">
+    Descárgalo para Windows, macOS o Linux y conecta tu agente.
+  </Card>
+  <Card icon={<Icon name="Globe" />} title="Tutorial: de tu sitio web a un vídeo terminado" href="tutorials/website-to-video.mdx">
+    Tu primer vídeo, pantalla a pantalla, en alrededor de una hora.
+  </Card>
+  <Card icon={<Icon name="SquarePlay" />} title="Tutorial: trae tu canal de redes sociales" href="tutorials/social-channel.mdx">
+    Configura un espacio de trabajo a partir de tu canal de YouTube, TikTok, Instagram u otra red.
+  </Card>
+</Cards>
+
+## Guías
+
+<Cards>
+  <Card icon={<Icon name="Palette" />} title="Configura tu marca" href="brand.mdx">
+    Contexto, colores, fuentes, logotipos, perfiles y salidas que sigue cada vídeo.
+  </Card>
+  <Card icon={<Icon name="Sparkles" />} title="Crea una biblioteca de animaciones" href="animations.mdx">
+    Cabeceras, rótulos y cierres para reutilizar en cualquier vídeo.
+  </Card>
+  <Card icon={<Icon name="Film" />} title="Crea y exporta tu primer vídeo" href="first-video.mdx">
+    Borradores, revisiones, subtítulos, el calendario y la exportación.
+  </Card>
+  <Card icon={<Icon name="ImagePlay" />} title="Genera medios y edita el sonido" href="media.mdx">
+    Imágenes, clips, música, efectos de sonido y voces, y herramientas para cambiar, limpiar o doblar el audio.
+  </Card>
+  <Card icon={<Icon name="Settings" />} title="Ajustes, actualizaciones y privacidad" href="settings.mdx">
+    Qué puede hacer el agente, cómo mantener Arrumo al día y qué envía.
+  </Card>
+  <Card icon={<Icon name="LifeBuoy" />} title="Solución de problemas" href="troubleshooting.mdx">
+    Respuestas para cuando algo no funciona como esperas.
+  </Card>
+</Cards>
+
+## Cómo se organiza Arrumo
+
+- Un **espacio de trabajo** es una marca o un canal: su contexto, colores, fuentes, logotipos, recursos, animaciones y salidas. Crea uno por cada marca para la que publicas.
+- Un **perfil** es un tipo de vídeo dentro de un espacio, como explicativos semanales o casos de clientes, con sus propias pautas y salidas.
+- Un **vídeo** empieza como borrador: un briefing, tu material o ambos. Al generarlo, el agente avanza por etapas (guion, recursos y animaciones, vistas previas, títulos y miniaturas, render final) y espera tu revisión en cada una.
+- Los **complementos** aportan el agente y los servicios que crean los medios: transcripción, voces, música, imágenes y clips de vídeo. Consulta [Complementos oficiales](../plugins/index.mdx).
+
+Los ajustes siguen las mismas capas: los predeterminados de la app, luego el espacio de trabajo, luego el perfil y luego el vídeo. En los ajustes gana la capa más específica, mientras que el contexto y los comentarios de todas las capas se suman.
 
 [![Ver «Del briefing al vídeo terminado» en YouTube](/tools/arrumo/static/media/videos/03-from-brief-to-finished-video.webp)](https://youtu.be/ldBiG89NOvA)

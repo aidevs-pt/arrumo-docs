@@ -1,13 +1,34 @@
 ---
-title: "Usa as imagens do Gemini no Arrumo"
-description: "Nas definições do Arrumo, abre o plugin do Gemini e guarda uma chave de API no campo secreto."
+title: "Cria miniaturas e imagens com o Gemini"
+description: "Adiciona o Gemini como segundo modelo de imagem para miniaturas e referências de estilo, seguindo até três imagens de referência."
 icon: Images
 ---
 
-Nas definições do Arrumo, abre o plugin do Gemini e guarda uma chave de API no campo secreto. A chave do espaço de trabalho tem prioridade sobre a da aplicação; o Arrumo guarda ambas no cofre de credenciais do sistema e nunca as mostra aos agentes.
+O Gemini cria miniaturas e imagens a partir das tuas referências de estilo. Usa-o junto com a [OpenAI](../openai/images.mdx) ou o [Codex](../codex/setup.mdx#cria-imagens), e coloca-o em primeiro quando preferires o seu estilo.
 
-Quando um formato pede miniaturas, o agente da execução escreve uma instrução por miniatura e o Arrumo pede-as aos fornecedores de imagens pela ordem guardada na execução. O Gemini é ignorado se não tiver chave. As miniaturas ficam guardadas como recursos do espaço de trabalho e aguardam a tua revisão com os títulos e descrições.
+Quando um formato pede miniaturas, o agente escreve uma descrição de imagem por miniatura e o Arrumo pede a imagem aos fornecedores pela ordem do vídeo. As miniaturas geradas ficam guardadas como recursos do espaço de trabalho e esperam pela tua revisão com os títulos e as descrições. Também podes escolher o Gemini em **Feita com**, em **Recursos › Gerar**.
 
-## Escolhe o modelo
+## Configura-o
 
-O plugin usa `gemini-2.5-flash-image` por omissão. Para usar um modelo mais recente, define **Modelo de imagem** nas definições do plugin para a aplicação ou um espaço de trabalho. Deixa vazio para seguir o modelo predefinido do plugin.
+Cria uma chave no [Google AI Studio](https://aistudio.google.com/apikey) e cola-a no Gemini, em **Definições › Serviços e chaves**, para todos os espaços de trabalho ou para um. Em **Que plugin faz o quê, por ordem**, sobe o Gemini em **Geração de imagens** para o preferir. É ignorado quando não tem chave.
+
+## Definições
+
+<TypeTable
+  type={{
+    "Chave de API do Gemini": {
+      description: "Usada para gerar imagens. Guardada no cofre do sistema; os agentes podem usá-la através do Arrumo, mas nunca lê-la.",
+      type: "secreta",
+      required: true,
+    },
+    "Modelo de imagem": {
+      description: "O modelo do Gemini usado para miniaturas e imagens. Deixa-o vazio para seguir a predefinição atual do plugin.",
+      type: "texto",
+      default: "gemini-2.5-flash-image",
+    },
+  }}
+/>
+
+## Tamanhos e referências
+
+O Gemini cria imagens em 16:9, 9:16, 1:1, 4:3 e 3:4, e segue até três imagens de referência de até 20 MB cada.

@@ -1,12 +1,69 @@
 ---
 title: "Configura Claude Code en Arrumo"
-description: "Instala la CLI local e inicia sesión siguiendo la guía del proveedor."
+description: "Instala Claude Code, inicia sesión con tu plan de Claude y elige qué puede hacer el agente mientras edita tus vídeos."
 icon: Bot
 ---
 
-Instala la CLI local e inicia sesión siguiendo la [guía del proveedor](https://code.claude.com/docs/en/setup). Arrumo encuentra la CLI en su PATH y en las carpetas que añade tu shell de inicio de sesión, aunque lo abras desde el Dock, el Finder o un lanzador del escritorio. Si la instalaste en otro sitio, elige su archivo de programa con **Elegir el programa…** en la configuración del agente o en Ajustes.
+Claude Code redacta guiones, planifica recursos, diseña animaciones y traduce subtítulos con tu plan de Claude. Para generar imágenes necesitas una clave de [OpenAI](../openai/images.mdx) o [Gemini](../gemini/images.mdx).
 
-Elige Claude Code al configurar el espacio de trabajo o selecciónalo como agente de producción en Ajustes. La comprobación confirma la sesión local y no inicia ningún montaje.
+## Configúralo
+
+<Steps>
+<Step>
+
+### Instálalo e inicia sesión
+
+Sigue la [guía de instalación de Claude Code](https://code.claude.com/docs/en/setup) para instalar el comando `claude` e iniciar sesión con tu cuenta de Claude. Ejecuta `claude` una vez en una terminal para comprobar que funciona.
+
+</Step>
+<Step>
+
+### Elígelo en Arrumo
+
+Elige Claude Code al crear un espacio de trabajo, o más tarde como agente en **Ajustes › Agente**. Arrumo lo encuentra en tu `PATH` y en las carpetas que añade tu shell de inicio de sesión, incluso cuando abres Arrumo desde el Dock, el Finder o un lanzador del escritorio. Si lo instalaste en otro sitio, usa **Elegir el programa…** y selecciona su archivo de programa.
+
+</Step>
+<Step>
+
+### Comprueba la sesión
+
+Elige **Comprobar inicio de sesión**. **La CLI indica que hay una sesión local** significa que todo está listo. La comprobación no inicia ninguna edición ni gasta tu plan.
+
+</Step>
+</Steps>
+
+## Ajustes
+
+Aparecen en **Ajustes › Agente** para todos los espacios de trabajo, o para uno en **Se aplica a**. Cada vídeo mantiene los ajustes con los que empezó, así que al repetirlo se puede reproducir.
+
+<TypeTable
+  type={{
+    "Escribir archivos y ejecutar comandos": {
+      description: "Permite al agente escribir sus propios scripts y archivos, ejecutar comandos y usar tus complementos, servidores de herramientas y hooks instalados mientras trabaja en un vídeo. Sus archivos se quedan en una carpeta de trabajo de ese vídeo hasta que se termina.",
+      type: "activado o desactivado",
+      default: "activado",
+    },
+    "Búsqueda web": {
+      description: "Permite al agente buscar en la web mientras trabaja, para datos, precios y tendencias.",
+      type: "activado o desactivado",
+      default: "desactivado",
+    },
+    "Modelo": {
+      description: "El modelo de Claude para el agente de este espacio de trabajo, como sonnet u opus. Déjalo vacío para usar el predeterminado de Claude Code.",
+      type: "texto",
+    },
+    "Esfuerzo de razonamiento": {
+      description: "Cuánto piensa el agente antes de responder. Más esfuerzo da mejores guiones y ediciones, pero tarda más.",
+      type: "low, medium, high, xhigh, max",
+      default: "medium",
+    },
+    "Usar mis complementos instalados": {
+      description: "Permite al agente usar los complementos y servidores de herramientas (MCP) que instalaste para Claude Code, mientras Escribir archivos y ejecutar comandos está desactivado. Pueden ver el material del espacio que recibe el agente, así que actívalo solo con los que sean de confianza.",
+      type: "activado o desactivado",
+      default: "desactivado",
+    },
+  }}
+/>
 
 ## Comprueba la conexión
 

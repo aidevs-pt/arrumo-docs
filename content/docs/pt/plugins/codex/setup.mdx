@@ -1,12 +1,69 @@
 ---
 title: "Configura Codex no Arrumo"
-description: "Instala a CLI local e inicia sessão seguindo o guia do fornecedor."
+description: "Instala o Codex, inicia sessão com o teu plano do ChatGPT e escolhe o que o agente pode fazer enquanto edita os teus vídeos."
 icon: SquareTerminal
 ---
 
-Instala a CLI local e inicia sessão seguindo o [guia do fornecedor](https://learn.chatgpt.com/docs/codex/cli). O Arrumo encontra a CLI no seu PATH e nas pastas que a tua shell de início de sessão acrescenta, mesmo quando o abres a partir da Dock, do Finder ou de um lançador do ambiente de trabalho. Se a instalaste noutro sítio, escolhe o ficheiro do programa com **Escolher o programa…** na configuração do agente ou nas Definições.
+O Codex redige guiões, planeia recursos, desenha animações e traduz legendas com o teu plano do ChatGPT. Também [cria miniaturas e imagens](#cria-imagens) com a sua ferramenta de imagens integrada, por isso precisas de menos uma chave.
 
-Escolhe Codex durante a configuração do espaço de trabalho ou seleciona-o como agente de produção nas Definições. A verificação confirma a sessão local e não inicia uma edição.
+## Configura-o
+
+<Steps>
+<Step>
+
+### Instala-o e inicia sessão
+
+Segue o [guia de instalação do Codex](https://learn.chatgpt.com/docs/codex/cli) para instalar o comando `codex` e iniciar sessão com a tua conta do ChatGPT. Corre `codex` uma vez num terminal para verificar que funciona.
+
+</Step>
+<Step>
+
+### Escolhe-o no Arrumo
+
+Escolhe o Codex ao criar um espaço de trabalho, ou mais tarde como agente em **Definições › Agente**. O Arrumo encontra-o no teu `PATH` e nas pastas que a tua shell de sessão acrescenta, mesmo quando abres o Arrumo a partir da Dock, do Finder ou de um lançador do ambiente de trabalho. Se o instalaste noutro sítio, usa **Escolher o programa…** e seleciona o ficheiro do programa.
+
+</Step>
+<Step>
+
+### Verifica a sessão
+
+Escolhe **Verificar sessão**. **A CLI indica uma sessão local** significa que está tudo pronto. A verificação não inicia nenhuma edição nem gasta o teu plano.
+
+</Step>
+</Steps>
+
+## Definições
+
+Aparecem em **Definições › Agente** para todos os espaços de trabalho, ou para um em **Aplica-se a**. Cada vídeo mantém as definições com que começou, por isso ao repeti-lo pode ser reproduzido.
+
+<TypeTable
+  type={{
+    "Escrever ficheiros e executar comandos": {
+      description: "Deixa o agente escrever os seus próprios scripts e ficheiros, executar comandos e usar os teus plugins, servidores de ferramentas e hooks instalados enquanto trabalha num vídeo. Os ficheiros ficam numa pasta de trabalho desse vídeo até estar concluído.",
+      type: "ativado ou desativado",
+      default: "ativado",
+    },
+    "Pesquisa na web": {
+      description: "Deixa o agente pesquisar na web enquanto trabalha, para factos, preços e tendências.",
+      type: "ativado ou desativado",
+      default: "desativado",
+    },
+    "Modelo": {
+      description: "O modelo do Codex para o agente deste espaço de trabalho. Deixa-o vazio para usar a predefinição do Codex.",
+      type: "texto",
+    },
+    "Esforço de raciocínio": {
+      description: "Quanto o agente pensa antes de responder. Mais esforço dá melhores guiões e edições, mas demora mais.",
+      type: "minimal, low, medium, high, xhigh",
+      default: "medium",
+    },
+    "Usar os meus plugins instalados": {
+      description: "Deixa o agente usar a tua própria configuração, plugins e servidores de ferramentas (MCP) do Codex, enquanto Escrever ficheiros e executar comandos está desativado. Podem ver o material do espaço que o agente recebe, por isso ativa-o só para os que forem de confiança.",
+      type: "ativado ou desativado",
+      default: "desativado",
+    },
+  }}
+/>
 
 ## Verifica a ligação
 

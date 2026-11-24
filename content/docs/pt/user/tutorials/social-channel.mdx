@@ -1,0 +1,139 @@
+---
+title: "Traz o teu canal de redes sociais para o Arrumo"
+description: "Transforma um canal de YouTube, TikTok, Instagram ou outra rede num espaço de trabalho que sabe quem és, que aspeto tens, o que publicas e onde."
+icon: SquarePlay
+---
+
+No fim deste tutorial tens um espaço de trabalho feito a partir do teu canal: um **Sobre ti** que o agente redigiu com as tuas páginas públicas, as cores da tua marca e o teu avatar, as tuas miniaturas como referências de estilo, um perfil para cada tipo de vídeo que fazes, uma saída para cada plataforma onde publicas e os teus vídeos em **Recursos**, prontos a reutilizar. Demora cerca de vinte minutos.
+
+Precisas do Arrumo e de um agente, o [Claude Code](../../plugins/claude-code/setup.mdx) ou o [Codex](../../plugins/codex/setup.mdx), instalado e com sessão iniciada.
+
+<Callout title="O que o Arrumo lê, e o que não lê">
+  O Arrumo abre cada link no teu computador como um visitante sem sessão iniciada, fica com o nome, a descrição, o texto visível, as imagens e a cor do tema da página, e entrega isso ao teu agente para redigir. Nunca inicia sessão nas tuas contas nem transfere os teus vídeos ou publicações, e não lê as tuas estatísticas, comentários nem conteúdo privado. Nada é guardado até carregares em **Guardar**.
+</Callout>
+
+## O que cada plataforma mostra
+
+Cada plataforma decide o que um visitante sem sessão pode ver, por isso alguns links dão ao agente muito mais material do que outros. Foi isto que o Arrumo encontrou em cada uma quando o testámos em novembro de 2026; as plataformas mudam as suas páginas, por isso usa-o como orientação.
+
+| Plataforma                          | Link a adicionar             | O que o Arrumo obtém                                                                             |
+| ----------------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------ |
+| YouTube                             | `youtube.com/@oteucanal`     | Nome, descrição e avatar do canal, e as miniaturas dos vídeos que aparecem na página.            |
+| Vídeo do YouTube                    | `youtube.com/watch?v=…`      | O título e a descrição completa do vídeo: uma boa amostra de como escreves.                      |
+| Instagram                           | `instagram.com/oteunome`     | Nome, número de seguidores e publicações, o início da tua biografia e a tua foto de perfil.      |
+| TikTok                              | `tiktok.com/@oteunome`       | Muitas vezes só o título da página. Acrescenta a tua biografia nas notas, ou liga o teu site ou a tua página de links. |
+| X, Threads, Bluesky                 | o teu perfil                 | Nome, biografia e foto de perfil.                                                                |
+| LinkedIn, Facebook, Twitch          | a tua página                 | Nome, descrição e imagem.                                                                        |
+| O teu site ou página de links       | a página inicial ou «sobre»  | Costuma ser a fonte mais rica: quem és, o que ofereces, o teu logótipo e as tuas cores.          |
+
+<Callout type="info" title="Escolhe os links que te descrevem">
+  Podes adicionar até oito. Um bom conjunto é o teu canal principal, dois ou três dos teus melhores vídeos, os teus outros perfis e o teu site. O Arrumo lê só a página de cada endereço, não as páginas para onde ela aponta.
+</Callout>
+
+<Steps>
+<Step>
+
+### Cria o espaço de trabalho e adiciona os teus links
+
+Na primeira vez que abres o Arrumo, ele pede um nome para o espaço de trabalho, o agente a usar e **Links para ler**. Cola primeiro o teu canal e depois os restantes, e escolhe **Criar … e ler os links** (mostra o nome do teu espaço).
+
+Para um espaço que já tens, abre **Definições do espaço › Contexto**. Em **Onde pode Claude Code conhecer-te?** (aparece o nome do teu agente), cola um link em **Ligações**, usa **Adicionar outra ligação** para cada um dos outros e escolhe **Redigir o meu contexto**.
+
+![Definições do espaço, Contexto: os links que o agente leu e o Sobre ti que redigiu](/tools/arrumo/static/media/app/context.webp)
+
+Usa **Mais alguma coisa a saber** para o que as tuas páginas não dizem: o que fazes, para quem e como gostas de soar, e, no caso do TikTok, a tua biografia. Ler e redigir demora cerca de um minuto.
+
+</Step>
+<Step>
+
+### Revê o Sobre ti
+
+O agente escreve o **Sobre ti** com as mesmas secções para cada criador: quem és, o que fazes, público, voz e tom, estilo visual, o que fazer e o que evitar, e links. Só preenche o que as tuas páginas e notas sustentam, e deixa uma indicação curta entre [parênteses retos] onde não conseguiu saber.
+
+Lê-o como o briefing de um editor novo. Substitui cada indicação, corrige o que tenha suposto e acrescenta o que todos os vídeos devem respeitar, como a forma como começas, as palavras que nunca usas ou a chamada à ação com que terminas sempre. Depois carrega em **Guardar**. Cada guião, corte e título parte desta página.
+
+</Step>
+<Step>
+
+### Fica com o que encontrou nas tuas páginas
+
+Em **Também nas tuas páginas**, o agente oferece:
+
+- **Cores da marca** que conseguiu perceber pelas tuas páginas, como a cor do tema e os tons do teu avatar.
+- **Imagens**, já com nome, agrupadas e descritas: o teu avatar e os teus logótipos como recursos de marca, as miniaturas dos teus vídeos como referências de miniatura com notas sobre o seu estilo, para que as novas condigam, e outras imagens úteis como recursos.
+
+Desmarca o que não quiseres e escolhe **Adicionar … ao espaço** (o botão conta o que está marcado). O Arrumo transfere as imagens para o espaço de trabalho e avisa-te se alguma não pôde ser transferida.
+
+Se publicas tipos de vídeo diferentes, como uma série semanal e dicas curtas, o agente também mostra **Perfis sugeridos**, cada um com orientações de edição e uma cor. Escolhe **Criar perfil** nos que fizerem sentido.
+
+</Step>
+<Step>
+
+### Revê a tua marca
+
+Abre **Definições do espaço › Marca**. Dá nome a cada cor e marca as que os vídeos podem usar; um avatar raramente traz uma paleta completa, por isso acrescenta à mão as cores em falta. Adiciona as tuas fontes de títulos e de texto, Regular e Bold, para que as animações as usem. Vê [Configura a tua marca](../brand.mdx) para todas as opções.
+
+</Step>
+<Step>
+
+### Adiciona uma saída para cada plataforma
+
+Abre **Definições do espaço › Saídas**. Cada espaço começa com um formato **horizontal** (1920 × 1080) e um **vertical** (1080 × 1920):
+
+- **Horizontal** para os vídeos do YouTube.
+- **Vertical** para Shorts, TikTok e Reels. No horizontal, pede **Cortes verticais** para receberes também clipes verticais curtos tirados de cada vídeo aprovado.
+- **Adicionar formato** para tudo o resto, como uma publicação quadrada.
+
+Em cada formato, pede títulos, descrições, etiquetas e miniaturas, e escreve as regras da plataforma em **Especificações adicionais**, como «títulos com menos de 60 caracteres» ou «termina cada descrição com um link para a newsletter».
+
+![A saída horizontal com miniaturas e imagens de referência](/tools/arrumo/static/media/app/outputs.webp)
+
+</Step>
+<Step>
+
+### Traz os teus vídeos
+
+O Arrumo não transfere vídeos das plataformas. Para reutilizares os teus, como material para vídeos novos ou para cortes verticais, transfere os originais com as ferramentas de cada plataforma: o YouTube Studio deixa-te transferir os vídeos que carregaste, e o TikTok e o Instagram incluem os teus vídeos quando transferes os dados da tua conta nas definições. Se ainda tens as gravações originais, melhor ainda.
+
+Depois abre **Recursos** e escolhe **Carregar**. Descreve cada vídeo nas notas para que o agente saiba o que contém. Para fazer um vídeo com eles, adiciona-os a um rascunho novo em **Vídeos › Rascunhos**, como em [Cria e exporta o teu primeiro vídeo](../first-video.mdx).
+
+</Step>
+<Step>
+
+### Volta a ler os teus links mais tarde
+
+O **Contexto** guarda os links que leu e mostra **Lida** ou **Não foi possível ler** em cada um. Quando o teu canal mudar, abre-o de novo: vês quando foram lidos pela última vez e podes voltar a lê-los ou adicionar mais. Esquece um link que já não queres com o botão ao lado.
+
+</Step>
+</Steps>
+
+## Quando um link não pode ser lido
+
+<Accordions>
+  <Accordion title="Nenhuma ligação pôde ser lida">
+    Verifica cada endereço numa janela privada do navegador. O Arrumo só lê páginas públicas da internet, nunca endereços da tua própria rede. Se os teus perfis são privados ou pedem sessão iniciada, escreve algumas palavras sobre ti em **Mais alguma coisa a saber** e redige a partir delas, ou liga o teu site.
+  </Accordion>
+  <Accordion title="Um link mostra Não foi possível ler">
+    A página pode pedir sessão iniciada, ser privada, não existir ou ter demorado demasiado a responder. Algumas plataformas mostram antes uma página de consentimento ou de região. Experimenta o endereço simples do perfil (`instagram.com/oteunome` em vez de um link de partilha) ou substitui-o por outra página que te descreva.
+  </Accordion>
+  <Accordion title="O rascunho é pobre ou genérico">
+    As páginas tinham pouco texto, como acontece muitas vezes com os perfis do TikTok. Adiciona links para alguns dos teus vídeos, para o teu site ou para a tua página de links, escreve algumas linhas em **Mais alguma coisa a saber** e redige de novo. Também podes editar o **Sobre ti** à mão quando quiseres.
+  </Accordion>
+  <Accordion title="Não encontrou miniaturas">
+    Só o YouTube mostra as miniaturas dos vídeos na página do canal. Para outras plataformas, guarda algumas das tuas miniaturas ou capas e carrega-as em **Imagens de referência para miniaturas** do formato, em **Saídas**.
+  </Accordion>
+</Accordions>
+
+## Com um agente
+
+Tudo isto também está disponível para agentes por [MCP, CLI e A2A](../../developer/connect.mdx):
+
+| Ferramenta                 | O que faz                                                                                                         |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `draft_workspace_context`  | Lê até oito páginas públicas e devolve um rascunho do contexto, dos perfis, das cores e das imagens, sem o guardar. |
+| `set_workspace_context`    | Guarda o Markdown do contexto.                                                                                    |
+| `import_workspace_context` | Adiciona ao espaço de trabalho as cores, imagens e perfis escolhidos de um rascunho.                              |
+| `list_context_sources`     | Lista os links lidos, se puderam ser lidos e quando.                                                              |
+| `forget_context_source`    | Esquece um link.                                                                                                  |
+
+A seguir, cria algumas [animações reutilizáveis](../animations.mdx) e segue [Do teu site a um vídeo concluído](website-to-video.mdx) a partir do passo 4 para fazeres o teu primeiro vídeo.

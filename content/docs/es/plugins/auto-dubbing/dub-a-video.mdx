@@ -1,12 +1,38 @@
 ---
 title: "Dobla un vídeo terminado"
-description: "Parte de una entrega verificada, una pista de subtítulos en el idioma de destino y un proveedor y una voz configurados."
+description: "Traduce los subtítulos de un vídeo terminado y ponles voz en otro idioma, manteniendo cada subtítulo a tiempo, y añade el doblaje junto a las salidas originales."
 icon: Languages
 ---
 
-Parte de una entrega verificada, una pista de subtítulos en el idioma de destino y un proveedor y una voz configurados. Ejecuta estos pasos desde el repositorio de Auto-Dubbing o desde el paquete extraído.
+Auto-Dubbing lleva un vídeo terminado a otros idiomas. Traduce los subtítulos uno a uno, pone voz a cada uno con tu proveedor de voz, coloca cada clip en el momento de su subtítulo y añade el MP4 doblado junto a la salida original.
 
-## Previsualiza la solicitud
+<Callout type="warn" title="Por ahora, una parte se ejecuta desde la línea de comandos">
+  En la app, las acciones de Auto-Dubbing preparan y montan las traducciones de los subtítulos. La voz y el render del doblaje se hacen con sus herramientas de línea de comandos, que se muestran abajo. Para doblar un solo clip desde **Recursos** en un par de clics, usa el [doblaje de ElevenLabs](../elevenlabs/audio-tools.mdx).
+</Callout>
+
+## Qué necesitas
+
+- Un vídeo terminado cuya entrega haya pasado la verificación, con sus subtítulos.
+- Un proveedor de voz con clave y una voz, como [ElevenLabs](../elevenlabs/narration.mdx), el primero en **Texto a voz**.
+- Una traducción de los subtítulos al idioma de destino, o un traductor: [Claude Code](../claude-code/setup.mdx) y [Codex](../codex/setup.mdx) pueden traducir subtítulos.
+
+## En la app
+
+Abre un vídeo terminado y busca **Acciones de complementos**. Auto-Dubbing ofrece tres, cada una sobre una pista SRT:
+
+| Acción                            | Qué hace                                                                                       |
+| --------------------------------- | ---------------------------------------------------------------------------------------------- |
+| **Leer subtítulos**               | Lista el texto de cada subtítulo, listo para traducir.                                         |
+| **Montar subtítulos traducidos**  | Vuelve a poner el texto traducido en los tiempos originales y devuelve el SRT traducido.       |
+| **Planificar segmentos de voz**   | Lista el texto de cada subtítulo con el intervalo en el que debe caber su voz, para sintetizarla. |
+
+Elige los subtítulos del vídeo o abre un archivo SRT de hasta 64 KiB, ejecuta la acción y copia el resultado. Guarda un SRT traducido como pista de idioma de la salida con **Importar SRT**.
+
+## Dobla desde la línea de comandos
+
+Ejecuta estos comandos desde el [repositorio de Auto-Dubbing](https://github.com/aidevs-pt/arrumo-plugin-auto-dubbing) o desde el paquete del complemento descomprimido. Usan el FFmpeg que viene con Arrumo: en Linux está en el `PATH`; en macOS y Windows, apunta `ARRUMO_FFMPEG` y `ARRUMO_FFPROBE` a `arrumo-ffmpeg` y `arrumo-ffprobe`, junto al ejecutable de la app.
+
+### Previsualiza la solicitud
 
 El ejemplo selecciona el espacio de trabajo 1, la ejecución 42 y el formato 3. Sustituye los identificadores, las rutas, el idioma y la voz por los tuyos. La vista previa indica las pistas disponibles y las solicitudes previstas para los subtítulos conocidos. No llama a ningún proveedor.
 
@@ -14,7 +40,7 @@ El ejemplo selecciona el espacio de trabajo 1, la ejecución 42 y el formato 3. 
 python3 tools/dub-completed-output.py /path/to/arrumo-workspaces /path/to/workspaces.sqlite 1 42 3 es elevenlabs YOUR_VOICE_ID --dry-run
 ```
 
-## Renderiza y exporta
+### Renderiza y exporta
 
 Cuando el plan esté listo, vuelve a ejecutar el comando sin la opción de vista previa. Usa all en lugar del identificador del formato para doblar todas las salidas verificadas, o añade formatos concretos con `--additional-format`. Si falta una pista traducida, puedes importarla en el vídeo terminado o usar un traductor compatible.
 

@@ -1,22 +1,49 @@
 ---
-title: "Usa a transcrição do ElevenLabs no Arrumo"
-description: "Nas definições do Arrumo, abre o plugin do ElevenLabs e guarda uma chave de API no campo de segredo."
+title: "Transcreve as tuas gravações com a ElevenLabs"
+description: "Deixa o agente cortar pelo que é dito e obtém legendas sincronizadas palavra a palavra com a conversão de voz para texto da ElevenLabs."
 icon: Captions
 ---
 
-Nas definições do Arrumo, abre o plugin do ElevenLabs e guarda uma chave de API no campo de segredo. A chave do espaço de trabalho tem prioridade sobre a chave predefinida da aplicação. O Arrumo guarda ambas no armazenamento de credenciais do sistema.
+A transcrição converte a fala das tuas gravações em texto com o momento de cada palavra. O agente lê-a para planear os cortes pelo que é dito, e o Arrumo usa-a para as legendas. A ElevenLabs transcreve com o modelo `scribe_v2`, palavra a palavra.
 
-Escolhe o ElevenLabs na ordem de fornecedores de transcrição do espaço de trabalho ou ao colocar uma execução na fila. A execução mantém essa ordem. Podes colocar outro fornecedor configurado a seguir.
+## Configura-a
 
-Na verificação da entrega, escolhe **Gerar legendas** para o formato que queres. Também podes ativar **Gerar automaticamente as legendas em falta** ao colocar o rascunho na fila. As duas ações enviam para o fornecedor o áudio da saída selecionada. Usa **Importar SRT** para forneceres as tuas próprias legendas.
+<Steps>
+<Step>
 
-## Verifica a configuração na CLI
+### Adiciona a tua chave
 
-Usa estes comandos numa compilação que inclua o fornecedor. O comando de estado indica o âmbito configurado sem devolver a chave. O comando de transcrição envia o WAV e apresenta a resposta normalizada.
+Abre **Definições › Serviços e chaves**, procura a ElevenLabs e cola uma chave de API da [ElevenLabs](https://elevenlabs.io/app/settings/api-keys). A chave de um espaço de trabalho tem prioridade sobre a da app. A mesma chave serve para a [narração](narration.mdx).
+
+</Step>
+<Step>
+
+### Coloca-a na ordem
+
+Em **Que plugin faz o quê, por ordem**, coloca a ElevenLabs onde a quiseres para **Transcrição**. Põe a [OpenAI](../openai/transcription.mdx) a seguir como alternativa se tiveres chave. Um vídeo mantém a ordem com que começou.
+
+</Step>
+</Steps>
+
+## Legendas
+
+- Ao colocar um vídeo na fila, ativa **Gerar automaticamente as legendas em falta** para que o Arrumo envie ao primeiro fornecedor de transcrição o áudio de cada formato renderizado sem SRT.
+- Na verificação da entrega, escolhe **Gerar legendas** num formato para as fazer só para esse formato.
+- Usa **Importar SRT** para trazeres as tuas.
+
+Ambas as opções enviam ao fornecedor o áudio dessa saída. Cada ficheiro pode ter até 32 MB.
+
+<Callout title="Escrito sem ouvir os teus clipes?">
+  Quando nenhum fornecedor de transcrição tem chave, o agente escreve o guião sem transcrição e indica-o. Adiciona uma chave e escolhe **Pedir alterações** para que o refaça a partir do que disseste.
+</Callout>
+
+## Verifica a partir da CLI
+
+Numa versão que inclua o fornecedor, verifica o âmbito da chave sem a revelar e transcreve um WAV para veres o resultado normalizado:
 
 ```sh
 arrumo-workspaces ./workspaces.sqlite plugin-credential-status elevenlabs 1 api-key
 arrumo-workspaces ./workspaces.sqlite transcribe-wav 1 elevenlabs ./sample.wav
 ```
 
-Se a geração falhar, confirma que a saída tem áudio, que a ordem de fornecedores guardada inclui um adaptador com marcas temporais e que a credencial continua configurada.
+Se as legendas falharem, verifica que a saída tem áudio, que a ordem de fornecedores do vídeo inclui um fornecedor de transcrição com marcas de tempo e que a chave continua válida.

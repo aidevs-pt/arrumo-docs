@@ -1,0 +1,90 @@
+---
+title: "Resolução de problemas"
+description: "O que fazer quando o agente não é encontrado, um vídeo para, as legendas falham, um fornecedor fica sem saldo ou o Arrumo não abre."
+icon: LifeBuoy
+---
+
+Procura a mensagem que vês ou o sintoma mais parecido. Se nada disto ajudar, pesquisa nas [issues](https://github.com/aidevs-pt/arrumo-video-editor/issues) ou abre uma nova com a tua versão do Arrumo (**Definições › Sobre**) e o que fizeste.
+
+## O agente
+
+<Accordions>
+  <Accordion title="CLI do agente não encontrada" id="agent-not-found">
+    O Arrumo procura o agente nas tuas pastas de programas habituais e nas que a tua shell de sessão acrescenta. Verifica que o [Claude Code](../plugins/claude-code/setup.mdx) ou o [Codex](../plugins/codex/setup.mdx) funciona num terminal e escolhe **Verificar novamente** em **Definições › Agente**. Se estiver instalado num sítio pouco habitual, escolhe **Escolher o programa…** e seleciona o ficheiro do programa do agente, o que tem o nome dele (`claude` ou `codex`). **Procurar automaticamente** volta a procurá-lo sozinho.
+  </Accordion>
+  <Accordion title="A CLI não confirmou a sessão" id="agent-sign-in">
+    O Arrumo encontrou o agente, mas a sessão não está iniciada. Inicia sessão num terminal seguindo o guia do agente e escolhe **Verificar sessão**. Se a verificação esgotou o tempo ou não pôde correr, normalmente o agente está a atualizar-se ou à espera de uma resposta: corre-o uma vez num terminal e tenta de novo.
+  </Accordion>
+  <Accordion title="O agente parou a meio de um vídeo" id="run-stopped">
+    Abre o vídeo em **Em produção**. A atividade mostra o passo que parou e porquê. Escolhe **Tentar novamente** para repetir esse passo, ou **Pedir alterações** se o problema estiver no que o agente fez. Os limites do plano são uma causa frequente: a utilização em **Definições › Serviços e chaves** mostra quando renovam.
+  </Accordion>
+  <Accordion title="O agente alterou ficheiros que eu não esperava" id="agent-files">
+    Com **Escrever ficheiros e executar comandos** ativado, o agente trabalha numa pasta própria para cada vídeo, mas com as permissões da tua conta. Desativa-o em **Definições › Agente** para que só leia. Vê [O que o agente pode fazer](settings.mdx#o-que-o-agente-pode-fazer).
+  </Accordion>
+</Accordions>
+
+## Vídeos e render
+
+<Accordions>
+  <Accordion title="O Arrumo não encontra o FFmpeg" id="ffmpeg">
+    O Arrumo traz o seu próprio FFmpeg para as pré-visualizações, o render e a exportação. Esta mensagem indica que essa cópia falta ou não arranca: reinstala o Arrumo para a recuperar. Se corres o Arrumo a partir do código, instala o FFmpeg e garante que `ffmpeg` e `ffprobe` estão no teu `PATH`.
+  </Accordion>
+  <Accordion title="As pré-visualizações ficam pretas ou sem som no Linux" id="linux-playback">
+    O Arrumo reproduz vídeo com o GStreamer. Os pacotes `.deb` e `.rpm` instalam os plugins de que precisa; se o instalaste de outra forma, acrescenta `gstreamer1.0-plugins-good` e `gstreamer1.0-libav` (Debian e Ubuntu) ou `gstreamer1-plugins-good` e `gstreamer1-plugin-libav` (Fedora). A AppImage traz os seus.
+  </Accordion>
+  <Accordion title="O render está lento" id="slow-previews">
+    As pré-visualizações são geradas no tamanho de **Definições › Qualidade › Tamanho da pré-visualização**. Escolhe o tamanho recomendado para o teu computador, ou um menor: o render final sai sempre em qualidade total. Os vídeos já em fila mantêm o seu tamanho.
+  </Accordion>
+  <Accordion title="Fechei o Arrumo enquanto um vídeo estava a ser gerado" id="closed-while-generating">
+    Não se perde nada. **Fechar e pausar** para no passo atual e cada vídeo continua daí da próxima vez que abrires o Arrumo. As atualizações fazem o mesmo.
+  </Accordion>
+</Accordions>
+
+## Legendas, vozes e media
+
+<Accordions>
+  <Accordion title="Escrito sem ouvir os teus clipes" id="no-transcript">
+    O agente escreveu o guião sem uma transcrição das tuas gravações porque nenhum fornecedor de transcrição tinha chave. Adiciona uma chave da [ElevenLabs](../plugins/elevenlabs/transcription.mdx) ou da [OpenAI](../plugins/openai/transcription.mdx) em **Definições › Serviços e chaves** e depois **Pedir alterações** para que o agente o refaça a partir do que disseste.
+  </Accordion>
+  <Accordion title="As legendas não foram geradas" id="subtitles">
+    Verifica que a saída tem áudio, que há na ordem um fornecedor de transcrição com chave e que a chave continua válida. Também podes ativar **Gerar automaticamente as legendas em falta** ao colocar o vídeo na fila, ou usar **Importar SRT** para trazeres as tuas.
+  </Accordion>
+  <Accordion title="O vídeo não tem narração" id="no-narration">
+    Sem um fornecedor de voz, os vídeos feitos do zero usam texto no ecrã. Adiciona uma chave da [ElevenLabs](../plugins/elevenlabs/narration.mdx) e escolhe uma voz nas definições. Se a síntese falhar, a pré-visualização é feita sem narração e o resumo explica porquê.
+  </Accordion>
+  <Accordion title="Um fornecedor ficou sem créditos" id="credits">
+    Aparece um aviso com 20% restante, que fica vermelho com 10%. As gerações que precisam desse fornecedor param nesse passo quando acaba. Carrega a conta ou desce o fornecedor em **Que plugin faz o quê, por ordem** para que seja usado o seguinte. Vê [Acompanha os teus créditos](media.mdx#acompanha-os-teus-créditos).
+  </Accordion>
+  <Accordion title="Não há nenhum fornecedor de imagem, música ou vídeo ativado" id="no-provider">
+    **Gerar** precisa de um fornecedor ativado e com chave. Abre **Definições › Serviços e chaves**, adiciona a chave e verifica que o plugin está ativado em **Definições › Plugins**.
+  </Accordion>
+</Accordions>
+
+## Espaços de trabalho e dados
+
+<Accordions>
+  <Accordion title="Nenhuma ligação pôde ser lida" id="links">
+    O Arrumo só lê páginas públicas. Vê [Quando um link não pode ser lido](tutorials/social-channel.mdx#quando-um-link-não-pode-ser-lido).
+  </Accordion>
+  <Accordion title="Uma cópia de segurança não é importada" id="backup">
+    **Este ficheiro não é uma cópia do Arrumo** significa que o `.zip` não foi feito com **Exportar .zip**. **Esta cópia foi alterada ou danificada** significa que as somas de verificação não coincidem, por isso não foi restaurada: exporta-a de novo. **Esta cópia precisa de uma versão mais recente do Arrumo** significa que tens de atualizar primeiro.
+  </Accordion>
+  <Accordion title="Quero começar do zero" id="start-over">
+    Exporta antes uma cópia em **Definições › Importar e exportar**. Depois fecha o Arrumo e move a pasta de dados para outro sítio: `%APPDATA%\pt.aidevs.arrumo` no Windows, `~/Library/Application Support/pt.aidevs.arrumo` no macOS, `~/.local/share/pt.aidevs.arrumo` no Linux. O Arrumo começa de novo da próxima vez que o abrires. As tuas chaves ficam no cofre do sistema.
+  </Accordion>
+</Accordions>
+
+## Instalação e atualizações
+
+<Accordions>
+  <Accordion title="O Windows protegeu o seu PC, ou o macOS não consegue verificar a app" id="unsigned">
+    As versões ainda não assinadas pedem confirmação antes de abrir da primeira vez. Vê [Instala o Arrumo](install.mdx) para os passos em cada sistema.
+  </Accordion>
+  <Accordion title="Uma versão nova não arranca" id="broken-update">
+    O arranque seguinte procura uma correção antes de tudo e instala-a sem perguntar, por isso uma versão avariada pode sempre ser substituída. Se continuar sem arrancar, descarrega a versão mais recente nas [versões](https://github.com/aidevs-pt/arrumo-video-editor/releases) e instala-a por cima da anterior; os teus dados mantêm-se.
+  </Accordion>
+</Accordions>
+
+<Callout title="Comunica um problema">
+  Os relatórios de erros, quando ativos, enviam o erro e a versão da app para o podermos corrigir sem o teu conteúdo. Para tudo o resto, [abre uma issue](https://github.com/aidevs-pt/arrumo-video-editor/issues/new/choose). Comunica problemas de segurança em privado, como descreve a [política de segurança](https://github.com/aidevs-pt/arrumo-video-editor/security/policy).
+</Callout>

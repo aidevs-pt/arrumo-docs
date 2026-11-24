@@ -1,17 +1,65 @@
 ---
 title: "Plugins oficiais"
-description: "Plugins criados e mantidos pela DEVS AI."
+description: "Os agentes e fornecedores de media criados e mantidos pela DEVS AI, o que cada um faz e como os configurar."
 icon: Puzzle
 ---
 
-Estes plugins vêm do [registo oficial](https://github.com/aidevs-pt/arrumo-plugin-registry). O Arrumo instala-os no primeiro arranque e ativa-os; os plugins que importares começam desativados. Ativa ou desativa cada um com o interruptor na respetiva página em **Definições › Plugins**. Um plugin desativado mantém as definições, mas o Arrumo não o usa.
+O agente do Arrumo e cada serviço que usa para criar media vêm de plugins. Os oficiais vêm do [registo oficial](https://github.com/aidevs-pt/arrumo-plugin-registry): o Arrumo instala-os no primeiro arranque, ativa-os e atualiza-os dentro da própria app com versões verificadas. Os plugins que importas começam desativados.
 
-| Plugin                                       | O que faz                                                              |
-| -------------------------------------------- | ---------------------------------------------------------------------- |
-| [Auto-Dubbing](auto-dubbing/dub-a-video.mdx)  | Dobra vídeos terminados para outras línguas.                           |
-| [Claude Code](claude-code/setup.mdx)          | Agente de edição com a tua sessão local do Claude Code.                |
-| [Codex](codex/setup.mdx)                      | Agente de edição com a tua sessão local do Codex; também cria imagens. |
-| [ElevenLabs](elevenlabs/transcription.mdx)    | Transcrição e narração.                                                |
-| [Gemini](gemini/images.mdx)                   | Miniaturas e imagens.                                                  |
-| [Higgsfield](higgsfield/video-and-images.mdx) | Clipes de vídeo e imagens gerados.                                     |
-| [OpenAI](openai/transcription.mdx)            | Transcrição e imagens.                                                 |
+Ativa ou desativa cada plugin com o interruptor na sua página em **Definições › Plugins**. Um plugin desativado mantém as definições, mas o Arrumo não o usa. As chaves vão em **Definições › Serviços e chaves**, para todos os espaços de trabalho ou para um: a chave de um espaço tem prioridade sobre a da app. Ficam guardadas cifradas no cofre do teu sistema, e os agentes usam-nas através do Arrumo sem nunca as conseguirem ler.
+
+## Agentes
+
+O agente escreve guiões, planeia recursos, desenha animações e toma as decisões de edição. Corre no teu computador, com a sessão do teu próprio plano.
+
+<Cards>
+  <Card icon={<Icon name="Bot" />} title="Claude Code" href="claude-code/setup.mdx">
+    Usa o teu plano do Claude. Redige guiões, planeia recursos e traduz legendas.
+  </Card>
+  <Card icon={<Icon name="SquareTerminal" />} title="Codex" href="codex/setup.mdx">
+    Usa o teu plano do ChatGPT e também cria miniaturas e imagens, por isso precisas de menos uma chave.
+  </Card>
+</Cards>
+
+## Fornecedores de media
+
+<Cards>
+  <Card icon={<Icon name="AudioLines" />} title="ElevenLabs" href="elevenlabs/narration.mdx">
+    Narração com cinco modelos de voz, transcrição, música, efeitos sonoros, mudança e isolamento de voz, e dobragem para 29 línguas.
+  </Card>
+  <Card icon={<Icon name="Sparkle" />} title="OpenAI" href="openai/transcription.mdx">
+    Transcrição com identificação de oradores e imagens para miniaturas e referências de estilo.
+  </Card>
+  <Card icon={<Icon name="Images" />} title="Gemini" href="gemini/images.mdx">
+    Um segundo modelo de imagem para miniaturas e referências de estilo.
+  </Card>
+  <Card icon={<Icon name="Video" />} title="Higgsfield" href="higgsfield/video-and-images.mdx">
+    Clipes de vídeo com IA de 45 modelos e imagens de 15, seguindo as tuas referências.
+  </Card>
+  <Card icon={<Icon name="Languages" />} title="Auto-Dubbing" href="auto-dubbing/dub-a-video.mdx">
+    Traduz as legendas dos vídeos concluídos e dá-lhes voz noutras línguas.
+  </Card>
+</Cards>
+
+## Quem faz o quê
+
+Quando vários plugins podem fazer o mesmo trabalho, o Arrumo experimenta-os pela ordem de **Definições › Serviços e chaves › Que plugin faz o quê, por ordem**, e passa ao seguinte se um falhar ou ficar sem saldo. Um espaço de trabalho pode seguir a ordem da app ou definir a sua, e cada vídeo mantém a ordem com que começou.
+
+| Capacidade                               | Plugins                               | Precisa de                                    |
+| ---------------------------------------- | ------------------------------------- | --------------------------------------------- |
+| Agente de edição                         | Claude Code, Codex                    | O agente instalado e com sessão iniciada      |
+| Transcrição                              | ElevenLabs, OpenAI                    | Uma chave de API                              |
+| Texto para voz                           | ElevenLabs                            | Uma chave de API                              |
+| Música, efeitos sonoros                  | ElevenLabs                            | Uma chave de API                              |
+| Mudança de voz, isolamento de voz, dobragem | ElevenLabs                         | Uma chave de API                              |
+| Geração de imagens                       | Codex, OpenAI, Gemini, Higgsfield     | Codex: o teu plano do ChatGPT; os outros: uma chave |
+| Geração de vídeo                         | Higgsfield                            | Uma chave de API                              |
+| Tradução de legendas                     | Claude Code, Codex                    | O agente com sessão iniciada                  |
+
+## Privacidade
+
+Um plugin fornecedor envia só o que o trabalho precisa, como o áudio de um clipe para transcrever ou uma descrição e imagens de referência para uma imagem, e só para a API desse fornecedor. O Arrumo faz o pedido; o agente nunca vê a chave. As tuas gravações ficam no teu computador, a não ser que um plugin que ativaste carregue uma parte para um trabalho que tu ou o agente pediram.
+
+## Cria o teu
+
+Os plugins são pacotes descritos por um manifesto. Os fornecedores de agentes, os fornecedores de media, as ações e os modelos de animação são escritos com o [SDK de plugins](../developer/sdk/index.mdx); começa por [Compila e executa o teu primeiro plugin](../developer/first-plugin.mdx).

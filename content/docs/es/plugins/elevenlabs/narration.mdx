@@ -1,9 +1,80 @@
 ---
 title: "Narra vídeos con ElevenLabs"
-description: "Cuando un vídeo empieza desde cero, Arrumo lo construye con escenas animadas y el agente escribe una frase de narración para cada una."
+description: "Configura ElevenLabs, elige la voz y el modelo de voz, y deja que Arrumo ponga voz a cada escena de tus vídeos."
 icon: Mic
 ---
 
-Cuando un vídeo empieza desde cero, Arrumo lo construye con escenas animadas y el agente escribe una frase de narración para cada una. Si ElevenLabs es el primero en el orden de proveedores de texto a voz y tiene una clave de API, Arrumo pone voz a cada frase al crear la vista previa, alarga las escenas que necesitan más tiempo y reutiliza el mismo audio en el vídeo final. Los subtítulos siguen la narración.
+ElevenLabs le da la voz a Arrumo. Cuando un vídeo empieza desde cero, Arrumo lo construye con escenas animadas y el agente escribe una frase de narración para cada una. Con ElevenLabs configurado, Arrumo locuta cada frase al hacer la vista previa, alarga las escenas que necesitan más tiempo y reutiliza el mismo audio en el vídeo final. Los subtítulos siguen la narración. Sin un proveedor de voz, el vídeo usa texto en pantalla.
 
-Para elegir la voz, copia un ID de voz de tu biblioteca de voces de ElevenLabs y pégalo en **ID de voz** en los ajustes del complemento para el espacio de trabajo. Si está vacío, Arrumo usa George. Cada intento de vista previa vuelve a sintetizar la narración, lo que consume créditos de ElevenLabs. Si la síntesis falla, la vista previa se crea sin narración y el motivo aparece en su resumen.
+La misma clave sirve para la [transcripción](transcription.mdx) y para [la música, los efectos de sonido, las herramientas de voz y el doblaje](audio-tools.mdx).
+
+## Configúralo
+
+<Steps>
+<Step>
+
+### Crea una clave de API
+
+En ElevenLabs, abre [API keys](https://elevenlabs.io/app/settings/api-keys) y crea una. Si la restringes, permite texto a voz, voz a texto y las demás funciones que vayas a usar, y dale el permiso **User: Read** para que Arrumo pueda mostrar los créditos que te quedan.
+
+</Step>
+<Step>
+
+### Añádela a Arrumo
+
+Abre **Ajustes › Servicios y claves**, busca ElevenLabs y pega la clave. Guárdala para todos los espacios de trabajo, o para uno cuando deba usar otra cuenta. Arrumo la guarda cifrada en el almacén de tu sistema.
+
+</Step>
+<Step>
+
+### Elige la voz
+
+Copia un ID de voz de tu biblioteca de voces de ElevenLabs y pégalo en **ID de voz** en los ajustes del complemento. Déjalo vacío para usar George.
+
+</Step>
+<Step>
+
+### Revisa el orden
+
+En **Qué complemento hace cada cosa, en orden**, ElevenLabs debe ir primero en **Texto a voz**. Auto-Dubbing usa el mismo orden para sus voces.
+
+</Step>
+</Steps>
+
+## Ajustes
+
+<TypeTable
+  type={{
+    "Clave de API de ElevenLabs": {
+      description: "Se usa para la transcripción, la voz y las herramientas de audio. Se guarda en el almacén del sistema; los agentes pueden usarla a través de Arrumo, pero nunca leerla.",
+      type: "secreto",
+      required: true,
+    },
+    "ID de voz": {
+      description: "La voz de ElevenLabs que narra los vídeos, copiada de tu biblioteca de voces.",
+      type: "texto",
+      default: "George",
+    },
+    "Modelo de voz": {
+      description: "El modelo que se usa para narrar cuando no se elige otro.",
+      type: "texto",
+      default: "eleven_multilingual_v2",
+    },
+  }}
+/>
+
+## Modelos de voz
+
+**Generar** en **Recursos** muestra para qué es mejor cada modelo, y puedes elegir uno para una sola frase, o dejar que lo elija el agente.
+
+| Modelo            | ID                       | Ideal para                                                                                  | Caracteres por petición |
+| ----------------- | ------------------------ | ------------------------------------------------------------------------------------------- | ----------------------- |
+| Multilingual v2   | `eleven_multilingual_v2` | Narración larga en 29 idiomas; ElevenLabs lo considera el más estable en textos largos. El predeterminado. | 10.000 |
+| Eleven v4         | `eleven_v4`              | El modelo más expresivo de ElevenLabs, para voces de personajes, interpretación emotiva y audiolibros en más de 90 idiomas. | 10.000 |
+| Eleven v3         | `eleven_v3`              | El modelo expresivo anterior, para una interpretación dramática en más de 70 idiomas.       | 5.000                   |
+| Flash v2.5        | `eleven_flash_v2_5`      | Voz rápida y más barata en 32 idiomas, a la mitad del precio por carácter.                  | 10.000                  |
+| Flash v2          | `eleven_flash_v2`        | Voz rápida solo en inglés.                                                                  | 10.000                  |
+
+## Créditos
+
+Cada intento de vista previa vuelve a sintetizar la narración, lo que gasta créditos de ElevenLabs. Si la síntesis falla, la vista previa se hace sin narración y su resumen explica por qué. **Ajustes › Servicios y claves** muestra la parte de caracteres que te queda y cuándo se renueva; Arrumo avisa con un 20 % y con un 10 %. Algunos modelos necesitan un plan de pago: si el tuyo no lo incluye, Arrumo muestra la respuesta de ElevenLabs como un mensaje claro.

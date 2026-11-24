@@ -1,0 +1,81 @@
+---
+title: "Genera medios y edita el sonido"
+description: "Crea imágenes, clips de vídeo, voces, música y efectos de sonido con tus proveedores, y cambia, limpia o dobla el sonido de cualquier clip."
+icon: ImagePlay
+---
+
+El agente pide medios a tus proveedores mientras hace un vídeo: la narración de cada escena, una miniatura para cada formato, un clip cuando una escena necesita recursos. También puedes crearlos tú en **Recursos**, para usarlos en cualquier vídeo o como referencia. Todo lo que creas llega a los recursos del espacio de trabajo con su descripción, para que lo encuentres y lo reutilices.
+
+## Genera un recurso
+
+Abre **Recursos** y elige **Generar**. Elige qué crear, descríbelo en **Descríbela** y elige el proveedor en **Hecha con**, o mantén el orden del espacio de trabajo. Cuando un proveedor ofrece varios modelos, **Modelo** los muestra con lo que mejor hace cada uno. Añade **Contexto para el agente**, como dónde se usará el recurso: se guarda con él para que el agente sepa para qué es.
+
+<Tabs items={["Imagen", "Clip de vídeo", "Voz", "Música", "Efecto de sonido"]}>
+<Tab value="Imagen">
+
+Describe la imagen, elige el **Tamaño** y cuántas **Variaciones** crear y, si quieres, elige **Referencias**: imágenes de tus recursos para que el proveedor las siga, como un personaje o un producto. Cada modelo admite un número distinto de referencias y Arrumo te dice cuántas usará. Los modelos que no admiten referencias trabajan solo con la descripción.
+
+La crean [OpenAI](../plugins/openai/images.mdx), [Gemini](../plugins/gemini/images.mdx), [Higgsfield](../plugins/higgsfield/video-and-images.mdx) o [Codex](../plugins/codex/setup.mdx#crea-imágenes).
+
+</Tab>
+<Tab value="Clip de vídeo">
+
+Describe el plano, elige el **Modelo**, el **Tamaño** y la **Duración** y, si quieres, elige imágenes para animar o imágenes y clips para que el modelo los siga. Arrumo te avisa cuando un modelo necesita una referencia o no puede hacer el tamaño elegido. Los clips tardan unos minutos: deja el diálogo abierto hasta que el clip esté listo.
+
+Lo crea [Higgsfield](../plugins/higgsfield/video-and-images.mdx), con 45 modelos para pasar de texto a vídeo, animar fotogramas, seguir referencias, transferir movimiento y editar clips.
+
+</Tab>
+<Tab value="Voz">
+
+Escribe el **Texto para locutar** y elige el modelo de voz. Habla con la voz elegida en los ajustes del proveedor, como el **ID de voz** de ElevenLabs.
+
+La crea [ElevenLabs](../plugins/elevenlabs/narration.mdx).
+
+</Tab>
+<Tab value="Música">
+
+Describe la música, como «ritmo lo-fi tranquilo con piano suave, sin voces, tempo constante para un tutorial», y elige su **Duración**, de 3 segundos a 10 minutos. La música puede tardar uno o dos minutos.
+
+La crea [ElevenLabs](../plugins/elevenlabs/audio-tools.mdx).
+
+</Tab>
+<Tab value="Efecto de sonido">
+
+Describe el sonido, como «un whoosh nítido cuando entra una tarjeta», y elige su **Duración**, de medio segundo a 30 segundos.
+
+Lo crea [ElevenLabs](../plugins/elevenlabs/audio-tools.mdx).
+
+</Tab>
+</Tabs>
+
+<Callout type="warn" title="Usa tus créditos">
+  Los medios generados se pagan con tus cuentas de cada proveedor. Arrumo muestra cuánto te queda cuando el proveedor lo informa y te avisa cuando queda poco: consulta [Vigila tus créditos](#vigila-tus-créditos).
+</Callout>
+
+## Cambia, limpia o dobla el sonido de un clip
+
+Selecciona un recurso de audio o vídeo en **Recursos** para ver qué puedes hacer con su sonido. Cada acción crea un recurso nuevo y deja el original como está.
+
+| Acción             | Qué hace                                                                                         | Límites                       |
+| ------------------ | ------------------------------------------------------------------------------------------------ | ----------------------------- |
+| **Cambiar voz**    | Dice las mismas palabras con otra voz, manteniendo el ritmo y la entonación.                     | Hasta 5 minutos y 50 MB.      |
+| **Aislar voz**     | Conserva la voz y elimina el ruido de fondo y la música.                                         | Hasta 1 hora y 500 MB.        |
+| **Doblar**         | Traduce el habla a otro idioma, con voces parecidas a las originales. Tarda unos minutos.       | Hasta 1 hora y 500 MB.        |
+
+**Cambiar voz** pide un **ID de voz**; déjalo vacío para usar la voz de los ajustes del proveedor. **Doblar** ofrece los 29 idiomas a los que dobla ElevenLabs. Estas acciones las hace [ElevenLabs](../plugins/elevenlabs/audio-tools.mdx). Para doblar un vídeo terminado con todas sus salidas y subtítulos, usa [Auto-Dubbing](../plugins/auto-dubbing/dub-a-video.mdx).
+
+## Qué proveedor hace cada cosa
+
+Cuando varios complementos pueden hacer lo mismo, como transcribir o crear imágenes, Arrumo los usa en orden. Abre **Ajustes › Servicios y claves** y busca **Qué complemento hace cada cosa, en orden**: Arrumo prueba el primero y pasa al siguiente si falla o se queda sin saldo. Cada fila muestra si el proveedor tiene su clave, si necesita una o si usa la sesión de tu agente.
+
+El orden de ahí se aplica a todos los espacios de trabajo. En los ajustes de un espacio puedes cambiarlo solo para ese espacio o seguir el orden de la app. Un vídeo mantiene el orden con el que empezó, así que al repetirlo usa los mismos proveedores.
+
+## Vigila tus créditos
+
+Para los proveedores que informan de su uso, como ElevenLabs, y para los límites del plan de tu agente, **Ajustes › Servicios y claves** muestra cuánto queda y cuándo se renueva. Cuando a un proveedor le queda un 20 %, aparece un aviso; con un 10 % se pone rojo y Arrumo te avisa antes de cada generación de que el vídeo podría detenerse a medias. Recarga la cuenta o baja ese proveedor en el orden.
+
+En ElevenLabs, da a la clave de API el permiso **User: Read** para que Arrumo pueda leer los créditos que te quedan.
+
+## Con un agente
+
+Los agentes pueden generar y transformar medios a través de Arrumo por [MCP, la CLI y A2A](../developer/connect.mdx), con los mismos proveedores, orden y claves, y sin ver nunca las claves. Los archivos generados llegan a los recursos del espacio igual que los que creas tú.

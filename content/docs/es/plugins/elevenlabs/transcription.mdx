@@ -1,22 +1,49 @@
 ---
-title: "Usa la transcripción de ElevenLabs en Arrumo"
-description: "En los ajustes de Arrumo, abre el complemento de ElevenLabs y guarda una clave de API en su campo secreto."
+title: "Transcribe tu material con ElevenLabs"
+description: "Deja que el agente corte según lo que se dice y obtén subtítulos sincronizados palabra a palabra con la conversión de voz a texto de ElevenLabs."
 icon: Captions
 ---
 
-En los ajustes de Arrumo, abre el complemento de ElevenLabs y guarda una clave de API en su campo secreto. La clave del espacio de trabajo tiene prioridad sobre la clave predeterminada de la aplicación. Arrumo guarda ambas en el almacén de credenciales del sistema.
+La transcripción convierte el habla de tu material en texto con el momento de cada palabra. El agente la lee para planificar los cortes según lo que se dice, y Arrumo la usa para los subtítulos. ElevenLabs transcribe con su modelo `scribe_v2`, palabra a palabra.
 
-Elige ElevenLabs en el orden de proveedores de transcripción del espacio de trabajo o al añadir un proceso a la cola. El proceso conserva ese orden. Puedes colocar otro proveedor configurado después.
+## Configúralo
 
-Al verificar la entrega, elige **Generar subtítulos** para el formato que quieras. También puedes activar **Generar automáticamente los subtítulos que falten** al poner el borrador en cola. Ambas acciones envían al proveedor el audio de la salida seleccionada. Usa **Importar SRT** para añadir tus propios subtítulos.
+<Steps>
+<Step>
 
-## Comprueba la configuración desde la CLI
+### Añade tu clave
 
-Usa estos comandos en una compilación que incluya el proveedor. El comando de estado indica el ámbito configurado sin devolver la clave. El de transcripción sube el WAV y muestra la respuesta normalizada.
+Abre **Ajustes › Servicios y claves**, busca ElevenLabs y pega una clave de API de [ElevenLabs](https://elevenlabs.io/app/settings/api-keys). La clave de un espacio de trabajo tiene prioridad sobre la de la app. La misma clave sirve para la [narración](narration.mdx).
+
+</Step>
+<Step>
+
+### Ponlo en el orden
+
+En **Qué complemento hace cada cosa, en orden**, coloca ElevenLabs donde lo quieras para **Transcripción**. Pon [OpenAI](../openai/transcription.mdx) detrás como alternativa si tienes clave. Un vídeo mantiene el orden con el que empezó.
+
+</Step>
+</Steps>
+
+## Subtítulos
+
+- Al poner un vídeo en cola, activa **Generar automáticamente los subtítulos que falten** para que Arrumo envíe al primer proveedor de transcripción el audio de cada formato renderizado que no tenga SRT.
+- En la verificación de la entrega, elige **Generar subtítulos** en un formato para hacerlos solo para ese formato.
+- Usa **Importar SRT** para aportar los tuyos.
+
+Ambas opciones envían al proveedor el audio de esa salida. Cada archivo puede ocupar hasta 32 MB.
+
+<Callout title="¿Escrito sin oír tus clips?">
+  Cuando ningún proveedor de transcripción tiene clave, el agente escribe el guion sin transcripción y lo indica. Añade una clave y elige **Pedir cambios** para que lo redacte de nuevo a partir de lo que dijiste.
+</Callout>
+
+## Compruébalo desde la CLI
+
+Desde una versión que incluya el proveedor, comprueba el alcance de la clave sin revelarla y transcribe un WAV para ver el resultado normalizado:
 
 ```sh
 arrumo-workspaces ./workspaces.sqlite plugin-credential-status elevenlabs 1 api-key
 arrumo-workspaces ./workspaces.sqlite transcribe-wav 1 elevenlabs ./sample.wav
 ```
 
-Si falla la generación, comprueba que la salida tenga audio, que el orden de proveedores guardado incluya un adaptador con marcas de tiempo y que la credencial siga configurada.
+Si los subtítulos fallan, comprueba que la salida tiene audio, que el orden de proveedores del vídeo incluye un proveedor de transcripción con marcas de tiempo y que la clave sigue siendo válida.

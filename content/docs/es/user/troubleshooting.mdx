@@ -1,0 +1,90 @@
+---
+title: "Solución de problemas"
+description: "Qué hacer cuando no se encuentra el agente, un vídeo se detiene, fallan los subtítulos, un proveedor se queda sin saldo o Arrumo no abre."
+icon: LifeBuoy
+---
+
+Busca el mensaje que ves o el síntoma más parecido. Si nada de esto te ayuda, busca en las [incidencias](https://github.com/aidevs-pt/arrumo-video-editor/issues) o abre una nueva con tu versión de Arrumo (**Ajustes › Acerca de**) y lo que hiciste.
+
+## El agente
+
+<Accordions>
+  <Accordion title="No se encontró la CLI del agente" id="agent-not-found">
+    Arrumo busca el agente en tus carpetas de programas habituales y en las que añade tu shell de inicio de sesión. Comprueba que [Claude Code](../plugins/claude-code/setup.mdx) o [Codex](../plugins/codex/setup.mdx) funciona en una terminal y elige **Volver a comprobar** en **Ajustes › Agente**. Si está instalado en un sitio poco habitual, elige **Elegir el programa…** y selecciona el archivo de programa del agente, el que lleva su nombre (`claude` o `codex`). **Buscarlo automáticamente** vuelve a buscarlo solo.
+  </Accordion>
+  <Accordion title="La CLI no confirmó el inicio de sesión" id="agent-sign-in">
+    Arrumo encontró el agente, pero no tiene la sesión iniciada. Inicia sesión desde una terminal siguiendo la guía del agente y elige **Comprobar inicio de sesión**. Si la comprobación agotó el tiempo o no pudo ejecutarse, normalmente el agente se está actualizando o espera una respuesta: ejecútalo una vez en una terminal y vuelve a intentarlo.
+  </Accordion>
+  <Accordion title="El agente se detuvo a mitad de un vídeo" id="run-stopped">
+    Abre el vídeo en **En producción**. La actividad muestra el paso que se detuvo y por qué. Elige **Reintentar** para repetir ese paso, o **Pedir cambios** si el problema está en lo que hizo el agente. Los límites del plan son una causa habitual: el uso en **Ajustes › Servicios y claves** muestra cuándo se renuevan.
+  </Accordion>
+  <Accordion title="El agente cambió archivos que no esperaba" id="agent-files">
+    Con **Escribir archivos y ejecutar comandos** activado, el agente trabaja en una carpeta propia para cada vídeo, pero con los permisos de tu cuenta. Desactívalo en **Ajustes › Agente** para que solo lea. Consulta [Qué puede hacer el agente](settings.mdx#qué-puede-hacer-el-agente).
+  </Accordion>
+</Accordions>
+
+## Vídeos y render
+
+<Accordions>
+  <Accordion title="Arrumo no encuentra FFmpeg" id="ffmpeg">
+    Arrumo trae su propio FFmpeg para las vistas previas, el render y la exportación. Este mensaje indica que esa copia falta o no arranca: reinstala Arrumo para recuperarla. Si ejecutas Arrumo desde el código, instala FFmpeg y asegúrate de que `ffmpeg` y `ffprobe` estén en tu `PATH`.
+  </Accordion>
+  <Accordion title="Las vistas previas salen en negro o sin sonido en Linux" id="linux-playback">
+    Arrumo reproduce vídeo con GStreamer. Los paquetes `.deb` y `.rpm` instalan los complementos que necesita; si lo instalaste de otra forma, añade `gstreamer1.0-plugins-good` y `gstreamer1.0-libav` (Debian y Ubuntu) o `gstreamer1-plugins-good` y `gstreamer1-plugin-libav` (Fedora). La AppImage lleva los suyos.
+  </Accordion>
+  <Accordion title="El render va lento" id="slow-previews">
+    Las vistas previas se generan al tamaño de **Ajustes › Calidad › Tamaño de vista previa**. Elige el tamaño recomendado para tu ordenador, o uno menor: el render final siempre sale a calidad completa. Los vídeos que ya están en cola mantienen su tamaño.
+  </Accordion>
+  <Accordion title="Cerré Arrumo mientras se generaba un vídeo" id="closed-while-generating">
+    No se pierde nada. **Cerrar y pausar** se detiene en el paso actual y cada vídeo continúa desde ahí la próxima vez que abras Arrumo. Las actualizaciones hacen lo mismo.
+  </Accordion>
+</Accordions>
+
+## Subtítulos, voces y medios
+
+<Accordions>
+  <Accordion title="Escrito sin oír tus clips" id="no-transcript">
+    El agente escribió el guion sin una transcripción de tu material porque ningún proveedor de transcripción tenía clave. Añade una clave de [ElevenLabs](../plugins/elevenlabs/transcription.mdx) u [OpenAI](../plugins/openai/transcription.mdx) en **Ajustes › Servicios y claves** y después **Pedir cambios** para que el agente lo redacte a partir de lo que dijiste.
+  </Accordion>
+  <Accordion title="No se generaron los subtítulos" id="subtitles">
+    Comprueba que la salida tiene audio, que hay en el orden un proveedor de transcripción con clave y que la clave sigue siendo válida. También puedes activar **Generar automáticamente los subtítulos que falten** al poner el vídeo en cola, o usar **Importar SRT** para aportar los tuyos.
+  </Accordion>
+  <Accordion title="El vídeo no tiene narración" id="no-narration">
+    Sin un proveedor de voz, los vídeos hechos desde cero usan texto en pantalla. Añade una clave de [ElevenLabs](../plugins/elevenlabs/narration.mdx) y elige una voz en sus ajustes. Si la síntesis falla, la vista previa se hace sin narración y su resumen explica por qué.
+  </Accordion>
+  <Accordion title="Un proveedor se quedó sin créditos" id="credits">
+    Aparece un aviso con un 20 % restante que se pone rojo con un 10 %. Las generaciones que necesitan ese proveedor se detienen en ese paso cuando se agota. Recarga la cuenta o baja el proveedor en **Qué complemento hace cada cosa, en orden** para que se use el siguiente. Consulta [Vigila tus créditos](media.mdx#vigila-tus-créditos).
+  </Accordion>
+  <Accordion title="No hay ningún proveedor de imagen, música o vídeo activado" id="no-provider">
+    **Generar** necesita un proveedor activado y con clave. Abre **Ajustes › Servicios y claves**, añade la clave y comprueba que el complemento está activado en **Ajustes › Complementos**.
+  </Accordion>
+</Accordions>
+
+## Espacios de trabajo y datos
+
+<Accordions>
+  <Accordion title="No se pudo leer ningún enlace" id="links">
+    Arrumo solo lee páginas públicas. Consulta [Cuando un enlace no se puede leer](tutorials/social-channel.mdx#cuando-un-enlace-no-se-puede-leer).
+  </Accordion>
+  <Accordion title="Una copia de seguridad no se importa" id="backup">
+    **Este archivo no es una copia de Arrumo** significa que el `.zip` no se hizo con **Exportar .zip**. **Esta copia se modificó o dañó** significa que sus sumas de comprobación no coinciden, así que no se restauró: vuelve a exportarla. **Esta copia necesita una versión más reciente de Arrumo** significa que debes actualizar primero.
+  </Accordion>
+  <Accordion title="Quiero empezar de cero" id="start-over">
+    Exporta antes una copia en **Ajustes › Importar y exportar**. Después cierra Arrumo y mueve su carpeta de datos a otro sitio: `%APPDATA%\pt.aidevs.arrumo` en Windows, `~/Library/Application Support/pt.aidevs.arrumo` en macOS, `~/.local/share/pt.aidevs.arrumo` en Linux. Arrumo empieza de nuevo la próxima vez que lo abras. Tus claves se quedan en el almacén del sistema.
+  </Accordion>
+</Accordions>
+
+## Instalación y actualizaciones
+
+<Accordions>
+  <Accordion title="Windows protegió tu PC, o macOS no puede verificar la app" id="unsigned">
+    Las versiones que aún no están firmadas piden confirmación antes de abrirse la primera vez. Consulta [Instala Arrumo](install.mdx) para ver los pasos en cada sistema.
+  </Accordion>
+  <Accordion title="Una versión nueva no arranca" id="broken-update">
+    El siguiente inicio busca una solución antes que nada y la instala sin preguntar, así que una versión rota siempre se puede sustituir. Si sigue sin arrancar, descarga la última versión desde las [versiones](https://github.com/aidevs-pt/arrumo-video-editor/releases) e instálala encima de la anterior; tus datos se conservan.
+  </Accordion>
+</Accordions>
+
+<Callout title="Informa de un problema">
+  Los informes de errores, si están activados, envían el error y la versión de la app para que podamos arreglarlo sin tu contenido. Para todo lo demás, [abre una incidencia](https://github.com/aidevs-pt/arrumo-video-editor/issues/new/choose). Informa de los problemas de seguridad en privado, como explica la [política de seguridad](https://github.com/aidevs-pt/arrumo-video-editor/security/policy).
+</Callout>

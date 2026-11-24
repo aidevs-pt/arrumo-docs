@@ -1,6 +1,6 @@
 ---
 title: "Documentación de Arrumo"
-description: "Guías para creadores, desarrolladores y autores de complementos."
+description: "Guías para creadores, desarrolladores y autores de complementos, y Markdown para los agentes que trabajan con ellos."
 icon: House
 ---
 
@@ -10,8 +10,33 @@ Arrumo AI Video Editor es un editor de vídeo de escritorio, gratuito y de códi
 
 _Todos los vídeos de esta documentación se hicieron íntegramente en Arrumo: el agente los escribió, diseñó, locutó y montó, y una persona aprobó cada paso._
 
-- [Usar Arrumo](user/index.mdx): configura un espacio de trabajo y crea tu primer vídeo, o sigue el [tutorial](user/tutorials/website-to-video.mdx).
-- [Desarrollar con Arrumo](developer/index.mdx): conéctate por CLI, MCP o A2A y crea complementos.
-- [Complementos oficiales](plugins/index.mdx): los agentes y proveedores multimedia que incluye Arrumo.
+<Cards>
+  <Card icon={<Icon name="Clapperboard" />} title="Usar Arrumo" href="user/index.mdx">
+    Instálalo, configura tu marca, crea tu primer vídeo y mantenlo en marcha.
+  </Card>
+  <Card icon={<Icon name="GraduationCap" />} title="Tutoriales" href="user/tutorials/index.mdx">
+    De tu sitio web o tu canal de redes sociales a un vídeo terminado, paso a paso.
+  </Card>
+  <Card icon={<Icon name="Puzzle" />} title="Complementos oficiales" href="plugins/index.mdx">
+    Claude Code, Codex, ElevenLabs, OpenAI, Gemini, Higgsfield y Auto-Dubbing.
+  </Card>
+  <Card icon={<Icon name="Code" />} title="Desarrollar con Arrumo" href="developer/index.mdx">
+    Maneja Arrumo por CLI, MCP o A2A y crea complementos con el SDK.
+  </Card>
+</Cards>
 
-Cada página también está disponible en Markdown para agentes de IA: consulta `llms.txt` y `llms-full.txt` en la raíz de cada idioma.
+## Para agentes de IA
+
+Cada página también está disponible en Markdown, para que un agente pueda leer esta documentación sin extraerla de la web:
+
+| Qué                          | Dónde                                                                                                |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Una página                   | La dirección de la página más `.md`, como [`/es/tools/arrumo/docs/user/install.md`](https://www.aidevs.pt/es/tools/arrumo/docs/user/install.md) |
+| La portada de la documentación | [`/es/tools/arrumo/docs/index.md`](https://www.aidevs.pt/es/tools/arrumo/docs/index.md)            |
+| Un índice de todas las páginas | [`/es/tools/arrumo/llms.txt`](https://www.aidevs.pt/es/tools/arrumo/llms.txt)                      |
+| Todas las páginas en un archivo | [`/es/tools/arrumo/llms-full.txt`](https://www.aidevs.pt/es/tools/arrumo/llms-full.txt)           |
+| Una sección en un archivo    | La dirección de la sección más `/llms-full.txt`, como `/es/tools/arrumo/docs/plugins/llms-full.txt`  |
+
+El inglés no lleva prefijo y el portugués está en `/pt`, como `/tools/arrumo/llms.txt` y `/pt/tools/arrumo/llms.txt`. Los botones **Copiar Markdown** y **Abrir** de cada página hacen lo mismo para quien pega una página en un chat.
+
+Para que un agente maneje Arrumo, en lugar de leer sobre él, consulta [Conecta con Arrumo](developer/connect.mdx) y la [skill para agentes](developer/agent-skill.mdx).

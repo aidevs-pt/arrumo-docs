@@ -14,6 +14,28 @@ Cria uma chave de API na [consola Higgsfield](https://console.higgsfield.ai/). N
 
 Cada clipe e imagem gasta os teus créditos Higgsfield. Quando a conta fica sem créditos, o trabalho falha e o Arrumo diz-te porquê. Alguns modelos podem não estar disponíveis para todas as contas; quando um trabalho é recusado, é mostrado o motivo da Higgsfield.
 
+## Definições
+
+<TypeTable
+  type={{
+    "Chave de API da Higgsfield": {
+      description: "Colada como KEY_ID:KEY_SECRET a partir da consola da Higgsfield. Guardada no cofre do sistema; os agentes podem usá-la através do Arrumo, mas nunca lê-la.",
+      type: "secreta",
+      required: true,
+    },
+    "Modelo de vídeo": {
+      description: "O modelo usado quando não é escolhido outro. Gerar mostra para que é melhor cada um.",
+      type: "modelo",
+      default: "kling-3.0-std",
+    },
+    "Modelo de imagem": {
+      description: "O modelo usado quando não é escolhido outro. Gerar mostra para que é melhor cada um.",
+      type: "modelo",
+      default: "qwen-image-3",
+    },
+  }}
+/>
+
 ## Cria um clipe de vídeo
 
 Abre **Recursos › Gerar › Clipe de vídeo**, descreve o clipe e escolhe o tamanho. Escolhe a Higgsfield em **Feito com** e depois um **Modelo**: a linha por baixo diz para que é ideal, e **Duração** só oferece as durações que esse modelo aceita. Os modelos cujo nome termina em _References_ seguem as imagens e vídeos que anexas; os modelos _Edit_, _Extend_, _Motion Control_ e _Genjutsu_ trabalham sobre um clipe que anexas, e o resultado segue a sua duração.

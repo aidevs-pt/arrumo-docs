@@ -1,13 +1,38 @@
 ---
-title: "Usa las imágenes de OpenAI en Arrumo"
-description: "En los ajustes de Arrumo, abre el complemento de OpenAI y guarda una clave de API en su campo secreto."
+title: "Crea miniaturas e imágenes con OpenAI"
+description: "Genera miniaturas e imágenes con tu estilo con el modelo de imagen de OpenAI, siguiendo hasta cuatro imágenes de referencia."
 icon: Images
 ---
 
-En los ajustes de Arrumo, abre el complemento de OpenAI y guarda una clave de API en su campo secreto. La clave del espacio de trabajo tiene prioridad sobre la de la aplicación; Arrumo guarda ambas en el almacén de credenciales del sistema y nunca las muestra a los agentes.
+OpenAI crea las miniaturas de cada formato y cualquier imagen que pidas en **Recursos › Generar**. Cuando un formato pide miniaturas, el agente escribe una descripción de imagen por miniatura, usando las **Imágenes de referencia para miniaturas** del formato y tu marca, y Arrumo pide la imagen a los proveedores en el orden del vídeo. Las miniaturas generadas se guardan como recursos del espacio de trabajo y esperan tu revisión junto con los títulos y las descripciones.
 
-Cuando un formato pide miniaturas, el agente del proceso escribe una indicación por miniatura y Arrumo pregunta a los proveedores de imágenes en el orden guardado del proceso. OpenAI se omite si no tiene clave. Las miniaturas se guardan como recursos del espacio de trabajo y esperan tu revisión junto a los títulos y descripciones.
+## Configúralo
 
-## Elige el modelo
+Crea una clave en la [página de claves de API de OpenAI](https://platform.openai.com/api-keys) y pégala en OpenAI, en **Ajustes › Servicios y claves**. La clave de un espacio de trabajo tiene prioridad sobre la de la app; los agentes la usan a través de Arrumo, pero nunca la ven. En **Qué complemento hace cada cosa, en orden**, sube OpenAI en **Generación de imágenes** para preferirlo. Los proveedores sin clave se omiten.
 
-El complemento usa `gpt-image-2.6-sunburst` por defecto. Para usar un modelo más reciente, indica **Modelo de imagen** en los ajustes del complemento para la aplicación o un espacio de trabajo. Déjalo vacío para seguir el modelo predeterminado del complemento.
+## Ajustes
+
+<TypeTable
+  type={{
+    "Clave de API de OpenAI": {
+      description: "Se usa para la transcripción y las imágenes. Se guarda en el almacén del sistema.",
+      type: "secreto",
+      required: true,
+    },
+    "Modelo de imagen": {
+      description: "El modelo de OpenAI que se usa para miniaturas e imágenes. Déjalo vacío para seguir el predeterminado actual del complemento.",
+      type: "texto",
+      default: "gpt-image-2.6-sunburst",
+    },
+  }}
+/>
+
+## Tamaños y referencias
+
+| Proporción | Tamaño      |
+| ---------- | ----------- |
+| 16:9       | 1536 × 1024 |
+| 9:16       | 1024 × 1536 |
+| 1:1        | 1024 × 1024 |
+
+Con imágenes de referencia, como miniaturas anteriores o un personaje, OpenAI edita a partir de hasta cuatro de ellas. Cada imagen puede ocupar hasta 20 MB.
