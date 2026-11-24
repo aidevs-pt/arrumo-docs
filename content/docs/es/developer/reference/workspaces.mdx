@@ -106,6 +106,8 @@ Usa `import_workspace_asset` con un identificador de espacio de trabajo y una ru
 
 Usa `replace_workspace_asset` por MCP o A2A con `workspaceId`, el `assetId` activo y una ruta local absoluta en `source` a un archivo del mismo tipo. El `asset` devuelto tiene un identificador nuevo. Usa ese identificador en las operaciones siguientes sobre el reemplazo.
 
+Usa `describe_workspace_assets` con `workspaceId` y hasta 60 `assetIds` para que el agente del espacio escriba el contexto, el grupo y las etiquetas de cada recurso. Mira la propia imagen, un fotograma de un vídeo o la transcripción que Arrumo ya tiene de su voz, y reutiliza los grupos y etiquetas que ya existen en el espacio. Las respuestas se guardan y se devuelven en `assets` y `organization`. Los recursos que no puede mirar se devuelven en `omitted`, cada uno con un `reason`: `agent_cannot_see`, `unsupported_format` (como GIF o SVG), `nothing_to_read` (audio sin voz), `unavailable` (falta el archivo) o `not_described`. Pasa `planOnly: true` para obtener solo `eligible` y `omitted` sin consultar al agente.
+
 Usa `remove_workspace_asset` por MCP o A2A con `workspaceId`, `assetId` y el nombre de archivo guardado exacto como `confirmedName`. Devuelve `removed: false` cuando el recurso no existe, está referenciado o el nombre no coincide. Quitar un recurso deja la importación original en su sitio.
 
 Usa `import_thumbnail_reference` (CLI `import-thumbnail-reference <workspace-id> <source-path>`) para importar una imagen local con notas de referencia para miniaturas. Usa `set_asset_notes` con el identificador del espacio de trabajo, el del recurso y notas en Markdown para cambiar las pautas de uso del recurso. Pasa una cadena vacía para borrar las notas.
