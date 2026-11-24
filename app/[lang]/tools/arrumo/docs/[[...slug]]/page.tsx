@@ -1,3 +1,4 @@
+import { Card } from "fumadocs-ui/components/card";
 import {
   DocsBody,
   DocsDescription,
@@ -51,18 +52,18 @@ export default async function Page(
       <DocsBody>
         <MDX
           components={getMDXComponents({
-            a: ({ href, children, ...props }: ComponentProps<"a">) => {
-              const target = href ? linkedPage(href, page.path, lang) : null;
-              const hash = href?.includes("#") ? `#${href.split("#")[1]}` : "";
-              return (
-                <defaultMdxComponents.a
-                  href={target ? `${target.url}${hash}` : href}
-                  {...props}
-                >
-                  {plainImages(children)}
-                </defaultMdxComponents.a>
-              );
-            },
+            a: ({ href, children, ...props }: ComponentProps<"a">) => (
+              <defaultMdxComponents.a
+                href={pageHref(href, page.path, lang)}
+                {...props}
+              >
+                {plainImages(children)}
+              </defaultMdxComponents.a>
+            ),
+            // biome-ignore lint/correctness/noComponentHookFactories: rendered once on the server; links resolve against this page
+            Card: ({ href, ...props }: ComponentProps<typeof Card>) => (
+              <Card href={pageHref(href, page.path, lang)} {...props} />
+            ),
           })}
         />
       </DocsBody>
@@ -72,6 +73,15 @@ export default async function Page(
       </div>
     </DocsPage>
   );
+}
+
+/** Content links to other pages by relative file path; this gives the page's address. */
+function pageHref(href: string | undefined, from: string, lang: string) {
+  const target = href ? linkedPage(href, from, lang) : undefined;
+  if (!target) return href;
+  return href?.includes("#")
+    ? `${target.url}#${href.split("#")[1]}`
+    : target.url;
 }
 
 /** An image inside a link (a video thumbnail that opens YouTube) stays a plain image, so a click

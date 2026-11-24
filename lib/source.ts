@@ -52,14 +52,21 @@ export function linkedPage(href: string, from: string, lang: string) {
 /** Markdown for agents: relative page links become the linked page's Markdown address, and
  * site paths (images, videos) become full addresses. */
 function absoluteLinks(markdown: string, from: string, lang: string) {
-  return markdown.replace(/\]\(([^)\s]+)\)/g, (whole, href: string) => {
-    if (href.startsWith("/")) return `](${siteUrl}${href})`;
-    if (/^([a-z]+:|#)/i.test(href)) return whole;
+  const address = (href: string) => {
+    if (href.startsWith("/")) return `${siteUrl}${href}`;
+    if (/^([a-z]+:|#)/i.test(href)) return href;
     const target = linkedPage(href, from, lang);
-    if (!target) return whole;
+    if (!target) return href;
     const hash = href.includes("#") ? `#${href.split("#")[1]}` : "";
-    return `](${siteUrl}${markdownPath(target.url)}${hash})`;
-  });
+    return `${siteUrl}${markdownPath(target.url)}${hash}`;
+  };
+  return markdown
+    .replace(/ \[#[\w-]+\]$/gm, "")
+    .replace(/\]\(([^)\s]+)\)/g, (_, href: string) => `](${address(href)})`)
+    .replace(
+      /\bhref="([^"]+)"/g,
+      (_, href: string) => `href="${address(href)}"`,
+    );
 }
 
 export const docsLlms = llms(source, {
