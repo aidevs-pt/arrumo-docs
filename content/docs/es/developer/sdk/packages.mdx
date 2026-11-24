@@ -38,6 +38,23 @@ La versión 3 del esquema de manifiesto añade una sección `code` opcional. Inc
 }
 ```
 
+Un paquete con ambos, listo para comprimir, tiene este aspecto:
+
+<Files>
+  <File name="manifest.json" />
+  <File name="icon.svg" />
+  <Folder name="backend" defaultOpen>
+    <File name="plugin.wasm" />
+  </Folder>
+  <Folder name="frontend" defaultOpen>
+    <File name="index.html" />
+    <File name="panel.js" />
+    <File name="panel.css" />
+  </Folder>
+  <File name="LICENSE" />
+  <File name="README.md" />
+</Files>
+
 Usa identificadores de superficie únicos. Las ubicaciones admitidas son `settings`, `workspace` y `completed_video`. El host valida la declaración, comprueba que el ZIP contenga los puntos de entrada y conserva el paquete. Los componentes de backend instalados se pueden invocar explícitamente mediante Arrumo. Las superficies de interfaz instaladas se renderizan en marcos aislados. Las concesiones de capacidades del host se declaran y aplican por separado.
 
 ### Invoca un backend

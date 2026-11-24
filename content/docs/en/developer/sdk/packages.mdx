@@ -38,6 +38,23 @@ Manifest schema v3 adds an optional `code` section. Include a WebAssembly backen
 }
 ```
 
+A package with both, ready to zip, looks like this:
+
+<Files>
+  <File name="manifest.json" />
+  <File name="icon.svg" />
+  <Folder name="backend" defaultOpen>
+    <File name="plugin.wasm" />
+  </Folder>
+  <Folder name="frontend" defaultOpen>
+    <File name="index.html" />
+    <File name="panel.js" />
+    <File name="panel.css" />
+  </Folder>
+  <File name="LICENSE" />
+  <File name="README.md" />
+</Files>
+
 Use unique surface IDs. Supported placements are `settings`, `workspace`, and `completed_video`. The host validates the declaration, checks that the ZIP contains the entrypoints, and retains the package. Installed backend components can be invoked explicitly through Arrumo. Installed frontend surfaces render in sandboxed frames. Host capability grants are declared and enforced separately.
 
 ### Invoke a backend
