@@ -61,7 +61,7 @@ function absoluteLinks(markdown: string, from: string, lang: string) {
     return `${siteUrl}${markdownPath(target.url)}${hash}`;
   };
   return markdown
-    .replace(/ \[#[\w-]+\]$/gm, "")
+    .replace(/ \[#[^\]\s]+\]$/gm, "")
     .replace(/\]\(([^)\s]+)\)/g, (_, href: string) => `](${address(href)})`)
     .replace(
       /\bhref="([^"]+)"/g,

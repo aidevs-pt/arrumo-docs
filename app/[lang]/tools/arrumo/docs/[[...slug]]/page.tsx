@@ -88,12 +88,25 @@ function pageHref(href: string | undefined, from: string, lang: string) {
  * follows the link instead of zooming. */
 function plainImages(children: ReactNode) {
   return Children.map(children, (child) => {
-    if (!isValidElement<ComponentProps<"img">>(child)) return child;
-    if (typeof child.props.src !== "string") return child;
-    // biome-ignore lint/performance/noImgElement: static export has no image optimizer
-    return <img {...child.props} alt={child.props.alt ?? ""} />;
+    if (!isValidElement<ImageProps>(child) || !child.props.src) return child;
+    const { src, alt, width, height } = child.props;
+    // Fumadocs MDX imports local images, so `src` can be the import rather than a path.
+    const url = typeof src === "string" ? src : src.src;
+    return (
+      // biome-ignore lint/performance/noImgElement: static export has no image optimizer
+      <img
+        src={url}
+        alt={alt ?? ""}
+        width={width ?? (typeof src === "string" ? undefined : src.width)}
+        height={height ?? (typeof src === "string" ? undefined : src.height)}
+      />
+    );
   });
 }
+
+type ImageProps = Omit<ComponentProps<"img">, "src"> & {
+  src?: string | { src: string; width: number; height: number };
+};
 
 export async function generateStaticParams() {
   return source.generateParams();
