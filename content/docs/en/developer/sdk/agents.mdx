@@ -173,6 +173,8 @@ for the follow-up, with `{session}` for the ID read from `resume.session`. If a
 session cannot be continued (it is gone, unreadable or stuck), the host starts
 a new one with the whole brief and all material so far.
 
+For plugins that accept images, the host can also offer the run's footage and its latest previews to look at. The agent asks with a `frames` list next to `needs`: each entry names a listed video, a start and end in seconds and 2 to 12 frames, with at most three per step. The host keeps the range inside the video, attaches a picture of evenly spaced frames above the sound's waveform, and lists each frame's time in the follow-up.
+
 Declare `resume.cleanup` so kept sessions do not pile up in the agent's own
 history: Arrumo records each session it keeps and deletes its files once the
 video it belongs to has completed, failed or been cancelled, or right after a
