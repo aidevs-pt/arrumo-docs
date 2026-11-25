@@ -57,6 +57,8 @@ Si cierras la ventana, o sales desde el menú o el dock, mientras se genera un v
 
 Cada evento incluye también un identificador aleatorio de esta instalación, creado la primera vez que se abrió Arrumo, más un identificador de sesión, la versión de la app y el sistema operativo. Nunca está ligado a ti y nunca incluye tus vídeos, archivos, indicaciones, textos, nombres de archivo ni claves. Los datos de uso van a [Aptabase](https://aptabase.com), que no usa cookies ni huellas digitales.
 
+Los datos de uso también cubren cuánto tardan los pasos de generación y los avisos que registra Arrumo, que van a [Sentry](https://sentry.io) como trazas y registros. Una medición nombra el paso, el complemento del agente, los programas que ejecutó el paso (como FFmpeg) y la ronda de comentarios; un aviso es una frase fija con los mismos detalles. Ninguno incluye el identificador de la instalación, tu nombre de usuario ni el de tu equipo, rutas de archivos, títulos, indicaciones ni contenido.
+
 **Informes de errores** envía el error y la versión de la app a [Sentry](https://sentry.io) cuando algo falla, en la app o en su interfaz. Los informes omiten tu nombre de usuario y el de tu equipo, recortan las rutas a nombres de archivo, quitan de los mensajes lo que parece una ruta y nunca incluyen volcados de memoria, los pasos previos al error ni tu contenido.
 
 Al desactivar un interruptor deja de enviar al instante, incluso para errores que ocurren antes de que Arrumo termine de abrirse. Las versiones que compilas tú no envían nada.
