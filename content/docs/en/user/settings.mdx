@@ -57,6 +57,8 @@ Closing the window, or quitting from the menu or dock, while a video is generati
 
 Each event also carries a random ID for this install, made when Arrumo first opened, plus a per-launch session ID, the app version and the operating system. It is never tied to you, and never includes your videos, files, prompts, text, file names or keys. Usage data goes to [Aptabase](https://aptabase.com), which does not use cookies or fingerprinting.
 
+Usage data also covers how long generation steps take and the warnings Arrumo records, which go to [Sentry](https://sentry.io) as traces and logs. A timing names the step, the agent plugin, the programs the step ran (such as FFmpeg) and the feedback round; a warning is a fixed sentence with the same details. Neither carries the install ID, your user or computer name, file paths, titles, prompts or content.
+
 **Crash reports** send the error and the app version to [Sentry](https://sentry.io) when something breaks, in the app or in its interface. Reports leave out your user and computer names, cut file paths to file names, remove path-like words from messages, and never include memory dumps, the steps before the error, or your content.
 
 Turning a switch off stops it at once, including for errors that happen before Arrumo finishes opening. Builds you compile yourself send nothing.
