@@ -6,7 +6,7 @@ icon: Boxes
 
 ## Pacotes ZIP locais
 
-Coloca um único `manifest.json` do SDK na raiz do ZIP. São suportados manifestos armazenados e comprimidos com Deflate. O editor limita um pacote a 16 MiB e 512 entradas, e o manifesto a 64 KiB. Usa nomes de entrada relativos em UTF-8 com barras normais. Evita nomes duplicados, incluindo os que só diferem em maiúsculas. As entradas cifradas e as ligações simbólicas são rejeitadas.
+Coloca um único `manifest.json` do SDK na raiz do ZIP. São suportados manifestos armazenados e comprimidos com Deflate. O editor limita um pacote a 16 MiB e 512 entradas, e o manifesto a 64 KiB. Cada adaptador de fornecedor, como `video-generation.json`, pode ocupar até 256 KiB. Usa nomes de entrada relativos em UTF-8 com barras normais. Evita nomes duplicados, incluindo os que só diferem em maiúsculas. As entradas cifradas e as ligações simbólicas são rejeitadas.
 
 O Arrumo guarda o ZIP original e o digest SHA-256. O digest identifica os bytes importados para os comparar com a soma de verificação de uma publicação. Registar o pacote deixa o conteúdo inerte. Executar uma capacidade exige um adaptador de confiança à parte.
 

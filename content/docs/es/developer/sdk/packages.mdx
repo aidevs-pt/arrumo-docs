@@ -6,7 +6,7 @@ icon: Boxes
 
 ## Paquetes ZIP locales
 
-Coloca un único `manifest.json` del SDK en la raíz del ZIP. Se admiten manifiestos almacenados y comprimidos con Deflate. El editor limita un paquete a 16 MiB y 512 entradas, y su manifiesto a 64 KiB. Usa nombres de entrada relativos en UTF-8 con barras normales. Evita nombres duplicados, incluidos los que solo se diferencian en mayúsculas. Se rechazan las entradas cifradas y los enlaces simbólicos.
+Coloca un único `manifest.json` del SDK en la raíz del ZIP. Se admiten manifiestos almacenados y comprimidos con Deflate. El editor limita un paquete a 16 MiB y 512 entradas, y su manifiesto a 64 KiB. Cada adaptador de proveedor, como `video-generation.json`, puede ocupar hasta 256 KiB. Usa nombres de entrada relativos en UTF-8 con barras normales. Evita nombres duplicados, incluidos los que solo se diferencian en mayúsculas. Se rechazan las entradas cifradas y los enlaces simbólicos.
 
 Arrumo guarda el ZIP original y su digest SHA-256. El digest identifica los bytes importados para compararlos con la suma de comprobación de una publicación. Registrar el paquete deja su contenido inerte. Ejecutar una capacidad requiere un adaptador de confianza aparte.
 
