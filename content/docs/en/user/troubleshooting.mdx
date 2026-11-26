@@ -47,7 +47,7 @@ Find the message you see, or the closest symptom. If nothing here helps, search 
     The agent wrote the script without a transcript of your footage, because no transcription provider had a key. Add an [ElevenLabs](../plugins/elevenlabs/transcription.mdx) or [OpenAI](../plugins/openai/transcription.mdx) key in **Settings › Services and keys**, then **Ask for changes** so the agent redrafts from what you said.
   </Accordion>
   <Accordion title="Subtitles weren't generated" id="subtitles">
-    Check that the output has audio, that a transcription provider with a key is in the order, and that the key is still valid. You can also turn on **Generate missing subtitles automatically** when you queue the video, or use **Import SRT** to supply your own.
+    Check that the output has audio, that a transcription provider with a key is in the order, and that the key is still valid. Keep **Generate missing subtitles automatically** on when you queue the video (it's on by default), or use **Import SRT** to supply your own.
   </Accordion>
   <Accordion title="No narration in the video" id="no-narration">
     Without a speech provider, videos made from scratch use on-screen text. Add an [ElevenLabs](../plugins/elevenlabs/narration.mdx) key and choose a voice in its settings. If synthesis fails, the preview is made without narration and its summary says why.
