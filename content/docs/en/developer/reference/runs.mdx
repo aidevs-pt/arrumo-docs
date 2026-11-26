@@ -49,7 +49,7 @@ Use `get_generation_plan` to inspect a run's prepared steps. A worker can use `f
 
 ## Editing agent
 
-Use `agent-settings <app|workspace-id>` to inspect the configured agent and where it came from. Use `set-agent-provider <app|workspace-id> <plugin-id|unset>` to change the choice. Unsetting a workspace override restores the app choice, if configured. New runs freeze the resolved selection and provenance. Selecting a provider is separate from connecting or running its agent.
+Use `agent-settings <app|workspace-id>` to inspect the configured agent and where it came from. Use `set-agent-provider <app|workspace-id> <plugin-id|unset>` to change the choice. Unsetting a workspace override restores the app choice, if configured. New runs record the resolved selection and provenance. When a paused, failed or reviewed run continues, it takes the agent selected at that moment, with that agent's settings; with no agent selected, it keeps its own. Selecting a provider is separate from connecting or running its agent.
 
 Open **Settings** in the desktop sidebar to choose the app's production agent. Use the settings scope picker to configure a workspace override or restore inheritance. The effective provider and its source appear under the selector.
 

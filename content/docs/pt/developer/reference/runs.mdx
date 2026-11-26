@@ -49,7 +49,7 @@ Usa `get_generation_plan` para ver os passos preparados de uma execução. Um wo
 
 ## Agente de edição
 
-Usa `agent-settings <app|workspace-id>` para ver o agente configurado e de onde vem. Usa `set-agent-provider <app|workspace-id> <plugin-id|unset>` para mudar a escolha. Retirar a substituição de um espaço de trabalho repõe a escolha da aplicação, se existir. As execuções novas congelam a seleção resolvida e a respetiva origem. Escolher um fornecedor é independente de ligar ou executar o agente.
+Usa `agent-settings <app|workspace-id>` para ver o agente configurado e de onde vem. Usa `set-agent-provider <app|workspace-id> <plugin-id|unset>` para mudar a escolha. Retirar a substituição de um espaço de trabalho repõe a escolha da aplicação, se existir. As execuções novas registam a seleção resolvida e a respetiva origem. Quando uma execução em pausa, falhada ou revista continua, usa o agente escolhido nesse momento, com as respetivas definições; se não houver nenhum escolhido, mantém o seu. Escolher um fornecedor é independente de ligar ou executar o agente.
 
 Abre **Definições** na barra lateral para escolher o agente de produção da aplicação. Usa o seletor de âmbito das definições para configurar uma substituição por espaço de trabalho ou repor a herança. O fornecedor efetivo e a origem aparecem por baixo do seletor.
 
