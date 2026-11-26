@@ -10,7 +10,7 @@ Find the message you see, or the closest symptom. If nothing here helps, search 
 
 <Accordions>
   <Accordion title="Agent CLI not found" id="agent-not-found">
-    Arrumo looks for the agent in your usual program folders and the ones your login shell adds. Check that [Claude Code](../plugins/claude-code/setup.mdx) or [Codex](../plugins/codex/setup.mdx) runs in a terminal, then choose **Check again** in **Settings › Agent**. If it's installed somewhere unusual, choose **Choose the program…** and pick the agent's program file, the one named after it (`claude` or `codex`). **Find it automatically** goes back to searching.
+    Arrumo looks for the agent in your usual program folders and the ones your login shell adds. Check that [Claude Code](../plugins/claude-code/setup.mdx) or [Codex](../plugins/codex/setup.mdx) runs in a terminal, then choose **Check again** in **Settings › Agent**, or on the first setup screen. It searches your program folders again, so an agent installed while Arrumo is open is found without restarting. If it's installed somewhere unusual, choose **Choose the program…** and pick the agent's program file, the one named after it (`claude` or `codex`). **Find it automatically** goes back to searching.
   </Accordion>
   <Accordion title="The CLI did not confirm a sign-in" id="agent-sign-in">
     Arrumo found the agent, but it isn't signed in. Sign in from a terminal following the agent's setup guide, then choose **Check sign-in**. A check that timed out or couldn't run usually means the agent is updating or waiting for input: run it once in a terminal and try again.
