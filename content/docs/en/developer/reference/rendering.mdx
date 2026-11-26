@@ -30,7 +30,7 @@ Use `process_media_stage` to claim and execute a ready media stage for one run. 
 
 ## Delivery verification
 
-Delivery verification requires `ffprobe` on PATH. At the `verify_delivery` stage, place each configured format's final files under `<database>.deliveries/<workspace-id>/<run-id>/`, named `<format-id>.mp4` and `<format-id>.srt`. Run `verify-delivery <workspace-id> <run-id> <attempt>` to check each video’s dimensions and duration and its subtitle cues. A successful verification records metadata and completes the run while the lease is still active. While the desktop is open, it automatically verifies eligible runs once every captured output format has a managed MP4 and SRT. Runs with missing files stay queued so you can import the remaining subtitles.
+Delivery verification requires `ffprobe` on PATH. At the `verify_delivery` stage, place each configured format's final files under `<database>.deliveries/<workspace-id>/<run-id>/`, named `<format-id>.mp4` and `<format-id>.srt`. Run `verify-delivery <workspace-id> <run-id> <attempt>` to check each video’s dimensions and duration and its subtitle cues. A successful verification records metadata and completes the run while the lease is still active. While the desktop is open, it automatically verifies eligible runs once every captured output format has a managed MP4, and an SRT when its delivery requires subtitles. Runs with missing files stay queued so you can import the remaining subtitles.
 
 Run `arrumo-workspaces <database-path> watch-delivery-queue` as a foreground
 worker when the desktop is closed. It verifies ready deliveries and generates
@@ -56,7 +56,11 @@ or **Import SRT** to supply your own subtitles.
 In the desktop queue form, **Generate missing subtitles automatically** is on
 by default for the selected draft. Runs submitted through the CLI, MCP, or A2A
 also default to it; to opt out, set
-`generate_delivery_subtitles: false` in its run options. While the desktop is
+`generate_delivery_subtitles: false` in its run options. A run queued without
+them records `"required": ["final_video"]` for each format in its snapshot,
+needs only `<format-id>.mp4` to verify, and reports `"subtitles": null` with
+`subtitle_cues: 0` in its verified delivery unless an SRT was present anyway.
+While the desktop is
 open, it attempts transcription once per rendered format missing an SRT.
 An interrupted or failed automatic attempt requires an explicit retry via
 **Generate subtitles**, or you can import an SRT. Existing SRTs are kept. The
