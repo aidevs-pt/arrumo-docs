@@ -8,29 +8,104 @@ Claude Code drafts scripts, plans assets, designs animations and translates subt
 
 ## Set it up
 
+You need a Claude Pro, Max, Team or Enterprise plan, or an Anthropic Console account. Free Claude accounts can't use Claude Code. New to agents? [Connect an agent](../../user/agents.mdx) explains what they do.
+
 <Steps>
 <Step>
 
-### Install and sign in
+### Install Claude Code
 
-Follow the [Claude Code setup guide](https://code.claude.com/docs/en/setup) to install the `claude` command and sign in with your Claude account. Run `claude` once in a terminal to check that it works.
+Open a terminal, paste the command for your computer and press Enter. It needs no administrator rights and keeps Claude Code up to date on its own.
+
+<Tabs groupId="os" persist items={["Windows", "macOS", "Linux"]}>
+<Tab value="Windows">
+
+Open the **Start** menu, type `PowerShell` and open **Windows PowerShell**. Then paste:
+
+```powershell
+irm https://claude.ai/install.ps1 | iex
+```
+
+![Installing Claude Code in PowerShell](/tools/arrumo/static/media/agents/claude-install-windows.webp)
+
+Claude Code needs 64-bit Windows 10 (version 1809) or later. Git for Windows is optional.
+
+</Tab>
+<Tab value="macOS">
+
+Open **Terminal** from **Applications › Utilities**, or search for it with Spotlight. Then paste:
+
+```sh
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
+![Installing Claude Code in the macOS Terminal](/tools/arrumo/static/media/agents/claude-install-macos.webp)
+
+</Tab>
+<Tab value="Linux">
+
+Open your terminal, for example with **Ctrl+Alt+T** on Ubuntu. Then paste:
+
+```sh
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
+![Installing Claude Code in a Linux terminal](/tools/arrumo/static/media/agents/claude-install-linux.webp)
+
+Don't add `sudo`: Claude Code installs into your own home folder.
+
+</Tab>
+</Tabs>
+
+**Claude Code successfully installed!** and the **Location** line tell you it worked. If the installer shows **Setup notes** about your `PATH`, that only affects typing `claude` in a terminal; Arrumo can still use it (see [If Arrumo doesn't find it](#if-arrumo-doesnt-find-it)). Anthropic's [setup guide](https://code.claude.com/docs/en/setup) lists other ways to install it.
+
+</Step>
+<Step>
+
+### Sign in
+
+In the same terminal, run:
+
+```sh
+claude auth login
+```
+
+Your browser opens Anthropic's sign-in page. Sign in with your Claude account and approve the access; then you can close the browser tab. To confirm, run `claude auth status`: it shows `"loggedIn": true`.
+
+You sign in on Anthropic's own page. Arrumo never sees your password or account tokens.
 
 </Step>
 <Step>
 
 ### Choose it in Arrumo
 
-Pick Claude Code when you create a workspace, or later as the agent in **Settings › Agent**. Arrumo finds it on your `PATH` and in the folders your login shell adds, even when Arrumo is opened from the Dock, Finder or a desktop launcher. If you installed it somewhere else, use **Choose the program…** and pick its program file.
+Open Arrumo. In the first setup step, Claude Code shows **Agent CLI found**; choose **Use Claude Code**. If Arrumo was already open while you installed it, choose **Check again**.
+
+![Claude Code and Codex found during setup](/tools/arrumo/static/media/agents/agent-found.webp)
+
+Already set up? Choose Claude Code in **Settings › Agent** and save.
 
 </Step>
 <Step>
 
 ### Check the sign-in
 
-Choose **Check sign-in**. **The CLI reports a local sign-in** means you're ready. The check doesn't start an edit or use your plan.
+In **Settings › Agent**, choose **Check sign-in**. **The CLI reports a local sign-in.** means you're ready. The check doesn't start an edit or use your plan.
+
+![Settings › Agent with Claude Code found and signed in](/tools/arrumo/static/media/agents/settings-claude-code.webp)
 
 </Step>
 </Steps>
+
+### If Arrumo doesn't find it
+
+Arrumo looks for `claude` in your usual program folders and the ones your login shell adds, even when you open Arrumo from the Dock, Finder or a desktop launcher.
+
+- Installed it while Arrumo was open? Choose **Check again**.
+- Still **Agent CLI not found**? Choose **Choose the program…** (the folder button during setup) and pick the file the installer listed under **Location**:
+  - Windows: `C:\Users\<you>\.local\bin\claude.exe`. The `.local` folder may be hidden; type the path into the file dialog.
+  - macOS and Linux: `~/.local/bin/claude`. Press **Cmd+Shift+.** on macOS, or **Ctrl+H** on Linux, to show hidden folders.
+- **The CLI did not confirm a sign-in** means Claude Code isn't signed in: run `claude auth login` again, then choose **Check sign-in**.
 
 ## Settings
 

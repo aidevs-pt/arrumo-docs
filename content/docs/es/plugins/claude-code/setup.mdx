@@ -8,29 +8,104 @@ Claude Code redacta guiones, planifica recursos, diseña animaciones y traduce s
 
 ## Configúralo
 
+Necesitas un plan Claude Pro, Max, Team o Enterprise, o una cuenta de Anthropic Console. Las cuentas gratuitas de Claude no pueden usar Claude Code. ¿Es tu primer agente? [Conecta un agente](../../user/agents.mdx) explica qué hacen.
+
 <Steps>
 <Step>
 
-### Instálalo e inicia sesión
+### Instala Claude Code
 
-Sigue la [guía de instalación de Claude Code](https://code.claude.com/docs/en/setup) para instalar el comando `claude` e iniciar sesión con tu cuenta de Claude. Ejecuta `claude` una vez en una terminal para comprobar que funciona.
+Abre un terminal, pega el comando para tu ordenador y pulsa Intro. No necesita permisos de administrador y mantiene Claude Code actualizado por sí solo.
+
+<Tabs groupId="os" persist items={["Windows", "macOS", "Linux"]}>
+<Tab value="Windows">
+
+Abre el menú **Inicio**, escribe `PowerShell` y abre **Windows PowerShell**. Después pega:
+
+```powershell
+irm https://claude.ai/install.ps1 | iex
+```
+
+![Instalar Claude Code en PowerShell](/tools/arrumo/static/media/agents/claude-install-windows.webp)
+
+Claude Code necesita Windows 10 de 64 bits (versión 1809) o posterior. Git para Windows es opcional.
+
+</Tab>
+<Tab value="macOS">
+
+Abre **Terminal** desde **Aplicaciones › Utilidades**, o búscalo con Spotlight. Después pega:
+
+```sh
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
+![Instalar Claude Code en el Terminal de macOS](/tools/arrumo/static/media/agents/claude-install-macos.webp)
+
+</Tab>
+<Tab value="Linux">
+
+Abre tu terminal, por ejemplo con **Ctrl+Alt+T** en Ubuntu. Después pega:
+
+```sh
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
+![Instalar Claude Code en un terminal de Linux](/tools/arrumo/static/media/agents/claude-install-linux.webp)
+
+No añadas `sudo`: Claude Code se instala en tu propia carpeta personal.
+
+</Tab>
+</Tabs>
+
+**Claude Code successfully installed!** y la línea **Location** indican que ha funcionado. Si el instalador muestra **Setup notes** sobre tu `PATH`, solo afecta a escribir `claude` en un terminal; Arrumo puede usarlo igualmente (consulta [Si Arrumo no lo encuentra](#si-arrumo-no-lo-encuentra)). La [guía de instalación](https://code.claude.com/docs/en/setup) de Anthropic recoge otras formas de instalarlo.
+
+</Step>
+<Step>
+
+### Inicia sesión
+
+En el mismo terminal, ejecuta:
+
+```sh
+claude auth login
+```
+
+Tu navegador abre la página de inicio de sesión de Anthropic. Inicia sesión con tu cuenta de Claude y aprueba el acceso; después puedes cerrar la pestaña. Para confirmarlo, ejecuta `claude auth status`: muestra `"loggedIn": true`.
+
+Inicias sesión en la propia página de Anthropic. Arrumo nunca ve tu contraseña ni los tokens de tu cuenta.
 
 </Step>
 <Step>
 
 ### Elígelo en Arrumo
 
-Elige Claude Code al crear un espacio de trabajo, o más tarde como agente en **Ajustes › Agente**. Arrumo lo encuentra en tu `PATH` y en las carpetas que añade tu shell de inicio de sesión, incluso cuando abres Arrumo desde el Dock, el Finder o un lanzador del escritorio. Si lo instalaste en otro sitio, usa **Elegir el programa…** y selecciona su archivo de programa.
+Abre Arrumo. En el primer paso de la configuración, Claude Code muestra **CLI del agente encontrada**; elige **Usar Claude Code**. Si Arrumo ya estaba abierto mientras lo instalabas, elige **Volver a comprobar** (la flecha circular).
+
+![Claude Code y Codex encontrados durante la configuración](/tools/arrumo/static/media/agents/agent-found.webp)
+
+¿Ya lo configuraste? Elige Claude Code en **Ajustes › Agente** y guarda.
 
 </Step>
 <Step>
 
-### Comprueba la sesión
+### Comprueba el inicio de sesión
 
-Elige **Comprobar inicio de sesión**. **La CLI indica que hay una sesión local** significa que todo está listo. La comprobación no inicia ninguna edición ni gasta tu plan.
+En **Ajustes › Agente**, elige **Comprobar inicio de sesión**. **La CLI indica que hay una sesión local.** significa que todo está listo. La comprobación no inicia ninguna edición ni usa tu plan.
+
+![Ajustes › Agente con Claude Code encontrado y con la sesión iniciada](/tools/arrumo/static/media/agents/settings-claude-code.webp)
 
 </Step>
 </Steps>
+
+### Si Arrumo no lo encuentra
+
+Arrumo busca `claude` en tus carpetas de programas habituales y en las que añade tu shell de inicio de sesión, incluso cuando abres Arrumo desde el Dock, el Finder o un lanzador del escritorio.
+
+- ¿Lo instalaste con Arrumo abierto? Elige **Volver a comprobar**.
+- ¿Sigue diciendo **No se encontró la CLI del agente**? Elige **Elegir el programa…** (el botón de la carpeta durante la configuración) y selecciona el archivo que el instalador indicó en **Location**:
+  - Windows: `C:\Users\<tú>\.local\bin\claude.exe`. La carpeta `.local` puede estar oculta; escribe la ruta en el cuadro de diálogo.
+  - macOS y Linux: `~/.local/bin/claude`. Pulsa **Cmd+Mayús+.** en macOS, o **Ctrl+H** en Linux, para ver las carpetas ocultas.
+- **La CLI no confirmó el inicio de sesión.** significa que Claude Code no tiene la sesión iniciada: vuelve a ejecutar `claude auth login` y elige **Comprobar inicio de sesión**.
 
 ## Ajustes
 

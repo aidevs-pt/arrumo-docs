@@ -8,29 +8,106 @@ Codex drafts scripts, plans assets, designs animations and translates subtitles,
 
 ## Set it up
 
+You need a ChatGPT plan that includes Codex, or an OpenAI API key; see OpenAI's [Codex pricing](https://chatgpt.com/codex/pricing) for the current plans. New to agents? [Connect an agent](../../user/agents.mdx) explains what they do.
+
 <Steps>
 <Step>
 
-### Install and sign in
+### Install Codex
 
-Follow the [Codex setup guide](https://learn.chatgpt.com/docs/codex/cli) to install the `codex` command and sign in with your ChatGPT account. Run `codex` once in a terminal to check that it works.
+Open a terminal, paste the command for your computer and press Enter. It needs no administrator rights.
+
+<Tabs groupId="os" persist items={["Windows", "macOS", "Linux"]}>
+<Tab value="Windows">
+
+Open the **Start** menu, type `PowerShell` and open **Windows PowerShell**. Then paste:
+
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://chatgpt.com/codex/install.ps1 | iex"
+```
+
+![Installing Codex in PowerShell](/tools/arrumo/static/media/agents/codex-install-windows.webp)
+
+When it asks **Start Codex now?**, answer `n`. The installer adds Codex to your `PATH` for new PowerShell windows. The first time Codex works on a video, Windows may ask you once to allow its sandbox, which keeps the agent inside its work folder; on some Windows 11 versions this needs administrator approval.
+
+</Tab>
+<Tab value="macOS">
+
+Open **Terminal** from **Applications › Utilities**, or search for it with Spotlight. Then paste:
+
+```sh
+curl -fsSL https://chatgpt.com/codex/install.sh | sh
+```
+
+![Installing Codex in the macOS Terminal](/tools/arrumo/static/media/agents/codex-install-macos.webp)
+
+When it asks **Start Codex now?**, answer `n`. The installer adds Codex to your `PATH` in `~/.zshrc`.
+
+</Tab>
+<Tab value="Linux">
+
+Open your terminal, for example with **Ctrl+Alt+T** on Ubuntu. Then paste:
+
+```sh
+curl -fsSL https://chatgpt.com/codex/install.sh | sh
+```
+
+![Installing Codex in a Linux terminal](/tools/arrumo/static/media/agents/codex-install-linux.webp)
+
+When it asks **Start Codex now?**, answer `n`. The installer adds Codex to your `PATH` in your shell's profile, such as `~/.bashrc`.
+
+</Tab>
+</Tabs>
+
+**Codex CLI … installed successfully.** tells you it worked. OpenAI's [Codex CLI guide](https://learn.chatgpt.com/docs/codex/cli) lists other ways to install it, such as Homebrew or npm.
+
+</Step>
+<Step>
+
+### Sign in
+
+Open a **new** terminal window, so it picks up the new `PATH`, and run:
+
+```sh
+codex login
+```
+
+Your browser opens OpenAI's sign-in page. Choose **Sign in with ChatGPT**, sign in and approve the access; then you can close the browser tab. To confirm, run `codex login status`: it shows `Logged in using ChatGPT`.
+
+If you use the ChatGPT desktop app, its Codex shares this sign-in, so you may already be signed in. Check with `codex login status` anyway. You sign in on OpenAI's own page, and Arrumo never sees your password or account tokens.
 
 </Step>
 <Step>
 
 ### Choose it in Arrumo
 
-Pick Codex when you create a workspace, or later as the agent in **Settings › Agent**. Arrumo finds it on your `PATH` and in the folders your login shell adds, even when Arrumo is opened from the Dock, Finder or a desktop launcher. If you installed it somewhere else, use **Choose the program…** and pick its program file.
+Open Arrumo. In the first setup step, Codex shows **Agent CLI found**; select it and choose **Use Codex**. If Arrumo was already open while you installed it, choose **Check again**.
+
+![Claude Code and Codex found during setup](/tools/arrumo/static/media/agents/agent-found.webp)
+
+Already set up? Choose Codex in **Settings › Agent** and save.
 
 </Step>
 <Step>
 
 ### Check the sign-in
 
-Choose **Check sign-in**. **The CLI reports a local sign-in** means you're ready. The check doesn't start an edit or use your plan.
+In **Settings › Agent**, choose **Check sign-in**. **The CLI reports a local sign-in.** means you're ready. The check doesn't start an edit or use your plan.
+
+![Settings › Agent with Codex found and signed in](/tools/arrumo/static/media/agents/settings-codex.webp)
 
 </Step>
 </Steps>
+
+### If Arrumo doesn't find it
+
+Arrumo looks for `codex` in your usual program folders and the ones your login shell adds, even when you open Arrumo from the Dock, Finder or a desktop launcher.
+
+- Installed it while Arrumo was open? Choose **Check again**.
+- Still **Agent CLI not found**? Choose **Choose the program…** (the folder button during setup) and pick the installed file:
+  - Windows: `C:\Users\<you>\AppData\Local\Programs\OpenAI\Codex\bin\codex.exe`. `AppData` is hidden; type the path into the file dialog.
+  - macOS and Linux: `~/.local/bin/codex`. Press **Cmd+Shift+.** on macOS, or **Ctrl+H** on Linux, to show hidden folders.
+- **The CLI did not confirm a sign-in** means Codex isn't signed in: run `codex login` again, then choose **Check sign-in**.
 
 ## Settings
 
