@@ -56,7 +56,11 @@ or **Import SRT** to supply your own subtitles.
 In the desktop queue form, **Generate missing subtitles automatically** is on
 by default for the selected draft. Runs submitted through the CLI, MCP, or A2A
 also default to it; to opt out, set
-`generate_delivery_subtitles: false` in its run options. While the desktop is
+`generate_delivery_subtitles: false` in its run options. A run queued without
+them records `"required": ["final_video"]` for each format in its snapshot,
+needs only `<format-id>.mp4` to verify, and reports `"subtitles": null` with
+`subtitle_cues: 0` in its verified delivery unless an SRT was present anyway.
+While the desktop is
 open, it attempts transcription once per rendered format missing an SRT.
 An interrupted or failed automatic attempt requires an explicit retry via
 **Generate subtitles**, or you can import an SRT. Existing SRTs are kept. The
