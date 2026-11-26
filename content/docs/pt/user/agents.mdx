@@ -1,0 +1,44 @@
+---
+title: "Liga um agente"
+description: "No Arrumo, a edição é feita por um agente de IA que instalas no teu computador e no qual inicias sessão com o teu próprio plano. Escolhe um e segue o respetivo guia."
+icon: Bot
+---
+
+O Arrumo não inclui um modelo de IA. Organiza as tuas filmagens, a tua marca e as tuas definições, e um **agente** faz o trabalho criativo: escreve guiões, planeia recursos, desenha animações e edita os teus vídeos. O agente é um programa da Anthropic ou da OpenAI que funciona no teu computador com o teu próprio plano, por isso escolhes com quem trabalhas e quanto custa.
+
+Configura-lo uma só vez, em três passos:
+
+1. **Instala o agente** com um comando do respetivo fabricante.
+2. **Inicia sessão** com a tua conta, no navegador.
+3. **Escolhe-o no Arrumo.** O Arrumo encontra-o e verifica que iniciaste sessão.
+
+## Escolhe o teu agente
+
+<Cards>
+  <Card icon={<Icon name="Bot" />} title="Claude Code" href="../plugins/claude-code/setup.mdx">
+    Da Anthropic. Usa o teu plano Claude Pro, Max, Team ou Enterprise, ou uma conta da Anthropic Console.
+  </Card>
+  <Card icon={<Icon name="SquareTerminal" />} title="Codex" href="../plugins/codex/setup.mdx">
+    Da OpenAI. Usa o teu plano do ChatGPT e também cria miniaturas e imagens.
+  </Card>
+</Cards>
+
+Os dois editam vídeos igualmente bem. Se já pagas o Claude ou o ChatGPT, escolhe esse. Podes instalar ambos e mudar quando quiseres em **Definições › Agente**, ou usar um agente diferente em cada espaço de trabalho.
+
+## O que vês no Arrumo
+
+![Escolher o agente durante a configuração: Claude Code e Codex, ambos encontrados](/tools/arrumo/static/media/agents/agent-found.webp)
+
+Quando abres o Arrumo, o primeiro passo mostra os agentes e se cada um está instalado. **CLI do agente encontrada** significa que o Arrumo o pode usar. Um agente marcado com **CLI do agente não encontrada** oferece:
+
+- **Abrir guia de configuração**, que abre a página desse agente aqui, com os passos para o teu computador.
+- A seta circular, **Verificar novamente**, que volta a procurar o agente. Usa-a depois de o instalares, sem reiniciar o Arrumo.
+- A pasta, **Escolher o programa…**, para escolheres tu o ficheiro do programa se o instalaste num sítio pouco habitual.
+
+![Um agente ainda não instalado, com a ligação para o guia e os botões Verificar novamente e Escolher o programa…](/tools/arrumo/static/media/agents/agent-not-found.webp)
+
+## Porquê um terminal
+
+A Anthropic e a OpenAI instalam os seus agentes com um único comando que colas num terminal: o PowerShell no Windows e o Terminal no macOS e no Linux. Cada guia mostra-te exatamente o que colar e o que deverás ver. Só precisas do terminal para instalar e iniciar sessão; depois, o Arrumo executa o agente por ti.
+
+O início de sessão faz-se sempre na página da Anthropic ou da OpenAI, no teu navegador. O Arrumo nunca te pede, vê nem guarda a tua palavra-passe nem os tokens da tua conta.
