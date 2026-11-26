@@ -5,7 +5,12 @@ import { source } from "@/lib/source";
 export const revalidate = false;
 
 const xmlText = (value: string) =>
-  value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
 
 /** Every docs page in each language, with its translations as alternates. aidevs.pt serves it
  * as `/sitemap-arrumo-docs.xml` from its sitemap index. */
