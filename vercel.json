@@ -41,6 +41,22 @@
     {
       "source": "/(es|pt)/tools/arrumo/docs/(.+)\\.(md|txt)",
       "destination": "/tools/arrumo/static/md/$1/tools/arrumo/docs/$2.$3"
+    },
+    {
+      "source": "/",
+      "destination": "/en/tools/arrumo/docs"
+    },
+    {
+      "source": "/tools/arrumo/docs",
+      "destination": "/en/tools/arrumo/docs"
+    },
+    {
+      "source": "/tools/arrumo/docs/:path*",
+      "destination": "/en/tools/arrumo/docs/:path*"
+    },
+    {
+      "source": "/tools/arrumo/static/_next/:path*",
+      "destination": "/_next/:path*"
     }
   ]
 }
