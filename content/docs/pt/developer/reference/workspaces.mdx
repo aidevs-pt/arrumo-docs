@@ -86,11 +86,15 @@ As definições de entrega podem incluir `portrait_derivatives`. Para pedir dois
 
 Usa `list_output_formats`, `create_output_format` e `update_output_format` para configurar as dimensões de saída do espaço de trabalho. Usa `get_format_delivery` e `set_format_delivery` para os entregáveis complementares. Enviar uma substituição repõe os valores predefinidos dos campos complementares omitidos. O vídeo final e as legendas continuam obrigatórios.
 
-Usa `list_profile_formats` e `get_profile_delivery` para ver as definições de formato herdadas e efetivas. Usa `set_profile_format_overrides` e `set_profile_delivery` para substituir as substituições de um formato num perfil. Omite um campo para herdar o valor do espaço de trabalho, ou envia um objeto de substituições vazio para herdar todos os campos desse grupo. Zero e false explícitos continuam a ser substituições.
+Usa `list_profile_formats` e `get_profile_delivery` para ver as definições de formato herdadas e efetivas. Usa `set_profile_format_overrides` e `set_profile_delivery` para substituir as substituições de um formato num perfil. Omite um campo para herdar o valor do espaço de trabalho, ou envia um objeto de substituições vazio para herdar todos os campos desse grupo. Zero e false explícitos continuam a ser substituições. Um perfil faz os seus vídeos em todos os formatos do espaço, a menos que algum seja desativado: `set_profile_format_enabled` (CLI `set-profile-format-enabled <workspace-id> <profile-id> <format-id> <on|off>`) deixa um formato fora dos vídeos do perfil, e um perfil mantém pelo menos um.
 
 Usa `remove_output_format` com um espaço de trabalho e um identificador de formato para retirar esse formato das execuções futuras. As definições de geração capturadas mantêm os formatos originais.
 
 Usa `thumbnail_reference_ids` para escolher recursos de imagem existentes numa configuração de entrega, incluindo dentro de uma origem vertical manual. Os identificadores pertencem ao espaço de trabalho. Nas entregas de perfil, omite o campo de primeiro nível para herdar a seleção do espaço de trabalho, ou passa uma lista vazia para a apagar.
+
+## Armazenamento
+
+`get_storage_settings` e `set_storage_settings` (CLI `storage-settings` e `set-delete-used-footage <on|off>`) leem e alteram `deleteUsedFootage`. Quando está ativo, o Arrumo apaga os clipes carregados de um vídeo concluído, exceto os que outro rascunho, um vídeo por concluir ou a biblioteca de recursos ainda usam. Uma execução cujos clipes já não existem não pode ser repetida a partir deles.
 
 ## Recursos
 

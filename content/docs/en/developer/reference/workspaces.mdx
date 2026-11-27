@@ -100,11 +100,15 @@ Delivery settings can include `portrait_derivatives`. To request two portrait de
 
 Use `list_output_formats`, `create_output_format`, and `update_output_format` to configure workspace output dimensions. Use `get_format_delivery` and `set_format_delivery` for supplemental deliverables. Sending a replacement resets omitted supplemental fields to their defaults. Final video and subtitles remain required.
 
-Use `list_profile_formats` and `get_profile_delivery` to inspect inherited and effective format settings. Use `set_profile_format_overrides` and `set_profile_delivery` to replace one format's overrides for a profile. Omit a field to inherit its workspace value, or send an empty overrides object to inherit all fields in that group. Explicit zero and false values remain overrides.
+Use `list_profile_formats` and `get_profile_delivery` to inspect inherited and effective format settings. Use `set_profile_format_overrides` and `set_profile_delivery` to replace one format's overrides for a profile. Omit a field to inherit its workspace value, or send an empty overrides object to inherit all fields in that group. Explicit zero and false values remain overrides. A profile makes its videos in every workspace format unless one is switched off: `set_profile_format_enabled` (CLI `set-profile-format-enabled <workspace-id> <profile-id> <format-id> <on|off>`) leaves a format out of the profile's videos, and a profile keeps at least one.
 
 Use `remove_output_format` with a workspace and format ID to remove that format from future runs. Captured generation settings retain their original formats.
 
 Use `thumbnail_reference_ids` to select existing image assets in a delivery configuration, including within a manual portrait source. IDs are scoped to the workspace. In profile deliveries, omit the top-level field to inherit the workspace selection or pass an empty list to clear it.
+
+## Storage
+
+`get_storage_settings` and `set_storage_settings` (CLI `storage-settings` and `set-delete-used-footage <on|off>`) read and change `deleteUsedFootage`. When it is on, Arrumo deletes a finished video's uploaded clips, except clips another draft, an unfinished video or the asset library still uses. A run whose clips are gone can't be replayed from them.
 
 ## Assets
 

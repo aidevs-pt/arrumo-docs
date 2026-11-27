@@ -39,3 +39,25 @@ Run `python tools/run_motion_package.py <package.zip> --sha256 <reviewed-digest>
 SDK conformance builds publish an `arrumo-motion-worker-linux` CI artifact containing the worker ZIP and `SHA256SUMS`. To build it locally, run `python tools/package_motion_worker.py arrumo-motion-worker-linux.zip` from the SDK checkout. The tool prints the archive's SHA-256. Select a trusted SDK revision or CI run, then verify the archive checksum before extracting it to a trusted location outside individual plugin directories.
 
 Install the extracted `motion-worker-requirements.txt` into the Python 3 environment that launches Arrumo. The host also needs Bubblewrap, util-linux with `prlimit`, and FFprobe. Set `ARRUMO_MOTION_SDK_WORKER` to the extracted absolute path of `tools/run_motion_package.py` when starting the editor, MCP, or A2A. Keep the extracted layout intact so the worker can load its SDK schemas.
+
+## Ship a canvas renderer
+
+Manifest schema 17 lets a plugin give agents canvas layers: animation layers written as small web pages. Declare `canvasRenderer` with:
+
+- `browser`: one download per platform (`linux-x64`, `linux-arm64`, `macos-arm64`, `macos-x64`, `windows-x64`), each with `url`, `sha256`, `size` in bytes and the `executable` path inside the archive. Arrumo downloads it only for the creator's computer, when they ask or when the plugin is on, and checks the digest before use.
+- `libraries`: scripts shipped in the package, each with `id`, `version`, `file`, `license`, `description` and `module` (loaded as an ES module named by `id` in the page's import map, or as a classic script).
+- `guide`: Markdown in the package that the agent reads before writing a canvas layer.
+
+```json
+"canvasRenderer": {
+  "browser": {
+    "linux-x64": {"url": "https://downloads.example.com/headless-browser-linux64.zip",
+      "sha256": "…", "size": 110000000, "executable": "headless-browser-linux64/headless-browser"}
+  },
+  "libraries": [{"id": "tween", "version": "1.0.0", "file": "lib/tween.js", "module": true,
+    "license": "MIT", "description": "Easing helpers: import { ease } from \"tween\"."}],
+  "guide": "guide.md"
+}
+```
+
+Pages draw in `window.render(t)` and read `window.arrumo`; the [motion reference](../reference/motion.mdx) describes the layer and how Arrumo renders it. The official [Canvas layers](../../plugins/canvas/canvas-layers.mdx) plugin is a complete example.
