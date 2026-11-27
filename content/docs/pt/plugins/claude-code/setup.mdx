@@ -114,7 +114,7 @@ Aparecem em **Definições › Agente** para todos os espaços de trabalho, ou p
 <TypeTable
   type={{
     "Escrever ficheiros e executar comandos": {
-      description: "Deixa o agente escrever os seus próprios scripts e ficheiros, executar comandos e usar os teus plugins, servidores de ferramentas e hooks instalados enquanto trabalha num vídeo. Os ficheiros ficam numa pasta de trabalho desse vídeo até estar concluído.",
+      description: "Deixa o agente escrever os seus próprios scripts e ficheiros e executar comandos enquanto trabalha num vídeo. Os ficheiros ficam numa pasta de trabalho desse vídeo até estar concluído.",
       type: "ativado ou desativado",
       default: "ativado",
     },
@@ -124,8 +124,9 @@ Aparecem em **Definições › Agente** para todos os espaços de trabalho, ou p
       default: "desativado",
     },
     "Modelo": {
-      description: "O modelo do Claude para o agente deste espaço de trabalho, como sonnet ou opus. Deixa-o vazio para usar a predefinição do Claude Code.",
+      description: "O modelo do Claude para o agente deste espaço de trabalho. O Opus dá os melhores guiões e montagens; escolhe `sonnet` para execuções mais rápidas ou se o teu plano não incluir o Opus.",
       type: "texto",
+      default: "opus",
     },
     "Esforço de raciocínio": {
       description: "Quanto o agente pensa antes de responder. Mais esforço dá melhores guiões e edições, mas demora mais.",
@@ -133,7 +134,7 @@ Aparecem em **Definições › Agente** para todos os espaços de trabalho, ou p
       default: "medium",
     },
     "Usar os meus plugins instalados": {
-      description: "Deixa o agente usar os plugins e servidores de ferramentas (MCP) que instalaste para o Claude Code, enquanto Escrever ficheiros e executar comandos está desativado. Podem ver o material do espaço que o agente recebe, por isso ativa-o só para os que forem de confiança.",
+      description: "Deixa o agente usar a tua própria configuração do Claude Code: os plugins, skills, servidores de ferramentas (MCP) e hooks que instalaste. Podem ver o material do espaço que o agente recebe, por isso ativa-o só para os que forem de confiança.",
       type: "ativado ou desativado",
       default: "desativado",
     },
@@ -152,9 +153,11 @@ O estado confirmed indica que a CLI aceitou a verificação. Se o Arrumo devolve
 
 ## Escrever ficheiros e executar comandos
 
-**Escrever ficheiros e executar comandos**, em Definições › Agente, está ativo por predefinição. Enquanto trabalha num vídeo, o Claude Code aceita as edições (`--permission-mode acceptEdits`) e pode usar Read, Write, Edit, Glob, Grep e Bash, além de WebSearch e WebFetch quando **Pesquisa na web** está ativa. Aplica-se a tua própria configuração do Claude Code: os hooks, os servidores MCP e os plugins. Trabalha numa pasta que o Arrumo cria para esse vídeo e apaga quando o vídeo termina, falha ou é cancelado.
+**Escrever ficheiros e executar comandos**, em Definições › Agente, está ativo por predefinição. Enquanto trabalha num vídeo, o Claude Code aceita as edições (`--permission-mode acceptEdits`) e pode usar Read, Write, Edit, Glob, Grep e Bash, além de WebSearch e WebFetch quando **Pesquisa na web** está ativa. Trabalha numa pasta que o Arrumo cria para esse vídeo e apaga quando o vídeo termina, falha ou é cancelado.
 
-Se o desativares, o Claude Code corre em modo restrito (`--restricted`), com os hooks desativados e sem ferramentas de ficheiros nem de terminal, e só lê o que o Arrumo lhe envia. **Usar os meus plugins instalados** decide então se os teus plugins e servidores MCP são carregados.
+Se o desativares, o Claude Code corre em modo restrito (`--restricted`), com os hooks desativados e sem ferramentas de ficheiros nem de terminal, e só lê o que o Arrumo lhe envia.
+
+**Usar os meus plugins instalados** funciona nos dois modos e está desativado por predefinição. Desativado, o Claude Code arranca em modo seguro (`--safe-mode`) sem servidores MCP, por isso os teus plugins, skills, servidores de ferramentas e hooks não são carregados. Ativo, aplica-se a tua própria configuração do Claude Code.
 
 ## Traduz as legendas
 

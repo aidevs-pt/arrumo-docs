@@ -24,7 +24,19 @@ Name colors as your **Brand** page names them, and name logos as the brand asset
 
 ![An animation’s details: its looping preview and when to use it](/tools/arrumo/static/media/app/animations-detail.webp)
 
-Open an item to play its preview and read its usage note. When something is off, choose **Change with agent** and say only what should change, such as "hold the end card one second longer" or "make the wordmark card smaller". The agent saves the result as a new item and leaves the original as it was, so you can compare them and delete the one you don't want. **Duplicate item** copies an item, for example to edit its usage note for another purpose.
+Open an item to play its preview and read its usage note. When something is off, choose **Change with agent** and say only what should change, such as "hold the end card one second longer" or "make the wordmark card smaller". The agent updates the item in place and keeps what it was in **Versions**: open a version to compare it, and choose **Bring back version** to restore it. **Duplicate item** copies an item, for example to edit its usage note for another purpose.
+
+To clear out several items at once, choose **Select**, pick them (or **Select all**) and choose **Delete**, then type the sentence shown to confirm. Their media stays in **Assets**, and videos that already used them keep them.
+
+### Templates
+
+An item whose words change from video to video, such as a lower third or a chapter card, can be a template. Its panel lists **What each video fills in**: each input with an example, its limit and what to do and avoid. When a video uses it, the agent fills in the inputs and Arrumo renders that use with its own preview, while the library keeps the original. A video's review shows each use with **Filled in for this use**.
+
+## Canvas layers and components
+
+With the **Canvas layers** plugin on, the agent can also draw parts of an animation as small web pages: 3D scenes, charts that build from your numbers, particles, maps of routes, Lottie animations and shader effects. Arrumo draws them frame by frame in an isolated browser with no network, no files and no access to the rest of Arrumo, in your brand colors and fonts. The [Canvas layers plugin](../plugins/canvas/canvas-layers.mdx) explains the one-time download.
+
+A **component** is a building block for these layers that later animations import, such as a confetti burst or a light sweep in your colors. Choose **Generate with agent**, pick **Reusable component** under **What to make**, and describe what it should do and which options it should have. Arrumo renders a demo. A component's panel shows its demo, its **Import path**, its **Options** and **View code** (read-only). To change it, use **Change with agent**: animations made earlier keep the version they were made with. **Show** filters the library to **Animations and transitions** or **Components**.
 
 ## Who can use it
 
@@ -40,4 +52,4 @@ So keep fixed text in library items, and treat pieces such as a lower third as s
 
 ## With an agent
 
-Agents can do the same through MCP, the command line or A2A: `generate_motion_library_item` takes the request (and `basedOn` to change an existing item), and `list_motion_library`, `duplicate_motion_library_item` and `set_motion_library_shares` manage the library. The [motion reference](../developer/reference/motion.mdx) describes the layers, shapes and fonts an animation can use.
+Agents can do the same through MCP, the command line or A2A: `generate_motion_library_item` takes the request (and `basedOn` to change an existing item), and `list_motion_library`, `duplicate_motion_library_item` and `set_motion_library_shares` manage the library. `list_motion_library_versions` and `restore_motion_library_version` handle versions, `get_motion_template_inputs` reads a template's inputs, and `generate_canvas_component` makes a component. `get_canvas_renderer`, `install_canvas_renderer` and `remove_canvas_renderer` manage the canvas download. The [motion reference](../developer/reference/motion.mdx) describes the layers, shapes and fonts an animation can use.

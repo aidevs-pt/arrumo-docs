@@ -24,7 +24,19 @@ Chama às cores os nomes que estão na tua página **Marca**, e aos logótipos o
 
 ![Os detalhes de uma animação: a pré-visualização em ciclo e quando a usar](/tools/arrumo/static/media/app/animations-detail.webp)
 
-Abre um elemento para reproduzir a pré-visualização e ler a nota de utilização. Se algo não estiver bem, escolhe **Alterar com o agente** e diz só o que deve mudar, como «mantém o cartão final mais um segundo» ou «torna o cartão do logótipo mais pequeno». O agente guarda o resultado como um elemento novo e deixa o original como estava, por isso podes compará-los e apagar o que não quiseres. **Duplicar elemento** copia um elemento, por exemplo para mudar a nota de utilização para outro fim.
+Abre um elemento para reproduzir a pré-visualização e ler a nota de utilização. Se algo não estiver bem, escolhe **Alterar com o agente** e diz só o que deve mudar, como «mantém o cartão final mais um segundo» ou «torna o cartão do logótipo mais pequeno». O agente atualiza o elemento no lugar e guarda como era em **Versões**: abre uma versão para a comparar e escolhe **Recuperar a versão** para a restaurar. **Duplicar elemento** copia um elemento, por exemplo para mudar a nota de utilização para outro fim.
+
+Para retirar vários elementos de uma vez, escolhe **Selecionar**, marca-os (ou **Selecionar todas**) e escolhe **Apagar**; depois escreve a frase indicada para confirmar. Os ficheiros continuam em **Recursos**, e os vídeos que já os usaram mantêm-nos.
+
+### Modelos
+
+Um elemento cujo texto muda de vídeo para vídeo, como um oráculo ou um cartão de capítulo, pode ser um modelo. O painel dele mostra **O que cada vídeo preenche**: cada campo com um exemplo, o limite e o que fazer e evitar. Quando um vídeo o usa, o agente preenche os campos e o Arrumo renderiza esse uso com a sua própria pré-visualização, enquanto a biblioteca mantém o original. A revisão de um vídeo mostra cada uso com **Preenchido para este uso**.
+
+## Camadas de tela e componentes
+
+Com o plugin **Canvas layers** ativo, o agente também pode desenhar partes de uma animação como pequenas páginas web: cenas 3D, gráficos que se constroem com os teus números, partículas, mapas de rotas, animações Lottie e efeitos de shader. O Arrumo desenha-as fotograma a fotograma num navegador isolado, sem rede, sem ficheiros e sem acesso ao resto do Arrumo, com as cores e os tipos de letra da tua marca. O [plugin Canvas layers](../plugins/canvas/canvas-layers.mdx) explica a transferência, feita uma única vez.
+
+Um **componente** é uma peça para estas camadas que outras animações importam depois, como uma explosão de confettis ou um varrimento de luz nas tuas cores. Escolhe **Gerar com o agente**, marca **Componente reutilizável** em **O que criar** e descreve o que deve fazer e que opções deve ter. O Arrumo renderiza uma demonstração. O painel de um componente mostra a demonstração, o **Caminho de importação**, as **Opções** e **Ver código** (só leitura). Para o alterar, usa **Alterar com o agente**: as animações feitas antes mantêm a versão com que foram feitas. **Mostrar** filtra a biblioteca por **Animações e transições** ou **Componentes**.
 
 ## Quem a pode usar
 
@@ -40,4 +52,4 @@ Por isso, deixa na biblioteca os elementos com texto fixo, e trata peças como u
 
 ## Com um agente
 
-Os agentes podem fazer o mesmo através do MCP, da linha de comandos ou do A2A: `generate_motion_library_item` recebe o pedido (e `basedOn` para alterar um elemento existente), e `list_motion_library`, `duplicate_motion_library_item` e `set_motion_library_shares` gerem a biblioteca. A [referência de animação](../developer/reference/motion.mdx) descreve as camadas, formas e tipos de letra que uma animação pode usar.
+Os agentes podem fazer o mesmo através do MCP, da linha de comandos ou do A2A: `generate_motion_library_item` recebe o pedido (e `basedOn` para alterar um elemento existente), e `list_motion_library`, `duplicate_motion_library_item` e `set_motion_library_shares` gerem a biblioteca. `list_motion_library_versions` e `restore_motion_library_version` tratam das versões, `get_motion_template_inputs` lê os campos de um modelo e `generate_canvas_component` cria um componente. `get_canvas_renderer`, `install_canvas_renderer` e `remove_canvas_renderer` gerem a transferência da tela. A [referência de animação](../developer/reference/motion.mdx) descreve as camadas, formas e tipos de letra que uma animação pode usar.

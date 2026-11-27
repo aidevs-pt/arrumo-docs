@@ -114,7 +114,7 @@ These appear in **Settings › Agent** for every workspace, or for one workspace
 <TypeTable
   type={{
     "Write files and run commands": {
-      description: "Lets the agent write its own scripts and files, run commands, and use your installed plugins, tool servers and hooks while it works on a video. Its files stay in a work folder for that video until the video is finished.",
+      description: "Lets the agent write its own scripts and files and run commands while it works on a video. Its files stay in a work folder for that video until the video is finished.",
       type: "on or off",
       default: "on",
     },
@@ -124,8 +124,9 @@ These appear in **Settings › Agent** for every workspace, or for one workspace
       default: "off",
     },
     Model: {
-      description: "The Claude model for this workspace, such as `sonnet` or `opus`. Leave it empty to use Claude Code's default.",
+      description: "The Claude model for this workspace. Opus gives the best scripts and edits; choose `sonnet` for faster runs or if your plan doesn't include Opus.",
       type: "text",
+      default: "opus",
     },
     "Reasoning effort": {
       description: "How long the agent thinks before answering. Higher effort gives better scripts and edits but takes longer.",
@@ -133,7 +134,7 @@ These appear in **Settings › Agent** for every workspace, or for one workspace
       default: "medium",
     },
     "Use my installed plugins": {
-      description: "Lets the agent use the plugins and tool servers (MCP) you installed for Claude Code yourself, while Write files and run commands is off. They can see the workspace material the agent is given, so turn it on only for ones you trust.",
+      description: "Lets the agent use your own Claude Code setup: the plugins, skills, tool servers (MCP) and hooks you installed. They can see the workspace material the agent is given, so turn it on only for ones you trust.",
       type: "on or off",
       default: "off",
     },
@@ -152,9 +153,11 @@ A confirmed status means the CLI accepted the sign-in probe. If Arrumo reports u
 
 ## Write files and run commands
 
-**Write files and run commands**, in Settings › Agent, is on by default. While working on a video, Claude Code then runs with edits accepted (`--permission-mode acceptEdits`) and may use Read, Write, Edit, Glob, Grep and Bash, plus WebSearch and WebFetch when **Web search** is on. Your own Claude Code setup applies: its hooks, MCP servers and plugins. It works in a folder Arrumo makes for that video and deletes once the video is finished, fails or is cancelled.
+**Write files and run commands**, in Settings › Agent, is on by default. While working on a video, Claude Code then runs with edits accepted (`--permission-mode acceptEdits`) and may use Read, Write, Edit, Glob, Grep and Bash, plus WebSearch and WebFetch when **Web search** is on. It works in a folder Arrumo makes for that video and deletes once the video is finished, fails or is cancelled.
 
-Turn it off and Claude Code runs restricted (`--restricted`), with hooks turned off and file and shell tools refused, and only reads what Arrumo sends. **Use my installed plugins** then decides whether your own plugins and MCP servers load.
+Turn it off and Claude Code runs restricted (`--restricted`), with hooks turned off and file and shell tools refused, and only reads what Arrumo sends.
+
+**Use my installed plugins** works in both modes and is off by default. Off, Claude Code starts in safe mode (`--safe-mode`) with no MCP servers, so your own plugins, skills, tool servers and hooks don't load. On, your own Claude Code setup applies.
 
 ## Translate subtitle cues
 

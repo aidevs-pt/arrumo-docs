@@ -12,10 +12,10 @@ Las opciones del agente vienen de su complemento y aparecen en **Ajustes › Age
 
 ![Ajustes, Agente: el agente de producción y lo que puede hacer](/tools/arrumo/static/media/app/settings-agent.webp)
 
-- **Escribir archivos y ejecutar comandos** está activado por defecto. Mientras trabaja en un vídeo, el agente puede escribir sus propios scripts y archivos, ejecutar comandos y usar los complementos, servidores de herramientas (MCP) y hooks que hayas configurado tú. Trabaja en una carpeta propia para ese vídeo, junto a los datos de Arrumo, que Arrumo borra cuando el vídeo termina, falla o se cancela. Un aviso bajo el interruptor te recuerda que así el agente puede cambiar archivos de tu equipo y ejecutar programas con los permisos de tu cuenta: déjalo activado solo con un agente y complementos de confianza. Si lo desactivas, el agente solo lee lo que Arrumo le da y responde, sin herramientas, hooks ni tu propia configuración.
+- **Escribir archivos y ejecutar comandos** está activado por defecto. Mientras trabaja en un vídeo, el agente puede escribir sus propios scripts y archivos y ejecutar comandos. Trabaja en una carpeta propia para ese vídeo, junto a los datos de Arrumo, que Arrumo borra cuando el vídeo termina, falla o se cancela. Un aviso bajo el interruptor te recuerda que así el agente puede cambiar archivos de tu equipo y ejecutar programas con los permisos de tu cuenta: déjalo activado solo con un agente y complementos de confianza. Si lo desactivas, el agente solo lee lo que Arrumo le da y responde.
 - **Búsqueda web** permite al agente buscar en la web datos, precios y tendencias.
-- **Usar mis complementos instalados** solo aparece cuando **Escribir archivos y ejecutar comandos** está desactivado. Permite al agente usar los complementos y servidores de herramientas que instalaste para él, que pueden ver el material del espacio de trabajo que recibe el agente.
-- **Modelo** y **Esfuerzo de razonamiento** eligen cómo piensa el agente. Más esfuerzo da mejores guiones y montajes, pero tarda más.
+- **Usar mis complementos instalados** está desactivado por defecto y funciona con **Escribir archivos y ejecutar comandos** activado o desactivado. Permite al agente usar tu propia configuración: los complementos, skills, servidores de herramientas (MCP) y hooks que instalaste. Pueden ver el material del espacio de trabajo que recibe el agente, así que actívalo solo con los que sean de confianza.
+- **Modelo** y **Esfuerzo de razonamiento** eligen cómo piensa el agente. Más esfuerzo da mejores guiones y montajes, pero tarda más. Claude Code usa Opus con esfuerzo medio salvo que elijas otra cosa; elige Sonnet para vídeos más rápidos o si tu plan no incluye Opus.
 
 Cada vídeo conserva las opciones con las que empezó, para poder repetirlo igual.
 
@@ -38,6 +38,10 @@ Si alguna versión nueva no llegara a arrancar, el siguiente inicio busca una co
 ![El aviso al cerrar Arrumo mientras se genera un vídeo](/tools/arrumo/static/media/app/close-warning.webp)
 
 Si cierras la ventana, o sales desde el menú o el dock, mientras se genera un vídeo, Arrumo pregunta antes. **Mantener Arrumo abierto** vuelve al trabajo; **Cerrar y pausar** sale, y cada vídeo continúa desde el mismo paso la próxima vez que abras Arrumo. Los vídeos que esperan tu revisión no cuentan, porque no hay nada en marcha.
+
+## Almacenamiento
+
+**Ajustes › Calidad › Almacenamiento** tiene **Eliminar los clips subidos cuando su vídeo esté terminado**. Actívalo para que Arrumo no crezca con cada vídeo: cuando un vídeo termina, Arrumo borra los clips que subiste para él. Se quedan los clips que aún usa otro borrador o un vídeo abierto, y los que guardas en la biblioteca de recursos. Un vídeo terminado cuyos clips ya no están no se puede volver a hacer a partir de ellos; su página lo indica y te propone empezar un vídeo nuevo con los clips.
 
 ## Datos y privacidad
 

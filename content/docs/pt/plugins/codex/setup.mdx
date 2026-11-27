@@ -116,7 +116,7 @@ Aparecem em **Definições › Agente** para todos os espaços de trabalho, ou p
 <TypeTable
   type={{
     "Escrever ficheiros e executar comandos": {
-      description: "Deixa o agente escrever os seus próprios scripts e ficheiros, executar comandos e usar os teus plugins, servidores de ferramentas e hooks instalados enquanto trabalha num vídeo. Os ficheiros ficam numa pasta de trabalho desse vídeo até estar concluído.",
+      description: "Deixa o agente escrever os seus próprios scripts e ficheiros e executar comandos enquanto trabalha num vídeo. Os ficheiros ficam numa pasta de trabalho desse vídeo até estar concluído.",
       type: "ativado ou desativado",
       default: "ativado",
     },
@@ -135,7 +135,7 @@ Aparecem em **Definições › Agente** para todos os espaços de trabalho, ou p
       default: "medium",
     },
     "Usar os meus plugins instalados": {
-      description: "Deixa o agente usar a tua própria configuração, plugins e servidores de ferramentas (MCP) do Codex, enquanto Escrever ficheiros e executar comandos está desativado. Podem ver o material do espaço que o agente recebe, por isso ativa-o só para os que forem de confiança.",
+      description: "Deixa o agente usar a tua própria configuração do Codex: a configuração, os plugins, os servidores de ferramentas (MCP) e os hooks. Podem ver o material do espaço que o agente recebe, por isso ativa-o só para os que forem de confiança.",
       type: "ativado ou desativado",
       default: "desativado",
     },
@@ -154,9 +154,11 @@ O estado confirmed indica que a CLI aceitou a verificação. Se o Arrumo devolve
 
 ## Escrever ficheiros e executar comandos
 
-**Escrever ficheiros e executar comandos**, em Definições › Agente, está ativo por predefinição. Enquanto trabalha num vídeo, o Codex corre na sua sandbox `workspace-write` com o terminal e carrega a tua própria configuração do Codex, incluindo os servidores MCP e os plugins. Trabalha numa pasta que o Arrumo cria para esse vídeo e apaga quando o vídeo termina, falha ou é cancelado.
+**Escrever ficheiros e executar comandos**, em Definições › Agente, está ativo por predefinição. Enquanto trabalha num vídeo, o Codex corre na sua sandbox `workspace-write` com o terminal. Trabalha numa pasta que o Arrumo cria para esse vídeo e apaga quando o vídeo termina, falha ou é cancelado.
 
-Se o desativares, o Codex corre na sandbox `read-only` sem a ferramenta de terminal, e só lê o que o Arrumo lhe envia. **Usar os meus plugins instalados** decide então se a tua configuração e os teus plugins do Codex são carregados. A geração de imagens é sempre só de leitura.
+Se o desativares, o Codex corre na sandbox `read-only` sem a ferramenta de terminal, e só lê o que o Arrumo lhe envia. A geração de imagens é sempre só de leitura.
+
+**Usar os meus plugins instalados** funciona nos dois modos e está desativado por predefinição. Desativado, o Codex ignora a tua própria configuração (`--ignore-user-config`) e os plugins. Ativo, aplica-se a tua própria configuração do Codex: a configuração, os plugins, os servidores de ferramentas (MCP) e os hooks.
 
 ## Traduz as legendas
 

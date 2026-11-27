@@ -12,10 +12,10 @@ The agent's options come from its plugin and appear in **Settings › Agent** fo
 
 ![Settings, Agent: the production agent and what it can do](/tools/arrumo/static/media/app/settings-agent.webp)
 
-- **Write files and run commands** is on by default. While it works on a video, the agent can write its own scripts and files, run commands, and use the plugins, tool servers (MCP) and hooks you set up for it yourself. It works in a folder of its own for that video, next to Arrumo's data, which Arrumo deletes when the video is finished, fails or is cancelled. A warning under the switch reminds you that the agent can then change files on your computer and run programs with your account's access: keep it on only with an agent and plugins you trust. Turn it off and the agent only reads what Arrumo gives it and answers, without tools, hooks or your own setup.
+- **Write files and run commands** is on by default. While it works on a video, the agent can write its own scripts and files and run commands. It works in a folder of its own for that video, next to Arrumo's data, which Arrumo deletes when the video is finished, fails or is cancelled. A warning under the switch reminds you that the agent can then change files on your computer and run programs with your account's access: keep it on only with an agent and plugins you trust. Turn it off and the agent only reads what Arrumo gives it and answers.
 - **Web search** lets the agent look things up on the web, for facts, prices and trends.
-- **Use my installed plugins** appears only while **Write files and run commands** is off. It lets the agent use the plugins and tool servers you installed for it, which can see the workspace material the agent is given.
-- **Model** and **Reasoning effort** choose how the agent thinks. Higher effort gives better scripts and edits but takes longer.
+- **Use my installed plugins** is off by default and works with **Write files and run commands** on or off. It lets the agent use your own setup for it: the plugins, skills, tool servers (MCP) and hooks you installed. They can see the workspace material the agent is given, so turn it on only for ones you trust.
+- **Model** and **Reasoning effort** choose how the agent thinks. Higher effort gives better scripts and edits but takes longer. Claude Code uses Opus at medium effort unless you choose otherwise; choose Sonnet for faster videos, or if your plan doesn't include Opus.
 
 Each video keeps the options it started with, so a replay can reproduce it.
 
@@ -38,6 +38,10 @@ If a new version ever fails to start, the next launch looks for a fix before any
 ![The warning when you close Arrumo while a video is generating](/tools/arrumo/static/media/app/close-warning.webp)
 
 Closing the window, or quitting from the menu or dock, while a video is generating asks first. **Keep Arrumo open** goes back to work; **Close and pause** quits, and each video continues from the same step the next time you open Arrumo. Videos waiting for your review don't count, since nothing is running.
+
+## Storage
+
+**Settings › Quality › Storage** has **Delete uploaded clips once their video is finished**. Turn it on to keep Arrumo from growing with every video: when a video is finished, Arrumo deletes the clips you uploaded for it. Clips another draft or an open video still uses stay, and so do clips you keep in the asset library. A finished video whose clips are gone can't be made again from them; its page says so and suggests starting a new video with the clips.
 
 ## Data and privacy
 
