@@ -1,0 +1,41 @@
+---
+title: "Canvas layers"
+description: "Deja que el agente dibuje escenas 3D, gráficos, partículas, mapas de rutas, animaciones Lottie y efectos de shader dentro de tus animaciones."
+icon: Box
+---
+
+Casi toda una animación es texto, cajas, imágenes y luz que Arrumo dibuja por sí mismo. El complemento **Canvas layers** añade otro tipo de capa: una pequeña página web que escribe el agente y que Arrumo dibuja fotograma a fotograma. Úsala para lo que las otras capas no pueden mostrar: profundidad, muchas piezas en movimiento, datos que se construyen o una animación vectorial diseñada.
+
+## Actívalo
+
+El complemento es oficial y se instala con Arrumo. Abre **Ajustes › Complementos › Canvas layers**. En **Renderizador**, Arrumo descarga el navegador sin interfaz con el que dibuja, de unos 130 MB, una sola vez para este equipo, y lo comprueba antes de usarlo. La descarga empieza sola cuando el complemento está activado; **Descargar renderizador** la inicia a mano y **Quitar descarga** libera el espacio.
+
+En Linux, las capas de lienzo necesitan Bubblewrap para mantener las páginas aisladas. Si la página lo pide, instala el paquete `bubblewrap` de tu distribución y vuelve a abrir la página.
+
+Cuando el renderizador muestra **Listo**, el agente puede usar capas de lienzo en animaciones nuevas. Hasta entonces, simplemente no las ofrece.
+
+## Qué puede dibujar el agente
+
+- **Escenas 3D** con three.js: productos, objetos, diagramas isométricos.
+- **Gráficos** con D3 que se construyen con las cifras de tu brief.
+- **Partículas**, como confeti, nieve y chispas, y flujos a lo largo de conectores.
+- **Rutas en un globo**, con la cuadrícula y los lugares que nombres. No incluye formas de países ni de costas.
+- Animaciones vectoriales **Lottie**.
+- **Efectos de shader** para fondos y ambiente, como manchas suaves de color, haces de luz, cielos estrellados y grano de película.
+- **Piezas listas** que puede adaptar: efectos de texto, subtítulos, ventanas de terminal y de chat, un cursor en movimiento, notificaciones, gráficos de barras, líneas y anillos, una cortinilla de logotipo y transiciones.
+
+Todo se dibuja con los colores y fuentes de la marca del vídeo, salvo que pidas otra cosa. El agente también puede crear **componentes**, piezas reutilizables que otras animaciones importan después; consulta [Crea una biblioteca de animaciones](../../user/animations.mdx).
+
+## Privacidad y seguridad
+
+Cada página se ejecuta en un navegador sin interfaz aislado, sin red y sin acceso a tus archivos ni al resto de Arrumo. Cada archivo que pide una página se responde desde la memoria o se rechaza. Las páginas no pueden enviar nada a ningún sitio.
+
+## Bibliotecas
+
+| Biblioteca | Versión | Licencia |
+| ---------- | ------- | -------- |
+| three.js | 0.170.0 | MIT |
+| Lottie (lottie-web) | 5.13.0 | MIT |
+| D3 | 7.9.2 | ISC |
+
+El navegador sin interfaz es el headless shell de Chrome for Testing, versión 158.0.8127.88.

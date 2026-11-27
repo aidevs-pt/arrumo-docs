@@ -39,3 +39,25 @@ Ejecuta `python tools/run_motion_package.py <package.zip> --sha256 <reviewed-dig
 Las compilaciones de conformidad del SDK publican un artefacto de CI `arrumo-motion-worker-linux` con el ZIP del worker y `SHA256SUMS`. Para compilarlo en local, ejecuta `python tools/package_motion_worker.py arrumo-motion-worker-linux.zip` desde el checkout del SDK. La herramienta imprime el SHA-256 del archivo. Elige una revisión del SDK o una ejecución de CI de confianza y verifica la suma de comprobación del archivo antes de extraerlo en una ubicación de confianza fuera de los directorios de los complementos.
 
 Instala el `motion-worker-requirements.txt` extraído en el entorno de Python 3 que lanza Arrumo. El host también necesita Bubblewrap, util-linux con `prlimit` y FFprobe. Define `ARRUMO_MOTION_SDK_WORKER` con la ruta absoluta extraída de `tools/run_motion_package.py` al iniciar el editor, MCP o A2A. Mantén intacta la estructura extraída para que el worker pueda cargar sus esquemas del SDK.
+
+## Incluye un renderizador de lienzo
+
+El esquema 17 del manifiesto permite que un complemento dé a los agentes capas de lienzo: capas de animación escritas como pequeñas páginas web. Declara `canvasRenderer` con:
+
+- `browser`: una descarga por plataforma (`linux-x64`, `linux-arm64`, `macos-arm64`, `macos-x64`, `windows-x64`), cada una con `url`, `sha256`, `size` en bytes y la ruta `executable` dentro del archivo. Arrumo la descarga solo para el equipo del creador, cuando la pide o cuando el complemento está activado, y comprueba el resumen antes de usarla.
+- `libraries`: scripts incluidos en el paquete, cada uno con `id`, `version`, `file`, `license`, `description` y `module` (se carga como módulo ES con el nombre `id` en el import map de la página, o como script clásico).
+- `guide`: Markdown del paquete que el agente lee antes de escribir una capa de lienzo.
+
+```json
+"canvasRenderer": {
+  "browser": {
+    "linux-x64": {"url": "https://downloads.example.com/headless-browser-linux64.zip",
+      "sha256": "…", "size": 110000000, "executable": "headless-browser-linux64/headless-browser"}
+  },
+  "libraries": [{"id": "tween", "version": "1.0.0", "file": "lib/tween.js", "module": true,
+    "license": "MIT", "description": "Easing helpers: import { ease } from \"tween\"."}],
+  "guide": "guide.md"
+}
+```
+
+Las páginas dibujan en `window.render(t)` y leen `window.arrumo`; la [referencia de animación](../reference/motion.mdx) describe la capa y cómo la renderiza Arrumo. El complemento oficial [Canvas layers](../../plugins/canvas/canvas-layers.mdx) es un ejemplo completo.

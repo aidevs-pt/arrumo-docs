@@ -18,7 +18,9 @@ The skill tells the agent not to redo work Arrumo handles itself: Arrumo transcr
 
 ## Editing guides
 
-Each production step's agent follows a short guide of editing craft notes: writing the script, planning visuals, designing animations, cutting footage, storyboarding, choosing portrait cuts, writing publishing text, and reviewing an edit. The guide sits in the step's prompt apart from the creator's brief, and the brief and learned feedback take precedence. Outside agents read the same guides with `list_editing_guides` and `get_editing_guide` (CLI `list-editing-guides` and `editing-guide <id>`), so their review notes and Arrumo's agent pull the same way.
+Each production step's agent follows a short guide of editing craft notes: writing the script, planning visuals, designing animations, directing the look and motion, cutting footage, storyboarding, choosing portrait cuts, writing publishing text, and reviewing an edit. The guide sits in the step's prompt apart from the creator's brief, and the brief and learned feedback take precedence. Outside agents read the same guides with `list_editing_guides` and `get_editing_guide` (CLI `list-editing-guides` and `editing-guide <id>`), so their review notes and Arrumo's agent pull the same way.
+
+A direction guide sets the look and motion before anything is designed: how calm or lively, soft or crisp the video should feel, and how vague words such as "clean" or "punchy" translate into concrete changes. The script step also names the video's kind: an explainer or tutorial, a data story or recap, a product, launch or ad video, a short vertical video, a talking head, interview or podcast, a title or type piece, or an animated short. The planning and preview steps then add that kind's guide, which ends with the checks a finished video of that kind should pass. A video that fits none of them, or a run started before kinds existed, follows the step guides alone.
 
 ## Looking at a moment
 

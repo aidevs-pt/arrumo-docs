@@ -114,7 +114,7 @@ Aparecen en **Ajustes › Agente** para todos los espacios de trabajo, o para un
 <TypeTable
   type={{
     "Escribir archivos y ejecutar comandos": {
-      description: "Permite al agente escribir sus propios scripts y archivos, ejecutar comandos y usar tus complementos, servidores de herramientas y hooks instalados mientras trabaja en un vídeo. Sus archivos se quedan en una carpeta de trabajo de ese vídeo hasta que se termina.",
+      description: "Permite al agente escribir sus propios scripts y archivos y ejecutar comandos mientras trabaja en un vídeo. Sus archivos se quedan en una carpeta de trabajo de ese vídeo hasta que se termina.",
       type: "activado o desactivado",
       default: "activado",
     },
@@ -124,8 +124,9 @@ Aparecen en **Ajustes › Agente** para todos los espacios de trabajo, o para un
       default: "desactivado",
     },
     "Modelo": {
-      description: "El modelo de Claude para el agente de este espacio de trabajo, como sonnet u opus. Déjalo vacío para usar el predeterminado de Claude Code.",
+      description: "El modelo de Claude para el agente de este espacio de trabajo. Opus da los mejores guiones y montajes; elige `sonnet` para ejecuciones más rápidas o si tu plan no incluye Opus.",
       type: "texto",
+      default: "opus",
     },
     "Esfuerzo de razonamiento": {
       description: "Cuánto piensa el agente antes de responder. Más esfuerzo da mejores guiones y ediciones, pero tarda más.",
@@ -133,7 +134,7 @@ Aparecen en **Ajustes › Agente** para todos los espacios de trabajo, o para un
       default: "medium",
     },
     "Usar mis complementos instalados": {
-      description: "Permite al agente usar los complementos y servidores de herramientas (MCP) que instalaste para Claude Code, mientras Escribir archivos y ejecutar comandos está desactivado. Pueden ver el material del espacio que recibe el agente, así que actívalo solo con los que sean de confianza.",
+      description: "Permite al agente usar tu propia configuración de Claude Code: los complementos, skills, servidores de herramientas (MCP) y hooks que instalaste. Pueden ver el material del espacio que recibe el agente, así que actívalo solo con los que sean de confianza.",
       type: "activado o desactivado",
       default: "desactivado",
     },
@@ -152,9 +153,11 @@ El estado confirmed indica que la CLI aceptó la comprobación. Si Arrumo devuel
 
 ## Escribir archivos y ejecutar comandos
 
-**Escribir archivos y ejecutar comandos**, en Ajustes › Agente, está activado por defecto. Mientras trabaja en un vídeo, Claude Code acepta las ediciones (`--permission-mode acceptEdits`) y puede usar Read, Write, Edit, Glob, Grep y Bash, además de WebSearch y WebFetch cuando **Búsqueda web** está activada. Se aplica tu propia configuración de Claude Code: sus hooks, servidores MCP y complementos. Trabaja en una carpeta que Arrumo crea para ese vídeo y borra cuando el vídeo termina, falla o se cancela.
+**Escribir archivos y ejecutar comandos**, en Ajustes › Agente, está activado por defecto. Mientras trabaja en un vídeo, Claude Code acepta las ediciones (`--permission-mode acceptEdits`) y puede usar Read, Write, Edit, Glob, Grep y Bash, además de WebSearch y WebFetch cuando **Búsqueda web** está activada. Trabaja en una carpeta que Arrumo crea para ese vídeo y borra cuando el vídeo termina, falla o se cancela.
 
-Si lo desactivas, Claude Code se ejecuta en modo restringido (`--restricted`), con los hooks desactivados y sin herramientas de archivos ni de terminal, y solo lee lo que Arrumo le envía. **Usar mis complementos instalados** decide entonces si se cargan tus complementos y servidores MCP.
+Si lo desactivas, Claude Code se ejecuta en modo restringido (`--restricted`), con los hooks desactivados y sin herramientas de archivos ni de terminal, y solo lee lo que Arrumo le envía.
+
+**Usar mis complementos instalados** funciona en los dos modos y está desactivado por defecto. Desactivado, Claude Code arranca en modo seguro (`--safe-mode`) sin servidores MCP, así que no se cargan tus complementos, skills, servidores de herramientas ni hooks. Activado, se aplica tu propia configuración de Claude Code.
 
 ## Traduce los subtítulos
 

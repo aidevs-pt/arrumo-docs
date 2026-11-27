@@ -1,0 +1,41 @@
+---
+title: "Canvas layers"
+description: "Deixa o agente desenhar cenas 3D, gráficos, partículas, mapas de rotas, animações Lottie e efeitos de shader dentro das tuas animações."
+icon: Box
+---
+
+Quase toda uma animação é texto, caixas, imagens e luz que o Arrumo desenha sozinho. O plugin **Canvas layers** acrescenta outro tipo de camada: uma pequena página web que o agente escreve e que o Arrumo desenha fotograma a fotograma. Usa-a para o que as outras camadas não conseguem mostrar: profundidade, muitas peças em movimento, dados que se constroem ou uma animação vetorial desenhada.
+
+## Ativa-o
+
+O plugin é oficial e é instalado com o Arrumo. Abre **Definições › Plugins › Canvas layers**. Em **Renderizador**, o Arrumo descarrega o navegador sem interface com que desenha, com cerca de 130 MB, uma única vez para este computador, e verifica-o antes de o usar. A transferência começa sozinha quando o plugin está ativo; **Descarregar renderizador** inicia-a à mão e **Remover descarga** liberta o espaço.
+
+No Linux, as camadas de tela precisam do Bubblewrap para manter as páginas isoladas. Se a página o pedir, instala o pacote `bubblewrap` da tua distribuição e volta a abrir a página.
+
+Quando o renderizador mostra **Pronto**, o agente pode usar camadas de tela em animações novas. Até lá, simplesmente não as oferece.
+
+## O que o agente pode desenhar
+
+- **Cenas 3D** com three.js: produtos, objetos, diagramas isométricos.
+- **Gráficos** com D3 que se constroem com os números do teu brief.
+- **Partículas**, como confettis, neve e faíscas, e fluxos ao longo de conectores.
+- **Rotas num globo**, com a grelha e os lugares que indicares. Não inclui formas de países nem de costas.
+- Animações vetoriais **Lottie**.
+- **Efeitos de shader** para fundos e ambiente, como manchas suaves de cor, feixes de luz, céus estrelados e grão de película.
+- **Peças prontas** que pode adaptar: efeitos de texto, legendas, janelas de terminal e de chat, um cursor em movimento, notificações, gráficos de barras, linhas e anéis, uma assinatura de logótipo e transições.
+
+Tudo é desenhado com as cores e os tipos de letra da marca do vídeo, a menos que peças outra coisa. O agente também pode criar **componentes**, peças reutilizáveis que outras animações importam depois; consulta [Cria uma biblioteca de animações](../../user/animations.mdx).
+
+## Privacidade e segurança
+
+Cada página corre num navegador sem interface isolado, sem rede e sem acesso aos teus ficheiros nem ao resto do Arrumo. Cada ficheiro que uma página pede é respondido a partir da memória ou recusado. As páginas não conseguem enviar nada para lado nenhum.
+
+## Bibliotecas
+
+| Biblioteca | Versão | Licença |
+| ---------- | ------ | ------- |
+| three.js | 0.170.0 | MIT |
+| Lottie (lottie-web) | 5.13.0 | MIT |
+| D3 | 7.9.2 | ISC |
+
+O navegador sem interface é o headless shell do Chrome for Testing, versão 158.0.8127.88.

@@ -116,7 +116,7 @@ These appear in **Settings › Agent** for every workspace, or for one workspace
 <TypeTable
   type={{
     "Write files and run commands": {
-      description: "Lets the agent write its own scripts and files, run commands, and use your installed plugins, tool servers and hooks while it works on a video. Its files stay in a work folder for that video until the video is finished.",
+      description: "Lets the agent write its own scripts and files and run commands while it works on a video. Its files stay in a work folder for that video until the video is finished.",
       type: "on or off",
       default: "on",
     },
@@ -135,7 +135,7 @@ These appear in **Settings › Agent** for every workspace, or for one workspace
       default: "medium",
     },
     "Use my installed plugins": {
-      description: "Lets the agent use your own Codex configuration, plugins and tool servers (MCP), while Write files and run commands is off. They can see the workspace material the agent is given, so turn it on only for ones you trust.",
+      description: "Lets the agent use your own Codex setup: its configuration, plugins, tool servers (MCP) and hooks. They can see the workspace material the agent is given, so turn it on only for ones you trust.",
       type: "on or off",
       default: "off",
     },
@@ -154,9 +154,11 @@ A confirmed status means the CLI accepted the sign-in probe. If Arrumo reports u
 
 ## Write files and run commands
 
-**Write files and run commands**, in Settings › Agent, is on by default. While working on a video, Codex then runs in its `workspace-write` sandbox with its shell, and loads your own Codex configuration, including MCP servers and plugins. It works in a folder Arrumo makes for that video and deletes once the video is finished, fails or is cancelled.
+**Write files and run commands**, in Settings › Agent, is on by default. While working on a video, Codex then runs in its `workspace-write` sandbox with its shell. It works in a folder Arrumo makes for that video and deletes once the video is finished, fails or is cancelled.
 
-Turn it off and Codex runs in the `read-only` sandbox without its shell tool, and only reads what Arrumo sends. **Use my installed plugins** then decides whether your own Codex configuration and plugins load. Image generation always runs read-only.
+Turn it off and Codex runs in the `read-only` sandbox without its shell tool, and only reads what Arrumo sends. Image generation always runs read-only.
+
+**Use my installed plugins** works in both modes and is off by default. Off, Codex ignores your own configuration (`--ignore-user-config`) and its plugins. On, your own Codex setup applies: its configuration, plugins, tool servers (MCP) and hooks.
 
 ## Translate subtitle cues
 

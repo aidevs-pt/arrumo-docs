@@ -116,7 +116,7 @@ Aparecen en **Ajustes › Agente** para todos los espacios de trabajo, o para un
 <TypeTable
   type={{
     "Escribir archivos y ejecutar comandos": {
-      description: "Permite al agente escribir sus propios scripts y archivos, ejecutar comandos y usar tus complementos, servidores de herramientas y hooks instalados mientras trabaja en un vídeo. Sus archivos se quedan en una carpeta de trabajo de ese vídeo hasta que se termina.",
+      description: "Permite al agente escribir sus propios scripts y archivos y ejecutar comandos mientras trabaja en un vídeo. Sus archivos se quedan en una carpeta de trabajo de ese vídeo hasta que se termina.",
       type: "activado o desactivado",
       default: "activado",
     },
@@ -135,7 +135,7 @@ Aparecen en **Ajustes › Agente** para todos los espacios de trabajo, o para un
       default: "medium",
     },
     "Usar mis complementos instalados": {
-      description: "Permite al agente usar tu propia configuración, complementos y servidores de herramientas (MCP) de Codex, mientras Escribir archivos y ejecutar comandos está desactivado. Pueden ver el material del espacio que recibe el agente, así que actívalo solo con los que sean de confianza.",
+      description: "Permite al agente usar tu propia configuración de Codex: su configuración, complementos, servidores de herramientas (MCP) y hooks. Pueden ver el material del espacio que recibe el agente, así que actívalo solo con los que sean de confianza.",
       type: "activado o desactivado",
       default: "desactivado",
     },
@@ -154,9 +154,11 @@ El estado confirmed indica que la CLI aceptó la comprobación. Si Arrumo devuel
 
 ## Escribir archivos y ejecutar comandos
 
-**Escribir archivos y ejecutar comandos**, en Ajustes › Agente, está activado por defecto. Mientras trabaja en un vídeo, Codex se ejecuta en su sandbox `workspace-write` con su terminal y carga tu propia configuración de Codex, incluidos los servidores MCP y los complementos. Trabaja en una carpeta que Arrumo crea para ese vídeo y borra cuando el vídeo termina, falla o se cancela.
+**Escribir archivos y ejecutar comandos**, en Ajustes › Agente, está activado por defecto. Mientras trabaja en un vídeo, Codex se ejecuta en su sandbox `workspace-write` con su terminal. Trabaja en una carpeta que Arrumo crea para ese vídeo y borra cuando el vídeo termina, falla o se cancela.
 
-Si lo desactivas, Codex se ejecuta en el sandbox `read-only` sin su herramienta de terminal, y solo lee lo que Arrumo le envía. **Usar mis complementos instalados** decide entonces si se cargan tu configuración y tus complementos de Codex. La generación de imágenes siempre es de solo lectura.
+Si lo desactivas, Codex se ejecuta en el sandbox `read-only` sin su herramienta de terminal, y solo lee lo que Arrumo le envía. La generación de imágenes siempre es de solo lectura.
+
+**Usar mis complementos instalados** funciona en los dos modos y está desactivado por defecto. Desactivado, Codex ignora tu propia configuración (`--ignore-user-config`) y sus complementos. Activado, se aplica tu propia configuración de Codex: su configuración, complementos, servidores de herramientas (MCP) y hooks.
 
 ## Traduce los subtítulos
 

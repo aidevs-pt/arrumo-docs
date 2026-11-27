@@ -39,3 +39,25 @@ Executa `python tools/run_motion_package.py <package.zip> --sha256 <reviewed-dig
 As compilações de conformidade do SDK publicam um artefacto de CI `arrumo-motion-worker-linux` com o ZIP do worker e `SHA256SUMS`. Para o compilar localmente, executa `python tools/package_motion_worker.py arrumo-motion-worker-linux.zip` a partir do checkout do SDK. A ferramenta imprime o SHA-256 do ficheiro. Escolhe uma revisão do SDK ou uma execução de CI de confiança e verifica a soma de verificação do ficheiro antes de o extrair para um local de confiança fora das pastas dos plugins.
 
 Instala o `motion-worker-requirements.txt` extraído no ambiente Python 3 que lança o Arrumo. O host também precisa de Bubblewrap, util-linux com `prlimit` e FFprobe. Define `ARRUMO_MOTION_SDK_WORKER` com o caminho absoluto extraído de `tools/run_motion_package.py` ao iniciar o editor, o MCP ou o A2A. Mantém intacta a estrutura extraída para o worker conseguir carregar os esquemas do SDK.
+
+## Inclui um renderizador de tela
+
+O esquema 17 do manifesto permite que um plugin dê aos agentes camadas de tela: camadas de animação escritas como pequenas páginas web. Declara `canvasRenderer` com:
+
+- `browser`: uma transferência por plataforma (`linux-x64`, `linux-arm64`, `macos-arm64`, `macos-x64`, `windows-x64`), cada uma com `url`, `sha256`, `size` em bytes e o caminho `executable` dentro do arquivo. O Arrumo descarrega-a só para o computador do criador, quando ele a pede ou quando o plugin está ativo, e verifica o resumo antes de a usar.
+- `libraries`: scripts incluídos no pacote, cada um com `id`, `version`, `file`, `license`, `description` e `module` (carregado como módulo ES com o nome `id` no import map da página, ou como script clássico).
+- `guide`: Markdown do pacote que o agente lê antes de escrever uma camada de tela.
+
+```json
+"canvasRenderer": {
+  "browser": {
+    "linux-x64": {"url": "https://downloads.example.com/headless-browser-linux64.zip",
+      "sha256": "…", "size": 110000000, "executable": "headless-browser-linux64/headless-browser"}
+  },
+  "libraries": [{"id": "tween", "version": "1.0.0", "file": "lib/tween.js", "module": true,
+    "license": "MIT", "description": "Easing helpers: import { ease } from \"tween\"."}],
+  "guide": "guide.md"
+}
+```
+
+As páginas desenham em `window.render(t)` e leem `window.arrumo`; a [referência de animação](../reference/motion.mdx) descreve a camada e como o Arrumo a renderiza. O plugin oficial [Canvas layers](../../plugins/canvas/canvas-layers.mdx) é um exemplo completo.

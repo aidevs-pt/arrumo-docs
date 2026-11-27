@@ -6,6 +6,7 @@
   "pages": [
     "index",
     "auto-dubbing",
+    "canvas",
     "claude-code",
     "codex",
     "elevenlabs",

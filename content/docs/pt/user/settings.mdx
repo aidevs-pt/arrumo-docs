@@ -12,10 +12,10 @@ As opções do agente vêm do seu plugin e aparecem em **Definições › Agente
 
 ![Definições, Agente: o agente de produção e o que pode fazer](/tools/arrumo/static/media/app/settings-agent.webp)
 
-- **Escrever ficheiros e executar comandos** está ativo por predefinição. Enquanto trabalha num vídeo, o agente pode escrever os seus próprios scripts e ficheiros, executar comandos e usar os plugins, servidores de ferramentas (MCP) e hooks que configuraste. Trabalha numa pasta própria para esse vídeo, junto aos dados do Arrumo, que o Arrumo apaga quando o vídeo termina, falha ou é cancelado. Um aviso por baixo do interruptor lembra-te de que, assim, o agente pode alterar ficheiros do teu computador e executar programas com as permissões da tua conta: mantém-no ativo só com um agente e plugins em que confias. Se o desativares, o agente só lê o que o Arrumo lhe dá e responde, sem ferramentas, hooks nem a tua configuração.
+- **Escrever ficheiros e executar comandos** está ativo por predefinição. Enquanto trabalha num vídeo, o agente pode escrever os seus próprios scripts e ficheiros e executar comandos. Trabalha numa pasta própria para esse vídeo, junto aos dados do Arrumo, que o Arrumo apaga quando o vídeo termina, falha ou é cancelado. Um aviso por baixo do interruptor lembra-te de que, assim, o agente pode alterar ficheiros do teu computador e executar programas com as permissões da tua conta: mantém-no ativo só com um agente e plugins em que confias. Se o desativares, o agente só lê o que o Arrumo lhe dá e responde.
 - **Pesquisa na web** deixa o agente procurar na web factos, preços e tendências.
-- **Usar os meus plugins instalados** só aparece quando **Escrever ficheiros e executar comandos** está desativado. Deixa o agente usar os plugins e servidores de ferramentas que instalaste para ele, que podem ver o material do espaço de trabalho que o agente recebe.
-- **Modelo** e **Esforço de raciocínio** escolhem como o agente pensa. Mais esforço dá melhores guiões e montagens, mas demora mais.
+- **Usar os meus plugins instalados** está desativado por predefinição e funciona com **Escrever ficheiros e executar comandos** ativo ou desativado. Deixa o agente usar a tua própria configuração: os plugins, skills, servidores de ferramentas (MCP) e hooks que instalaste. Podem ver o material do espaço de trabalho que o agente recebe, por isso ativa-o só para os que são de confiança.
+- **Modelo** e **Esforço de raciocínio** escolhem como o agente pensa. Mais esforço dá melhores guiões e montagens, mas demora mais. O Claude Code usa o Opus com esforço médio, a menos que escolhas outra coisa; escolhe o Sonnet para vídeos mais rápidos ou se o teu plano não incluir o Opus.
 
 Cada vídeo guarda as opções com que começou, para poder ser repetido igual.
 
@@ -38,6 +38,10 @@ Se alguma versão nova não conseguir arrancar, o arranque seguinte procura uma 
 ![O aviso ao fechar o Arrumo enquanto se gera um vídeo](/tools/arrumo/static/media/app/close-warning.webp)
 
 Se fechares a janela, ou saíres pelo menu ou pela dock, enquanto se gera um vídeo, o Arrumo pergunta primeiro. **Manter o Arrumo aberto** volta ao trabalho; **Fechar e pausar** sai, e cada vídeo continua no mesmo passo da próxima vez que abrires o Arrumo. Os vídeos à espera da tua revisão não contam, porque não há nada a correr.
+
+## Armazenamento
+
+**Definições › Qualidade › Armazenamento** tem **Apagar os clipes carregados quando o vídeo estiver concluído**. Ativa-o para que o Arrumo não cresça a cada vídeo: quando um vídeo fica concluído, o Arrumo apaga os clipes que carregaste para ele. Ficam os clipes que outro rascunho ou um vídeo aberto ainda usa, e os que guardas na biblioteca de recursos. Um vídeo concluído cujos clipes já não existem não pode ser feito de novo a partir deles; a página dele indica-o e propõe começar um vídeo novo com os clipes.
 
 ## Dados e privacidade
 

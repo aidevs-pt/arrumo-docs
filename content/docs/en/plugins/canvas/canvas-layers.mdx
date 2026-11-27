@@ -1,0 +1,41 @@
+---
+title: "Canvas layers"
+description: "Let the agent draw 3D scenes, charts, particles, maps of routes, Lottie animations and shader effects inside your animations."
+icon: Box
+---
+
+Most of an animation is text, boxes, images and light that Arrumo draws itself. The **Canvas layers** plugin adds one more kind of layer: a small web page the agent writes, which Arrumo draws frame by frame. Use it for what the other layers can't show: depth, many moving parts, data that builds, or a designed vector animation.
+
+## Turn it on
+
+The plugin is official and installed with Arrumo. Open **Settings › Plugins › Canvas layers**. Under **Renderer**, Arrumo downloads the headless browser it draws with, about 130 MB, once for this computer, and checks it before use. It starts downloading on its own when the plugin is on; **Download renderer** starts it by hand, and **Remove download** frees the space.
+
+On Linux, canvas layers need Bubblewrap to keep pages isolated. If the page asks for it, install the `bubblewrap` package from your distribution and reopen the page.
+
+When the renderer shows **Ready**, the agent can use canvas layers in new animations. Until then, it simply doesn't offer them.
+
+## What the agent can draw
+
+- **3D scenes** with three.js: products, objects, isometric diagrams.
+- **Charts** with D3 that build from the numbers in your brief.
+- **Particles** such as confetti, snow and sparks, and flows along connectors.
+- **Routes on a globe**, with the grid and the places you name. No country or coastline shapes are included.
+- **Lottie** vector animations.
+- **Shader effects** for backgrounds and atmosphere, such as soft colour pools, light beams, starfields and film grain.
+- **Ready-made pieces** it can adapt: text effects, captions, terminal and chat windows, a moving cursor, notifications, bar, line and ring charts, a logo sting and transitions.
+
+Everything is drawn in the video's brand colors and fonts unless you ask otherwise. The agent can also make **components**, reusable pieces later animations import; see [Build an animation library](../../user/animations.mdx).
+
+## Privacy and safety
+
+Each page runs in an isolated headless browser with no network and no access to your files or to the rest of Arrumo. Every file a page asks for is answered from memory or refused. Pages can't send anything anywhere.
+
+## Libraries
+
+| Library | Version | License |
+| ------- | ------- | ------- |
+| three.js | 0.170.0 | MIT |
+| Lottie (lottie-web) | 5.13.0 | MIT |
+| D3 | 7.9.2 | ISC |
+
+The headless browser is Chrome for Testing's headless shell, version 158.0.8127.88.
